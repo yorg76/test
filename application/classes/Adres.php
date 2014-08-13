@@ -17,9 +17,15 @@ class Adres {
 	public $telefon;
 
 	// association with Firma class
+<<<<<<< HEAD
 	
 	// association with Zamowienie class
 	
+=======
+	public $;
+	// association with Zamowienie class
+	public $;
+>>>>>>> refs/remotes/choose_remote_name/master
 
 	public function edytuj() {
 

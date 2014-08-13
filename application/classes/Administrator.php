@@ -3,6 +3,7 @@
 class Administrator extends Uzytkownik {
 
 	// association with PracownikFirmy class
+<<<<<<< HEAD
 	
 	// association with Administrator class
 	
@@ -10,6 +11,15 @@ class Administrator extends Uzytkownik {
 	
 	// association with Firma class
 	
+=======
+	public $=array();
+	// association with Administrator class
+	public $;
+	// association with Administrator class
+	public $;
+	// association with Firma class
+	public $;
+>>>>>>> refs/remotes/choose_remote_name/master
 
 	public function rejestruj() {
 

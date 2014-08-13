@@ -7,6 +7,7 @@ class WirtualnaTeczka {
 	public $opis;
 
 	// association with Dzial class
+<<<<<<< HEAD
 	
 	// association with WirtualnaTeczka class
 	
@@ -20,6 +21,21 @@ class WirtualnaTeczka {
 	
 	// association with OpakowanieZbiorcze class
 	
+=======
+	public $ma przypisan¹;
+	// association with WirtualnaTeczka class
+	public $=array();
+	// association with WirtualnaTeczka class
+	public $;
+	// association with ListaDokumentów class
+	public $;
+	// association with Pozycja class
+	public $=array();
+	// association with Dokument class
+	public $;
+	// association with OpakowanieZbiorcze class
+	public $;
+>>>>>>> refs/remotes/choose_remote_name/master
 
 	public function edytuj() {
 
