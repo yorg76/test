@@ -1,0 +1,336 @@
+<?php defined('SYSPATH') OR die('No direct script access.'); ?>
+
+2014-07-21 10:28:01 --- CRITICAL: ErrorException [ 1 ]: Using $this when not in object context ~ APPPATH\views\templates\user\main.php [ 60 ] in file:line
+2014-07-21 10:28:01 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-07-21 10:28:33 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: _user ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:28:33 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(104): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:28:51 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: _user ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:28:51 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(104): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:29:06 --- CRITICAL: ErrorException [ 1 ]: Cannot access parent:: when current class scope has no parent ~ APPPATH\views\templates\user\main.php [ 60 ] in file:line
+2014-07-21 10:29:06 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-07-21 10:29:17 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: this ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:29:17 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(104): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:31:19 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: this ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:31:19 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(80): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:31:28 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: _user ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:31:28 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(80): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:32:48 --- CRITICAL: ErrorException [ 2 ]: var_dump() expects at least 1 parameter, 0 given ~ APPPATH\views\templates\user\main.php [ 60 ] in file:line
+2014-07-21 10:32:48 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'var_dump() expe...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\application\views\templates\user\main.php(60): var_dump()
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#3 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#4 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#5 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(80): Kohana_Controller_Template->after()
+#6 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#7 [internal function]: Kohana_Controller->execute()
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#10 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#11 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#12 {main} in file:line
+2014-07-21 10:32:53 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: i ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:32:53 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(80): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:33:26 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: _user ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:33:26 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(80): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:34:30 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: _user ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:34:30 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(82): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:37:01 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: user ~ APPPATH\views\templates\user\main.php [ 60 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:37:01 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(60): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 60, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(80): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:60
+2014-07-21 10:37:46 --- CRITICAL: Kohana_Exception [ 0 ]: View variable is not set: _user ~ SYSPATH\classes\Kohana\View.php [ 171 ] in E:\www12\web\archiwum\application\classes\Controller\User.php:17
+2014-07-21 10:37:46 --- DEBUG: #0 E:\www12\web\archiwum\application\classes\Controller\User.php(17): Kohana_View->__get('_user')
+#1 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_User->before()
+#2 [internal function]: Kohana_Controller->execute()
+#3 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#4 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#7 {main} in E:\www12\web\archiwum\application\classes\Controller\User.php:17
+2014-07-21 11:05:09 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: _bread ~ APPPATH\views\templates\user\main.php [ 356 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:356
+2014-07-21 11:05:09 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(356): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 356, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(86): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:356
+2014-07-21 11:06:55 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: _bread ~ APPPATH\views\templates\user\main.php [ 356 ] in E:\www12\web\archiwum\application\views\templates\user\main.php:356
+2014-07-21 11:06:55 --- DEBUG: #0 E:\www12\web\archiwum\application\views\templates\user\main.php(356): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www12\\web\\ar...', 356, Array)
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(61): include('E:\\www12\\web\\ar...')
+#2 E:\www12\web\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www12\\web\\ar...', Array)
+#3 E:\www12\web\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(86): Kohana_Controller_Template->after()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\application\views\templates\user\main.php:356
+2014-07-21 11:07:00 --- CRITICAL: Kohana_Exception [ 0 ]: View variable is not set: _breab ~ SYSPATH\classes\Kohana\View.php [ 171 ] in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:07:00 --- DEBUG: #0 E:\www12\web\archiwum\application\classes\Controller\Default.php(12): Kohana_View->__get('_breab')
+#1 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_Default->before()
+#2 [internal function]: Kohana_Controller->execute()
+#3 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Default))
+#4 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#7 {main} in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:07:36 --- CRITICAL: Kohana_Exception [ 0 ]: View variable is not set: _bread ~ SYSPATH\classes\Kohana\View.php [ 171 ] in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:07:36 --- DEBUG: #0 E:\www12\web\archiwum\application\classes\Controller\Default.php(12): Kohana_View->__get('_bread')
+#1 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_Default->before()
+#2 [internal function]: Kohana_Controller->execute()
+#3 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Default))
+#4 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#7 {main} in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:07:50 --- CRITICAL: Kohana_Exception [ 0 ]: View variable is not set: _bread ~ SYSPATH\classes\Kohana\View.php [ 171 ] in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:07:50 --- DEBUG: #0 E:\www12\web\archiwum\application\classes\Controller\Default.php(12): Kohana_View->__get('_bread')
+#1 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_Default->before()
+#2 [internal function]: Kohana_Controller->execute()
+#3 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Default))
+#4 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#7 {main} in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:08:02 --- CRITICAL: Kohana_Exception [ 0 ]: View variable is not set: _bread ~ SYSPATH\classes\Kohana\View.php [ 171 ] in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:08:02 --- DEBUG: #0 E:\www12\web\archiwum\application\classes\Controller\Default.php(12): Kohana_View->__get('_bread')
+#1 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_Default->before()
+#2 [internal function]: Kohana_Controller->execute()
+#3 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Default))
+#4 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#7 {main} in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:08:13 --- CRITICAL: Kohana_Exception [ 0 ]: View variable is not set: _bread ~ SYSPATH\classes\Kohana\View.php [ 171 ] in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:08:13 --- DEBUG: #0 E:\www12\web\archiwum\application\classes\Controller\Default.php(12): Kohana_View->__get('_bread')
+#1 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_Default->before()
+#2 [internal function]: Kohana_Controller->execute()
+#3 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Default))
+#4 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#7 {main} in E:\www12\web\archiwum\application\classes\Controller\Default.php:12
+2014-07-21 11:09:40 --- CRITICAL: Kohana_Exception [ 0 ]: View variable is not set: _bread ~ SYSPATH\classes\Kohana\View.php [ 171 ] in E:\www12\web\archiwum\application\classes\Controller\User.php:15
+2014-07-21 11:09:40 --- DEBUG: #0 E:\www12\web\archiwum\application\classes\Controller\User.php(15): Kohana_View->__get('_bread')
+#1 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_User->before()
+#2 [internal function]: Kohana_Controller->execute()
+#3 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#4 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#7 {main} in E:\www12\web\archiwum\application\classes\Controller\User.php:15
+2014-07-21 11:21:56 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected ';' ~ APPPATH\classes\Controller\User.php [ 27 ] in file:line
+2014-07-21 11:21:56 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-07-21 11:25:30 --- CRITICAL: View_Exception [ 0 ]: The requested view user/dashboard could not be found ~ SYSPATH\classes\Kohana\View.php [ 257 ] in E:\www12\web\archiwum\system\classes\Kohana\View.php:137
+2014-07-21 11:25:30 --- DEBUG: #0 E:\www12\web\archiwum\system\classes\Kohana\View.php(137): Kohana_View->set_filename('user/dashboard')
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(30): Kohana_View->__construct('user/dashboard', NULL)
+#2 E:\www12\web\archiwum\application\classes\Controller\User.php(27): Kohana_View::factory('user/dashboard')
+#3 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(77): Controller_User->load_content()
+#4 E:\www12\web\archiwum\application\classes\Controller\User.php(11): Controller_Welcome->before()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_User->before()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\system\classes\Kohana\View.php:137
+2014-07-21 11:25:33 --- CRITICAL: View_Exception [ 0 ]: The requested view user/dashboard could not be found ~ SYSPATH\classes\Kohana\View.php [ 257 ] in E:\www12\web\archiwum\system\classes\Kohana\View.php:137
+2014-07-21 11:25:33 --- DEBUG: #0 E:\www12\web\archiwum\system\classes\Kohana\View.php(137): Kohana_View->set_filename('user/dashboard')
+#1 E:\www12\web\archiwum\system\classes\Kohana\View.php(30): Kohana_View->__construct('user/dashboard', NULL)
+#2 E:\www12\web\archiwum\application\classes\Controller\User.php(27): Kohana_View::factory('user/dashboard')
+#3 E:\www12\web\archiwum\application\classes\Controller\Welcome.php(77): Controller_User->load_content()
+#4 E:\www12\web\archiwum\application\classes\Controller\User.php(11): Controller_Welcome->before()
+#5 E:\www12\web\archiwum\system\classes\Kohana\Controller.php(69): Controller_User->before()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www12\web\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_User))
+#8 E:\www12\web\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www12\web\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www12\web\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www12\web\archiwum\system\classes\Kohana\View.php:137
+2014-07-21 18:38:07 --- CRITICAL: Database_Exception [ 2 ]: mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) ~ MODPATH\database\classes\Kohana\Database\MySQL.php [ 67 ] in E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php:171
+2014-07-21 18:38:07 --- DEBUG: #0 E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php(171): Kohana_Database_MySQL->connect()
+#1 E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php(359): Kohana_Database_MySQL->query(1, 'SHOW FULL COLUM...', false)
+#2 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(1668): Kohana_Database_MySQL->list_columns('users')
+#3 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(444): Kohana_ORM->list_columns()
+#4 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(389): Kohana_ORM->reload_columns()
+#5 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(254): Kohana_ORM->_initialize()
+#6 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(46): Kohana_ORM->__construct(NULL)
+#7 E:\www10\archiwum\modules\orm\classes\Kohana\Auth\ORM.php(79): Kohana_ORM::factory('User')
+#8 E:\www10\archiwum\modules\auth\classes\Kohana\Auth.php(92): Kohana_Auth_ORM->_login('Admin', 'Mleko100%', NULL)
+#9 E:\www10\archiwum\application\classes\Controller\Default.php(57): Kohana_Auth->login('Admin', 'Mleko100%', NULL)
+#10 E:\www10\archiwum\system\classes\Kohana\Controller.php(84): Controller_Default->action_login()
+#11 [internal function]: Kohana_Controller->execute()
+#12 E:\www10\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Default))
+#13 E:\www10\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#14 E:\www10\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#15 E:\www10\archiwum\index.php(118): Kohana_Request->execute()
+#16 {main} in E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php:171
+2014-07-21 18:53:42 --- CRITICAL: Database_Exception [ 2 ]: mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) ~ MODPATH\database\classes\Kohana\Database\MySQL.php [ 67 ] in E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php:171
+2014-07-21 18:53:42 --- DEBUG: #0 E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php(171): Kohana_Database_MySQL->connect()
+#1 E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php(359): Kohana_Database_MySQL->query(1, 'SHOW FULL COLUM...', false)
+#2 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(1668): Kohana_Database_MySQL->list_columns('users')
+#3 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(444): Kohana_ORM->list_columns()
+#4 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(389): Kohana_ORM->reload_columns()
+#5 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(254): Kohana_ORM->_initialize()
+#6 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(46): Kohana_ORM->__construct(NULL)
+#7 E:\www10\archiwum\modules\orm\classes\Kohana\Auth\ORM.php(79): Kohana_ORM::factory('User')
+#8 E:\www10\archiwum\modules\auth\classes\Kohana\Auth.php(92): Kohana_Auth_ORM->_login('Admin', 'Mleko100%', NULL)
+#9 E:\www10\archiwum\application\classes\Controller\Default.php(57): Kohana_Auth->login('Admin', 'Mleko100%', NULL)
+#10 E:\www10\archiwum\system\classes\Kohana\Controller.php(84): Controller_Default->action_login()
+#11 [internal function]: Kohana_Controller->execute()
+#12 E:\www10\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Default))
+#13 E:\www10\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#14 E:\www10\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#15 E:\www10\archiwum\index.php(118): Kohana_Request->execute()
+#16 {main} in E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php:171
+2014-07-21 19:10:27 --- CRITICAL: Database_Exception [ 2 ]: mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) ~ MODPATH\database\classes\Kohana\Database\MySQL.php [ 67 ] in E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php:171
+2014-07-21 19:10:27 --- DEBUG: #0 E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php(171): Kohana_Database_MySQL->connect()
+#1 E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php(359): Kohana_Database_MySQL->query(1, 'SHOW FULL COLUM...', false)
+#2 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(1668): Kohana_Database_MySQL->list_columns('users')
+#3 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(444): Kohana_ORM->list_columns()
+#4 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(389): Kohana_ORM->reload_columns()
+#5 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(254): Kohana_ORM->_initialize()
+#6 E:\www10\archiwum\modules\orm\classes\Kohana\ORM.php(46): Kohana_ORM->__construct(NULL)
+#7 E:\www10\archiwum\modules\orm\classes\Kohana\Auth\ORM.php(79): Kohana_ORM::factory('User')
+#8 E:\www10\archiwum\modules\auth\classes\Kohana\Auth.php(92): Kohana_Auth_ORM->_login('Admin', 'Mleko100%', NULL)
+#9 E:\www10\archiwum\application\classes\Controller\Default.php(57): Kohana_Auth->login('Admin', 'Mleko100%', NULL)
+#10 E:\www10\archiwum\system\classes\Kohana\Controller.php(84): Controller_Default->action_login()
+#11 [internal function]: Kohana_Controller->execute()
+#12 E:\www10\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Default))
+#13 E:\www10\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#14 E:\www10\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#15 E:\www10\archiwum\index.php(118): Kohana_Request->execute()
+#16 {main} in E:\www10\archiwum\modules\database\classes\Kohana\Database\MySQL.php:171
+2014-07-21 22:06:54 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected '>' ~ APPPATH\views\templates\main.php [ 325 ] in file:line
+2014-07-21 22:06:54 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-07-21 22:34:00 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected '}', expecting ',' or ';' ~ APPPATH\views\templates\main.php [ 326 ] in file:line
+2014-07-21 22:34:00 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-07-21 22:35:44 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected '$_controller' (T_VARIABLE), expecting '(' ~ APPPATH\views\templates\main.php [ 329 ] in file:line
+2014-07-21 22:35:44 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-07-21 22:35:45 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected '$_controller' (T_VARIABLE), expecting '(' ~ APPPATH\views\templates\main.php [ 329 ] in file:line
+2014-07-21 22:35:45 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2014-07-21 22:59:49 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: controller_title ~ APPPATH\views\templates\main.php [ 342 ] in E:\www10\archiwum\application\views\templates\main.php:342
+2014-07-21 22:59:49 --- DEBUG: #0 E:\www10\archiwum\application\views\templates\main.php(342): Kohana_Core::error_handler(8, 'Undefined varia...', 'E:\\www10\\archiw...', 342, Array)
+#1 E:\www10\archiwum\system\classes\Kohana\View.php(61): include('E:\\www10\\archiw...')
+#2 E:\www10\archiwum\system\classes\Kohana\View.php(348): Kohana_View::capture('E:\\www10\\archiw...', Array)
+#3 E:\www10\archiwum\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 E:\www10\archiwum\application\classes\Controller\Welcome.php(90): Kohana_Controller_Template->after()
+#5 E:\www10\archiwum\system\classes\Kohana\Controller.php(87): Controller_Welcome->after()
+#6 [internal function]: Kohana_Controller->execute()
+#7 E:\www10\archiwum\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Warehouse))
+#8 E:\www10\archiwum\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#9 E:\www10\archiwum\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#10 E:\www10\archiwum\index.php(118): Kohana_Request->execute()
+#11 {main} in E:\www10\archiwum\application\views\templates\main.php:342
