@@ -21,11 +21,7 @@ return array
 			'hostname'   => 'localhost',
 			'database'   => 'archiwum',
 			'username'   => 'root',
-<<<<<<< HEAD
 			'password'   => '',
-=======
-			'password'   => 'admin',
->>>>>>> refs/remotes/choose_remote_name/master
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',

@@ -7,27 +7,13 @@ class WirtualnaTeczka {
 	public $opis;
 
 	// association with Dzial class
-<<<<<<< HEAD
-	
-	// association with WirtualnaTeczka class
-	
-	// association with WirtualnaTeczka class
-	
-	// association with ListaDokumentï¿½w class
-	
-	// association with Pozycja class
-	
-	// association with Dokument class
-	
-	// association with OpakowanieZbiorcze class
-	
-=======
-	public $ma przypisan¹;
+
+	public $ma przypisanï¿½;
 	// association with WirtualnaTeczka class
 	public $=array();
 	// association with WirtualnaTeczka class
 	public $;
-	// association with ListaDokumentów class
+	// association with ListaDokumentï¿½w class
 	public $;
 	// association with Pozycja class
 	public $=array();

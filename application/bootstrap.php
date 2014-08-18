@@ -161,7 +161,7 @@ Cookie::$salt = 'Parrarell Thinking';
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-<<<<<<< HEAD
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(
 	array(
@@ -170,26 +170,3 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
 	'id' =>''
 	));
 	
-=======
-Route::set('klienci', '(<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'controller' => 'customer',
-		'action'     => 'index',
-		'id' => ''
-));
-
-Route::set('u¿ytkownicy', '(<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'controller' => 'customer',
-		'action' => 'search',
-		'id' => ''
-));
-
-Route::set('dzia³y', '(<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'controller' => 'customer',
-		'action' => 'divisions',
-		'id' => ''
-));
-
->>>>>>> refs/remotes/choose_remote_name/master
