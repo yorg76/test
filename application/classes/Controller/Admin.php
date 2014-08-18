@@ -16,9 +16,7 @@ class Controller_Admin extends Controller_Welcome {
 		array_push($this->_bread, ucfirst($this->request->action ()));
 		
 		$this->template->message = Message::factory();
-		
-		$this->add_init("UsersAjax.init();\n\t");
-		$this->add_init("TableEditable.init();");
+		$this->add_init("TableEditable.init();\n\t");
 		
 		if(strtolower ( $this->request->action()) == 'add_user') $this->add_init("Add_user.init();");
 		if(strtolower ( $this->request->action()) == 'edit_user') $this->add_init("Edit_user.init();");
@@ -36,11 +34,9 @@ class Controller_Admin extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		$this->add_fjs ( ASSETS_GLOBAL_SCRIPTS.'datatable.js');
-		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'users-ajax.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-editable.js');
-		if($this->request->action ()=='add_user') $this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'add_user.js');
-		if($this->request->action ()=='edit_user') $this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'edit_user.js');
+
 
 		
 		$this->class='page-header-fixed page-quick-sidebar-over-content';

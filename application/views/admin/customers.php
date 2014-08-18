@@ -22,8 +22,7 @@
 								<div class="btn-group">
 								</div>
 								<div class="btn-group pull-right">
-									<button class="btn dropdown-toggle" data-toggle="dropdown">Narzędzia <i class="fa fa-angle-down"></i>
-									</button>
+									<button class="btn dropdown-toggle" data-toggle="dropdown">Narzędzia <i class="fa fa-angle-down"></i></button>
 									<ul class="dropdown-menu pull-right">
 										<li>
 											<a href="#">
@@ -40,7 +39,7 @@
 									</ul>
 								</div>
 							</div>
-							<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+							<table class="table table-striped table-hover table-bordered" id="customers_list">
 							<thead>
 							<tr>
 								<th>
@@ -56,10 +55,7 @@
 									 Liczba użytkowników
 								</th>
 								<th>
-									 Edycja
-								</th>
-								<th>
-									 Usuń
+									 Opcje
 								</th>
 							</tr>
 							</thead>
@@ -78,12 +74,10 @@
 									 power user
 								</td>
 								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
+									<div class="margin-bottom-5">
+											<button class="btn btn-sm yellow customer-delete margin-bottom" onClick="javascript:window.location='/admin/customers/delete/id';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow customer-edit margin-bottom" onClick="javascript:window.location='/admin/customers/edit/id';"><i class="fa fa-user"></i> Edytuj</button>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -100,12 +94,10 @@
 									 new user
 								</td>
 								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
+									<div class="margin-bottom-5">
+											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -122,12 +114,10 @@
 									 power user
 								</td>
 								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
+									<div class="margin-bottom-5">
+											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -144,12 +134,10 @@
 									 elite user
 								</td>
 								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
+									<div class="margin-bottom-5">
+											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -166,12 +154,10 @@
 									 new user
 								</td>
 								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
+									<div class="margin-bottom-5">
+											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -188,12 +174,10 @@
 									 new user
 								</td>
 								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
+									<div class="margin-bottom-5">
+											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
+									</div>
 								</td>
 							</tr>
 							</tbody>
