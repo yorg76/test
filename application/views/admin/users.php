@@ -1,4 +1,4 @@
-<div class="row">
+﻿<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue">
@@ -9,194 +9,63 @@
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
 								</a>
-								<a href="#portlet-config" data-toggle="modal" class="config">
-								</a>
 								<a href="javascript:;" class="reload">
-								</a>
-								<a href="javascript:;" class="remove">
 								</a>
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="table-toolbar">
-								<div class="btn-group">
-									
-								</div>
-								<div class="btn-group pull-right">
-									<button class="btn dropdown-toggle" data-toggle="dropdown">Narzędzia <i class="fa fa-angle-down"></i>
-									</button>
-									<ul class="dropdown-menu pull-right">
-										<li>
-											<a href="#">
-											Drukuj </a>
-										</li>
-										<li>
-											<a href="#">
-											Zapisz jako PDF </a>
-										</li>
-										<li>
-											<a href="#">
-											Export do Excel </a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+							<table class="table table-striped table-hover table-bordered" id="users_list">
 							<thead>
 							<tr>
 								<th>
 									 Login
-								</th>
+								</th>							
 								<th>
 									 Imię
 								</th>
 								<th>
 									 Nazwisko
 								</th>
+
+								<th>
+									 Email
+								</th>
 								<th>
 									 Firma
-								</th>
+								</th>								
 								<th>
-									 Edycja
-								</th>
-								<th>
-									 Usuń
+									 Opcje
 								</th>
 							</tr>
 							</thead>
 							<tbody>
+							<?php foreach ($users as $user):?>
 							<tr>
 								<td>
-									 alex
+									 <?php echo $user['login'] ;?>
+								</td>
+															
+								<td>
+									 <?php echo $user['imie'] ;?>
 								</td>
 								<td>
-									 Alex Nilson
+									 <?php echo $user['nazwisko'] ;?>
 								</td>
 								<td>
-									 1234
+									 <?php echo $user['email'] ;?>
 								</td>
 								<td class="center">
-									 power user
+									 <?php echo $user['firma'] ;?>
 								</td>
 								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
+									<div class="margin-bottom-5">
+											<button class="btn btn-sm yellow user-edit margin-bottom" onClick="javascript:window.location='/admin/user_edit/<?php echo $user['id'] ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-sm blue user-lock margin-bottom" onClick="javascript:window.location='/admin/user_lock/<?php echo $user['id'] ;?>';"><i class="fa fa-lock"></i> Zablokuj</button>
+											<button class="btn btn-sm red user-delete margin-bottom" id="<?php echo $user['id'] ;?>"><i class="fa fa-recycle"></i> Usuń</button>
+									</div>
 								</td>
 							</tr>
-							<tr>
-								<td>
-									 lisa
-								</td>
-								<td>
-									 Lisa Wong
-								</td>
-								<td>
-									 434
-								</td>
-								<td class="center">
-									 new user
-								</td>
-								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									 nick12
-								</td>
-								<td>
-									 Nick Roberts
-								</td>
-								<td>
-									 232
-								</td>
-								<td class="center">
-									 power user
-								</td>
-								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									 goldweb
-								</td>
-								<td>
-									 Sergio Jackson
-								</td>
-								<td>
-									 132
-								</td>
-								<td class="center">
-									 elite user
-								</td>
-								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									 webriver
-								</td>
-								<td>
-									 Antonio Sanches
-								</td>
-								<td>
-									 462
-								</td>
-								<td class="center">
-									 new user
-								</td>
-								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									 gist124
-								</td>
-								<td>
-									 Nick Roberts
-								</td>
-								<td>
-									 62
-								</td>
-								<td class="center">
-									 new user
-								</td>
-								<td>
-									<a class="edit" href="javascript:;">
-									Edycja </a>
-								</td>
-								<td>
-									<a class="delete" href="javascript:;">
-									Usuń </a>
-								</td>
-							</tr>
+							<?php endforeach;?>
 							</tbody>
 							</table>
 						</div>

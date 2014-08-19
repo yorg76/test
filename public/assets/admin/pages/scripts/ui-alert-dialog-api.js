@@ -2,6 +2,30 @@ var UIAlertDialogApi = function () {
 
     var handleDialogs = function() {
 
+    	 $('.user-delete').click(function(){
+    		 var id = $(this).attr('id');
+             bootbox.confirm("Czy napewno chcesz usunąć użytkownika, ta operacja jest nie odwracalna !", function(result) {
+            	 if(result==true) {
+            		 window.location='/admin/user_delete/'+id;
+            	 }else {
+            		 return false;
+            	 }
+             }); 
+         });
+
+    	 $('.customer-delete').click(function(){
+    		 var id = $(this).attr('id');
+    		 
+             bootbox.confirm("Czy napewno chcesz usunąć klienta, ta operacja jest nie odwracalna !", function(result) {
+            	 if(result==true) {
+            		 window.location='/admin/customer_delete/'+id;
+            	 }else {
+            		 return false;
+            	 }
+             }); 
+         });
+
+    	
         $('#demo_1').click(function(){
                 bootbox.alert("Hello world!");    
             });

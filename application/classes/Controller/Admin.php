@@ -17,8 +17,11 @@ class Controller_Admin extends Controller_Welcome {
 		
 		$this->template->message = Message::factory();
 		
-		if(strtolower ( $this->request->action()) == 'customers') $this->add_init("TableCustomers.init();");
-
+		if(strtolower ( $this->request->action()) == 'customers') $this->add_init("TableCustomers.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'customer_users') $this->add_init("TableCustomerUsers.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'users') $this->add_init("TableUsers.init();\t\n");
+		
+		$this->add_init("UIAlertDialogApi.init();\t\n");
 
 	}
 	
@@ -34,6 +37,8 @@ class Controller_Admin extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		$this->add_fjs ( ASSETS_GLOBAL_SCRIPTS.'datatable.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.js');
+		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootbox/bootbox.min.js');
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-alert-dialog-api.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-customers.js');
 
 
@@ -61,6 +66,36 @@ class Controller_Admin extends Controller_Welcome {
 		
 	public function action_users() {
 		
+		$users = array(
+				array(
+						'id' =>'1',
+						'login'=>'test',
+						'imie' => 'Test',
+						'nazwisko' =>'Testowy',
+						'email' =>'test@testowy.pl',
+						'firma' => 'Cipa cipa'
+				),
+				array(
+						'id' =>'2',
+						'login'=>'testcik',
+						'imie' => 'Testcik',
+						'nazwisko' =>'Testowiutki',
+						'email' =>'test123@testowy.pl',
+						'firma' => 'Dupa dupa'
+				),
+		
+				array(
+						'id' =>'3',
+						'login'=>'teststas',
+						'imie' => 'Testas',
+						'nazwisko' =>'Testikus',
+						'email' =>'testikus12@testowy.pl',
+						'firma' => 'Huje muje'
+				),
+		);
+		
+		$this->content->bind('users', $users);
+		
 	}
 	
 	public function action_customers() {
@@ -73,14 +108,14 @@ class Controller_Admin extends Controller_Welcome {
 			'regon' =>'0987654321'
 			),
 			array(
-			'id' =>'1',
+			'id' =>'2',
 			'nazwa'=>'Test 2',
 			'nip' =>'123456789',
 			'regon' =>'0987654321'
 			),
 				
 			array(
-			'id' =>'1',
+			'id' =>'3',
 			'nazwa'=>'Test 3',
 			'nip' =>'123456789',
 			'regon' =>'0987654321'
@@ -116,6 +151,99 @@ class Controller_Admin extends Controller_Welcome {
 			
 		}else {
 			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
+		}
+	}
+	
+	public function action_customer_users() {
+		
+		if($this->request->param('id') > 0) {
+			
+			$users = array(
+					array(
+							'id' =>'1',
+							'login'=>'test',
+							'imie' => 'Test',
+							'nazwisko' =>'Testowy',
+							'email' =>'test@testowy.pl'
+					),
+					array(
+							'id' =>'2',
+							'login'=>'testcik',
+							'imie' => 'Testcik',
+							'nazwisko' =>'Testowiutki',
+							'email' =>'test123@testowy.pl'
+					),
+								
+					array(
+							'id' =>'3',
+							'login'=>'teststas',
+							'imie' => 'Testas',
+							'nazwisko' =>'Testikus',
+							'email' =>'testikus12@testowy.pl'
+					),
+			);
+			
+			$this->content->bind('users', $users);
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
+		}
+		
+	}
+	
+	public function action_user_edit() {
+		
+		$customer_id = 1;
+		
+		if($this->request->param('id') > 0) {
+				// TODO user edit
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/admin/customers/'.$customer_id);
+		}
+	}
+	
+	public function action_user_delete() {
+		if($this->request->param('id') > 0) {
+			//TODO kasowanie usera
+			$customer_id = 1;
+			if(1) {
+				Message::success(ucfirst(__('Użytkownik został usunięty')),'/admin/customer_users/'.$customer_id);
+			}else {
+				Message::error(ucfirst(__('Nie udało się usunąć użytkownika')),'/admin/customer_users/'.$customer_id);
+			}
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/admin/customer_users/'.$customer_id);
+		}
+	}	
+	
+	public function action_user_lock() {
+		
+		if($this->request->param('id') > 0) {
+			//TODO blokowanie usera
+			$customer_id = 1;
+			
+			if(1) {
+				Message::success(ucfirst(__('Użytkownik został zablokowany')),'/admin/customer_users/'.$customer_id);
+			}else {
+				Message::error(ucfirst(__('Nie udało się zablokować użytkownika')),'/admin/customer_users/'.$customer_id);
+			}
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/admin/customer_users');
+		}
+	}
+
+	public function action_user_unlock() {
+	
+		if($this->request->param('id') > 0) {
+			//TODO odblokowanie usera
+			$customer_id = 1;
+				
+			if(1) {
+				Message::success(ucfirst(__('Użytkownik został zablokowany')),'/admin/customer_users/'.$customer_id);
+			}else {
+				Message::error(ucfirst(__('Nie udało się zablokować użytkownika')),'/admin/customer_users/'.$customer_id);
+			}
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/admin/customer_users');
 		}
 	}
 }

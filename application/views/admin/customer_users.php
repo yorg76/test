@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-edit"></i>Klienci
+								<i class="fa fa-edit"></i>Użytkownicy
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -14,20 +14,21 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<table class="table table-striped table-hover table-bordered" id="customers_list">
+							<table class="table table-striped table-hover table-bordered" id="customer_users_list">
 							<thead>
 							<tr>
 								<th>
-									 Nazwa
+									 Login
+								</th>							
+								<th>
+									 Imię
 								</th>
 								<th>
-									 NIP
+									 Nazwisko
 								</th>
+
 								<th>
-									 REGON
-								</th>
-								<th>
-									 Liczba użytkowników
+									 Email
 								</th>
 								<th>
 									 Opcje
@@ -35,26 +36,26 @@
 							</tr>
 							</thead>
 							<tbody>
-							<?php foreach ($customers as $customer):?>
+							<?php foreach ($users as $user):?>
 							<tr>
 								<td>
-									 <?php echo $customer['nazwa'] ;?>
+									 <?php echo $user['login'] ;?>
+								</td>
+															
+								<td>
+									 <?php echo $user['imie'] ;?>
 								</td>
 								<td>
-									 <?php echo $customer['nip'] ;?>
-								</td>
-								<td>
-									 <?php echo $customer['regon'] ;?>
+									 <?php echo $user['nazwisko'] ;?>
 								</td>
 								<td class="center">
-									 <?php echo count($customers) ;?>
+									 <?php echo $user['email'] ;?>
 								</td>
 								<td>
 									<div class="margin-bottom-5">
-											
-											<button class="btn btn-sm yellow customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_edit/<?php echo $customer['id'] ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-sm blue customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_users/<?php echo $customer['id'] ;?>';"><i class="fa fa-group"></i> Użytkownicy</button>
-											<button class="btn btn-sm red customer-delete margin-bottom" id="<?php echo $customer['id'] ;?>" ><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow user-edit margin-bottom" onClick="javascript:window.location='/admin/user_edit/<?php echo $user['id'] ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-sm blue user-lock margin-bottom" onClick="javascript:window.location='/admin/user_lock/<?php echo $user['id'] ;?>';"><i class="fa fa-lock"></i> Zablokuj</button>
+											<button class="btn btn-sm red user-delete margin-bottom" id="<?php echo $user['id'] ;?>"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

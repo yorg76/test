@@ -10,6 +10,8 @@ RewriteEngine On
 # Ustawiamy na DEV
 SetEnv KOHANA_ENV DEVELOPMENT
 
+RewriteRule ^assets/(.*) /public/assets/$1 [L]
+
 # Protect application and system files from being viewed
 RewriteRule ^(?:application|modules|system)\b.* index.php/$0 [L]
 
