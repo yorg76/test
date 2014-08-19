@@ -63,131 +63,61 @@ class Controller_Admin extends Controller_Welcome {
 	public function action_users() {
 		
 	}
+	
 	public function action_customers() {
 		
-	}
-	
-	public function action_change_user_password() {
-		if($this->request->param('id') > 1 ) {
-			$user = User::instance($this->request->param('id'));
-			
-			if($this->request->method()===HTTP_Request::POST) {
-				if($user->user->loaded()) {
-					$user->user->password=$this->request->post('password');
-					if($user->user->save()) Message::success(ucfirst(__('Hasło zostało zapisane poprawnie')), '/'.$this->template->_controller.'/users');
-					else Message::error(ucfirst(__('Podczas zapisywania hasła wystąpił błąd')), '/'.$this->template->_controller.'/'.$this->template->_action);
-				}else {
-					Message::error(ucfirst(__('Podczas zapisywania hasła wystąpił błąd')), '/'.$this->template->_controller.'/'.$this->template->_action);
-				}
-			}
-		}
-	}
-	
-	public function action_edit_user() {
+		$customers = array(
+			array(
+			'id' =>'1',
+			'nazwa'=>'Test 1',
+			'nip' =>'123456789',
+			'regon' =>'0987654321'
+			),
+			array(
+			'id' =>'1',
+			'nazwa'=>'Test 2',
+			'nip' =>'123456789',
+			'regon' =>'0987654321'
+			),
 				
-		if($this->request->param('id') > 1 ) {
-			$user = User::instance($this->request->param('id'));
-			$this->content->bind('editeduser', $user);
-			
-			if($this->request->method()===HTTP_Request::POST) {
-
-				$params['firstname']=$this->request->post('firstname');
-				$params['lastname']=$this->request->post('lastname');
-				$params['email']=$this->request->post('email');
-				$params['username']=$this->request->post('username');
-				$params['pass']=$this->request->post('pass');
-				$params['comments']=$this->request->post('comments');
-				$params['csa']=$this->request->post('csa');
-					
-				$params['IsIndividual']=$this->request->post('IsIndividual');
-					
-				if($this->request->post('tel'))	$params['tel']=$this->request->post('tel');
-				if($this->request->post('pesel') AND $this->request->post('IsIndividual')) $params['pesel']=$this->request->post('pesel');
-					
-				if(!$this->request->post('IsIndividual')) {
-					$params['name']=$this->request->post('cname');
-					$params['nip']=$this->request->post('nip');
-					$params['regon']=$this->request->post('regon');
-					$params['cstreet']=$this->request->post('cstreet');
-					$params['cpostal']=$this->request->post('cpostal');
-					$params['ccity']=$this->request->post('ccity');
-					$params['ccountry']=$this->request->post('ccountry');
-			
-				}else{
-					$params['street']=$this->request->post('street');
-					$params['postal']=$this->request->post('postal');
-					$params['city']=$this->request->post('city');
-					$params['country']=$this->request->post('country');
-				}
+			array(
+			'id' =>'1',
+			'nazwa'=>'Test 3',
+			'nip' =>'123456789',
+			'regon' =>'0987654321'
+			),
 				
-				
-				if($user->updateUser($params)) Message::success(ucfirst(__('Użytkownik został zapisany poprawnie')), '/'.$this->template->_controller.'/users');
-				else Message::error(ucfirst(__('Podczas zapisywania użytkownika wystąpił błąd')), '/'.$this->template->_controller.'/'.$this->template->_action);
-			}
-		}
-	}
-
-	public function action_del_user() {
-		if($this->request->param('id') > 1 ) {
-			$user = User::instance($this->request->param('id'));
-			if($user->deleteUser()) Message::success(ucfirst(__('Użytkownik został usunięty poprawnie')), '/'.$this->template->_controller.'/users');
-			else Message::error(ucfirst(__('Podczas usuwania użytkownika wystąpił błąd')), '/'.$this->template->_controller.'/'.$this->template->_action);
-		}	
-	}
-	
-	public function action_lock_user() {
-		if($this->request->param('id') > 1 ) {
-			$user = User::instance($this->request->param('id'));
-			if($user->lockUser()) Message::success(ucfirst(__('Użytkownik został zablokowany poprawnie')), '/'.$this->template->_controller.'/users');
-			else Message::error(ucfirst(__('Podczas blokowania użytkownika wystąpił błąd')), '/'.$this->template->_controller.'/'.$this->template->_action);
-		}
-	}
-	
-	public function action_unlock_user() {
-		if($this->request->param('id') > 1 ) {
-			$user = User::instance($this->request->param('id'));
-			if($user->unlockUser()) Message::success(ucfirst(__('Użytkownik został odblokowany poprawnie')), '/'.$this->template->_controller.'/users');
-			else Message::error(ucfirst(__('Podczas odblokowania użytkownika wystąpił błąd')), '/'.$this->template->_controller.'/'.$this->template->_action);
-		}
+		);
+		
+		$this->content->bind('customers', $customers);
 		
 	}
 	
-	
-	public function action_add_user() {
-		
-		$this->template->content = View::factory('admin/add_user')
-			->bind('errors', $errors)
-			->bind('message', $message);
-			
-		if (HTTP_Request::POST == $this->request->method()) 
-		{			
-			try {
-				// Create the user using form values
-				$user = ORM::factory('user')->create_user($this->request->post(), array(
-					'username',
-					'password',
-					'email'				
-				));
-				
-				// Grant user login role
-				$user->add('roles', ORM::factory('role', array('name' => 'login')));
-				
-				// Reset values so form is not sticky
-				$_POST = array();
-				
-				// Set success message
-				$message = "Dodałeś użytkownika '{$user->username}' do bazy";
-				
-			} catch (ORM_Validation_Exception $e) {
-				
-				// Set failure message
-				$message = 'Wystąpiły błędy. Proszę poprawić formularz';
-				
-				// Set errors using custom messages
-				$errors = $e->errors('models');
+	public function action_customer_delete() {
+		if($this->request->param('id') > 0) {
+			//TODO kasowanie klienta
+			if(1) {
+				Message::success(ucfirst(__('Klient został usunięty')),'/admin/customers');
+			}else {
+				Message::error(ucfirst(__('Nie udało się usunąć klienta')),'/admin/customers');
 			}
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
 		}
 	}
 	
+	public function action_customer_edit() {
+		
+		if($this->request->param('id') > 0) {
+			//TODO edycja i zapisywanie klienta
+			
+			$customer = Customer::instance($this->request->param('id'));
+			
+			$this->content->bind('customer', $customer);
+			
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
+		}
+	}
 }
 	

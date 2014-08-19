@@ -345,6 +345,9 @@
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
+				
+					<?php echo View::factory('messages')->render(); ?>
+					
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
 					<?php echo ucfirst(__($_controller)); ?> <small><?php echo ucfirst(__($_action)); ?></small>

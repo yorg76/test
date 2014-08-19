@@ -60,126 +60,28 @@
 							</tr>
 							</thead>
 							<tbody>
+							<?php foreach ($customers as $customer):?>
 							<tr>
 								<td>
-									 alex
+									 <?php echo $customer['nazwa'] ;?>
 								</td>
 								<td>
-									 Alex Nilson
+									 <?php echo $customer['nip'] ;?>
 								</td>
 								<td>
-									 1234
+									 <?php echo $customer['regon'] ;?>
 								</td>
 								<td class="center">
-									 power user
+									 <?php echo count($customers) ;?>
 								</td>
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow customer-delete margin-bottom" onClick="javascript:window.location='/admin/customers/delete/id';"><i class="fa fa-recycle"></i> Usuń</button>
-											<button class="btn btn-sm yellow customer-edit margin-bottom" onClick="javascript:window.location='/admin/customers/edit/id';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-sm yellow customer-delete margin-bottom" onClick="javascript:window.location='/admin/customer_delete/<?php echo $customer['id'] ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_edit/<?php echo $customer['id'] ;?>';"><i class="fa fa-user"></i> Edytuj</button>
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<td>
-									 lisa
-								</td>
-								<td>
-									 Lisa Wong
-								</td>
-								<td>
-									 434
-								</td>
-								<td class="center">
-									 new user
-								</td>
-								<td>
-									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
-											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									 nick12
-								</td>
-								<td>
-									 Nick Roberts
-								</td>
-								<td>
-									 232
-								</td>
-								<td class="center">
-									 power user
-								</td>
-								<td>
-									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
-											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									 goldweb
-								</td>
-								<td>
-									 Sergio Jackson
-								</td>
-								<td>
-									 132
-								</td>
-								<td class="center">
-									 elite user
-								</td>
-								<td>
-									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
-											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									 webriver
-								</td>
-								<td>
-									 Antonio Sanches
-								</td>
-								<td>
-									 462
-								</td>
-								<td class="center">
-									 new user
-								</td>
-								<td>
-									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
-											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									 gist124
-								</td>
-								<td>
-									 Nick Roberts
-								</td>
-								<td>
-									 62
-								</td>
-								<td class="center">
-									 new user
-								</td>
-								<td>
-									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow customer-delete margin-bottom"><i class="fa fa-recycle"></i> Usuń</button>
-											<button class="btn btn-sm yellow customer-edit margin-bottom"><i class="fa fa-user"></i> Edytuj</button>
-									</div>
-								</td>
-							</tr>
+							<?php endforeach;?>
 							</tbody>
 							</table>
 						</div>
