@@ -385,6 +385,7 @@
 		</span>
 	</div>
 </div>
+<br />
 <?php echo $footer; ?>
 
 <script>

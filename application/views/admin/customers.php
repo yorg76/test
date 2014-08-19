@@ -18,27 +18,6 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="table-toolbar">
-								<div class="btn-group">
-								</div>
-								<div class="btn-group pull-right">
-									<button class="btn dropdown-toggle" data-toggle="dropdown">Narzędzia <i class="fa fa-angle-down"></i></button>
-									<ul class="dropdown-menu pull-right">
-										<li>
-											<a href="#">
-											Drukuj </a>
-										</li>
-										<li>
-											<a href="#">
-											Zapisz jako PDF </a>
-										</li>
-										<li>
-											<a href="#">
-											Export do Excel </a>
-										</li>
-									</ul>
-								</div>
-							</div>
 							<table class="table table-striped table-hover table-bordered" id="customers_list">
 							<thead>
 							<tr>
@@ -78,6 +57,7 @@
 									<div class="margin-bottom-5">
 											<button class="btn btn-sm yellow customer-delete margin-bottom" onClick="javascript:window.location='/admin/customer_delete/<?php echo $customer['id'] ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 											<button class="btn btn-sm yellow customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_edit/<?php echo $customer['id'] ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-sm yellow customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_users/<?php echo $customer['id'] ;?>';"><i class="fa fa-group"></i> Użytkownicy</button>
 									</div>
 								</td>
 							</tr>
