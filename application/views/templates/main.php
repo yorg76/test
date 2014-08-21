@@ -137,16 +137,16 @@
 					<span class="arrow <?php if ($_controller=='admin') echo "open";?>"></span>
 					</a>
 					<ul class="sub-menu">
-						<li class="active">
+						<li class="<?php if ($_action=='customers') echo "active";?>">
 							<a href="/admin/customers">
 							<i class="icon-list"></i>
 							Lista klientów</a>
 						</li>
-						<li>
+						<li class="<?php if ($_action=='users') echo "active";?>">
 							<a href="/admin/users">
 							<i class="icon-list"></i>
 							Lista użytkowników</a>
-						<li class="active">
+						<li class="<?php if ($_action=='add_user') echo "active";?>">
 							<a href="/admin/add_user">
 							<i class="icon-user"></i>
 							Dodaj nowego</a>
@@ -157,27 +157,27 @@
 				<li class="<?php if ($_controller=='customer') echo "active open";?>">
 					<a href="/customer/index">
 					<i class="icon-basket"></i>
-					<span class="title">Klienci</span>
+					<span class="title">Klient</span>
 					<span class="selected"></span>
 					<span class="arrow <?php if ($_controller=='customer') echo "open";?>"></span>
 					</a>
 					<ul class="sub-menu">
-						<li class="active">
+						<li class="<?php if ($_action=='users') echo "active";?>">
 							<a href="/customer/users">
 							<i class="icon-list"></i>
 							Lista użytkowników</a>
 						</li>
-						<li>
+						<li class="<?php if ($_action=='divisions') echo "active";?>">
 							<a href="/customer/divisions">
 							<i class="icon-list"></i>
 							Lista działów</a>
 						</li>
-						<li>
+						<li class="<?php if ($_action=='info') echo "active";?>">
 							<a href="/customer/info">
 							<i class="icon-notebook"></i>
 							Informacje o firmie</a>
 						</li>	
-						<li>
+						<li class="<?php if ($_action=='edit') echo "active";?>">
 							<a href="/customer/edit">
 							<i class="icon-globe"></i>
 							Edycja danych firmowych</a>
