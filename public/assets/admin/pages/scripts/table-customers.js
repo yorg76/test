@@ -60,14 +60,13 @@ var TableCustomers = function () {
             },
             "columnDefs": [{ // set default column settings
                 'orderable': true,
-                'targets': [1]
+                'targets': [0]
             }, {
                 "searchable": true,
-                "targets": [1]
+                "targets": [0]
             }],
             "order": [
-                [5, "asc"],
-                [1, "asc"],
+                [0, "asc"]
             ], // set first column as a default sort by asc
            
         });

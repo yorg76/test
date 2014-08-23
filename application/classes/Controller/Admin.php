@@ -129,8 +129,7 @@ class Controller_Admin extends Controller_Welcome {
 		
 	public function action_customer_delete() {
 		if($this->request->param('id') > 0) {
-			//TODO kasowanie klienta
-			if(1) {
+			if(Customer::instance($this->request->param('id'))->deleteCompany()) {
 				Message::success(ucfirst(__('Klient został usunięty')),'/admin/customers');
 			}else {
 				Message::error(ucfirst(__('Nie udało się usunąć klienta')),'/admin/customers');
