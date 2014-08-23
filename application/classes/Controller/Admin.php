@@ -57,7 +57,8 @@ class Controller_Admin extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		
 		
-		
+		if(strtolower ( $this->request->action()) == 'customer_add_user') $this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'add_user.js');
+			
 		if (file_exists (DOCROOT.ASSETS_ADMIN_PAGES_SCRIPTS . strtolower ( $this->request->action()) . '.js' )) {
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.strtolower ( $this->request->action()).'.js');
 		}
@@ -104,6 +105,7 @@ class Controller_Admin extends Controller_Welcome {
 		
 		if($this->request->param('id') > 0) {
 			$customer = Customer::instance($this->request->param('id'));
+			$this->content->bind('customer', $customer);
 			
 			if($this->request->method()===HTTP_Request::POST) {
 				$params = $this->request->post();
@@ -116,7 +118,7 @@ class Controller_Admin extends Controller_Welcome {
 					Message::error(ucfirst(__('Nie udało się dodać użytkownika')),'/admin/customers');
 				}
 				
-				$this->content->bind('customer', $customer);
+	
 					
 			}
 			
