@@ -22,7 +22,7 @@ class Controller_Customer extends Controller_Welcome {
 		
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'select2/select2.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
-		//$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery-validation/js/jquery.validate.min.js');
+		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery-validation/js/jquery.validate.min.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'select2/select2.min.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'datatables/media/js/jquery.dataTables.min.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.js');
@@ -75,7 +75,7 @@ class Controller_Customer extends Controller_Welcome {
             
             if($validate->check()){
                 $Model->add($_POST);
-                $success = "Nowy klient zosta³ utworzony";
+                $success = "Nowy klient zostaï¿½ utworzony";
             }else{
                 $error = $validate->errors('msg');
             }
@@ -105,7 +105,7 @@ class Controller_Customer extends Controller_Welcome {
             
             if($validate->check()){
                 $modelCustomer->update($id,$_POST);
-                $success = "Dane klienta zosta³y poprawnie zmienione";
+                $success = "Dane klienta zostaï¿½y poprawnie zmienione";
             }else{
                 $error = $validate->errors('msg');
             }

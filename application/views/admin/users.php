@@ -14,7 +14,14 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<table class="table table-striped table-hover table-bordered" id="users_list">
+							<div class="table-toolbar">
+								<div class="btn-group">
+									<button class="btn green" onClick="javascript:window.location='/admin/add_user'">
+									Dodaj<i class="fa fa-plus"></i>
+									</button>
+								</div>
+							</div>
+							<table class="table table-striped table-hover table-bordered" id="customer_users_list">
 							<thead>
 							<tr>
 								<th>
@@ -31,8 +38,11 @@
 									 Email
 								</th>
 								<th>
-									 Firma
-								</th>								
+									Status
+								</th>
+								<th>
+									Firma
+								</th>
 								<th>
 									 Opcje
 								</th>
@@ -42,26 +52,29 @@
 							<?php foreach ($users as $user):?>
 							<tr>
 								<td>
-									 <?php echo $user['login'] ;?>
+									 <?php echo $user->username;?>
 								</td>
 															
 								<td>
-									 <?php echo $user['imie'] ;?>
+									 <?php echo $user->firstname ;?>
 								</td>
 								<td>
-									 <?php echo $user['nazwisko'] ;?>
-								</td>
-								<td>
-									 <?php echo $user['email'] ;?>
+									 <?php echo $user->lastname ;?>
 								</td>
 								<td class="center">
-									 <?php echo $user['firma'] ;?>
+									 <?php echo $user->email;?>
+								</td>
+								<td class="center">
+									 <?php echo $user->status;?>
+								</td>
+								<td class="center">
+									 <?php echo $user->customer->name;?>
 								</td>
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow user-edit margin-bottom" onClick="javascript:window.location='/admin/user_edit/<?php echo $user['id'] ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-sm blue user-lock margin-bottom" onClick="javascript:window.location='/admin/user_lock/<?php echo $user['id'] ;?>';"><i class="fa fa-lock"></i> Zablokuj</button>
-											<button class="btn btn-sm red user-delete margin-bottom" id="<?php echo $user['id'] ;?>"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow user-edit margin-bottom" onClick="javascript:window.location='/admin/user_edit/<?php echo $user->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-sm blue user-lock margin-bottom" onClick="javascript:window.location='/admin/user_lock/<?php echo $user->id ;?>';"><i class="fa fa-lock"></i> Zablokuj</button>
+											<button class="btn btn-sm red user-delete margin-bottom" id="<?php echo $user->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

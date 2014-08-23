@@ -15,7 +15,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/admin/customer_edit/<?php echo $customer->id ?>" method="POST" id="customer_edit_form">
+		<form role="form" action="/admin/customer_add" method="POST" id="customer_add_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -31,7 +31,7 @@
 						<div class="input-icon right">
 							<i class="fa fa-check-circle tooltips hidden" id="username_ok"  data-original-title="Firma nie istnieje" data-container="body"></i>
 							<i class="fa fa-exclamation tooltips hidden" id="username_error" data-original-title="Ta firma już istnieje" data-container="body"></i>
-							<input type="text" placeholder="nazwa" class="form-control" name="name" value="<?php echo $customer->name?>" />
+							<input type="text" placeholder="nazwa" class="form-control" name="name" value="" />
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -39,17 +39,17 @@
 						<label class="control-label">NIP
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<input type="text" placeholder="123456" class="form-control" name="nip"  value="<?php echo $customer->nip?>"/>
+						<input type="text" placeholder="123456" class="form-control" name="nip"  value=""/>
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">REGON</label>
-						<input type="text" placeholder="0987654" class="form-control" name="regon"  value="<?php echo $customer->regon?>"/>
+						<input type="text" placeholder="0987654" class="form-control" name="regon"  value=""/>
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Komentarz</label>
-						<textarea class="form-control" rows="3" placeholder="Nowy klient yuuuupi!" name='comments'><?php echo $customer->comments?></textarea>
+						<textarea class="form-control" rows="3" placeholder="Nowy klient yuuuupi!" name='comments'></textarea>
 						<span class="help-block"></span>
 					</div>
 					<div class="margiv-top-10">
@@ -64,20 +64,20 @@
 						<label class="control-label">Ulica
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<input type="text" placeholder="ul. Pana Jana " class="form-control" name="street"  value="<?php echo $customer->street?>"/>
+						<input type="text" placeholder="ul. Pana Jana " class="form-control" name="street"  value=""/>
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Numer
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<input type="text" placeholder="1" class="form-control" name="number"  value="<?php echo $customer->number?>"/>
+						<input type="text" placeholder="1" class="form-control" name="number"  value=""/>
 						<span class="help-block"></span>
 					</div>					
 					<div class="form-group">
 						<label class="control-label">Lokal							
 						</label>
-						<input type="text" placeholder="1" class="form-control" name="flat"  value="<?php echo $customer->flat?>"/>
+						<input type="text" placeholder="1" class="form-control" name="flat"  value=""/>
 						<span class="help-block"></span>
 					</div>					
 															
@@ -85,34 +85,34 @@
 						<label class="control-label">Miasto
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<input type="text" placeholder="Warszawa" class="form-control" name="city"  value="<?php echo $customer->city?>" />
+						<input type="text" placeholder="Warszawa" class="form-control" name="city"  value="" />
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Kod pocztowy
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<input type="text" placeholder="00-001" class="form-control" name='postal' value="<?php echo $customer->postal?>" />
+						<input type="text" placeholder="00-001" class="form-control" name='postal' value="" />
 						<span class="help-block"></span>
 					</div>															
 					<div class="form-group">
 						<label class="control-label">Kraj							
 						</label>
-						<input type="text" placeholder="+48666999000" class="form-control" name="country"  value="<?php echo $customer->country?>"/>
+						<input type="text" placeholder="+48666999000" class="form-control" name="country"  value=""/>
 						<span class="help-block"></span>
 					</div>					
 					
 					<div class="form-group">
 						<label class="control-label">Telefon							
 						</label>
-						<input type="text" placeholder="+48666999000" class="form-control" name="telephone"  value="<?php echo $customer->telephone?>"/>
+						<input type="text" placeholder="+48666999000" class="form-control" name="telephone"  value=""/>
 						<span class="help-block"></span>
 					</div>					
 					
 					<div class="form-group">
 						<label class="control-label">Strona
 						</label>
-						<input type="text" placeholder="http://www.mywebsite.com" class="form-control" name='www' value="<?php echo $customer->www?>" />
+						<input type="text" placeholder="http://www.mywebsite.com" class="form-control" name='www' value="" />
 						<span class="help-block"></span>
 					</div>
 					<div class="margiv-top-10">

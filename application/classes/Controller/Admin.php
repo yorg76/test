@@ -17,9 +17,23 @@ class Controller_Admin extends Controller_Welcome {
 		
 		$this->template->message = Message::factory();
 		
+		if($this->request->param('id') > 0) {
+			$this->add_init("var id='".$this->request->param('id')."';\t\n");
+		}
+		
+		if($this->request->param('id') > 0) {
+			$this->add_init("TableCustomerUsers.id='".$this->request->param('id')."';\t\n");
+			$this->add_init("TableUsers.id='".$this->request->param('id')."';\t\n");
+		}
+		
 		if(strtolower ( $this->request->action()) == 'customers') $this->add_init("TableCustomers.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'customer_users') $this->add_init("TableCustomerUsers.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'users') $this->add_init("TableUsers.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'customer_add_user') $this->add_init("PasswordGenerator.init();\t\nAdd_user.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'add_user') $this->add_init("PasswordGenerator.init();\t\nAdd_user.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'customer_edit') $this->add_init("PasswordGenerator.init();\t\nCustomer_edit.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'customer_add') $this->add_init("PasswordGenerator.init();\t\nCustomer_add.init();\t\n");
+		
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 
@@ -36,12 +50,18 @@ class Controller_Admin extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		$this->add_fjs ( ASSETS_GLOBAL_SCRIPTS.'datatable.js');
-		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootbox/bootbox.min.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-alert-dialog-api.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-customers.js');
-
-
+		
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
+		
+		
+		
+		if (file_exists (DOCROOT.ASSETS_ADMIN_PAGES_SCRIPTS . strtolower ( $this->request->action()) . '.js' )) {
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.strtolower ( $this->request->action()).'.js');
+		}
+		
 		
 		$this->class='page-header-fixed page-quick-sidebar-over-content';
 	
@@ -66,33 +86,7 @@ class Controller_Admin extends Controller_Welcome {
 		
 	public function action_users() {
 		
-		$users = array(
-				array(
-						'id' =>'1',
-						'login'=>'test',
-						'imie' => 'Test',
-						'nazwisko' =>'Testowy',
-						'email' =>'test@testowy.pl',
-						'firma' => 'Cipa cipa'
-				),
-				array(
-						'id' =>'2',
-						'login'=>'testcik',
-						'imie' => 'Testcik',
-						'nazwisko' =>'Testowiutki',
-						'email' =>'test123@testowy.pl',
-						'firma' => 'Dupa dupa'
-				),
-		
-				array(
-						'id' =>'3',
-						'login'=>'teststas',
-						'imie' => 'Testas',
-						'nazwisko' =>'Testikus',
-						'email' =>'testikus12@testowy.pl',
-						'firma' => 'Huje muje'
-				),
-		);
+		$users = ORM::factory("User")->find_all();
 		
 		$this->content->bind('users', $users);
 		
@@ -100,33 +94,37 @@ class Controller_Admin extends Controller_Welcome {
 	
 	public function action_customers() {
 		
-		$customers = array(
-			array(
-			'id' =>'1',
-			'nazwa'=>'Test 1',
-			'nip' =>'123456789',
-			'regon' =>'0987654321'
-			),
-			array(
-			'id' =>'2',
-			'nazwa'=>'Test 2',
-			'nip' =>'123456789',
-			'regon' =>'0987654321'
-			),
-				
-			array(
-			'id' =>'3',
-			'nazwa'=>'Test 3',
-			'nip' =>'123456789',
-			'regon' =>'0987654321'
-			),
-				
-		);
+		$customers = ORM::factory("Customer")->find_all();
 		
 		$this->content->bind('customers', $customers);
 		
 	}
 	
+	public function action_customer_add_user() {
+		
+		if($this->request->param('id') > 0) {
+			$customer = Customer::instance($this->request->param('id'));
+			
+			if($this->request->method()===HTTP_Request::POST) {
+				$params = $this->request->post();
+				$params['customer_id'] = $customer->id;
+				
+				$user=User::instance();
+				if($user->registerUser($params)) {
+					Message::success(ucfirst(__('Użytkownik firmy został dodany')),'/admin/customers');
+				}else {
+					Message::error(ucfirst(__('Nie udało się dodać użytkownika')),'/admin/customers');
+				}
+				
+				$this->content->bind('customer', $customer);
+					
+			}
+			
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
+		}
+	}
+		
 	public function action_customer_delete() {
 		if($this->request->param('id') > 0) {
 			//TODO kasowanie klienta
@@ -143,9 +141,19 @@ class Controller_Admin extends Controller_Welcome {
 	public function action_customer_edit() {
 		
 		if($this->request->param('id') > 0) {
-			//TODO edycja i zapisywanie klienta
 			
 			$customer = Customer::instance($this->request->param('id'));
+			
+			if($this->request->method()===HTTP_Request::POST) {
+				
+				$params = $this->request->post();
+				
+				if($customer->updateCompany($params)) {
+					Message::success(ucfirst(__('Firma została zaktualizowana')),'/admin/customers');
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować firmy')),'/admin/customers');
+				}
+			}
 			
 			$this->content->bind('customer', $customer);
 			
@@ -154,40 +162,55 @@ class Controller_Admin extends Controller_Welcome {
 		}
 	}
 	
+	public function action_customer_add() {
+	
+		
+		$customer = Customer::instance();
+			
+		if($this->request->method()===HTTP_Request::POST) {
+
+			$params = $this->request->post();
+
+			if($customer->addCompany($params)) {
+				Message::success(ucfirst(__('Firma została dodana')),'/admin/customers');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać firmy')),'/admin/customers');
+			}
+		}
+			
+		$this->content->bind('customer', $customer);
+				
+	}
+	
 	public function action_customer_users() {
 		
 		if($this->request->param('id') > 0) {
 			
-			$users = array(
-					array(
-							'id' =>'1',
-							'login'=>'test',
-							'imie' => 'Test',
-							'nazwisko' =>'Testowy',
-							'email' =>'test@testowy.pl'
-					),
-					array(
-							'id' =>'2',
-							'login'=>'testcik',
-							'imie' => 'Testcik',
-							'nazwisko' =>'Testowiutki',
-							'email' =>'test123@testowy.pl'
-					),
-								
-					array(
-							'id' =>'3',
-							'login'=>'teststas',
-							'imie' => 'Testas',
-							'nazwisko' =>'Testikus',
-							'email' =>'testikus12@testowy.pl'
-					),
-			);
+			$users = ORM::factory("Customer")->where('id','=',$this->request->param('id'))->find()->users->find_all();	
 			
 			$this->content->bind('users', $users);
+			
 		}else {
 			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
 		}
 		
+	}
+	
+	public function action_add_user() {
+		
+		$customers = ORM::factory("Customer")->find_all();
+		
+		$this->content->bind('customers', $customers);			
+		
+		if($this->request->method()===HTTP_Request::POST) {
+			$params = $this->request->post();
+			$user=User::instance();
+			if($user->registerUser($params)) {
+				Message::success(ucfirst(__('Użytkownik firmy został dodany')),'/admin/users');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać użytkownika')),'/admin/users');
+			}		
+		}
 	}
 	
 	public function action_user_edit() {

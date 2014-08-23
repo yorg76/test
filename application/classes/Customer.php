@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Customer extends ORM {
+class Customer  {
 
 	public $customer;
 	public $id;
@@ -13,9 +13,23 @@ class Customer extends ORM {
 	public $nip;
 	public $regon;
 	public $code;
+	public $address;
+	public $www;
+	public $pricetable;
+	public $warehouses;
+	public $users;
+	public $divisions;
+	public $invoices;
+	public $street;
+	public $flat;
+	public $number;
+	public $telephone;
+	public $city;
+	public $postal;
+	public $commemts;
 	
 	public static function instance($id=NULL) {
-		if($id>1) {
+		if($id>0) {
 			return new Customer($id);
 		}else{
 			return new Customer(NULL);
@@ -23,51 +37,155 @@ class Customer extends ORM {
 	}
 	
 	public function __construct($id) {
-		if($id>1) {
+		if($id>0) {
+			
 			$this->customer = ORM::factory('Customer')->where('id','=',$id)->find();
-			$this->address = $this->customer->addresses->where('type','=',0)->find();
+			$this->address = $this->customer->addresses->where('address_type','=','firmowy')->find();
+			$this->street = $this->address->street; 
+			$this->number = $this->address->number;
+			$this->flat = $this->address->flat;
+			$this->country=$this->address->country;
+			$this->city=$this->address->city;
+			$this->postal=$this->address->postal;
+			$this->www=$this->customer->www;
+			$this->telephone=$this->address->telephone;
 			$this->users = $this->customer->users->find();
 			$this->divisions = $this->customer->divisions->find();
 			$this->warehouses = $this->customer->warehouses->find();
 			$this->invoices = $this->customer->invoices->find();
-			$this->pricetable = $this->customer->pricetables->find();
-			
+			$this->pricetable = $this->customer->pricetable->find();
 			$this->id = $this->customer->id;
 			$this->name = $this->customer->name;
 			$this->nip = $this->customer->nip;
 			$this->regon = $this->customer->regon;
 			$this->code = $this->customer->code;
+			$this->comments = $this->customer->comments;
 			
 		}else {
 			$this->customer = ORM::factory('Customer');
 			$this->address = ORM::factory('Address');
-			$this->user = ORM::factory('User');
-			$this->division = ORM::factory('Division');
-			$this->warehouse = ORM::factory('Warehose');
-			$this->invoice = ORM::factory('Invoice');
 			$this->pricetable = ORM::factory('Pricetable');
 		}
 	}
 	
-	public function addCompany() {
-
+	public function addCompany($params) {
+		$log=Kohana_Log::instance();
+		
+		$this->address->street = $params['street']; 
+		$this->address->number = $params['number'];
+		$this->address->flat = $params['flat'];
+		$this->address->country=$params['country'];
+		$this->address->city=$params['city'];
+		$this->address->postal=$params['postal'];
+		$this->address->telephone=$params['telephone'];
+		$this->address->address_type='firmowy';
+		
+		$this->www=$params['www'];
+		$this->name = $params['name'];
+		$this->nip = $params['nip'];
+		$this->regon = $params['regon'];		
+		$this->comments = $params['comments'];
+		
+		$this->customer->www=$params['www'];
+		$this->customer->name = $params['name'];
+		$this->customer->nip = $params['nip'];
+		$this->customer->regon = $params['regon'];
+		$this->customer->comments = $params['comments'];
+		
+		try {
+			Database::instance()->begin();
+			if($this->customer->save()) {
+				$this->id=$this->customer->id;
+				$this->address->customer_id=$this->customer->id;
+				
+				if($this->address->save() ) {
+						$log->add(Log::DEBUG,"Success: Updated company with params:".serialize($params)."\n");
+						Database::instance()->commit();				
+						return true;
+				} else {
+					$log->add(Log::ERROR,"Error: Company update failed params:".serialize($params)."\n");
+					Database::instance()->rollback();
+					return false;
+				}
+			}else {
+				$log->add(Log::ERROR,"Error: Company update failed params:".serialize($params)."\n");
+				Database::instance()->rollback();
+				return false;
+			}
+		}catch (Exception $e) {
+				Database::instance()->rollback();
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
 		return;
+		
 	}
 
 
-	public function editCompany() {
-
+	public function updateCompany($params) {
+		
+		$log=Kohana_Log::instance();
+		
+		$this->address->street = $params['street']; 
+		$this->address->number = $params['number'];
+		$this->address->flat = $params['flat'];
+		$this->address->country=$params['country'];
+		$this->address->city=$params['city'];
+		$this->address->postal=$params['postal'];
+		$this->address->telephone=$params['telephone'];
+		$this->www=$params['www'];
+		$this->name = $params['name'];
+		$this->nip = $params['nip'];
+		$this->regon = $params['regon'];
+		$this->comments = $params['comments'];
+		$this->customer->www=$params['www'];
+		$this->customer->name = $params['name'];
+		$this->customer->nip = $params['nip'];
+		$this->customer->regon = $params['regon'];
+		$this->customer->comments = $params['comments'];
+		
+		try {
+			if($this->customer->update() && $this->address->update()) {
+				$log->add(Log::DEBUG,"Success: Updated company with params:".serialize($params)."\n");
+				
+				return true;
+			} else {
+				$log->add(Log::ERROR,"Error: Company update failed params:".serialize($params)."\n");
+				
+				return false;
+			}
+		}catch (Exception $e) {
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
 		return;
+		
 	}
 
 
 	public function deleteCompany() {
-
+		try {
+			if($this->customer->remove()) {
+				$this->customer=NULL;
+				return true;
+			} else {
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+		}
 		return;
 	}
 	
 	public function addAddress() {
-	
+		
+		try {
+			if($this->customer->add($this->address)) {
+				return true;
+			} else {
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+		}
 		return;
 	}
 	
@@ -76,9 +194,19 @@ class Customer extends ORM {
 		return;
 	}
 	
-	public function addDivision() {
+	public function addDivision($division) {
 	
+		try {
+			if($this->customer->add($division)) {
+				return true;
+			} else {
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+		}
 		return;
+		
 	}
 	
 	public function deleteDivision() {
@@ -86,8 +214,16 @@ class Customer extends ORM {
 		return;
 	}
 	
-	public function addWarehouse() {
-	
+	public function addWarehouse($warehouse) {
+		try {
+			if($this->customer->add($warehouse)) {
+				return true;
+			} else {
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+		}
 		return;
 	}
 	

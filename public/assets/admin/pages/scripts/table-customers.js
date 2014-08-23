@@ -1,5 +1,5 @@
 var TableCustomers = function () {
-
+    var id = 0;
     var handleTable = function () {
 
         function restoreRow(oTable, nRow) {
@@ -60,14 +60,16 @@ var TableCustomers = function () {
             },
             "columnDefs": [{ // set default column settings
                 'orderable': true,
-                'targets': [0]
+                'targets': [1]
             }, {
                 "searchable": true,
-                "targets": [0]
+                "targets": [1]
             }],
             "order": [
-                [0, "asc"]
-            ] // set first column as a default sort by asc
+                [5, "asc"],
+                [1, "asc"],
+            ], // set first column as a default sort by asc
+           
         });
 
         var tableWrapper = $("#sample_editable_1_wrapper");
@@ -166,7 +168,7 @@ var TableCustomers = function () {
 
 
 var TableCustomerUsers = function () {
-
+	var id=0;
     var handleTable = function () {
 
         function restoreRow(oTable, nRow) {
@@ -223,7 +225,9 @@ var TableCustomerUsers = function () {
             "pageLength": -1,
 
             "language": {
-                "lengthMenu": " _MENU_ wierszy"
+                "lengthMenu": " _MENU_ wierszy",
+                "infoEmpty": "<span class=\"label label-info\">Brak użytkowników.  </span> ",
+                "emptyTable": "<span class=\"label label-info\">Brak użytkowników.  </span><p> <center> <button class=\"btn btn-sm yellow customer-edit margin-bottom\" onclick=\"javascript:window.location='/admin/customer_add_user/"+TableCustomerUsers.id+"';\"><i class=\"fa fa-user\"></i> Dodaj</button></center></p>"
             },
             "columnDefs": [{ // set default column settings
                 'orderable': true,
@@ -333,7 +337,7 @@ var TableCustomerUsers = function () {
 
 
 var TableUsers = function () {
-
+	var id=0;
     var handleTable = function () {
 
         function restoreRow(oTable, nRow) {

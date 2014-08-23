@@ -17,6 +17,8 @@ class User extends ORM {
 	public $firstname;
 	public $lastname;
 	public $status;
+	public $customer;
+	public $division;
 		
 	public static function instance($id=NULL) {
 		if($id>1) {
@@ -29,10 +31,9 @@ class User extends ORM {
 	public function __construct($id) {
 		if($id>1) {
 			$this->user = ORM::factory('User')->where('id','=',$id)->find();
-			$this->address = $this->user->addresses->where('type','=',0)->find();
+			$this->id = $this->user->id;
 			$this->customer = $this->user->customer->find();
 			$this->division = $this->user->divisions->find();
-			$this->id = $this->user->id;
 			$this->firstname = $this->user->firstname;
 			$this->lastname = $this->user->lastname;
 			$this->username = $this->user->username;
@@ -135,22 +136,26 @@ class User extends ORM {
 		$customer=$this->customer;
 		$division=$this->division;
 		
+		$user->firstname=$params['firstname'];
+		$user->lastname=$params['lastname'];
+		$user->email=$params['email'];
+		$user->username=$params['username'];
+		$user->password=$params['password'];
+		$user->customer_id=$params['customer_id'];
+		
+		
 		if(is_array($params)) {
 			
 			try {
+			
 				if($user->save()) {
-					
-					$user->firstname=$params['firstname'];
-					$user->lastname=$params['lastname'];
-					$user->email=$params['email'];
-					$user->username=$params['username'];
-					$user->password=$params['pass'];
-					$user->save();
-											
-					}
 					$user->add('roles', ORM::factory('role', array('name' => 'login')));
 					$log->add(Log::DEBUG,"Success: Registered user with params:".serialize($params)."\n");
 					return true;
+				}else {
+					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodwania usera'."\n");
+				}
+				return true;
 			}catch (Exception $e) {
 				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
 				return false;
