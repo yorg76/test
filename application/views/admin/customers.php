@@ -39,6 +39,9 @@
 									 REGON
 								</th>
 								<th>
+									KOD
+								</th>
+								<th>
 									 Liczba użytkowników
 								</th>
 								<th>
@@ -57,6 +60,9 @@
 								</td>
 								<td>
 									 <?php echo $customer->regon;?>
+								</td>
+								<td>
+									 <?php echo $customer->code;?>
 								</td>
 								<td class="center">
 									 <?php echo $customer->users->count_all();?>

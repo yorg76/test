@@ -48,6 +48,11 @@
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
+						<label class="control-label">KOD</label>
+						<input type="text" placeholder="0987654" class="form-control" name="code"  value="<?php echo $customer->code?>"/>
+						<span class="help-block"></span>
+					</div>
+					<div class="form-group">
 						<label class="control-label">Komentarz</label>
 						<textarea class="form-control" rows="3" placeholder="Nowy klient yuuuupi!" name='comments'><?php echo $customer->comments?></textarea>
 						<span class="help-block"></span>

@@ -135,9 +135,11 @@ class Customer  {
 		$this->www=$params['www'];
 		$this->name = $params['name'];
 		$this->nip = $params['nip'];
+		$this->code = $params['code'];
 		$this->regon = $params['regon'];
 		$this->comments = $params['comments'];
 		$this->customer->www=$params['www'];
+		$this->customer->code=$params['code'];
 		$this->customer->name = $params['name'];
 		$this->customer->nip = $params['nip'];
 		$this->customer->regon = $params['regon'];
