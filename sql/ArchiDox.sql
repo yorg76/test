@@ -75,7 +75,9 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `amount` float DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
   `pricetable_id` int(11) unsigned NOT NULL,
+  `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `wystawiona_na` (`customer_id`),
   KEY `liczona wg` (`pricetable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
 
@@ -86,6 +88,8 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `nip` varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
   `regon` varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
   `code` varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
+  `www` varchar(32) NOT NULL,
+  `comments` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
 
@@ -201,6 +205,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_login` int(10) unsigned DEFAULT NULL,
   `firstname` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL,
+  `status` varchar(32) NOT NULL,
   `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
@@ -266,7 +271,8 @@ ALTER TABLE `divisions`
   ADD CONSTRAINT `FK_nalezy_do` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 
 ALTER TABLE `invoices`
-  ADD CONSTRAINT `liczona_wg` FOREIGN KEY (`pricetable_id`) REFERENCES `pricetables` (`id`);
+  ADD CONSTRAINT `liczona_wg` FOREIGN KEY (`pricetable_id`) REFERENCES `pricetables` (`id`),
+  ADD CONSTRAINT `liczona_wg` FOREIGN KEY (`pricetable_id`) REFERENCES `customers` (`id`);
 
 ALTER TABLE `boxbarcodes`
   ADD CONSTRAINT `FK_kp_przypisany_do_p` FOREIGN KEY (`box_id`) REFERENCES `boxes` (`id`);  
