@@ -30,7 +30,8 @@ class Controller_Admin extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'customer_users') $this->add_init("TableCustomerUsers.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'users') $this->add_init("TableUsers.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'customer_add_user') $this->add_init("PasswordGenerator.init();\t\nAdd_user.init();\t\n");
-		if(strtolower ( $this->request->action()) == 'add_user') $this->add_init("PasswordGenerator.init();\t\nAdd_user.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'user_add') $this->add_init("PasswordGenerator.init();\t\nAdd_user.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'user_edit') $this->add_init("PasswordGenerator.init();\t\nUser_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'customer_edit') $this->add_init("PasswordGenerator.init();\t\nCustomer_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'customer_add') $this->add_init("PasswordGenerator.init();\t\nCustomer_add.init();\t\n");
 		
@@ -197,7 +198,7 @@ class Controller_Admin extends Controller_Welcome {
 		
 	}
 	
-	public function action_add_user() {
+	public function action_user_add() {
 		
 		$customers = ORM::factory("Customer")->find_all();
 		
@@ -215,11 +216,29 @@ class Controller_Admin extends Controller_Welcome {
 	}
 	
 	public function action_user_edit() {
-		
-		$customer_id = 1;
+		$customers = ORM::factory("Customer")->find_all();
+		$this->content->bind('customers', $customers);
+		$user = ORM::factory('User',$this->request->param('id'));
+		$this->content->bind('user', $user);
 		
 		if($this->request->param('id') > 0) {
-				// TODO user edit
+
+			if($this->request->method()===HTTP_Request::POST) {
+				 
+				$user->values($_POST);	
+				 
+				$validate = new Validation($_POST);
+				$validate->rule('firstname', 'not_empty')
+				->rule('lastname', 'not_empty')
+				->rule('username', 'not_empty');
+			
+				if($validate->check() && $user->update($validate)){
+					Message::success(ucfirst(__('Dane klienta zostały zaktualizowane')),'/admin/users');
+				}else{
+					Message::error(ucfirst(__('Wystąpił błąd')." ".$validate->errors('msg')),'/admin/users');
+				}
+			
+			}
 		}else {
 			Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/admin/customers/'.$customer_id);
 		}

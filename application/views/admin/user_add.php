@@ -65,7 +65,7 @@
 								<option>-- Wybierz --</option>
 								<?php foreach ($customers as $customer):?>
 								<?php 
-									echo "<option value=\"".$customer->id."\">".$customer->name."</option>";
+											echo "<option value=\"".$customer->id."\">".$customer->name."</option>";
 								?>
 								<?php endforeach;?>
 							</select>

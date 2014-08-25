@@ -146,8 +146,8 @@
 							<a href="/admin/users">
 							<i class="icon-list"></i>
 							Lista użytkowników</a>
-						<li class="<?php if ($_action=='add_user') echo "active";?>">
-							<a href="/admin/add_user">
+						<li class="<?php if ($_action=='user_add') echo "active";?>">
+							<a href="/admin/user_add">
 							<i class="icon-user"></i>
 							Dodaj nowego</a>
 						</li>
@@ -186,7 +186,7 @@
 				</li>
 				<li class="<?php if ($_controller=='warehouse') echo "active open";?>">
 					<a href="/warehouse/index">
-					<i class="icon-basket"></i>
+					<i class="icon-grid"></i>
 					<span class="title">Magazyn</span>
 					<span class="selected"></span>
 					<span class="arrow <?php if ($_controller=='warehouse') echo "open";?>"></span>
@@ -219,7 +219,32 @@
 						</li>
 					</ul>
 				</li>
-				
+				<li class="<?php if ($_controller=='virtualbriefcase') echo "active open";?>">
+					<a href="/virtualbriefcase/index">
+					<i class="icon-briefcase"></i>
+					<span class="title">
+					Wirtualne teczki </span>
+					<span class="arrow <?php if ($_controller=='virtualbriefcase') echo "open";?>">
+					</span>
+					</a>
+					<ul class="sub-menu">
+						<li>
+							<a href="/virtualbriefcase/add">
+							<i class="icon-note"></i>
+							Dodaj</a>
+						</li>
+						<li>
+							<a href="/virtualbriefcase/remove">
+							<i class="icon-trash"></i>
+							Usuń</a>
+						</li>
+						<li>
+							<a href="/virtualbriefcase/modify">
+							<i class="icon-loop"></i>
+							Zmień</a>
+						</li>
+					</ul>
+				</li>
 				<li class="<?php if ($_controller=='order') echo "active open";?>">
 					<a href="/order/index">
 					<i class="icon-calculator"></i>
@@ -249,32 +274,7 @@
 						</li>						
 					</ul>
 				</li>
-				<li class="<?php if ($_controller=='virtualbriefcase') echo "active open";?>">
-					<a href="/virtualbriefcase/index">
-					<i class="icon-briefcase"></i>
-					<span class="title">
-					Wirtualne teczki </span>
-					<span class="arrow <?php if ($_controller=='virtualbriefcase') echo "open";?>">
-					</span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="/virtualbriefcase/add">
-							<i class="icon-note"></i>
-							Dodaj</a>
-						</li>
-						<li>
-							<a href="/virtualbriefcase/remove">
-							<i class="icon-trash"></i>
-							Usuń</a>
-						</li>
-						<li>
-							<a href="/virtualbriefcase/modify">
-							<i class="icon-loop"></i>
-							Zmień</a>
-						</li>
-					</ul>
-				</li>
+
 				
 				<li class="<?php if ($_controller=='finance') echo "active open";?>">
 					<a href="/finance/index">
