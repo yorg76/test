@@ -128,6 +128,62 @@ class User extends ORM {
 			}
 		}
 	}
+	
+	public function sendEmail($params) {
+		
+		$log=Kohana_Log::instance();
+		
+		$email = Email::factory($params['subject']);
+		
+		$message_template = View::factory('templates/email_template');
+		$title = $params['subject'];
+		$message_template->bind('title', $title);
+		
+		$message_template->bind('email_title', $params['email_title']);
+		
+		
+		$message_template->bind('email_info', $params['email_info']);
+		
+		
+		$message_template->bind('email_content', $params['email_content']);
+			
+		$message = $message_template->render();
+			
+		$logo = $email->embed(DOCROOT.ASSETS_ADMIN_LAYOUT_IMG."logo-big.png");
+			
+		$message = str_replace("logo.png", $logo, $message);
+			
+		$social_facebook= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_facebook.png");
+			
+		$message = str_replace("social_facebook.png", $social_facebook, $message);
+			
+		$social_twitter= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_twitter.png");
+			
+		$message = str_replace("social_twitter.png", $social_twitter, $message);
+			
+		$social_googleplus= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_googleplus.png");
+			
+		$message = str_replace("social_googleplus.png", $social_googleplus, $message);
+			
+		$social_linkedin= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_linkedin.png");
+			
+		$message = str_replace("social_linkedin.png", $social_linkedin, $message);
+			
+		$social_rss= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_rss.png");
+			
+		$message = str_replace("social_rss.png", $social_rss, $message);
+			
+		$email->message($message, 'text/html');
+		$email->to($params['email'],$params['firstname']." ".$params['lastname']);
+		$email->from(Kohana::$config->load('email')->as_array()['default']['options']['fromemail'],"System magazynowy");
+			
+		try {
+			if($email->send()) $log->add(Log::DEBUG,"Success: User email sent\n");
+			else $log->add(Log::ERROR,"Error: User email not sent\n");
+		}catch (Exception $e) {
+			$log->add(Log::ERROR,"Error: User email not sent\n");
+		}
+	}
 		
 	public function registerUser($params) {
 		
@@ -151,6 +207,18 @@ class User extends ORM {
 				if($user->save()) {
 					$user->add('roles', ORM::factory('role', array('name' => 'login')));
 					$log->add(Log::DEBUG,"Success: Registered user with params:".serialize($params)."\n");
+
+					$paramse = array();
+					$paramse['subject']="Rejestracja nowego użytkownika systemu";
+					$paramse['email_title'] = "Witamy w gronie użytkowników systemu";
+					$paramse['email_info'] = "Poniżej znajdują się dane do logowania do systemu";
+					$paramse['email_content'] = "<p>Użytkownik: ".$user->username." </p><p>Hasło: ".$params['password']."<br />";
+					$paramse['email'] = $user->email;
+					$paramse['firstname'] = $user->firstname;
+					$paramse['lastname']= $user->lastname;
+					
+					$this->sendEmail($paramse);
+					
 					return true;
 				}else {
 					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodwania usera'."\n");

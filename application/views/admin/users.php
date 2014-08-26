@@ -16,12 +16,12 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/admin/add_user'">
+									<button class="btn green" onClick="javascript:window.location='/admin/user_add'">
 									Dodaj<i class="fa fa-plus"></i>
 									</button>
 								</div>
 							</div>
-							<table class="table table-striped table-hover table-bordered" id="customer_users_list">
+							<table class="table table-striped table-hover table-bordered" id="users_list">
 							<thead>
 							<tr>
 								<th>

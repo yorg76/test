@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/admin/user_add" method="POST" id="add_user_form">
+		<form role="form" action="/admin/user_edit/<?php echo $user->id ?>" method="POST" id="add_user_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -27,7 +27,7 @@
 						<div class="input-icon right">
 							<i class="fa fa-check-circle tooltips hidden" id="username_ok"  data-original-title="Firma nie istnieje" data-container="body"></i>
 							<i class="fa fa-exclamation tooltips hidden" id="username_error" data-original-title="Ta firma już istnieje" data-container="body"></i>
-							<input type="text" placeholder="Login" class="form-control" name="username" value="" />
+							<input type="text" placeholder="Login" class="form-control" name="username" value="<?php echo $user->username ?>" />
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -35,14 +35,14 @@
 						<label class="control-label">Imie
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<input type="text" placeholder="Imię" class="form-control" name="firstname"  value=""/>
+						<input type="text" placeholder="Imię" class="form-control" name="firstname"  value="<?php echo $user->firstname ?>"/>
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Nazwisko
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<input type="text" placeholder="Nazwisko" class="form-control" name="lastname"  value=""/>
+						<input type="text" placeholder="Nazwisko" class="form-control" name="lastname"  value="<?php echo $user->lastname ?>"/>
 						<span class="help-block"></span>
 					</div>					
 					<div class="form-group">
@@ -52,10 +52,10 @@
 						<div class="input-icon right">
 							<i class="fa fa-check-circle tooltips hidden" id="email_ok"  data-original-title="Użytkownik nie istnieje" data-container="body"></i>
 							<i class="fa fa-exclamation tooltips hidden" id="email_error" data-original-title="Ten użytkownik już istnieje" data-container="body"></i>
-							<input type="text" placeholder="user@example.com" class="form-control" name="email" value="" />
+							<input type="text" placeholder="user@example.com" class="form-control" name="email" value="<?php echo $user->email ?>" />
 							<span class="help-block"></span>
 						</div>
-					</div>		
+					</div>				
 					<div class="form-group">
 						<label class="control-label">Klient
 							<span class="required" aria-required="true"> * </span>
@@ -65,12 +65,16 @@
 								<option>-- Wybierz --</option>
 								<?php foreach ($customers as $customer):?>
 								<?php 
-											echo "<option value=\"".$customer->id."\">".$customer->name."</option>";
+										if ($user->customer->id == $customer->id) $checked=" selected=\"true\"";
+										else $checked="";
+										
+										echo "<option value=\"".$customer->id."\"".$checked." >".$customer->name."</option>";
+
 								?>
 								<?php endforeach;?>
 							</select>
 						</div>
-					</div>				
+					</div>		
 					<div class="form-group">
 						<label class="control-label">Hasło
 							<span class="required" aria-required="true"> * </span>
@@ -93,9 +97,7 @@
 					<br />
 					<span class="input-group-btn">
 						<button id="genpassword" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"></i> Losowe</button>
-					</span>		
-					
-				
+					</span>			
 					<br/>
 					<div class="margiv-top-10">
 						<a href="#" class="btn green" id="submit">

@@ -131,6 +131,7 @@ Kohana::modules(array(
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
        'formo'		=> MODPATH.'formo',		 // Formularze
 	   'pagination' => MODPATH.'pagination',  // Pagination module access
+	   'email' => MODPATH.'email',  
 	));
 
 //Aplication skin and folders
