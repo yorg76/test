@@ -218,11 +218,11 @@ class Controller_Admin extends Controller_Welcome {
 	public function action_user_edit() {
 		$customers = ORM::factory("Customer")->find_all();
 		$this->content->bind('customers', $customers);
-		$user = ORM::factory('User',$this->request->param('id'));
-		$this->content->bind('user', $user);
+
 		
 		if($this->request->param('id') > 0) {
-
+			$user = ORM::factory('User',$this->request->param('id'));
+			$this->content->bind('user', $user);
 			if($this->request->method()===HTTP_Request::POST) {
 				 
 				$user->values($_POST);	
@@ -246,25 +246,25 @@ class Controller_Admin extends Controller_Welcome {
 	
 	public function action_user_delete() {
 		if($this->request->param('id') > 0) {
-			//TODO kasowanie usera
-			$customer_id = 1;
-			if(1) {
+			$user = User::instance($this->request->param('id'));
+			$customer_id = $user->customer->id;
+			
+			
+			if($user->deleteUser()) {
 				Message::success(ucfirst(__('Użytkownik został usunięty')),'/admin/customer_users/'.$customer_id);
 			}else {
 				Message::error(ucfirst(__('Nie udało się usunąć użytkownika')),'/admin/customer_users/'.$customer_id);
 			}
-		}else {
-			Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/admin/customer_users/'.$customer_id);
 		}
 	}	
 	
 	public function action_user_lock() {
 		
 		if($this->request->param('id') > 0) {
-			//TODO blokowanie usera
-			$customer_id = 1;
+			$user = User::instance($this->request->param('id'));
+			$customer_id = $user->customer->id;
 			
-			if(1) {
+			if($user->lockUser()) {
 				Message::success(ucfirst(__('Użytkownik został zablokowany')),'/admin/customer_users/'.$customer_id);
 			}else {
 				Message::error(ucfirst(__('Nie udało się zablokować użytkownika')),'/admin/customer_users/'.$customer_id);
@@ -277,13 +277,13 @@ class Controller_Admin extends Controller_Welcome {
 	public function action_user_unlock() {
 	
 		if($this->request->param('id') > 0) {
-			//TODO odblokowanie usera
-			$customer_id = 1;
-				
-			if(1) {
-				Message::success(ucfirst(__('Użytkownik został zablokowany')),'/admin/customer_users/'.$customer_id);
+			$user = User::instance($this->request->param('id'));
+			$customer_id = $user->customer->id;
+			
+			if($user->unlockUser()) {
+				Message::success(ucfirst(__('Użytkownik został odblokowany')),'/admin/customer_users/'.$customer_id);
 			}else {
-				Message::error(ucfirst(__('Nie udało się zablokować użytkownika')),'/admin/customer_users/'.$customer_id);
+				Message::error(ucfirst(__('Nie udało się oblokować użytkownika')),'/admin/customer_users/'.$customer_id);
 			}
 		}else {
 			Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/admin/customer_users');

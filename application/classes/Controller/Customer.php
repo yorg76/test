@@ -150,9 +150,9 @@ class Controller_Customer extends Controller_Welcome {
     		$this->content->bind('customer', $customer);
     		
     		if($this->request->method()===HTTP_Request::POST) {
-    			$user = ORM::factory('User');
+    			$user = User::instance();
     			
-    			$user->values($_POST);
+    			$user->user->values($_POST);
     			
     			$validate = new Validation($_POST);
     			
@@ -162,7 +162,7 @@ class Controller_Customer extends Controller_Welcome {
     			->rule('password', 'not_empty')
     			->rule('email', 'not_empty');
     			
-    			if($validate->check() && $user->save($validate)){
+    			if($validate->check() && $user->registerUser($_POST)){
     				Message::success(ucfirst(__('Dodano użytkownika')),'/customer/users');
     			}else{
     				Message::error(ucfirst(__('Wystąpił błąd')." ".$validate->errors('msg')),'/customer/users');

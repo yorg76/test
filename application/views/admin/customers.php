@@ -22,7 +22,7 @@
 							<div class="table-toolbar">
 								<div class="btn-group">
 									<button class="btn green" onClick="javascript:window.location='/admin/customer_add'">
-									Dodaj<i class="fa fa-plus"></i>
+									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
 							</div>

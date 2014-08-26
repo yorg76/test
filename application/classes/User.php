@@ -32,8 +32,8 @@ class User extends ORM {
 		if($id>1) {
 			$this->user = ORM::factory('User')->where('id','=',$id)->find();
 			$this->id = $this->user->id;
-			$this->customer = $this->user->customer->find();
-			$this->division = $this->user->divisions->find();
+			$this->customer = $this->user->customer;
+			$this->division = $this->user->divisions;
 			$this->firstname = $this->user->firstname;
 			$this->lastname = $this->user->lastname;
 			$this->username = $this->user->username;
@@ -51,16 +51,18 @@ class User extends ORM {
 		$log=Kohana_Log::instance();
 	
 		if($this->user->loaded()) {
+			$username=$this->user->username;
+					
 			if($this->user->delete()) {
-				$log->add(Log::DEBUG,"Success: Removed user:".$user->user->username."\n");
+				$log->add(Log::DEBUG,"Success: Removed user:".$username."\n");
 				return true;
 			}
 			else {
-				$log->add(Log::DEBUG,"Fail: Remove user:".$user->user->username."\n");
+				$log->add(Log::DEBUG,"Fail: Remove user:".$username."\n");
 				return false;
 			}
 		}else {
-			$log->add(Log::DEBUG,"Fail: Remove user:".$user->user->username."\n");
+			$log->add(Log::DEBUG,"Fail: Remove user:".$username."\n");
 			return false;
 		}
 	}
@@ -69,17 +71,17 @@ class User extends ORM {
 		$log=Kohana_Log::instance();
 		
 		if($this->user->loaded()) {
-			$this->user->status="locked";
-			if($this->user->save()) {
-				$log->add(Log::DEBUG,"Success: Locked user:".$user->user->username."\n");
+			$this->user->status="zablokowany";
+			if($this->user->update()) {
+				$log->add(Log::DEBUG,"Success: Locked user:".$this->user->username."\n");
 				return true;
 			}
 			else {
-				$log->add(Log::DEBUG,"Fail: Locked user:".$user->user->username."\n");
+				$log->add(Log::DEBUG,"Fail: Locked user:".$this->user->username."\n");
 				return false;
 			}
 		}else {
-			$log->add(Log::DEBUG,"Fail: Locked user:".$user->user->username."\n");
+			$log->add(Log::DEBUG,"Fail: Locked user:".$this->user->username."\n");
 			return false;
 		}
 	}
@@ -88,17 +90,17 @@ class User extends ORM {
 		$log=Kohana_Log::instance();
 	
 		if($this->user->loaded()) {
-			$this->user->status="active";
-			if($this->user->save()) {
-				$log->add(Log::DEBUG,"Success: UnLocked user:".$user->user->username."\n");
+			$this->user->status="aktywny";
+			if($this->user->update()) {
+				$log->add(Log::DEBUG,"Success: UnLocked user:".$this->user->username."\n");
 				return true;
 			}
 			else {
-				$log->add(Log::DEBUG,"Fail: UnLocked user:".$user->user->username."\n");
+				$log->add(Log::DEBUG,"Fail: UnLocked user:".$this->user->username."\n");
 				return false;
 			}
 		}else {
-			$log->add(Log::DEBUG,"Fail: UnLocked user:".$user->user->username."\n");
+			$log->add(Log::DEBUG,"Fail: UnLocked user:".$this->user->username."\n");
 			return false;
 		}
 	}
