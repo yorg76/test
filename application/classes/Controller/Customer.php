@@ -19,6 +19,7 @@ class Controller_Customer extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'user_add') $this->add_init("PasswordGenerator.init();\t\nUser_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'user_edit') $this->add_init("PasswordGenerator.init();\t\nUser_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'division_add') $this->add_init("PasswordGenerator.init();\t\nAdd_division.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'division_edit') $this->add_init("PasswordGenerator.init();\t\nEdit_division.init();\t\n");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 		
@@ -30,6 +31,9 @@ class Controller_Customer extends Controller_Welcome {
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'select2/select2.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/css/datepicker.css');
+		
+		if(strtolower ( $this->request->action()) == 'info') $this->add_css ( ASSETS_ADMIN_PAGES_CSS.'profile.css');
+		
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery-validation/js/jquery.validate.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery-validation/js/additional-methods.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'select2/select2.min.js');
@@ -171,6 +175,39 @@ class Controller_Customer extends Controller_Welcome {
     }
     
     
+    public function action_user_lock() {
+    
+    	if($this->request->param('id') > 0) {
+    		$user = User::instance($this->request->param('id'));
+    		$customer_id = $user->customer->id;
+    			
+    		if($user->lockUser()) {
+    			Message::success(ucfirst(__('Użytkownik został zablokowany')),'/customer/users/');
+    		}else {
+    			Message::error(ucfirst(__('Nie udało się zablokować użytkownika')),'/customer/users/');
+    		}
+    	}else {
+    		Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/customer/users');
+    	}
+    }
+    
+    public function action_user_unlock() {
+    
+    	if($this->request->param('id') > 0) {
+    		$user = User::instance($this->request->param('id'));
+    		$customer_id = $user->customer->id;
+    			
+    		if($user->unlockUser()) {
+    			Message::success(ucfirst(__('Użytkownik został odblokowany')),'/customer/users/');
+    		}else {
+    			Message::error(ucfirst(__('Nie udało się oblokować użytkownika')),'/customer/users/');
+    		}
+    	}else {
+    		Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/customer/users');
+    	}
+    }
+    
+    
     public function after(){     
         parent::after();
     }	
@@ -184,17 +221,56 @@ class Controller_Customer extends Controller_Welcome {
 	public function action_divisions() {
 		$customer=Auth::instance()->get_user()->customer;
 		$divisions = $customer->divisions->find_all();
+		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);
+		$this->content->bind('user', $user);
 	}
 	
 	public function action_division_add() {
-		
 		$customer=Auth::instance()->get_user()->customer;
-		
+		$division = Division::instance();			
 		$this->content->bind('customer', $customer);
+				
 		if($this->request->method()===HTTP_Request::POST) {
+
+			$params = $_POST;
+			$params['customer_id'] = $customer->id;
+			
+			if($division->addDivision($params)) {
+				Message::success(ucfirst(__('Dział został utworzony')),'/customer/divisions/');
+			}else {
+				Message::error(ucfirst(__('Dział nie został utworzony')),'/customer/divisions/');
+			}
 			
 		}
+	}
+	
+	public function action_division_edit() {
+		if($this->request->param('id') > 0) {
+			$division = Division::instance($this->request->param('id'));
+			$user = Auth_ORM::instance()->get_user();
+			$customer_id = $user->customer->id;
+			$this->content->bind('user', $user);
+			$this->content->bind('customer', $user->customer);
+			$this->content->bind('division', $division);
+			
+			if($this->request->method()===HTTP_Request::POST) {
+				$params=$_POST;
+				$params['customer_id'] = $customer_id;
+				
+				if($division->updateDivision($params)) {
+					Message::success(ucfirst(__('Dział został zaktualizowany')),'/customer/divisions/');
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować działu')),'/customer/divisions/');
+				}
+			}
+		}
+	}
+	
+	public function action_info() {
+		$user = Auth_ORM::instance()->get_user();
+		$this->content->bind('user', $user);
+		$this->content->bind('customer', $user->customer);
 	}
 }
