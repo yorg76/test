@@ -15,8 +15,16 @@ class Controller_Warehouse extends Controller_Welcome {
 		array_push($this->_bread, ucfirst($this->request->action ()));
 		$this->template->message = Message::factory();
 		
-		if(strtolower ( $this->request->action()) == 'warehouse_add') $this->add_init("PasswordGenerator.init();\t\nAdd_warehouse.init();\t\n");
-		if(strtolower ( $this->request->action()) == 'warehouse_edit') $this->add_init("PasswordGenerator.init();\t\nEdit_warehouse.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'warehouse_add') $this->add_init("Add_warehouse.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'warehouse_edit') $this->add_init("Edit_warehouse.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'box_add') $this->add_init("ComponentsPickers.init();\t\nAdd_box.init();");
+		if(strtolower ( $this->request->action()) == 'box_edit') $this->add_init("ComponentsPickers.init();\t\nEdit_box.init();");
+		if(strtolower ( $this->request->action()) == 'document_add') $this->add_init("Add_document.init();");
+		if(strtolower ( $this->request->action()) == 'document_edit') $this->add_init("Edit_document.init();");
+		if(strtolower ( $this->request->action()) == 'documentlist_add') $this->add_init("Add_documentlist.init();");
+		if(strtolower ( $this->request->action()) == 'documentlist_edit') $this->add_init("Edit_documentlist.init();");
+		if(strtolower ( $this->request->action()) == 'bulkpackaging_add') $this->add_init("Add_bulkpackaging.init();");
+		if(strtolower ( $this->request->action()) == 'bulkpackaging_edit') $this->add_init("Edit_bulkpackaging.init();");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 	}
@@ -39,6 +47,8 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootbox/bootbox.min.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-alert-dialog-api.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-users.js');
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'components-pickers.js');
+		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		
@@ -81,24 +91,38 @@ class Controller_Warehouse extends Controller_Welcome {
 	public function action_boxes() {
 		$customer=Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
-		$box = $warehouses->box->find_all();
-		$user = Auth::instance()->get_user();
+		$boxes = $customer->warehouses->boxes->find_all();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
-		$this->content->bind('box', $box);
-		$this->content->bind('user', $user);
+		$this->content->bind('boxes', $boxes);
+				
 	}
 	
 	public function action_documents() {
-	
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$documents = $customer->warehouses->documents->find_all();
+		$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('documents', $documents);
 	}
 	
 	public function action_documentlists() {
-			
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$documentlists = $customer->warehouses->documentlists->find_all();
+		$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('documentlists', $documentlists);
 	}
 	
 	public function action_bulkpackagings() {
-	
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$bulkpackagings = $customer->warehouses->bulkpackagings->find_all();
+		$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('bulkpackagings', $bulkpackagings);
 	}
 	
 	
@@ -114,40 +138,74 @@ class Controller_Warehouse extends Controller_Welcome {
 			$params['customer_id'] = $customer->id;
 			
 			if($warehouse->addWarehouse($params)) {
-				Message::success(ucfirst(__('Magazyn zosta� utworzony')),'/warehouse/warehouses/');
+				Message::success(ucfirst(__('Magazyn został utworzony')),'/warehouse/warehouses/');
 			}else {
-				Message::error(ucfirst(__('Magazyn nie zosta� utworzony')),'/warehouse/warehouses/');
+				Message::error(ucfirst(__('Magazyn nie został utworzony')),'/warehouse/warehouses/');
 			}
 			
 		}
 	}
 	
 	public function action_warehouse_edit() {
-
-		
-		
 		if($this->request->param('id') > 0) {
-			
-			$warehouse = ORM::factory('Warehouse')->where('id','=',$this->request->param('id'))->find();
-        	
-        	$this->content->bind('warehouse', $warehouse);
+			$warehouse = Warehouse::instance($this->request->param('id'));
+			$user = Auth::instance()->get_user();
+			$customer_id = $user->customer->id;
+			$this->content->bind('user', $user);
+			$this->content->bind('customer', $user->customer);
+			$this->content->bind('warehouse', $warehouse);
 			
 			if($this->request->method()===HTTP_Request::POST) {
-				$params = $this->request->post();
-				//$params=$_POST;
-				//$params['customer_id'] = $customer_id;
+				$params=$_POST;
+				$params['customer_id'] = $customer_id;
 				
 				if($warehouse->updateWarehouse($params)) {
-					Message::success(ucfirst(__('Magazyn zosta� zaktualizowany')),'/warehouse/warehouses/');
+					Message::success(ucfirst(__('Magazyn został zaktualizowany')),'/warehouse/warehouses/');
 				}else {
-					Message::error(ucfirst(__('Nie uda�o si� zaktualizowa� magazynu')),'/warehouse/warehouses/');
+					Message::error(ucfirst(__('Nie udało się zaktualizować magazynu')),'/warehouse/warehouses/');
 				}
 			}
 		}
 	}
 	
 	public function action_box_add() {
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+			
+		$this->content->bind('warehouses', $warehouses);
+		
+	if($this->request->method()===HTTP_Request::POST) {
+			$params = $this->request->post();
+			$box=Box::instance();
+			if($box->addBox($params)) {
+				Message::success(ucfirst(__('Pozycja zosytała dodana do magazynu')),'/warehouse/boxes');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać pozycji do magazynu')),'/warehouse/boxes');
+			}		
+		}
+	}
 	
+	public function action_box_edit() {
+		if($this->request->param('id') > 0) {
+			$warehouse = Warehouse::instance($this->request->param('id'));
+			$user = Auth::instance()->get_user();
+			//$customer_id = $user->customer->id;
+			$warehouse_id = $user->customer->warehouse->id;
+			$this->content->bind('user', $user);
+			$this->content->bind('customer', $user->customer);
+			$this->content->bind('warehouse', $warehouse);
+				
+			if($this->request->method()===HTTP_Request::POST) {
+				$params=$_POST;
+				$params['warehouse_id'] = $warehouse_id;
+	
+				if($warehouse->updateBox($params)) {
+					Message::success(ucfirst(__('Pozycja została zaktualizowana')),'/warehouse/boxes/');
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować pozycji')),'/warehouse/boxes/');
+				}
+			}
+		}
 	}
 	
 	public function action_document_add() {

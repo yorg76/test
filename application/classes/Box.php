@@ -36,7 +36,6 @@ class Box extends ORM {
 			$this->date_reception=$this->box->date_reception;
 			$this->lock=$this->box->lock;
 			$this->seal=$this->box->seal;
-			$this->description=$this->warehouse->description;
 			$this->warehouse = $this->box->warehouse;
 				
 	
@@ -49,13 +48,52 @@ class Box extends ORM {
 	}
 	
 	public function addBox() {
+		$log=Kohana_Log::instance();
+		$box=$this->box;
+		$warehouse=$this->warehouse;
+		
+		$box->storage_category=$params['storage_category'];
+		$box->date_from=$params['date_from'];
+		$box->date_to=$params['date_to'];
+		$box->date_reception=$params['date_reception'];
+		$box->lock=$params['lock'];
+		$box->seal=$params['seal'];
+		$box->warehouse_id=$params['warehouse_id'];
+				
+		if(is_array($params)) {
+			
+			try {
+			
+				if($box->save()) {
+					$log->add(Log::DEBUG,"Success: Dodano pozycję z parametrami:".serialize($params)."\n");
 
-		return;
+				}else {
+					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodwania pozycji'."\n");
+				}
+				return true;
+			}catch (Exception $e) {
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+				return false;
+			}
+		}
 	}
 
 
-	public function editBox() {
-
+	public function updateBox() {
+		$log=Kohana_Log::instance();
+		$this->box->values($params);
+		$this->warehouse=ORM::factory('Warehouse',$params['warehouse_id']);
+		$this->box->warehouse_id=$this->warehouse->id;
+		
+		if($this->box->update()) {
+			$this->id=$this->box->id;
+			$log->add(Log::DEBUG,"Success: Updated Box with params:".serialize($params)."\n");
+			return true;
+		}else {
+			$log->add(Log::ERROR,"Error: Box not updated with params:".serialize($params)."\n");
+			return false;
+		}
+		
 		return;
 	}
 	
