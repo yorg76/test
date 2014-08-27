@@ -1,13 +1,9 @@
-﻿SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-SET foreign_key_checks = 0;
-
 -- phpMyAdmin SQL Dump
 -- version 3.2.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 25 Sie 2014, 22:34
+-- Czas wygenerowania: 27 Sie 2014, 19:26
 -- Wersja serwera: 5.1.41
 -- Wersja PHP: 5.4.29
 
@@ -137,17 +133,19 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `code` varchar(32) DEFAULT NULL,
   `comments` varchar(1024) NOT NULL,
   `www` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `create_date` (`create_date`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Zrzut danych tabeli `customers`
 --
 
-INSERT INTO `customers` (`id`, `name`, `nip`, `regon`, `code`, `comments`, `www`) VALUES
-(0, '_Default', '123-123-12-12', '123456', 'DEFAULT', '', ''),
-(1, 'BSDterminal', '951-197-60-37', '123456', 'BSD', 'Test', ''),
-(9, 'PHAR', '123-120-13-77', '', 'PHAR', '', 'http://www.phar.pl');
+INSERT INTO `customers` (`id`, `name`, `nip`, `regon`, `code`, `comments`, `www`, `create_date`) VALUES
+(0, '_Default', '123-123-12-12', '123456', 'DEFAULT', 'Domyślna firma - nie usuwać', 'https://www.bsdterminal.pl', '2014-01-01 00:00:00'),
+(1, 'BSDterminal', '951-197-60-37', '123456', 'BSD', 'Test', '', '0000-00-00 00:00:00'),
+(9, 'PHAR', '123-120-13-77', '', 'PHAR', '', 'http://www.phar.pl', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -158,16 +156,19 @@ INSERT INTO `customers` (`id`, `name`, `nip`, `regon`, `code`, `comments`, `www`
 CREATE TABLE IF NOT EXISTS `divisions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
-  `description` int(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_nalezy_do` (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Zrzut danych tabeli `divisions`
 --
 
+INSERT INTO `divisions` (`id`, `name`, `description`, `customer_id`) VALUES
+(1, 'TESTOWY', 'Testowy dział ssss', 0),
+(2, 'TESTOWY 2', '0', 0);
 
 -- --------------------------------------------------------
 
@@ -358,6 +359,13 @@ INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
 (2, 1),
 (3, 1),
 (4, 1),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(19, 1),
 (1, 2);
 
 -- --------------------------------------------------------
@@ -382,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `uniq_email` (`email`),
   KEY `fk_customer_id` (`customer_id`),
   KEY `status` (`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Zrzut danych tabeli `users`
@@ -391,14 +399,19 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_login`, `firstname`, `lastname`, `status`, `customer_id`) VALUES
 (1, 'maciekk@bsdterminal.pl', 'admin', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 14, 1408601062, '', '', 'Aktywny', 0),
 (2, 'h31180y@gmail.com', 'h31180y', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 0, NULL, 'Maciej', 'Kowalczyk-Tepfer', 'Aktywny', 1),
-(3, 'test@polki.xxx', 'test', 'df40d08b0fd67fbbe09d8aec96325703f5bbe72e613efce9b0413262b5365bca', 0, NULL, 'Test', 'Tester', 'Aktywny', 1),
+(3, 'test@polki.xxx', 'test', 'df40d08b0fd67fbbe09d8aec96325703f5bbe72e613efce9b0413262b5365bca', 0, NULL, 'Test', 'Tester', 'Zablokowany', 1),
 (4, 'Robert.Wrobel@phar.pl', 'robert', '5a6e5e110a8844c7863de9bbafb8f55270e8a6e33f60e62ce5f4ebfa6765f7fd', 0, NULL, 'Robert', 'Wróbel', 'Aktywny', 9),
-(5, 'ptys@polki.xxx', 'ptys', '6a5adf59f783869f06768124d43d8792a43ba7ebe86952065393a1e8b9db6f33', 0, NULL, 'Ptyś', 'Ptysiowy', 'Aktywny', 0),
 (6, 'bigdicks@polki.xxx', 'mistrz', '28b4e319f8eb94e043d6ae1849e840996a65d26a9c996ca5a223274f48b81234', 0, NULL, 'Mistrzuniu', 'Duża pyta', 'Aktywny', 0),
 (7, 'mocna_krycha@polki.xxx', 'krystyna', '4497c14659584316e6011819763310f05020ff0c01641f7043cb13284127c894', 0, NULL, 'Kryśka', 'Mocnossąca', 'Aktywny', 0),
 (8, 'luce23k@polki.xxx', 'lucek', 'ddd59b5daee56e68ae59e072da46619ec227e37414ad48e0913dc40a14fb04dd', 0, NULL, 'Lucjan', 'Miśkiewicz', 'Aktywny', 0),
 (9, 'pedrylek@polki.xxx', 'pedryl', '96380b623ba0cb5bca13e16566c2c0ab321722673706b445bbc8571f9072201f', 0, NULL, 'Peneloposław', 'Pedrylek', 'Aktywny', 0),
-(10, 'adam_z_hujami_nie_gadam@polki.xxx', 'adamos', 'cb629ec69688645da8100c959930f1d071f519ee03671c243f492d4d56e3f597', 0, NULL, 'Adam', 'Tester', 'Aktywny', 0);
+(13, 'ziomek@polki.xxx', 'lucjan', '613dae22da2ee91aba0a4ba02d2c19dbddacfa625128414027a69ccc8aa41afd', 0, NULL, 'Stefan', 'Ziomek', 'Aktywny', 0),
+(14, 'leszek@polki.xxx', 'Leszek', '44125249c90e7e9cb14334373d21c4758cc031871f6534b604130511f747e2a0', 0, NULL, 'Leszek', 'Lechowski', 'Aktywny', 1),
+(15, 'maku@polki.xxx', 'longin', 'd4fcedfcd0e06b531227e4d2e60ae55e9c7586b5fd692f3d0084c8fffc908123', 0, NULL, 'Longin', 'Makowski', 'Aktywny', 1),
+(16, 'pisior@polki.xxx', 'manfred', '878aede0b9a13669a3e3c2f715943b31b1e737ff87f55f5f791fca6672c79634', 0, NULL, 'Maniek', 'Pisior', 'Aktywny', 0),
+(17, 'adminsadffgh@polki.xxx', 'kowalm13', '7443720a2fa450366becdba0733748700a5a1527bd963566a01f14648de86bf4', 0, NULL, 'asdffggh', 'asdfghg', 'Aktywny', 0),
+(18, 'adminsadffg1h@polki.xxx', 'kowalm14', 'bac082b4917ea65f536a7d8c360e282a83108b7819592d2153f7ad5123e6d5e6', 0, NULL, 'asdffggh', 'asdfghg', 'Aktywny', 0),
+(19, 'killer@polki.xxx', 'kipa', '4554c8de2d982c9fc0a93e089fb82cc7969a729e51e4c0835b4bd2c4422316e7', 0, NULL, 'Lipa', 'Dupa', 'Aktywny', 1);
 
 -- --------------------------------------------------------
 
@@ -606,5 +619,3 @@ ALTER TABLE `warehouses`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-SET foreign_key_checks = 1;
