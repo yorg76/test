@@ -10,6 +10,15 @@ class Warehouse extends ORM {
 	public $warehouse;
 	public $id;
 	public $name;
+	public $description;
+	
+	public static function instance($id=NULL) {
+		if($id>0) {
+			return new Warehouse($id);
+		}else{
+			return new Warehouse(NULL);
+		}
+	}
 	
 	public function addWarehouse() {
 	

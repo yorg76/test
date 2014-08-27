@@ -124,7 +124,7 @@
 				
 				<li class="start <?php if ($_controller=='user') echo "active open";?>">
 					<a href="/user/dashboard">
-					<i class="icon-home"></i>
+					<i class="glyphicon glyphicon-dashboard"></i>
 					<span class="title">Dashboard</span>
 					<span class="arrow <?php if ($_controller=='user') echo "open";?>"></span>
 					</a>
@@ -192,23 +192,45 @@
 					<span class="arrow <?php if ($_controller=='warehouse') echo "open";?>"></span>
 					</a>
 					<ul class="sub-menu">
-						<li class="active">
-							<a href="/warehouse/list">
+						<li class="<?php if ($_action=='warehouse') echo "active";?>">
+							<a href="/warehouse/warehouses">
 							<i class="icon-layers"></i>
 							Magazyny</a>
 						</li>
-						<li>
+						<li class="<?php if ($_action=='box') echo "active";?>">
 							<a href="/warehouse/boxes">
-							<i class="icon-present"></i>
+							<i class="glyphicon glyphicon-inbox"></i>
 							Pozycje</a>
+							<ul class="sub-menu">
+								<li class="<?php if ($_action=='boxes') echo "active";?>">
+									<a href="/warehouse/boxes">
+									<i class="icon-list"></i>
+									Lista pozycji</a>
+								</li>
+								<li class="<?php if ($_action=='documents') echo "active";?>">
+									<a href="/warehouse/documents">
+									<i class="icon-pencil"></i>
+									Dokumenty</a>
+								</li>
+								<li class="<?php if ($_action=='documentlists') echo "active";?>">
+									<a href="/warehouse/documentlists">
+									<i class="glyphicon glyphicon-list-alt"></i>
+									Listy dokumentów</a>
+								</li>	
+								<li class="<?php if ($_action=='bulkpackagings') echo "active";?>">
+									<a href="/warehouse/bulkpackagings">
+									<i class="glyphicon glyphicon-th"></i>
+									Opakowania zbiorcze</a>
+								</li>
+							</ul>
 						</li>
 						<li>
-							<a href="/warehouse/stats">
+							<a href="/warehouse/boxes_search">
 							<i class="icon-directions"></i>
 							Wyszukaj pozycję</a>
 						</li>
 						<li>
-							<a href="/warehouse/search">
+							<a href="/warehouse/document_search">
 							<i class="icon-magnifier"></i>
 							Wyszukaj dokument</a>
 						</li>

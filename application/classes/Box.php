@@ -15,6 +15,38 @@ class Box extends ORM {
 	public $date_reception;
 	public $lock;
 	public $seal;
+	public $warehouse;
+	
+	public static function instance($id=NULL) {
+		if($id>0) {
+			return new Box($id);
+		}else{
+			return new Box(NULL);
+		}
+	}
+	
+	public function __construct($id) {
+		if($id>0) {
+	
+			$this->box = ORM::factory('Box')->where('id','=',$id)->find();
+			$this->id=$this->box->id;
+			$this->storage_category=$this->box->storage_category;
+			$this->date_from=$this->box->date_from;
+			$this->date_to=$this->box->date_to;
+			$this->date_reception=$this->box->date_reception;
+			$this->lock=$this->box->lock;
+			$this->seal=$this->box->seal;
+			$this->description=$this->warehouse->description;
+			$this->warehouse = $this->box->warehouse;
+				
+	
+	
+		}else {
+			$this->box = ORM::factory('Box');
+			$this->warehouse = ORM::factory('Warehouse');
+			
+		}
+	}
 	
 	public function addBox() {
 
