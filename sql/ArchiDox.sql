@@ -76,11 +76,12 @@ CREATE TABLE IF NOT EXISTS `boxbarcodes` (
 
 CREATE TABLE IF NOT EXISTS `boxes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `storage_category` int(11) DEFAULT NULL,
+  `storage_category` varchar(32) DEFAULT NULL,
   `date_from` date DEFAULT NULL,
   `date_to` date DEFAULT NULL,
-  `blokada` tinyint(1) DEFAULT NULL,
-  `plomba` tinyint(1) DEFAULT NULL,
+  `date_reception` date DEFAULT NULL,
+  `lock` varchar(32) DEFAULT NULL,
+  `seal` varchar(32) DEFAULT NULL,
   `virtualbriefcase_id` int(11) unsigned NOT NULL,
   `boxbarcode_id` int(11) unsigned NOT NULL,
   `warehouse_id` int(11) unsigned NOT NULL,
@@ -95,7 +96,12 @@ CREATE TABLE IF NOT EXISTS `boxes` (
 --
 -- Zrzut danych tabeli `boxes`
 --
-
+CREATE TABLE IF NOT EXISTS `storage_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `description` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
