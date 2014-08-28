@@ -25,7 +25,7 @@
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="" />
+							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="<?php echo $warehouse->name;?>" />
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -33,12 +33,11 @@
 						<label class="control-label">Opis
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<textarea class="form-control" name="description">
-						</textarea>
-						<span class="help-block"></span>
+						<textarea class="form-control" name="description"><?php echo $warehouse->description;?></textarea>
+					<span class="help-block"></span>
 					</div>
 					<br/>
-					
+					<input type="hidden" value="<?php echo $customer->id ?>" name="customer_id" />
 					<div class="margiv-top-10">
 						<a href="#" class="btn green" id="submit">
 						Zapisz zmiany</a>

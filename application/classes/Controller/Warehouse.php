@@ -147,11 +147,13 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_warehouse_edit() {
+		
 		if($this->request->param('id') > 0) {
-			$warehouse = Warehouse::instance($this->request->param('id'));
-			$user = Auth::instance()->get_user();
+			$warehouse = ORM::factory('warehouse')->where('id','=',$this->request->param('id'))->find();
+			//$warehouse = Warehouse::instance($this->request->param('id'));
+			//$user = Auth::instance()->get_user();
 			$customer_id = $user->customer->id;
-			$this->content->bind('user', $user);
+			//$this->content->bind('user', $user);
 			$this->content->bind('customer', $user->customer);
 			$this->content->bind('warehouse', $warehouse);
 			

@@ -69,10 +69,10 @@ class Warehouse extends ORM {
 		
 		if($this->warehouse->update()) {
 			$this->id=$this->warehouse->id;
-			$log->add(Log::DEBUG,"Success: Added Warehouse with params:".serialize($params)."\n");
+			$log->add(Log::DEBUG,"Success: Updated Warehouse with params:".serialize($params)."\n");
 			return true;
 		}else {
-			$log->add(Log::ERROR,"Error: Warehouse not added with params:".serialize($params)."\n");
+			$log->add(Log::ERROR,"Error: Warehouse not updated with params:".serialize($params)."\n");
 			return false;
 		}
 		
