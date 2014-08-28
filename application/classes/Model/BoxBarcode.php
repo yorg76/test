@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class BoxBarcode extends Barcode {
+class Model_BoxBarcode extends ORM {
 
 	protected $_belongs_to = array(
 			'box'=> array('model' => 'Box', 'foreign_key' => 'box_id')

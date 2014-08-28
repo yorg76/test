@@ -16,6 +16,10 @@ class Box extends ORM {
 	public $lock;
 	public $seal;
 	public $warehouse;
+	public $virtualbriefcase;
+	public $boxbarcode;
+	public $warehousebarcode;
+	
 	
 	public static function instance($id=NULL) {
 		if($id>0) {
@@ -29,28 +33,37 @@ class Box extends ORM {
 		if($id>0) {
 	
 			$this->box = ORM::factory('Box')->where('id','=',$id)->find();
-			$this->id=$this->box->id;
-			$this->storage_category=$this->box->storage_category;
-			$this->date_from=$this->box->date_from;
-			$this->date_to=$this->box->date_to;
-			$this->date_reception=$this->box->date_reception;
-			$this->lock=$this->box->lock;
-			$this->seal=$this->box->seal;
-			$this->warehouse = $this->box->warehouse;
+			$this->id = $this->box->id;
+			$this->storage_category = $this->box->storage_category;
+			$this->date_from = $this->box->date_from;
+			$this->date_to = $this->box->date_to;
+			$this->date_reception = $this->box->date_reception;
+			$this->lock = $this->box->lock;
+			$this->seal = $this->box->seal;
+			$this->warehouse_id = $this->box->warehouse->id;
+			$this->virtualbriefcase_id = $this->box->virtualbriefcase->id;
+			$this->boxbarcode_id = $this->box->boxbarcode->id;
+			$this->warehousebarcode_id = $this->box->warehousebarcode->id;
 				
 	
 	
 		}else {
 			$this->box = ORM::factory('Box');
 			$this->warehouse = ORM::factory('Warehouse');
+			$this->virtualbriefcase = ORM::factory('VirtualBriefcase');
+			$this->boxbarcode =  ORM::factory('BoxBarcode');
+			$this->warehousebarcode =  ORM::factory('WarehouseBarcode');
 			
 		}
 	}
 	
-	public function addBox() {
+	public function addBox($params) {
 		$log=Kohana_Log::instance();
 		$box=$this->box;
 		$warehouse=$this->warehouse;
+		$virtualbriefcase=$this->virtualbriefcase;
+		$boxbarcode=$this->boxbarcode;
+		$warehousebarcode=$this->warehousebarcode;
 		
 		$box->storage_category=$params['storage_category'];
 		$box->date_from=$params['date_from'];

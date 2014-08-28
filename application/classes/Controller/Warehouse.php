@@ -15,16 +15,16 @@ class Controller_Warehouse extends Controller_Welcome {
 		array_push($this->_bread, ucfirst($this->request->action ()));
 		$this->template->message = Message::factory();
 		
-		if(strtolower ( $this->request->action()) == 'warehouse_add') $this->add_init("Add_warehouse.init();\t\n");
-		if(strtolower ( $this->request->action()) == 'warehouse_edit') $this->add_init("Edit_warehouse.init();\t\n");
-		if(strtolower ( $this->request->action()) == 'box_add') $this->add_init("ComponentsPickers.init();\t\nAdd_box.init();");
-		if(strtolower ( $this->request->action()) == 'box_edit') $this->add_init("ComponentsPickers.init();\t\nEdit_box.init();");
-		if(strtolower ( $this->request->action()) == 'document_add') $this->add_init("Add_document.init();");
-		if(strtolower ( $this->request->action()) == 'document_edit') $this->add_init("Edit_document.init();");
-		if(strtolower ( $this->request->action()) == 'documentlist_add') $this->add_init("Add_documentlist.init();");
-		if(strtolower ( $this->request->action()) == 'documentlist_edit') $this->add_init("Edit_documentlist.init();");
-		if(strtolower ( $this->request->action()) == 'bulkpackaging_add') $this->add_init("Add_bulkpackaging.init();");
-		if(strtolower ( $this->request->action()) == 'bulkpackaging_edit') $this->add_init("Edit_bulkpackaging.init();");
+		if(strtolower ( $this->request->action()) == 'warehouse_add') $this->add_init("Warehouse_add.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'warehouse_edit') $this->add_init("Warehouse_edit.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'box_add') $this->add_init("Box_add.init();\t\nComponentsPickers.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'box_edit') $this->add_init("Box_edit.init();\t\nComponentsPickers.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'document_add') $this->add_init("Document_add.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'document_edit') $this->add_init("Document_edit.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'documentlist_add') $this->add_init("Documentlist_add.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'documentlist_edit') $this->add_init("Documentlist_edit.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'bulkpackaging_add') $this->add_init("Bulkpackaging_add.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'bulkpackaging_edit') $this->add_init("Bulkpackaging_edit.init();\t\n");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 	}
@@ -175,10 +175,11 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->content->bind('warehouses', $warehouses);
 		
 	if($this->request->method()===HTTP_Request::POST) {
-			$params = $this->request->post();
+			$params = $_POST;
+			//$params = $this->request->post();
 			$box=Box::instance();
 			if($box->addBox($params)) {
-				Message::success(ucfirst(__('Pozycja zosytała dodana do magazynu')),'/warehouse/boxes');
+				Message::success(ucfirst(__('Pozycja została dodana do magazynu')),'/warehouse/boxes');
 			}else {
 				Message::error(ucfirst(__('Nie udało się dodać pozycji do magazynu')),'/warehouse/boxes');
 			}		
@@ -189,7 +190,7 @@ class Controller_Warehouse extends Controller_Welcome {
 		if($this->request->param('id') > 0) {
 			$warehouse = Warehouse::instance($this->request->param('id'));
 			$user = Auth::instance()->get_user();
-			//$customer_id = $user->customer->id;
+			$customer_id = $user->customer->id;
 			$warehouse_id = $user->customer->warehouse->id;
 			$this->content->bind('user', $user);
 			$this->content->bind('customer', $user->customer);

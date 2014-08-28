@@ -25,15 +25,15 @@
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<input type="text" placeholder="Kategoria" class="form-control" name="storage_category" value="" />
+							<input type="text" placeholder="Kategoria" class="form-control" name="storage_category" value="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Data początku magazynowania
 							<span class="required" aria-required="true"> * </span>
 						</label>
-							<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-								<input type="text" class="form-control form-filter input-sm" readonly name="date_from" placeholder="Od" size="16">
+							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
+								<input type="text" class="form-control form-filter input-sm" readonly name="date_from" placeholder="Od">
 								<span class="input-group-btn">
 								<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 								</span>
@@ -44,7 +44,7 @@
 						<label class="control-label">Data końca magazynowania
 							<span class="required" aria-required="true"> * </span>
 						</label>
-							<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
 								<input type="text" class="form-control form-filter input-sm" readonly name="date_to" placeholder="Do" size="16">
 								<span class="input-group-btn">
 								<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -56,7 +56,7 @@
 						<label class="control-label">Data odbioru
 							<span class="required" aria-required="true"> * </span>
 						</label>
-							<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
 								<input type="text" class="form-control form-filter input-sm" readonly name="date_reception" placeholder="Termin odbioru" size="16">
 								<span class="input-group-btn">
 								<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -102,9 +102,9 @@
 					<br/>
 					<br/>
 					<div class="margiv-top-10">
-						<a href="#" class="btn green" id="submit">
+						<a href="/warehouse/boxes/" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="#" class="btn default" id="cancel">
+						<a href="/warehouse/boxes/" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

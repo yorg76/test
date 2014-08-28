@@ -1,7 +1,7 @@
 /**
 Custom module for you to write your own javascript functions
 **/
-var Add_warehouse = function () {
+var Warehouse_add = function () {
 	
 	// public functions
     return {

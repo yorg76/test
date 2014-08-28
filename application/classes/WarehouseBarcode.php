@@ -5,10 +5,11 @@
  * @version    1.0
  */
 
-class WarehouseBarcode extends Barcode {
+class WarehouseBarcode extends ORM {
 
 	public $warehousebarcode;
 	public $id;
+	public $data;
 	public $position_number;
 	
 }

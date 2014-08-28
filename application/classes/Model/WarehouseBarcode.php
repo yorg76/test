@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Model_WarehouseBarcode extends Barcode {
+class Model_WarehouseBarcode extends ORM {
 
 	protected $_belongs_to = array(
 			'warehouse'=> array('model' => 'Warehouse', 'foreign_key' => 'warehouse_id'),

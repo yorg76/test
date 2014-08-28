@@ -16,7 +16,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/warehouse/box_add/<?php echo $customer->id; ?>'">
+									<button class="btn green" onClick="javascript:window.location='/warehouse/box_add'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
@@ -25,10 +25,28 @@
 							<thead>
 							<tr>
 								<th>
-									 Nazwa
+									 ID Pozycji
+								</th>
+								<th>
+									 Magazyn
+								</th>
+								<th>
+									 Kategoria przechowywania
 								</th>							
 								<th>
-									 Opis
+									 Data początku magazynowania
+								</th>
+								<th>
+									 Data końca magazynowania
+								</th>
+								<th>
+									 Data odbioru
+								</th>							
+								<th>
+									Blokady
+								</th>
+								<th>
+									 Plomby
 								</th>
 								<th>
 									 Opcje
@@ -39,16 +57,39 @@
 							<?php foreach ($boxes as $box):?>
 							<tr>
 								<td>
-									 <?php echo $box->name;?>
+									 <?php echo $box->id;?>
 								</td>
-															
 								<td>
-									 <?php echo $box->description;?>
+									 <?php echo $box->warehouse->name;?>
 								</td>
+								<td>
+									 <?php echo $box->storage_category;?>
+								</td>			
+								<td>
+									 <?php echo $box->date_from ;?>
+								</td>
+								<td>
+									 <?php echo $box->date_to ;?>
+								</td>
+								<td>
+									 <?php echo $box->date_reception;?>
+								</td>
+								<td>
+									 <?php echo $box->lock;?>
+								</td>
+								<td>
+									 <?php echo $box->seal;?>
+								</td>
+								
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/warehouse_edit/<?php echo $user->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-sm red division-delete margin-bottom" id="<?php echo $warehouse->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow user-edit margin-bottom" onClick="javascript:window.location='/admin/user_edit/<?php echo $user->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<?php if($user->status == 'Aktywny'):?>
+											<button class="btn btn-sm blue user-lock margin-bottom" onClick="javascript:window.location='/admin/user_lock/<?php echo $user->id ;?>';"><i class="fa fa-lock"></i> Zablokuj</button>
+											<?php else:?>
+											<button class="btn btn-sm green user-unlock margin-bottom" onClick="javascript:window.location='/admin/user_unlock/<?php echo $user->id ;?>';"><i class="fa fa-unlock"></i> Odblokuj</button>
+											<?php endif;?>
+											<button class="btn btn-sm red user-delete margin-bottom" id="<?php echo $user->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>
