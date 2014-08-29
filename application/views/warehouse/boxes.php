@@ -21,7 +21,7 @@
 									</button>
 								</div>
 							</div>						
-							<table class="table table-striped table-hover table-bordered" id="customer_users_list">
+							<table class="table table-striped table-hover table-bordered" id="boxes_list">
 							<thead>
 							<tr>
 								<th>
@@ -83,13 +83,8 @@
 								
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow user-edit margin-bottom" onClick="javascript:window.location='/admin/user_edit/<?php echo $user->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<?php if($user->status == 'Aktywny'):?>
-											<button class="btn btn-sm blue user-lock margin-bottom" onClick="javascript:window.location='/admin/user_lock/<?php echo $user->id ;?>';"><i class="fa fa-lock"></i> Zablokuj</button>
-											<?php else:?>
-											<button class="btn btn-sm green user-unlock margin-bottom" onClick="javascript:window.location='/admin/user_unlock/<?php echo $user->id ;?>';"><i class="fa fa-unlock"></i> Odblokuj</button>
-											<?php endif;?>
-											<button class="btn btn-sm red user-delete margin-bottom" id="<?php echo $user->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow user-edit margin-bottom" onClick="javascript:window.location='/warehouse/box_edit/<?php echo $box->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-sm red user-delete margin-bottom" onClick="javascript:window.location='/warehouse/box_delete/<?php echo $box->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

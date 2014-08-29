@@ -197,7 +197,7 @@
 							<i class="icon-layers"></i>
 							Magazyny</a>
 						</li>
-						<li class="<?php if ($_action=='box') echo "active";?>">
+						<li class="<?php if ($_action=='boxes') echo "active";?>">
 							<a href="/warehouse/boxes">
 							<i class="glyphicon glyphicon-inbox"></i>
 							Pozycje</a>
@@ -242,7 +242,7 @@
 					</ul>
 				</li>
 				<li class="<?php if ($_controller=='virtualbriefcase') echo "active open";?>">
-					<a href="/virtualbriefcase/index">
+					<a href="/virtualbriefcase/virtualbriefcases">
 					<i class="icon-briefcase"></i>
 					<span class="title">
 					Wirtualne teczki </span>
@@ -250,6 +250,11 @@
 					</span>
 					</a>
 					<ul class="sub-menu">
+						<li class="<?php if ($_action=='virtualbriefcases') echo "active";?>">
+									<a href="/virtualbriefcase/virtualbriefcases">
+									<i class="icon-list"></i>
+									Lista wirtualnych teczek</a>
+								</li>
 						<li>
 							<a href="/virtualbriefcase/add">
 							<i class="icon-note"></i>

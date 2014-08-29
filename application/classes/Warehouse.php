@@ -57,7 +57,23 @@ class Warehouse extends ORM {
 	}
 
 	public function deleteWarehouse() {
-	
+		$log=Kohana_Log::instance();
+		
+		if($this->warehouse->loaded()) {
+			$name=$this->warehouse->name;
+						
+			if($this->warehouse->delete()) {
+				$log->add(Log::DEBUG,"Success: Removed warehouse:".$name."\n");
+				return true;
+			}
+			else {
+				$log->add(Log::DEBUG,"Fail: Remove warehouse:".$name."\n");
+				return false;
+			}
+		}else {
+			$log->add(Log::DEBUG,"Fail: Remove warehouse:".$name."\n");
+			return false;
+		}
 		return;
 	}
 

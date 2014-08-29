@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-layers"></i>Magazyny
+								<i class="icon-layers"></i>Wirtualne teczki
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -21,7 +21,7 @@
 									</button>
 								</div>
 							</div>						
-							<table class="table table-striped table-hover table-bordered" id="customer_users_list">
+							<table class="table table-striped table-hover table-bordered" id="virtualbriefcases_list"">
 							<thead>
 							<tr>
 								<th>
@@ -46,9 +46,12 @@
 									 <?php echo $warehouse->description;?>
 								</td>
 								<td>
+									 <?php echo $warehouse->boxes->count_all();?>
+								</td>
+								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/warehouse_edit/<?php echo $warehouse->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-sm red division-delete margin-bottom" id="<?php echo $warehouse->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs yellow margin-bottom" onClick="javascript:window.location='/warehouse/warehouse_edit/<?php echo $warehouse->id ;?>';"><i class="icon-layers"></i> Edytuj</button>
+											<button class="btn btn-xs red margin-bottom" onClick="javascript:window.location='/warehouse/warehouse_delete/<?php echo $warehouse->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

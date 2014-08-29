@@ -50,9 +50,9 @@ class Box extends ORM {
 		}else {
 			$this->box = ORM::factory('Box');
 			$this->warehouse = ORM::factory('Warehouse');
-			$this->virtualbriefcase = ORM::factory('VirtualBriefcase');
-			$this->boxbarcode =  ORM::factory('BoxBarcode');
-			$this->warehousebarcode =  ORM::factory('WarehouseBarcode');
+			$this->virtualbriefcase = ORM::factory('VirtualBriefcase', NULL);
+			$this->boxbarcode =  ORM::factory('BoxBarcode', NULL);
+			$this->warehousebarcode =  ORM::factory('WarehouseBarcode', NULL);
 			
 		}
 	}
@@ -111,8 +111,23 @@ class Box extends ORM {
 	}
 	
 	public function deleteBox() {
+		$log=Kohana_Log::instance();
 	
-		return;
+		if($this->box->loaded()) {
+			$id=$this->box->id;
+					
+			if($this->box->delete()) {
+				$log->add(Log::DEBUG,"Success: Removed box:".$id."\n");
+				return true;
+			}
+			else {
+				$log->add(Log::DEBUG,"Fail: Remove box:".$id."\n");
+				return false;
+			}
+		}else {
+			$log->add(Log::DEBUG,"Fail: Remove box:".$id."\n");
+			return false;
+		}
 	}
 	
 	public function is_locked() {
@@ -151,7 +166,7 @@ class Box extends ORM {
 	}
 
 
-	public function deleteBocumentlist() {
+	public function deleteDocumentlist() {
 
 		return;
 	}

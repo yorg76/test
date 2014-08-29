@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Nowopakowanie zbiorcze</a>
+				<i class="fa fa-cog"></i>Nowe opakowanie zbiorcze</a>
 				<span class="after">
 				</span>
 			</li>
@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/warehouse/warehouse_add/<?php echo $customer->id ?>" method="POST" id="add_warehouse_form">
+		<form role="form" action="/warehouse/bulkpackaging_add/<?php echo $box->id ?>" method="POST" id="add_bulkpackaging_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -38,11 +38,11 @@
 						<span class="help-block"></span>
 					</div>
 					<br/>
-					<input type="hidden" value="<?php echo $customer->id ?>" name="customer_id" />
+					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 					<div class="margiv-top-10">
-						<a href="#" class="btn green" id="submit">
+						<a href="/warehouse/bulkpackagings" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="#" class="btn default" id="cancel">
+						<a href="/warehouse/bulkpackagings" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	
