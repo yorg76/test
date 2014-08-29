@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/warehouse/document_add/<?php echo $box->id ?>" method="POST" id="add_document_form">
+		<form enctype="multipart/form-data" role="form" action="/warehouse/document_add/" method="POST" id="add_document_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -37,8 +37,14 @@
 						</textarea>
 						<span class="help-block"></span>
 					</div>
+					<div class="form-group">
+						<label for="control-label">Skan dokumentu</label>
+						<input name="plik" type="file" id="upload">
+						<!-- TODO UPLOAD (CZY AN FILESYSTEM CZY DO BAZY?)  -->
+						<span class="help-block"></span>
+					</div>
 					<br/>
-					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
+					
 					<div class="margiv-top-10">
 						<a href="/warehouse/documents" class="btn green" id="submit">
 						Zapisz zmiany</a>
@@ -49,5 +55,5 @@
 			</div>
 		</form>
 	</div>
-	<!--end col-md-9-->
+<!--end col-md-9-->
 </div>

@@ -21,7 +21,7 @@
 									</button>
 								</div>
 							</div>						
-							<table class="table table-striped table-hover table-bordered" id="virtualbriefcases_list"">
+							<table class="table table-striped table-hover table-bordered" id="virtualbriefcases_list">
 							<thead>
 							<tr>
 								<th>
@@ -29,6 +29,9 @@
 								</th>							
 								<th>
 									 Opis
+								</th>
+								<th>
+									 Dział
 								</th>
 								<th>
 									 Opcje
