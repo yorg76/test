@@ -9,7 +9,7 @@ class Box extends ORM {
 
 	public $box;
 	public $id;
-	public $storage_category;
+	public $storage_categories;
 	public $date_from;
 	public $date_to;
 	public $date_reception;
@@ -34,7 +34,6 @@ class Box extends ORM {
 	
 			$this->box = ORM::factory('Box')->where('id','=',$id)->find();
 			$this->id = $this->box->id;
-			$this->storage_category = $this->box->storage_category;
 			$this->date_from = $this->box->date_from;
 			$this->date_to = $this->box->date_to;
 			$this->date_reception = $this->box->date_reception;
@@ -44,6 +43,7 @@ class Box extends ORM {
 			$this->virtualbriefcase_id = $this->box->virtualbriefcase->id;
 			$this->boxbarcode_id = $this->box->boxbarcode->id;
 			$this->warehousebarcode_id = $this->box->warehousebarcode->id;
+			$this->storage_category_id = $this->box->storage_categories->id;
 				
 	
 	
@@ -64,14 +64,15 @@ class Box extends ORM {
 		$virtualbriefcase=$this->virtualbriefcase;
 		$boxbarcode=$this->boxbarcode;
 		$warehousebarcode=$this->warehousebarcode;
+		$storage_category=$this->storage_categories;
 		
-		$box->storage_category=$params['storage_category'];
 		$box->date_from=$params['date_from'];
 		$box->date_to=$params['date_to'];
 		$box->date_reception=$params['date_reception'];
 		$box->lock=$params['lock'];
 		$box->seal=$params['seal'];
 		$box->warehouse_id=$params['warehouse_id'];
+		$box->storage_category_id=$params['storage_category_id'];
 				
 		if(is_array($params)) {
 			
