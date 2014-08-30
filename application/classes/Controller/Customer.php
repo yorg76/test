@@ -169,7 +169,7 @@ class Controller_Customer extends Controller_Welcome {
     			if($validate->check() && $user->registerUser($_POST)){
     				Message::success(ucfirst(__('Dodano użytkownika')),'/customer/users');
     			}else{
-    				Message::error(ucfirst(__('Wystąpił błąd')." ".$validate->errors('msg')),'/customer/users');
+    				Message::error(ucfirst(__('Wystąpił błąd')." ".$validate->errors()),'/customer/users');
     			}
     		}
     }
