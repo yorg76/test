@@ -220,7 +220,7 @@ class User extends ORM {
 					$paramse['lastname']= $user->lastname;
 					
 					$this->sendEmail($paramse);
-
+					
 					return true;
 				}else {
 					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodwania usera'."\n");
