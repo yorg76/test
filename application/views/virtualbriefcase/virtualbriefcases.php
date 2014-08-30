@@ -40,9 +40,13 @@
 							</thead>
 							<tbody>
 							<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
+							
 							<tr>
 								<td>
-									 <?php echo $virtualbriefcase->name;?>
+									 <?php 
+									 
+									 
+									 echo $virtualbriefcase->name;?>
 								</td>
 															
 								<td>

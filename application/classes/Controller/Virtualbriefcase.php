@@ -91,7 +91,18 @@ public $controller_title = 'Wirtualne teczki';
 		
 		$customer=Auth::instance()->get_user()->customer;
 		$divisions = $customer->divisions->find_all();
-		$virtualbriefcases = $customer->divisions->virtualbriefcases->find_all();
+		
+		$divisions_ids= array();
+		
+		$virtualbriefcases = array();
+		
+		foreach ($divisions as $division) {
+			array_push($divisions_ids, $division->id);
+			
+		} 
+		 	
+		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('id','IN',$divisions_ids)->find_all();
+		
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);

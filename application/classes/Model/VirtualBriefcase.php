@@ -12,11 +12,11 @@ class Model_VirtualBriefcase extends ORM {
 	);
 
 	protected $_has_many = array(
-			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through'=>'virtualbriefcases_viritualbriefcases'),
-			'bulkpackagings'=> array('model' => 'BulkPackaging', 'through'=>'virtualbriefcases_bulkpackagings'),
-			'documentlists'=> array('model' => 'DocumentList', 'through'=>'virtualbriefcases_documentlists'),
-			'boxes'=> array('model' => 'Box', 'through'=>'virtualbriefcases_boxes'),
-			'documents'=> array('model' => 'Document', 'through'=>'virtualbriefcases_documents')
+			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through'=>'virtualbriefcases_boxes'),
+			'bulkpackagings'=> array('model' => 'BulkPackaging', 'foreign_key' => 'virtualbriefcase_id'),
+			'documentlists'=> array('model' => 'DocumentList', 'foreign_key' => 'virtualbriefcase_id'),
+			'boxes'=> array('model' => 'Box', 'foreign_key' => 'virtualbriefcase_id'),
+			'documents'=> array('model' => 'Document', 'foreign_key' => 'virtualbriefcase_id')
 	);
 }
 
