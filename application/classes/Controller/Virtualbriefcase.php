@@ -16,7 +16,7 @@ public $controller_title = 'Wirtualne teczki';
 		array_push($this->_bread, ucfirst($this->request->action ()));
 		$this->template->message = Message::factory();
 		
-		if(strtolower ( $this->request->action()) == 'virtualbriefcases') $this->add_init("TableWarehouses.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'virtualbriefcases') $this->add_init("TableVirtualBriefcases.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'virtualbriefcase_add') $this->add_init("VirtualBriefcase_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'virtualbriefcase_edit') $this->add_init("VirtualBriefcase_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'boxes') $this->add_init("TableBoxes.init();\t\n");
@@ -55,7 +55,7 @@ public $controller_title = 'Wirtualne teczki';
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-users.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'components-pickers.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
-		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-warehouses.js');
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-virtualbriefcases.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		

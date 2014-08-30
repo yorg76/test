@@ -16,7 +16,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_add/<?php echo $division->id; ?>'">
+									<button class="btn green" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_add/'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
