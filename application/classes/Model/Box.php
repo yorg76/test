@@ -10,7 +10,7 @@ class Model_Box extends ORM {
 	protected $_belongs_to = array(
 			'warehouse'=> array('model' => 'Warehouse', 'foreign_key' => 'warehouse_id'),
 			'order'=> array('model' => 'Order', 'foreign_key' => 'order_id'),
-			//'virtualbriefcase'=> array('model' => 'VirtualBriefcase', 'foreign_key' => 'virtualbriefcase_id')
+			
 	);
 	
 	protected $_has_many = array(

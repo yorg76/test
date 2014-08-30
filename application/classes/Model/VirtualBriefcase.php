@@ -7,16 +7,16 @@
 
 class Model_VirtualBriefcase extends ORM {
 
-	protected $_has_one = array(
+	protected $_belongs_to = array(
 			'division'=> array('model' => 'Division', 'foreign_key' => 'division_id')
 	);
 
 	protected $_has_many = array(
+			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through'=>'virtualbriefcases_viritualbriefcases'),
 			'bulkpackagings'=> array('model' => 'BulkPackaging', 'through'=>'virtualbriefcases_bulkpackagings'),
 			'documentlists'=> array('model' => 'DocumentList', 'through'=>'virtualbriefcases_documentlists'),
 			'boxes'=> array('model' => 'Box', 'through'=>'virtualbriefcases_boxes'),
-			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through'=>'virtualbriefcases_virtualbriefcases'),
-			'documents'=> array('model' => 'Document', 'foreign_key' => 'virtualbriefcase_id')
+			'documents'=> array('model' => 'Document', 'through'=>'virtualbriefcases_documents')
 	);
 }
 
