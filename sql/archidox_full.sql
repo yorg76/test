@@ -1,14 +1,15 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.2.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 27 Sie 2014, 19:26
+-- Czas wygenerowania: 30 Sie 2014, 17:01
 -- Wersja serwera: 5.1.41
 -- Wersja PHP: 5.4.29
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET FOREIGN_KEY_CHECKS = 0;
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,6 +26,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Struktura tabeli dla  `addresses`
 --
 
+DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE IF NOT EXISTS `addresses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `city` varchar(64) DEFAULT NULL,
@@ -55,6 +57,7 @@ INSERT INTO `addresses` (`id`, `city`, `street`, `number`, `flat`, `postal`, `co
 -- Struktura tabeli dla  `boxbarcodes`
 --
 
+DROP TABLE IF EXISTS `boxbarcodes`;
 CREATE TABLE IF NOT EXISTS `boxbarcodes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `box_number` int(11) DEFAULT NULL,
@@ -93,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `boxes` (
   KEY `FK_kp_przypisany_do_p` (`boxbarcode_id`),
   KEY `FK_m_ma_na_stanie` (`warehouse_id`),
   KEY `FK_km_przypisany_do_p` (`warehousebarcode_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Zrzut danych tabeli `boxes`
@@ -104,29 +107,13 @@ INSERT INTO `boxes` (`id`, `storage_category_id`, `date_from`, `date_to`, `date_
 (12, 2, '2014-01-01', '2014-01-01', '2014-01-01', '0', '1', 0, 0, 1, 0),
 (13, 3, '2014-01-01', '2014-01-01', '2014-01-01', '0', '1', 0, 0, 1, 0);
 
---
--- Zrzut danych tabeli `boxes`
---
-CREATE TABLE IF NOT EXISTS `storagecategories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL,
-  `description` varchar(64) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
-INSERT INTO `storagecategories` (`id`, `name`, `description`) VALUES
-(1, 'KAT A', 'Kategoria magazynowania A'),
-(2, 'KAT B', 'Kategoria magazynowania B'),
-(3, 'KAT C', 'Kategoria magazynowania C'),
-(4, 'KAT D', 'Kategoria magazynowania D');
 -- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla  `bulkpackagings`
 --
 
+DROP TABLE IF EXISTS `bulkpackagings`;
 CREATE TABLE IF NOT EXISTS `bulkpackagings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -149,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `bulkpackagings` (
 -- Struktura tabeli dla  `customers`
 --
 
+DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -177,6 +165,7 @@ INSERT INTO `customers` (`id`, `name`, `nip`, `regon`, `code`, `comments`, `www`
 -- Struktura tabeli dla  `divisions`
 --
 
+DROP TABLE IF EXISTS `divisions`;
 CREATE TABLE IF NOT EXISTS `divisions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -184,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `divisions` (
   `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_nalezy_do` (`customer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Zrzut danych tabeli `divisions`
@@ -192,7 +181,8 @@ CREATE TABLE IF NOT EXISTS `divisions` (
 
 INSERT INTO `divisions` (`id`, `name`, `description`, `customer_id`) VALUES
 (1, 'TESTOWY', 'Testowy dział ssss', 0),
-(2, 'TESTOWY 2', '0', 0);
+(2, 'TESTOWY 2', '0', 0),
+(3, 'test3', '	test3					', 0);
 
 -- --------------------------------------------------------
 
@@ -200,6 +190,7 @@ INSERT INTO `divisions` (`id`, `name`, `description`, `customer_id`) VALUES
 -- Struktura tabeli dla  `divisions_users`
 --
 
+DROP TABLE IF EXISTS `divisions_users`;
 CREATE TABLE IF NOT EXISTS `divisions_users` (
   `division_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
@@ -219,6 +210,7 @@ CREATE TABLE IF NOT EXISTS `divisions_users` (
 -- Struktura tabeli dla  `documentlists`
 --
 
+DROP TABLE IF EXISTS `documentlists`;
 CREATE TABLE IF NOT EXISTS `documentlists` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -243,6 +235,7 @@ CREATE TABLE IF NOT EXISTS `documentlists` (
 -- Struktura tabeli dla  `documents`
 --
 
+DROP TABLE IF EXISTS `documents`;
 CREATE TABLE IF NOT EXISTS `documents` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -269,6 +262,7 @@ CREATE TABLE IF NOT EXISTS `documents` (
 -- Struktura tabeli dla  `invoices`
 --
 
+DROP TABLE IF EXISTS `invoices`;
 CREATE TABLE IF NOT EXISTS `invoices` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `number` varchar(32) DEFAULT NULL,
@@ -294,6 +288,7 @@ CREATE TABLE IF NOT EXISTS `invoices` (
 -- Struktura tabeli dla  `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -318,6 +313,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- Struktura tabeli dla  `pricetables`
 --
 
+DROP TABLE IF EXISTS `pricetables`;
 CREATE TABLE IF NOT EXISTS `pricetables` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `boxes_reception` float DEFAULT NULL,
@@ -343,6 +339,7 @@ CREATE TABLE IF NOT EXISTS `pricetables` (
 -- Struktura tabeli dla  `roles`
 --
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -367,6 +364,7 @@ INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 -- Struktura tabeli dla  `roles_users`
 --
 
+DROP TABLE IF EXISTS `roles_users`;
 CREATE TABLE IF NOT EXISTS `roles_users` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
@@ -395,9 +393,35 @@ INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla  `storagecategories`
+--
+
+DROP TABLE IF EXISTS `storagecategories`;
+CREATE TABLE IF NOT EXISTS `storagecategories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `description` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Zrzut danych tabeli `storagecategories`
+--
+
+INSERT INTO `storagecategories` (`id`, `name`, `description`) VALUES
+(1, 'KAT A', 'Kategoria magazynowania A'),
+(2, 'KAT B', 'Kategoria magazynowania B'),
+(3, 'KAT C', 'Kategoria magazynowania CE'),
+(5, 'KAT D', 'Kategoria D				');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla  `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(254) NOT NULL,
@@ -421,7 +445,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_login`, `firstname`, `lastname`, `status`, `customer_id`) VALUES
-(1, 'maciekk@bsdterminal.pl', 'admin', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 16, 1409138145, '', '', 'Aktywny', 0),
+(1, 'maciekk@bsdterminal.pl', 'admin', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 18, 1409399606, '', '', 'Aktywny', 0),
 (2, 'h31180y@gmail.com', 'h31180y', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 0, NULL, 'Maciej', 'Kowalczyk-Tepfer', 'Aktywny', 1),
 (3, 'test@polki.xxx', 'test', 'df40d08b0fd67fbbe09d8aec96325703f5bbe72e613efce9b0413262b5365bca', 0, NULL, 'Test', 'Tester', 'Aktywny', 1),
 (4, 'Robert.Wrobel@phar.pl', 'robert', '5a6e5e110a8844c7863de9bbafb8f55270e8a6e33f60e62ce5f4ebfa6765f7fd', 0, NULL, 'Robert', 'Wróbel', 'Aktywny', 9),
@@ -440,6 +464,7 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_logi
 -- Struktura tabeli dla  `user_tokens`
 --
 
+DROP TABLE IF EXISTS `user_tokens`;
 CREATE TABLE IF NOT EXISTS `user_tokens` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -464,6 +489,7 @@ CREATE TABLE IF NOT EXISTS `user_tokens` (
 -- Struktura tabeli dla  `virtualbriefcases`
 --
 
+DROP TABLE IF EXISTS `virtualbriefcases`;
 CREATE TABLE IF NOT EXISTS `virtualbriefcases` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -471,12 +497,17 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases` (
   `division_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_wt_przypisana_do` (`division_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Zrzut danych tabeli `virtualbriefcases`
 --
 
+INSERT INTO `virtualbriefcases` (`id`, `name`, `description`, `division_id`) VALUES
+(1, 'teczka', 'test			', 3),
+(2, 'ble', 'cos', 3),
+(3, 'test2', 'test test', 3),
+(4, 'ASDasd', '		ASDasdASD				', 1);
 
 -- --------------------------------------------------------
 
@@ -484,6 +515,7 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases` (
 -- Struktura tabeli dla  `warehousebarcodes`
 --
 
+DROP TABLE IF EXISTS `warehousebarcodes`;
 CREATE TABLE IF NOT EXISTS `warehousebarcodes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `position_number` int(11) DEFAULT NULL,
@@ -503,6 +535,7 @@ CREATE TABLE IF NOT EXISTS `warehousebarcodes` (
 -- Struktura tabeli dla  `warehouses`
 --
 
+DROP TABLE IF EXISTS `warehouses`;
 CREATE TABLE IF NOT EXISTS `warehouses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -510,20 +543,20 @@ CREATE TABLE IF NOT EXISTS `warehouses` (
   `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_zarzadza` (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
+--
+-- Zrzut danych tabeli `warehouses`
+--
 
 INSERT INTO `warehouses` (`id`, `name`, `description`, `customer_id`) VALUES
 (1, 'Magazyn 1', 'Magazyn 1 do testów				', 10),
 (2, 'kuwa', 'kuwa					', 1),
 (3, '1234', '1234				', 1),
-(4, 'magazyn admina', 'asdfasdgafgadfgasdfg			', 0),
+(4, 'magazyn admina', 'i tak byłem pierwszy	', 0),
 (11, 'Magazyn 2', 'Magazyn 2 do testów						', 10),
-(12, 'Magazyn 3', 'Magazyn 3 do testów					', 10);
---
--- Zrzut danych tabeli `warehouses`
---
-
+(12, 'Magazyn 3', 'Magazyn 3 do testów					', 10),
+(13, 'Drugi magazyn admina', 'YeaHHHH	', 0);
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -649,4 +682,5 @@ ALTER TABLE `warehouses`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 SET FOREIGN_KEY_CHECKS = 1;

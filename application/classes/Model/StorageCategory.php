@@ -5,13 +5,8 @@
  * @version    1.0
  */
 
-class WarehouseBarcode extends ORM {
+class Model_StorageCategory extends ORM {
 
-	public $warehousebarcode;
-	public $id;
-	public $data;
-	public $position_number;
-	
 }
 
 

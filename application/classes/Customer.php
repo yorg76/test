@@ -65,6 +65,7 @@ class Customer  {
 			$this->customer = ORM::factory('Customer');
 			$this->address = ORM::factory('Address');
 			$this->pricetable = ORM::factory('Pricetable');
+			
 		}
 	}
 	

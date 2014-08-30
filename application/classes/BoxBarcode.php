@@ -5,10 +5,11 @@
  * @version    1.0
  */
 
-class BoxBarcode extends Barcode {
+class BoxBarcode extends ORM {
 
 	public $boxbarcode;
 	public $id;
+	public $data;
 	public $box_number;
 
 }

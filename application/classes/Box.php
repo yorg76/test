@@ -9,27 +9,126 @@ class Box extends ORM {
 
 	public $box;
 	public $id;
-	public $storage_category;
+	public $storage_categories;
 	public $date_from;
 	public $date_to;
 	public $date_reception;
 	public $lock;
 	public $seal;
+	public $warehouse;
+	public $virtualbriefcase;
+	public $boxbarcode;
+	public $warehousebarcode;
 	
-	public function addBox() {
+	
+	public static function instance($id=NULL) {
+		if($id>0) {
+			return new Box($id);
+		}else{
+			return new Box(NULL);
+		}
+	}
+	
+	public function __construct($id) {
+		if($id>0) {
+	
+			$this->box = ORM::factory('Box')->where('id','=',$id)->find();
+			$this->id = $this->box->id;
+			$this->date_from = $this->box->date_from;
+			$this->date_to = $this->box->date_to;
+			$this->date_reception = $this->box->date_reception;
+			$this->lock = $this->box->lock;
+			$this->seal = $this->box->seal;
+			$this->warehouse_id = $this->box->warehouse->id;
+			$this->virtualbriefcase_id = $this->box->virtualbriefcase->id;
+			$this->boxbarcode_id = $this->box->boxbarcode->id;
+			$this->warehousebarcode_id = $this->box->warehousebarcode->id;
+			$this->storage_category_id = $this->box->storage_categories->id;
+				
+	
+	
+		}else {
+			$this->box = ORM::factory('Box');
+			$this->warehouse = ORM::factory('Warehouse');
+			$this->virtualbriefcase = ORM::factory('VirtualBriefcase', NULL);
+			$this->boxbarcode =  ORM::factory('BoxBarcode', NULL);
+			$this->warehousebarcode =  ORM::factory('WarehouseBarcode', NULL);
+			
+		}
+	}
+	
+	public function addBox($params) {
+		$log=Kohana_Log::instance();
+		$box=$this->box;
+		$warehouse=$this->warehouse;
+		$virtualbriefcase=$this->virtualbriefcase;
+		$boxbarcode=$this->boxbarcode;
+		$warehousebarcode=$this->warehousebarcode;
+		$storage_category=$this->storage_categories;
+		
+		$box->date_from=$params['date_from'];
+		$box->date_to=$params['date_to'];
+		$box->date_reception=$params['date_reception'];
+		$box->lock=$params['lock'];
+		$box->seal=$params['seal'];
+		$box->warehouse_id=$params['warehouse_id'];
+		$box->storage_category_id=$params['storage_category_id'];
+				
+		if(is_array($params)) {
+			
+			try {
+			
+				if($box->save()) {
+					$log->add(Log::DEBUG,"Success: Dodano pozycję z parametrami:".serialize($params)."\n");
 
-		return;
+				}else {
+					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodwania pozycji'."\n");
+				}
+				return true;
+			}catch (Exception $e) {
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+				return false;
+			}
+		}
 	}
 
 
-	public function editBox() {
-
+	public function updateBox() {
+		$log=Kohana_Log::instance();
+		$this->box->values($params);
+		$this->warehouse=ORM::factory('Warehouse',$params['warehouse_id']);
+		$this->box->warehouse_id=$this->warehouse->id;
+		
+		if($this->box->update()) {
+			$this->id=$this->box->id;
+			$log->add(Log::DEBUG,"Success: Updated Box with params:".serialize($params)."\n");
+			return true;
+		}else {
+			$log->add(Log::ERROR,"Error: Box not updated with params:".serialize($params)."\n");
+			return false;
+		}
+		
 		return;
 	}
 	
 	public function deleteBox() {
+		$log=Kohana_Log::instance();
 	
-		return;
+		if($this->box->loaded()) {
+			$id=$this->box->id;
+					
+			if($this->box->delete()) {
+				$log->add(Log::DEBUG,"Success: Removed box:".$id."\n");
+				return true;
+			}
+			else {
+				$log->add(Log::DEBUG,"Fail: Remove box:".$id."\n");
+				return false;
+			}
+		}else {
+			$log->add(Log::DEBUG,"Fail: Remove box:".$id."\n");
+			return false;
+		}
 	}
 	
 	public function is_locked() {
@@ -68,7 +167,7 @@ class Box extends ORM {
 	}
 
 
-	public function deleteBocumentlist() {
+	public function deleteDocumentlist() {
 
 		return;
 	}
