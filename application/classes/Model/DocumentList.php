@@ -13,7 +13,6 @@ class Model_DocumentList extends ORM {
 	);
 	
 	protected $_belongs_to = array(
-			'virtualbriefscase'=> array('model' => 'VirtualBriefcase', 'foreign_key' => 'virtualbriefcase_id'),
 			'bulkpackaging'=> array('model' => 'BulkPackaging', 'foreign_key' => 'bulkpackaging_id'),
 			'box'=> array('model' => 'Box', 'foreign_key' => 'box_id')
 	);
