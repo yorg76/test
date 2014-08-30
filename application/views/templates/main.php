@@ -151,6 +151,11 @@
 							<i class="icon-user"></i>
 							Dodaj nowego</a>
 						</li>
+						<li class="<?php if ($_action=='storagecategories') echo "active";?>">
+							<a href="/admin/storagecategories">
+							<i class="icon-layers"></i>
+							Kategorie</a>
+						</li>
 						</li>
 					</ul>
 				</li>
@@ -197,6 +202,7 @@
 							<i class="icon-layers"></i>
 							Magazyny</a>
 						</li>
+						
 						<li class="<?php if ($_action=='boxes') echo "active";?>">
 							<a href="/warehouse/boxes">
 							<i class="glyphicon glyphicon-inbox"></i>

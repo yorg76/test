@@ -34,6 +34,9 @@ class Controller_Admin extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'user_edit') $this->add_init("PasswordGenerator.init();\t\nUser_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'customer_edit') $this->add_init("PasswordGenerator.init();\t\nCustomer_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'customer_add') $this->add_init("PasswordGenerator.init();\t\nCustomer_add.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'storagecategories') $this->add_init("TableStorageCategories.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'storagecategory_add') $this->add_init("StorageCategory_add.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'storagecategory_edit') $this->add_init("StorageCategory_edit.init();\t\n");
 		
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
@@ -54,6 +57,8 @@ class Controller_Admin extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootbox/bootbox.min.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-alert-dialog-api.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-customers.js');
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-users.js');
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-storagecategories.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		
@@ -287,6 +292,59 @@ class Controller_Admin extends Controller_Welcome {
 			}
 		}else {
 			Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/admin/customer_users');
+		}
+	}
+	
+	public function action_storagecategories() {
+		$storagecategories = ORM::factory("StorageCategory")->find_all();
+		$this->content->bind('storagecategories', $storagecategories);
+	}
+	
+	public function action_storagecategory_add() {
+		$storagecategory = StorageCategory::instance();
+			
+		if($this->request->method()===HTTP_Request::POST) {
+	
+			$params = $_POST;
+				
+			if($storagecategory->addStorageCategory($params)) {
+				Message::success(ucfirst(__('Kategoria magazynowania została utworzona')),'/admin/storagecategories/');
+			}else {
+				Message::error(ucfirst(__('Kategoria magazynowania nie została utworzona')),'/admin/storagecategories/');
+			}
+				
+		}
+	}
+	
+	public function action_storagecategory_edit() {
+	
+		if($this->request->param('id') > 0) {
+			$storagecategory = StorageCategory::instance($this->request->param('id'));
+			$this->content->bind('storagecategory', $storagecategory);
+				
+			if($this->request->method()===HTTP_Request::POST) {
+				$params=$_POST;
+	
+				if($storagecategory->updateStorageCategory($params)) {
+					Message::success(ucfirst(__('Kategoria magazynowania została zaktualizowana')),'/admin/storagecategories/');
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować kategorii magazynowania')),'/admin/storagecategories/');
+				}
+			}
+		}
+	}
+	
+	public function action_storagecategory_delete() {
+		if($this->request->param('id') > 0) {
+			$storagecategory = StorageCategory::instance($this->request->param('id'));
+			$storagecategory_id = $storagecategory->id;
+			$name = $storagecategory->name;
+	
+			if($storagecategory->deleteStorageCategory()) {
+				Message::success(ucfirst(__('Kategoria magazynowania została usunięty')),'/admin/storagecategories/'.$name);
+			}else {
+				Message::error(ucfirst(__('Nie udało się usunąć kategorii magazynowania')),'/admin/storagecategories/'.$name);
+			}
 		}
 	}
 }

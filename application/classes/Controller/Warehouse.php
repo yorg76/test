@@ -185,6 +185,9 @@ class Controller_Warehouse extends Controller_Welcome {
 	public function action_box_add() {
 		$customer=Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
+		$storagecategory = ORM::factory('StorageCategory');
+		$storagecategories = $storagecategory->find_all();
+		$this->content->bind('storagecategories', $storagecategories);
 
 		$this->content->bind('warehouses', $warehouses);
 		

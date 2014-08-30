@@ -25,7 +25,14 @@
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<input type="text" placeholder="Kategoria" class="form-control" name="storage_category" value="">
+							<select class="form-control" name="storage_category_id">
+								<option>-- Wybierz kategorię --</option>
+								<?php foreach ($storagecategories as $storagecategory):?>
+								<?php 
+											echo "<option value=\"".$storagecategory->id."\">".$storagecategory->name."</option>";
+								?>
+								<?php endforeach;?>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
