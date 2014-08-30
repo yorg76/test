@@ -89,8 +89,8 @@ public $controller_title = 'Wirtualne teczki';
 	public function action_virtualbriefcases() {
 		
 		$customer=Auth::instance()->get_user()->customer;
-		$divisions = $customer->divisions;
-		$virtualbriefcases = $customer->divisions->virtualbriefcases;
+		$divisions = $customer->divisions->find_all();
+		$virtualbriefcases = $customer->divisions->virtualbriefcases->find_all();
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);
