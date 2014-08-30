@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Nowy magazyn</a>
+				<i class="fa fa-cog"></i>Nowa wirtualna teczka</a>
 				<span class="after">
 				</span>
 			</li>
@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/virtualbriefcase/virtualbriefcase_add/" method="POST" id="add_virtualbriefcase_form">
+		<form role="form" action="/virtualbriefcase/virtualbriefcase_add" method="POST" id="add_virtualbriefcase_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -54,9 +54,9 @@
 					</div>
 					<br/>
 					<div class="margiv-top-10">
-						<a href="/virtualbriefcase/virtualbriefcases" class="btn green" id="submit">
+						<a href="/virtualbriefcase/virtualbriefcases/" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/virtualbriefcase/virtualbriefcases" class="btn default" id="cancel">
+						<a href="/virtualbriefcase/virtualbriefcases/" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Edycja magazynu</a>
+				<i class="fa fa-cog"></i>Edycja witrualnej teczki</a>
 				<span class="after">
 				</span>
 			</li>
@@ -52,6 +52,7 @@
 						</div>
 					</div>
 					<br/>
+					<input type="hidden" value="<?php echo $division->id ?>" name="division_id" />
 					<div class="margiv-top-10">
 						<a href="/virtualbriefcase/virtualbriefcases/" class="btn green" id="submit">
 						Zapisz zmiany</a>

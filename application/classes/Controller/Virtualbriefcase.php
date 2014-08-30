@@ -144,13 +144,16 @@ public $controller_title = 'Wirtualne teczki';
 	
 	public function action_virtualbriefcase_add() {
 		$customer=Auth::instance()->get_user()->customer;
+		$virtualbriefcase = VirtualBriefcase::instance();
 		$divisions = $customer->divisions->find_all();
 
 		$this->content->bind('divisions', $divisions);
 		
 	if($this->request->method()===HTTP_Request::POST) {
+			
 			$params = $_POST;
-			$virtualbriefcase=VirtualBriefcase::instance();
+			//$params['division_id'] = $division->id;
+			//$virtualbriefcase=VirtualBriefcase::instance();
 			if($virtualbriefcase->addVirtualBriefcase($params)) {
 				Message::success(ucfirst(__('Wirtualna teczka została dodana do działu')),'/virtualbriefcase/virtualbriefcases');
 			}else {
