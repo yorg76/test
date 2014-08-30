@@ -86,6 +86,7 @@ public $controller_title = 'Wirtualne teczki';
 		
 	}
 	
+	
 	public function action_virtualbriefcases() {
 		
 		$customer=Auth::instance()->get_user()->customer;

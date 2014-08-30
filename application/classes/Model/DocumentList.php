@@ -8,7 +8,7 @@
 class Model_DocumentList extends ORM {
 
 	protected $_has_many = array(
-			'documents'=> array('model' =>  'Document', 'through' => 'document_id')
+			'documents'=> array('model' =>  'Document', 'through' => 'documentlist_id')
 			
 	);
 	
