@@ -21,6 +21,7 @@ class Controller_Customer extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'division_add') $this->add_init("PasswordGenerator.init();\t\nAdd_division.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'division_edit') $this->add_init("PasswordGenerator.init();\t\nEdit_division.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'info') $this->add_init("MapsGoogle.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'edit') $this->add_init("Customer_edit.init();\t\nCustomer_Add_delivery_address.init();\t\nCustomer_Add_pickup_address.init();\t\n");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 		
@@ -291,5 +292,49 @@ class Controller_Customer extends Controller_Welcome {
 		$this->content->bind('virtualbriefcases_count',$vc);
 		
 		
+	}
+	
+	
+	public  function action_edit() {
+		$user = Auth_ORM::instance()->get_user();
+		$customer = Customer::instance($user->customer->id);
+		
+		$delivery_addresses = $customer->delivery_addresses;
+		$pickup_addresses = $customer->pickup_addresses;		
+		
+		$this->content->bind('user', $user);
+		$this->content->bind('customer', $customer);
+		$this->content->bind('delivery_addresses', $delivery_addresses);
+		$this->content->bind('pickup_addresses', $pickup_addresses);
+		
+
+		
+	}
+	
+	public function action_add_address() {
+		if($this->request->method()===HTTP_Request::POST) {
+			$user = Auth_ORM::instance()->get_user();
+			$customer = Customer::instance($user->customer->id);
+			
+			var_dump($_POST);
+			
+			if($_POST['address_type'] == 'dostawy') {			
+				if($customer->addDeliveryAddress($_POST)) {
+					
+					Message::success(ucfirst(__('Adres został dodany')),'/customer/edit/');
+				}else {
+					
+					Message::error(ucfirst(__('Nie udało się dodać adresu')),'/customer/edit/');
+				}
+			}elseif($_POST['address_type']=='odbioru') {
+				if($customer->addPickupAddress($_POST)) {
+					
+					Message::success(ucfirst(__('Adres został dodany')),'/customer/edit/');
+				}else {
+					
+					Message::error(ucfirst(__('Nie udało się dodać adresu')),'/customer/edit/');
+				}
+			}
+		}
 	}
 }
