@@ -9,16 +9,15 @@ class Box extends ORM {
 
 	public $box;
 	public $id;
-	public $storage_categories;
 	public $date_from;
 	public $date_to;
 	public $date_reception;
 	public $lock;
 	public $seal;
+	public $storagecategory;
 	public $warehouse;
-	public $virtualbriefcase;
 	public $boxbarcode;
-	public $warehousebarcode;
+
 	
 	
 	public static function instance($id=NULL) {
@@ -40,19 +39,16 @@ class Box extends ORM {
 			$this->lock = $this->box->lock;
 			$this->seal = $this->box->seal;
 			$this->warehouse_id = $this->box->warehouse->id;
-			$this->virtualbriefcase_id = $this->box->virtualbriefcase->id;
 			$this->boxbarcode_id = $this->box->boxbarcode->id;
-			$this->warehousebarcode_id = $this->box->warehousebarcode->id;
-			$this->storage_category_id = $this->box->storage_categories->id;
+			$this->storage_category_id = $this->box->storagecategory->id;
 				
 	
 	
 		}else {
 			$this->box = ORM::factory('Box');
 			$this->warehouse = ORM::factory('Warehouse');
-			$this->virtualbriefcase = ORM::factory('VirtualBriefcase', NULL);
 			$this->boxbarcode =  ORM::factory('BoxBarcode', NULL);
-			$this->warehousebarcode =  ORM::factory('WarehouseBarcode', NULL);
+			$this->storagecategory = ORM::factory('StorageCategory', NULL);
 			
 		}
 	}
@@ -61,10 +57,8 @@ class Box extends ORM {
 		$log=Kohana_Log::instance();
 		$box=$this->box;
 		$warehouse=$this->warehouse;
-		$virtualbriefcase=$this->virtualbriefcase;
 		$boxbarcode=$this->boxbarcode;
-		$warehousebarcode=$this->warehousebarcode;
-		$storage_category=$this->storage_categories;
+		$storagecategory=$this->storagecategory;
 		
 		$box->date_from=$params['date_from'];
 		$box->date_to=$params['date_to'];
@@ -97,7 +91,9 @@ class Box extends ORM {
 		$log=Kohana_Log::instance();
 		$this->box->values($params);
 		$this->warehouse=ORM::factory('Warehouse',$params['warehouse_id']);
+		$this->storagecategory=ORM::factory('StorageCategory',$params['storage_category_id']);
 		$this->box->warehouse_id=$this->warehouse->id;
+		$this->box->storage_category_id=$this->storagecategory->id;
 		
 		if($this->box->update()) {
 			$this->id=$this->box->id;
@@ -156,8 +152,7 @@ class Box extends ORM {
 
 
 	public function addDocument() {
-
-		return;
+		
 	}
 
 

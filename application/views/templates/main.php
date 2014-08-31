@@ -146,6 +146,10 @@
 							<a href="/admin/users">
 							<i class="icon-list"></i>
 							Lista użytkowników</a>
+						<li class="<?php if ($_action=='user_add') echo "active";?>">
+							<a href="/admin/user_add">
+							<i class="icon-user"></i>
+							Dodaj nowego</a>
 						</li>
 						<li class="<?php if ($_action=='storagecategories') echo "active";?>">
 							<a href="/admin/storagecategories">
@@ -153,12 +157,6 @@
 							Kategorie</a>
 						</li>
 						</li>
-						<li class="<?php if ($_action=='user_add') echo "active";?>">
-							<a href="/admin/user_add">
-							<i class="icon-user"></i>
-							Dodaj nowego</a>
-						</li>
-
 					</ul>
 				</li>
 				<li class="<?php if ($_controller=='customer') echo "active open";?>">

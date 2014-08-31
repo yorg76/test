@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 31 Sie 2014, 22:49
+-- Czas wygenerowania: 01 Wrz 2014, 00:23
 -- Wersja serwera: 5.1.41
 -- Wersja PHP: 5.4.29
 
@@ -25,6 +25,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Struktura tabeli dla  `addresses`
 --
 
+DROP TABLE IF EXISTS `addresses`;
 CREATE TABLE IF NOT EXISTS `addresses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `city` varchar(64) DEFAULT NULL,
@@ -55,6 +56,7 @@ INSERT INTO `addresses` (`id`, `city`, `street`, `number`, `flat`, `postal`, `co
 -- Struktura tabeli dla  `boxbarcodes`
 --
 
+DROP TABLE IF EXISTS `boxbarcodes`;
 CREATE TABLE IF NOT EXISTS `boxbarcodes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `box_number` int(11) DEFAULT NULL,
@@ -74,6 +76,7 @@ CREATE TABLE IF NOT EXISTS `boxbarcodes` (
 -- Struktura tabeli dla  `boxes`
 --
 
+DROP TABLE IF EXISTS `boxes`;
 CREATE TABLE IF NOT EXISTS `boxes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `storage_category_id` int(11) NOT NULL,
@@ -88,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `boxes` (
   KEY `FK_p_przypisana_do_km` (`storage_category_id`),
   KEY `FK_kp_przypisany_do_p` (`boxbarcode_id`),
   KEY `FK_m_ma_na_stanie` (`warehouse_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Zrzut danych tabeli `boxes`
@@ -105,18 +108,24 @@ INSERT INTO `boxes` (`id`, `storage_category_id`, `date_from`, `date_to`, `date_
 -- Struktura tabeli dla  `bulkpackagings`
 --
 
+DROP TABLE IF EXISTS `bulkpackagings`;
 CREATE TABLE IF NOT EXISTS `bulkpackagings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `box_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Zrzut danych tabeli `bulkpackagings`
 --
 
+INSERT INTO `bulkpackagings` (`id`, `name`, `description`, `box_id`) VALUES
+(1, 'Opakowanie A', 'Opakowanie magazynowania A', 11),
+(2, 'Opakowanie B', 'Opakowanie magazynowania B', 12),
+(3, 'Opakowanie C', 'Opakowanie magazynowania C', 13),
+(5, 'Opakowanie D', 'Opakowanie magazynowania D', 13);
 
 -- --------------------------------------------------------
 
@@ -124,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `bulkpackagings` (
 -- Struktura tabeli dla  `bulkpackagings_bulkpackagings`
 --
 
+DROP TABLE IF EXISTS `bulkpackagings_bulkpackagings`;
 CREATE TABLE IF NOT EXISTS `bulkpackagings_bulkpackagings` (
   `bulkpackaging1_id` int(10) unsigned NOT NULL,
   `bulkpackaging2_id` int(10) unsigned NOT NULL,
@@ -143,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `bulkpackagings_bulkpackagings` (
 -- Struktura tabeli dla  `customers`
 --
 
+DROP TABLE IF EXISTS `customers`;
 CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -171,6 +182,7 @@ INSERT INTO `customers` (`id`, `name`, `nip`, `regon`, `code`, `comments`, `www`
 -- Struktura tabeli dla  `divisions`
 --
 
+DROP TABLE IF EXISTS `divisions`;
 CREATE TABLE IF NOT EXISTS `divisions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -198,6 +210,7 @@ INSERT INTO `divisions` (`id`, `name`, `description`, `customer_id`) VALUES
 -- Struktura tabeli dla  `divisions_users`
 --
 
+DROP TABLE IF EXISTS `divisions_users`;
 CREATE TABLE IF NOT EXISTS `divisions_users` (
   `division_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
@@ -217,6 +230,7 @@ CREATE TABLE IF NOT EXISTS `divisions_users` (
 -- Struktura tabeli dla  `documentlists`
 --
 
+DROP TABLE IF EXISTS `documentlists`;
 CREATE TABLE IF NOT EXISTS `documentlists` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -224,12 +238,17 @@ CREATE TABLE IF NOT EXISTS `documentlists` (
   `bulkpackaging_id` int(11) unsigned NOT NULL,
   `box_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Zrzut danych tabeli `documentlists`
 --
 
+INSERT INTO `documentlists` (`id`, `name`, `description`, `bulkpackaging_id`, `box_id`) VALUES
+(1, 'Lista A', 'Lista magazynowania A', 0, 11),
+(2, 'Lista B', 'Lista magazynowania B', 0, 12),
+(3, 'Lista C', 'Lista magazynowania C', 0, 12),
+(5, 'Lista D', 'Lista magazynowania D', 0, 13);
 
 -- --------------------------------------------------------
 
@@ -237,6 +256,7 @@ CREATE TABLE IF NOT EXISTS `documentlists` (
 -- Struktura tabeli dla  `documents`
 --
 
+DROP TABLE IF EXISTS `documents`;
 CREATE TABLE IF NOT EXISTS `documents` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -252,10 +272,10 @@ CREATE TABLE IF NOT EXISTS `documents` (
 --
 
 INSERT INTO `documents` (`id`, `name`, `description`, `documentlist_id`, `bulkpackaging_id`, `box_id`) VALUES
-(1, 'Dokument A', 'Dokument magazynowania A', 0, 0, 0),
-(2, 'Dokument B', 'Dokument magazynowania B', 0, 0, 0),
-(3, 'Dokument C', 'Dokument magazynowania C', 0, 0, 0),
-(5, 'Dokument D', 'Dokument magazynowania D', 0, 0, 0);
+(1, 'Dokument A', 'Dokument magazynowania A', 0, 0, 11),
+(2, 'Dokument B', 'Dokument magazynowania B', 0, 0, 11),
+(3, 'Dokument C', 'Dokument magazynowania C', 0, 0, 12),
+(5, 'Dokument D', 'Dokument magazynowania D', 0, 0, 13);
 
 -- --------------------------------------------------------
 
@@ -263,6 +283,7 @@ INSERT INTO `documents` (`id`, `name`, `description`, `documentlist_id`, `bulkpa
 -- Struktura tabeli dla  `invoices`
 --
 
+DROP TABLE IF EXISTS `invoices`;
 CREATE TABLE IF NOT EXISTS `invoices` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `number` varchar(32) DEFAULT NULL,
@@ -288,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `invoices` (
 -- Struktura tabeli dla  `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -312,6 +334,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- Struktura tabeli dla  `pricetables`
 --
 
+DROP TABLE IF EXISTS `pricetables`;
 CREATE TABLE IF NOT EXISTS `pricetables` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `boxes_reception` float DEFAULT NULL,
@@ -337,6 +360,7 @@ CREATE TABLE IF NOT EXISTS `pricetables` (
 -- Struktura tabeli dla  `roles`
 --
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -361,6 +385,7 @@ INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 -- Struktura tabeli dla  `roles_users`
 --
 
+DROP TABLE IF EXISTS `roles_users`;
 CREATE TABLE IF NOT EXISTS `roles_users` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
@@ -394,6 +419,7 @@ INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
 -- Struktura tabeli dla  `storagecategories`
 --
 
+DROP TABLE IF EXISTS `storagecategories`;
 CREATE TABLE IF NOT EXISTS `storagecategories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -418,6 +444,7 @@ INSERT INTO `storagecategories` (`id`, `name`, `description`) VALUES
 -- Struktura tabeli dla  `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(254) NOT NULL,
@@ -441,7 +468,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_login`, `firstname`, `lastname`, `status`, `customer_id`) VALUES
-(1, 'maciekk@bsdterminal.pl', 'admin', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 20, 1409502568, '', '', 'Aktywny', 0),
+(1, 'maciekk@bsdterminal.pl', 'admin', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 21, 1409522535, '', '', 'Aktywny', 0),
 (2, 'h31180y@gmail.com', 'h31180y', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 0, NULL, 'Maciej', 'Kowalczyk-Tepfer', 'Aktywny', 1),
 (3, 'test@polki.xxx', 'test', 'df40d08b0fd67fbbe09d8aec96325703f5bbe72e613efce9b0413262b5365bca', 0, NULL, 'Test', 'Tester', 'Aktywny', 1),
 (4, 'Robert.Wrobel@phar.pl', 'robert', '5a6e5e110a8844c7863de9bbafb8f55270e8a6e33f60e62ce5f4ebfa6765f7fd', 0, NULL, 'Robert', 'Wróbel', 'Aktywny', 9),
@@ -453,7 +480,7 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_logi
 (10, 'adam_z_hujami_nie_gadam@polki.xxx', 'adamo', 'ddd59b5daee56e68ae59e072da46619ec227e37414ad48e0913dc40a14fb04dd', 0, NULL, 'Adam', 'Tester', 'Aktywny', 0),
 (12, 'mledzinska@wp.pl', 'mledzins', '549d5de0852c28e68cce857a7285f5cbbe0f7e69eb0bdb0daacc90ba0c777227', 0, NULL, 'Marta', 'Ledzińska', 'Aktywny', 10),
 (21, 'maniek@gmail.com', 'maniek', '549d5de0852c28e68cce857a7285f5cbbe0f7e69eb0bdb0daacc90ba0c777227', 0, NULL, 'Maniek', 'Maniek', 'Aktywny', 0),
-(24, 'msasin76@gmail.com', 'msasin', '549d5de0852c28e68cce857a7285f5cbbe0f7e69eb0bdb0daacc90ba0c777227', 2, 1409501949, 'Marcin', 'Sasin', 'Aktywny', 9);
+(24, 'msasin76@gmail.com', 'msasin', '549d5de0852c28e68cce857a7285f5cbbe0f7e69eb0bdb0daacc90ba0c777227', 3, 1409521311, 'Marcin', 'Sasin', 'Aktywny', 9);
 
 -- --------------------------------------------------------
 
@@ -461,6 +488,7 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_logi
 -- Struktura tabeli dla  `user_tokens`
 --
 
+DROP TABLE IF EXISTS `user_tokens`;
 CREATE TABLE IF NOT EXISTS `user_tokens` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -485,6 +513,7 @@ CREATE TABLE IF NOT EXISTS `user_tokens` (
 -- Struktura tabeli dla  `virtualbriefcases`
 --
 
+DROP TABLE IF EXISTS `virtualbriefcases`;
 CREATE TABLE IF NOT EXISTS `virtualbriefcases` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -513,6 +542,7 @@ INSERT INTO `virtualbriefcases` (`id`, `name`, `description`, `division_id`) VAL
 -- Struktura tabeli dla  `virtualbriefcases_boxes`
 --
 
+DROP TABLE IF EXISTS `virtualbriefcases_boxes`;
 CREATE TABLE IF NOT EXISTS `virtualbriefcases_boxes` (
   `virtualbriefcase_id` int(10) unsigned NOT NULL,
   `box_id` int(10) unsigned NOT NULL,
@@ -532,6 +562,7 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases_boxes` (
 -- Struktura tabeli dla  `virtualbriefcases_bulkpackagings`
 --
 
+DROP TABLE IF EXISTS `virtualbriefcases_bulkpackagings`;
 CREATE TABLE IF NOT EXISTS `virtualbriefcases_bulkpackagings` (
   `virtualbriefcase_id` int(10) unsigned NOT NULL,
   `bulkpackaging_id` int(10) unsigned NOT NULL,
@@ -551,6 +582,7 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases_bulkpackagings` (
 -- Struktura tabeli dla  `virtualbriefcases_documentlists`
 --
 
+DROP TABLE IF EXISTS `virtualbriefcases_documentlists`;
 CREATE TABLE IF NOT EXISTS `virtualbriefcases_documentlists` (
   `virtualbriefcase_id` int(10) unsigned NOT NULL,
   `documentlist_id` int(10) unsigned NOT NULL,
@@ -570,6 +602,7 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases_documentlists` (
 -- Struktura tabeli dla  `virtualbriefcases_documents`
 --
 
+DROP TABLE IF EXISTS `virtualbriefcases_documents`;
 CREATE TABLE IF NOT EXISTS `virtualbriefcases_documents` (
   `virtualbriefcase_id` int(10) unsigned NOT NULL,
   `document_id` int(10) unsigned NOT NULL,
@@ -589,6 +622,7 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases_documents` (
 -- Struktura tabeli dla  `virtualbriefcases_virtualbriefcases`
 --
 
+DROP TABLE IF EXISTS `virtualbriefcases_virtualbriefcases`;
 CREATE TABLE IF NOT EXISTS `virtualbriefcases_virtualbriefcases` (
   `virtualbriefcase1_id` int(10) unsigned NOT NULL,
   `virtualbriefcase2_id` int(10) unsigned NOT NULL,
@@ -608,6 +642,7 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases_virtualbriefcases` (
 -- Struktura tabeli dla  `warehousebarcodes`
 --
 
+DROP TABLE IF EXISTS `warehousebarcodes`;
 CREATE TABLE IF NOT EXISTS `warehousebarcodes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `position_number` int(11) DEFAULT NULL,
@@ -627,6 +662,7 @@ CREATE TABLE IF NOT EXISTS `warehousebarcodes` (
 -- Struktura tabeli dla  `warehouses`
 --
 
+DROP TABLE IF EXISTS `warehouses`;
 CREATE TABLE IF NOT EXISTS `warehouses` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -788,4 +824,5 @@ ALTER TABLE `warehouses`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 SET FOREIGN_KEY_CHECKS=1;

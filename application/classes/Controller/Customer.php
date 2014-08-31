@@ -20,7 +20,6 @@ class Controller_Customer extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'user_edit') $this->add_init("PasswordGenerator.init();\t\nUser_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'division_add') $this->add_init("PasswordGenerator.init();\t\nAdd_division.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'division_edit') $this->add_init("PasswordGenerator.init();\t\nEdit_division.init();\t\n");
-		if(strtolower ( $this->request->action()) == 'info') $this->add_init("MapsGoogle.init();\t\n");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 		
@@ -45,9 +44,6 @@ class Controller_Customer extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootbox/bootbox.min.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-alert-dialog-api.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-users.js');
-		$this->add_fjs ( "http://maps.google.com/maps/api/js?sensor=false");
-		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'gmaps/gmaps.min.js');
-		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'maps-google.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		
@@ -274,22 +270,7 @@ class Controller_Customer extends Controller_Welcome {
 	
 	public function action_info() {
 		$user = Auth_ORM::instance()->get_user();
-	
 		$this->content->bind('user', $user);
 		$this->content->bind('customer', $user->customer);
-		
-		$dc=$user->divisions->count_all();
-		$wc=$user->customer->warehouses->count_all();
-		$bc=$user->customer->warehouses->boxes->count_all();
-		$xc=$user->customer->warehouses->boxes->documents->count_all();
-		$vc=$user->divisions->virtualbriefcases->count_all();
-		
-		$this->content->bind('divisions_count',$dc);
-		$this->content->bind('warehouses_count',$wc);
-		$this->content->bind('boxes_count',$bc);
-		$this->content->bind('documents_count',$xc);
-		$this->content->bind('virtualbriefcases_count',$vc);
-		
-		
 	}
 }

@@ -9,7 +9,6 @@ var MapsGoogle = function () {
     }
 
     var mapMarker = function () {
-    	
         var map = new GMaps({
             div: '#gmap_marker',
            lat: -51.38739,
@@ -36,8 +35,7 @@ var MapsGoogle = function () {
                 content: '<span style="color:#000">HTML Content!</span>'
             }
         });
-        map.setZoom(5);											
-        
+        map.setZoom(5);
     }
 
     var mapPolylines = function () {
@@ -191,13 +189,13 @@ var MapsGoogle = function () {
     return {
         //main function to initiate map samples
         init: function () {
-           // mapBasic();
+            mapBasic();
             mapMarker();
-            //mapGeolocation();
-            //mapGeocoding();
-            //mapPolylines();
-            //mapPolygone();
-           //mapRoutes();
+            mapGeolocation();
+            mapGeocoding();
+            mapPolylines();
+            mapPolygone();
+            mapRoutes();
         }
 
     };

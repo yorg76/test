@@ -71,9 +71,9 @@
 									<?php if($customer->code != 'DEFAULT'):?>
 									<div class="margin-bottom-5">
 											
-											<button class="btn btn-sm yellow customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_edit/<?php echo $customer->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-sm blue customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_users/<?php echo $customer->id ;?>';"><i class="fa fa-group"></i> Użytkownicy</button>
-											<button class="btn btn-sm red customer-delete margin-bottom" id="<?php echo $customer->id ;?>" ><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs yellow customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_edit/<?php echo $customer->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-xs blue customer-edit margin-bottom" onClick="javascript:window.location='/admin/customer_users/<?php echo $customer->id ;?>';"><i class="fa fa-group"></i> Użytkownicy</button>
+											<button class="btn btn-xs red customer-delete margin-bottom" id="<?php echo $customer->id ;?>" ><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 									<?php endif;?>
 								</td>

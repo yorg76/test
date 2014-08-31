@@ -47,8 +47,8 @@
 								</td>
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-sm yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-sm red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/document_delete/<?php echo $document->id ;?>';">"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';"><i class="icon-pencil"></i> Edytuj</button>
+											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/document_delete/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

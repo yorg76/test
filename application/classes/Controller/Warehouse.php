@@ -98,10 +98,21 @@ class Controller_Warehouse extends Controller_Welcome {
 	public function action_boxes() {
 		$customer=Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
-		$boxes = $customer->warehouses->boxes->find_all();
+		$storagecategory = ORM::factory('StorageCategory');
+		$storagecategories = $storagecategory->find_all();
+		
+		$warehouses_ids= array();
+		$boxes = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('storagecategories', $storagecategories);
 		$this->content->bind('user', $user);
 		$this->content->bind('boxes', $boxes);
 				
@@ -110,7 +121,20 @@ class Controller_Warehouse extends Controller_Welcome {
 	public function action_documents() {
 		$customer=Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
-		$documents = $customer->warehouses->boxes->documents->find_all();
+		$warehouses_ids= array();
+		$boxes_ids = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		
+		foreach ($boxes as $box) {
+			array_push($boxes_ids, $box->id);
+		}
+		$documents = ORM::factory('Document')->where('box_id','IN', $boxes_ids)->find_all();
+		
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
 		$this->content->bind('boxes', $boxes);
@@ -120,7 +144,20 @@ class Controller_Warehouse extends Controller_Welcome {
 	public function action_documentlists() {
 		$customer=Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
-		$documentlists = $customer->warehouses->boxes->documentlists->find_all();
+		$warehouses_ids= array();
+		$boxes_ids = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		
+		foreach ($boxes as $box) {
+			array_push($boxes_ids, $box->id);
+		}
+		$documentlists = ORM::factory('DocumentList')->where('box_id','IN', $boxes_ids)->find_all();
+		
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
 		$this->content->bind('boxes', $boxes);
@@ -130,7 +167,20 @@ class Controller_Warehouse extends Controller_Welcome {
 	public function action_bulkpackagings() {
 		$customer=Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
-		$bulkpackagings = $customer->warehouses->boxes->bulkpackagings->find_all();
+		$warehouses_ids= array();
+		$boxes_ids = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		
+		foreach ($boxes as $box) {
+			array_push($boxes_ids, $box->id);
+		}
+		$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
+		
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
 		$this->content->bind('boxes', $boxes);
@@ -195,6 +245,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			$params = $_POST;
 			//$params = $this->request->post();
 			$box=Box::instance();
+	
 			if($box->addBox($params)) {
 				Message::success(ucfirst(__('Pozycja została dodana do magazynu')),'/warehouse/boxes');
 			}else {
@@ -204,27 +255,33 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_box_edit() {
+	$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$storagecategories = ORM::factory('StorageCategory')->find_all();
+		$this->content->bind('storagecategories', $storagecategories);
+		$this->content->bind('customers', $customers);
+		$this->content->bind('warehouses', $warehouses);
+
+		
 		if($this->request->param('id') > 0) {
-			$warehouse = Warehouse::instance($this->request->param('id'));
-			$user = Auth::instance()->get_user();
-			$customer_id = $user->customer->id;
-			$warehouse_id = $user->customer->warehouse->id;
-			$this->content->bind('user', $user);
-			$this->content->bind('customer', $user->customer);
-			$this->content->bind('warehouse', $warehouse);
-				
+			$box = ORM::factory('Box',$this->request->param('id'));
+			$this->content->bind('box', $box);
+			
 			if($this->request->method()===HTTP_Request::POST) {
-				$params=$_POST;
-				$params['warehouse_id'] = $warehouse_id;
-	
-				if($warehouse->updateBox($params)) {
-					Message::success(ucfirst(__('Pozycja została zaktualizowana')),'/warehouse/boxes/');
-				}else {
-					Message::error(ucfirst(__('Nie udało się zaktualizować pozycji')),'/warehouse/boxes/');
+				$params = $_POST;
+							 
+				if($box->updateBox($params)) {
+					Message::success(ucfirst(__('Dane pozycji zostaĹ‚y zaktualizowane')),'/admin/users');
+				}else{
+					Message::error(ucfirst(__('Nie udaĹ‚o siÄ™ zaktualizowaÄ‡ pozycji')." ".$validate->errors('msg')),'/admin/users');
 				}
+			
 			}
+		}else {
+			Message::error(ucfirst(__('Nie podaĹ‚eĹ› id uĹĽytkownika')));
 		}
 	}
+	
 	public function action_warehouse_delete() {
 		if($this->request->param('id') > 0) {
 			$warehouse = Warehouse::instance($this->request->param('id'));
@@ -244,7 +301,7 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_document_add() {
-	
+		
 	}
 	
 	public function action_document_edit() {
@@ -278,4 +335,10 @@ class Controller_Warehouse extends Controller_Welcome {
 	public function action_bulkpackaging_delete() {
 	
 	}
+	
+	public function action_item_add() {
+		
+	
+	}
+	
 }
