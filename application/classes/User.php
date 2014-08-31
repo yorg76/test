@@ -21,7 +21,7 @@ class User extends ORM {
 	public $division;
 		
 	public static function instance($id=NULL) {
-		if($id>1) {
+		if($id!=NULL) {
 			return new User($id);
 		}else{
 			return new User(NULL);
@@ -29,7 +29,7 @@ class User extends ORM {
 	}
 	
 	public function __construct($id) {
-		if($id>1) {
+		if($id!=NULL) {
 			$this->user = ORM::factory('User')->where('id','=',$id)->find();
 			$this->id = $this->user->id;
 			$this->customer = $this->user->customer;

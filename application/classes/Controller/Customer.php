@@ -129,10 +129,18 @@ class Controller_Customer extends Controller_Welcome {
     		
         	$user = ORM::factory('User')->where('id','=',$this->request->param('id'))->find();
         	
+        	$divisions = $user->customer->divisions->find_all();
+        	
+        	$user_divisions = $user->divisions->find_all();
+        	
         	$this->content->bind('user', $user);
+        	
+        	$this->content->bind('divisions', $divisions);
+        	$this->content->bind('user_divisions', $user_divisions);
         	
  		    if($this->request->method()===HTTP_Request::POST) {
             	
+ 		    	
  		    	$user->values($_POST);
             	
             	$validate = new Validation($_POST);
@@ -155,8 +163,10 @@ class Controller_Customer extends Controller_Welcome {
     public function action_user_add(){
     		
     		$customer=Auth::instance()->get_user()->customer;
-    		   		
+    		$divisions = $customer->divisions->find_all();
+    		
     		$this->content->bind('customer', $customer);
+    		$this->content->bind('divisions', $divisions);
     		
     		if($this->request->method()===HTTP_Request::POST) {
     			$user = User::instance();
