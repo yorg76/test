@@ -26,10 +26,13 @@ class Customer  {
 	public $telephone;
 	public $city;
 	public $postal;
-	public $commemts;
+	public $country;
+	public $comments;
+	public $delivery_addresses;
+	public $pickup_addresses;
 	
 	public static function instance($id=NULL) {
-		if($id>0) {
+		if($id !== NULL) {
 			return new Customer($id);
 		}else{
 			return new Customer(NULL);
@@ -37,7 +40,8 @@ class Customer  {
 	}
 	
 	public function __construct($id) {
-		if($id>0) {
+		
+		if($id !== NULL) {
 			
 			$this->customer = ORM::factory('Customer')->where('id','=',$id)->find();
 			$this->address = $this->customer->addresses->where('address_type','=','firmowy')->find();
@@ -60,6 +64,8 @@ class Customer  {
 			$this->regon = $this->customer->regon;
 			$this->code = $this->customer->code;
 			$this->comments = $this->customer->comments;
+			$this->delivery_addresses = $this->customer->addresses->where('address_type','=','wysyłki')->find_all();
+			$this->pickup_addresses=$this->customer->addresses->where('address_type','=','odbioru')->find_all();
 			
 		}else {
 			$this->customer = ORM::factory('Customer');
@@ -173,15 +179,64 @@ class Customer  {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
 		}
 		return;
 	}
 	
+	public function addDeliveryAddress($params) {
+		
+		$log=Kohana_Log::instance();
+		
+		$address=ORM::factory('Address');
+		
+		$params['address_type'] = 'wysyłki';
+		$params['customer_id'] = $this->id;
+		
+		$address->values($params);
+		
+		try {
+			if($address->save()) {
+				$log->add(Log::DEBUG,"Success: Added delivery address ".serialize($params)."\n");
+				return true;
+			} else {
+				return false;
+			}
+		}catch (Exception $e) {
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
+		return;
+	}
+
+	public function addPickupAddress($params) {
+	
+		$log=Kohana_Log::instance();
+		
+		$address=ORM::factory('Address');
+		
+		$params['address_type'] = 'odbioru';
+		$params['customer_id'] = $this->id;
+		
+		$address->values($params);
+		
+		try {
+			if($address->save()) {
+				$log->add(Log::DEBUG,"Success: Added pickup address ".serialize($params)."\n");
+				return true;
+			} else {
+				return false;
+			}
+		}catch (Exception $e) {
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
+		return;
+	}
+	
+	
 	public function addAddress() {
 		
 		try {
-			if($this->customer->add($this->address)) {
+			if($this->customer->add('addresses',$this->address)) {
 				return true;
 			} else {
 				return false;

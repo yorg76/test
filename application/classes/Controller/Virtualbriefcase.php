@@ -101,8 +101,9 @@ public $controller_title = 'Wirtualne teczki';
 			
 		} 
 		 	
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('id','IN',$divisions_ids)->find_all();
 		
+		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);
