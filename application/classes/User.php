@@ -120,6 +120,20 @@ class User extends ORM {
 				$user->email=$params['email'];
 				$user->username=$params['username'];
 				$user->password=$params['pass'];
+				
+				if(is_array($params['divisions'])) {
+					foreach($params['divisions'] as $div) {
+						if(!$user->has('divisions',$div))	{
+							$user->add('divisions',$div);
+						}
+					}
+					foreach ($user->divisions->find_all() as $div) {
+						if(!in_array($div->id, $_POST['divisions'])) {
+							$user->remove('divisions',$div->id);
+						}
+					}
+				}
+				
 				$user->update();
 						
 					$log->add(Log::DEBUG,"Success: Updated user with params:".serialize($params)."\n");

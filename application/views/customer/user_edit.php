@@ -60,15 +60,8 @@
 						<label class="control-label">Działy</label>
 						<select multiple class="form-control" name="divisions[]">
 							<?php foreach($divisions as $division):?>
-							
-								<?php
-								 $selected="";
-								 foreach ($user_divisions as $ud): 
-									if($ud->id==$divsion->id) $selected = "selected=\"true\"";
-									else $selected="";
-								?>
-								<?php endforeach;?>
-								
+								<?php if ($user->has('divisions',$division->id)) $selected="selected=\"true\"";
+									  else $selected="";?>
 								<option value="<?php echo $division->id ?>" <?php echo $selected;?> ><?php echo $division->name?></option>
 							<?php endforeach;?>
 						</select>

@@ -9,6 +9,7 @@ class Model_Box extends ORM {
 
 	protected $_belongs_to = array(
 			'warehouse'=> array('model' => 'Warehouse', 'foreign_key' => 'warehouse_id'),
+			'storagecategory'=> array('model' => 'StorageCategory',	'foreign_key' => 'storage_category_id'),
 					
 	);
 	
@@ -21,7 +22,6 @@ class Model_Box extends ORM {
 	
 	protected $_has_one = array(
 			'boxbarcode'=> array('model' => 'BoxBarcode',	'foreign_key' => 'boxbarcode_id'),
-			'storagecategory'=> array('model' => 'StorageCategory',	'foreign_key' => 'storage_category_id')
 	);
 }
 

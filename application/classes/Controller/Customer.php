@@ -140,6 +140,20 @@ class Controller_Customer extends Controller_Welcome {
         	
  		    if($this->request->method()===HTTP_Request::POST) {
             	
+ 		    	if(is_array($_POST['divisions'])) {
+ 		    		foreach($_POST['divisions'] as $div) {
+ 		    			if(!$user->has('divisions',$div))	{
+ 		    				$user->add('divisions',$div);
+ 		    			}
+ 		    		}
+ 		    		
+ 		    		foreach ($user->divisions->find_all() as $div) {
+ 		    			if(!in_array($div->id, $_POST['divisions'])) {
+ 		    				$user->remove('divisions',$div->id);
+ 		    			}
+ 		    		}
+ 		    	}
+ 		    	
  		    	
  		    	$user->values($_POST);
             	

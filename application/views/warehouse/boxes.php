@@ -63,7 +63,7 @@
 									 <?php echo $box->warehouse->name;?>
 								</td>
 								<td>
-									 <?php echo $box->storage_category_id;?>
+									 <?php echo $box->storagecategory->name;?>
 								</td>			
 								<td>
 									 <?php echo $box->date_from ;?>
