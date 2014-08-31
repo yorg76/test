@@ -12,6 +12,8 @@ class Model_Document extends ORM {
 			'documentlist'=> array('model' => 'DocumentList', 'foreign_key' => 'documentlist_id'),
 			'box'=> array('model' => 'Box', 'foreign_key' => 'box_id'),
 	);
+	
+	
 }
 
 

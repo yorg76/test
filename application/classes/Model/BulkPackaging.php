@@ -8,7 +8,7 @@
 class Model_BulkPackaging extends ORM {
 
 	protected $_has_many = array(
-			'bulkpackagings'=> array('model' => 'BulkPackaging', 'foreign_key' => 'bulkpackaging_id'),
+			'bulkpackagings'=> array('model' => 'BulkPackaging', 'through' => 'bulkpackagings_bulkpackagings'),
 			'documentlists'=> array('model' => 'DocumentList', 'foreign_key' => 'bulkpackaging_id'),
 			'documents'=> array('model' => 'Document', 'foreign_key' => 'bulkpackaging_id')
 	);
