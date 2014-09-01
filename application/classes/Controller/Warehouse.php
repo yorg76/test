@@ -459,9 +459,43 @@ class Controller_Warehouse extends Controller_Welcome {
 		}
 	}
 	
-	public function action_item_add() {
+	public function action_add_item() {
+		
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$storagecategory = ORM::factory('StorageCategory');
+		$storagecategories = $storagecategory->find_all();
+		$this->content->bind('storagecategories', $storagecategories);
+		
+		$this->content->bind('warehouses', $warehouses);
+		
+		if($this->request->method()===HTTP_Request::POST) {
+			$params = $_POST;
+			//$params = $this->request->post();
+			$box=Box::instance();
+		
+			if($box->addBox($params)) {
+				Message::success(ucfirst(__('Pozycja została dodana do magazynu')),'/warehouse/boxes');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać pozycji do magazynu')),'/warehouse/boxes');
+			}
+		}
 		
 	
 	}
 	
+	public function action_boxes_search() {
+	
+	
+	}
+	
+	public function action_document_search() {
+	
+	
+	}
+	
+	public function action_warehouse_view() {
+	
+	
+	}
 }

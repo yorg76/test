@@ -232,16 +232,11 @@
 						</li>
 						<li>
 							<a href="/warehouse/boxes_search">
-							<i class="icon-directions"></i>
-							Wyszukaj pozycję</a>
-						</li>
-						<li>
-							<a href="/warehouse/document_search">
 							<i class="icon-magnifier"></i>
-							Wyszukaj dokument</a>
+							Wyszukaj...</a>
 						</li>
 						<li>
-							<a href="/warehouse/add">
+							<a href="/warehouse/add_item">
 							<i class="icon-docs"></i>
 							Dodaj...</a>
 						</li>
@@ -279,21 +274,7 @@
 									Opakowania zbiorcze</a>
 								</li>
 							
-						<li>
-							<a href="/virtualbriefcase/add">
-							<i class="icon-note"></i>
-							Dodaj</a>
-						</li>
-						<li>
-							<a href="/virtualbriefcase/remove">
-							<i class="icon-trash"></i>
-							Usuń</a>
-						</li>
-						<li>
-							<a href="/virtualbriefcase/modify">
-							<i class="icon-loop"></i>
-							Zmień</a>
-						</li>
+						
 					</ul>
 				</li>
 				<li class="<?php if ($_controller=='order') echo "active open";?>">
