@@ -175,7 +175,7 @@ public $controller_title = 'Wirtualne teczki';
 		$customer=Auth::instance()->get_user()->customer;
 		$divisions = $customer->divisions->find_all();
 		$divisions_ids= array();
-		$virtualbriefcases = array();
+		$virtualbriefcases_ids = array();
 		
 		foreach ($divisions as $division) {
 			array_push($divisions_ids, $division->id);
@@ -187,8 +187,9 @@ public $controller_title = 'Wirtualne teczki';
 		foreach ($virtualbriefcases as $virtualbriefcase) {
 			array_push($virtualbriefcases_ids, $virtualbriefcase->id);
 		}
-		$documents = ORM::factory('Document')->where('virtualbriefcase_id','IN', $virtualbriefcases_ids)->find_all();
 		
+		$documents = ORM::factory('Document')->join('virtualbriefcases_documents')->on('document.id', '=','virtualbriefcases_documents.document_id')->where('virtualbriefcases_documents.virtualbriefcase_id','IN',$virtualbriefcases_ids)->find_all();
+			
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);

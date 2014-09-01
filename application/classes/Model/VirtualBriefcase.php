@@ -8,9 +8,9 @@
 class Model_VirtualBriefcase extends ORM {
 
 	protected $_belongs_to = array(
-			'division'=> array('model' => 'Division', 'foreign_key' => 'division_id')
+			'division'=> array('model' => 'Division')
 	);
-
+	
 	protected $_has_many = array(
 			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through' => 'virtualbriefcases_virtualbriefcases'),
 			'bulkpackagings'=> array('model' => 'BulkPackaging', 'through' => 'virtualbriefcases_bulkpackagings'),

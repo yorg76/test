@@ -285,6 +285,12 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
+							<a href="/order/add">
+							<i class="icon-plus"></i>
+							Dodaj
+							</a>
+						</li>
+						<li>
 							<a href="/order/new">
 							<i class="icon-basket"></i>
 							Nowe</a>

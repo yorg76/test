@@ -71,6 +71,7 @@
 						<a href="#" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
+					</form>
 				</div>
 				<div id="tab_4-4" class="tab-pane">
 				<form role="form" action="/customer/edit/<?php echo $customer->id ?>" method="POST" id="customer_edit_form">

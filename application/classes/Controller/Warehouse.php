@@ -334,10 +334,11 @@ class Controller_Warehouse extends Controller_Welcome {
 			$params = $_POST;
 			
 			$document=Document::instance();
+			
 			if($document->addDocument($params)) {
-				Message::success(ucfirst(__('Dokument został została dodany do Pozycji')),'/warehouses/documents');
+				Message::success(ucfirst(__('Dokument został dodany do pozycji')),'/warehouse/documents');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać dokumentu do pozycji')),'/warehouses/documents');
+				Message::error(ucfirst(__('Nie udało się dodać dokumentu do pozycji')),'/warehouse/documents');
 			}
 		}
 	}
@@ -353,9 +354,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$name = $document->name;
 		
 			if($document->deleteDocument()) {
-				Message::success(ucfirst(__('Dokument został usunięty')),'/warehouse/documents/'.$name);
+				Message::success(ucfirst(__('Dokument został usunięty')),'/warehouse/documents');
 			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć dokumentu')),'/warehouse/documents/'.$name);
+				Message::error(ucfirst(__('Nie udało się usunąć dokumentu')),'/warehouse/documents');
 			}
 		}
 	}

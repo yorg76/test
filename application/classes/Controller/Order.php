@@ -43,4 +43,12 @@ class Controller_Order extends Controller_Welcome {
 	public function action_index() {
 		
 	}
+	
+	public function action_new() {
+		
+	}
+	
+	public function action_add() {
+		
+	}
 }

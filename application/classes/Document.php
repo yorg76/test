@@ -47,7 +47,7 @@ class Document extends ORM {
 		
 			try {
 					
-				if($document->save()) {
+				if($this->document->save()) {
 					$log->add(Log::DEBUG,"Success: Dodano dokument z parametrami:".serialize($params)."\n");
 		
 				}else {
