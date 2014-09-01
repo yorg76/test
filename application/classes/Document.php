@@ -11,6 +11,7 @@ class Document extends ORM {
 	public $id;
 	public $name;
 	public $description;
+	public $box;
 
 	
 	public static function instance($id=NULL) {
@@ -24,22 +25,23 @@ class Document extends ORM {
 	public function __construct($id) {
 		if($id>0) {
 	
-			$this->Document = ORM::factory('Document')->where('id','=',$id)->find();
+			$this->document = ORM::factory('Document')->where('id','=',$id)->find();
 			$this->id = $this->document->id;
 			$this->name = $this->document->name;
 			$this->description = $this->description;
+			$this->box = $this->box;
 			
 		}else {
+			$this->document = ORM::factory('Document');
 			$this->box = ORM::factory('Box');
 		}
 	}
 	
-	public function addDocument() {
+	public function addDocument($params) {
 		$log=Kohana_Log::instance();
-		$document=$this->document;
-			
-		$document->name=$params['name'];
-		$document->description=$params['description'];
+		$this->document->values($params);
+		$this->box=ORM::factory('Box',$params['box_id']);
+		$this->document->box_id=$this->box->id;
 			
 		if(is_array($params)) {
 		
@@ -60,12 +62,29 @@ class Document extends ORM {
 	}
 	
 	public function editDocument() {
-
+		
 		return;
 	}
 
 	public function deleteDocument() {
-
+		$log=Kohana_Log::instance();
+		
+		if($this->document->loaded()) {
+			$name=$this->document->name;
+		
+			if($this->document->delete()) {
+				$log->add(Log::DEBUG,"Success: Removed document:".$name."\n");
+				return true;
+			}
+			else {
+				$log->add(Log::DEBUG,"Fail: Remove document:".$name."\n");
+				return false;
+			}
+		}else {
+			$log->add(Log::DEBUG,"Fail: Remove document:".$name."\n");
+			return false;
+		}
+		return;
 		return;
 	}
 

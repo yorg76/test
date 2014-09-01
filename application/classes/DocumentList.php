@@ -11,19 +11,80 @@ class DocumentList extends ORM {
 	public $id;
 	public $name;
 	public $description;
+	public $box;
 
-	public function addDocumentList() {
 	
-		return;
+	public static function instance($id=NULL) {
+		if($id>0) {
+			return new DocumentList($id);
+		}else{
+			return new DocumentList(NULL);
+		}
 	}
+	
+	public function __construct($id) {
+		if($id>0) {
+	
+			$this->documentlist = ORM::factory('DocumentList')->where('id','=',$id)->find();
+			$this->id = $this->documentlist->id;
+			$this->name = $this->documentlist->name;
+			$this->description = $this->description;
+			$this->box = $this->box;
+			
+		}else {
+			$this->documentlist = ORM::factory('DocumentList');
+			$this->box = ORM::factory('Box');
+		}
+	}
+	
+	public function addDocumentlist($params) {
+		$log=Kohana_Log::instance();
+		$this->documentlist->values($params);
+		$this->box=ORM::factory('Box',$params['box_id']);
+		$this->documentlist->box_id=$this->box->id;
+			
+		if(is_array($params)) {
 		
+			try {
+					
+				if($documentlist->save()) {
+					$log->add(Log::DEBUG,"Success: Dodano listę dokumentów z parametrami:".serialize($params)."\n");
+		
+				}else {
+					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodwania listy dokumentów'."\n");
+				}
+				return true;
+			}catch (Exception $e) {
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+				return false;
+			}
+		}
+	}
+	
 	public function editDocumentList() {
 	
 		return;
 	}
 	
 	public function deleteDocumentList() {
-	
+		$log=Kohana_Log::instance();
+		
+		if($this->documentlist->loaded()) {
+			$name=$this->documentlist->name;
+		
+			if($this->documentlist->delete()) {
+				$log->add(Log::DEBUG,"Success: Removed documentlist:".$name."\n");
+				return true;
+			}
+			else {
+				$log->add(Log::DEBUG,"Fail: Remove documentlist:".$name."\n");
+				return false;
+			}
+		}else {
+			$log->add(Log::DEBUG,"Fail: Remove documentlist:".$name."\n");
+			return false;
+		}
+		return;
 		return;
 	}
 

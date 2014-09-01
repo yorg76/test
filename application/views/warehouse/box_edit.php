@@ -10,7 +10,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/warehouse/box_edit" method="POST" id="add_box_form">
+		<form role="form" action="/warehouse/box_edit/<?php echo $box->id ?>" method="POST" id="add_box_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>

@@ -257,10 +257,28 @@
 					</a>
 					<ul class="sub-menu">
 						<li class="<?php if ($_action=='virtualbriefcases') echo "active";?>">
-									<a href="/virtualbriefcase/virtualbriefcases">
-									<i class="icon-list"></i>
-									Lista wirtualnych teczek</a>
+							<a href="/virtualbriefcase/virtualbriefcases">
+								<i class="icon-list"></i>
+									Lista wirtualnych teczek
+							</a>
+						</li>
+						
+								<li class="<?php if ($_action=='documents') echo "active";?>">
+									<a href="/virtualbriefcase/documents">
+									<i class="icon-pencil"></i>
+									Dokumenty</a>
 								</li>
+								<li class="<?php if ($_action=='documentlists') echo "active";?>">
+									<a href="/virtualbriefcase/documentlists">
+									<i class="glyphicon glyphicon-list-alt"></i>
+									Listy dokumentów</a>
+								</li>	
+								<li class="<?php if ($_action=='bulkpackagings') echo "active";?>">
+									<a href="/virtualbriefcase/bulkpackagings">
+									<i class="glyphicon glyphicon-th"></i>
+									Opakowania zbiorcze</a>
+								</li>
+							
 						<li>
 							<a href="/virtualbriefcase/add">
 							<i class="icon-note"></i>

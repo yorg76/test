@@ -63,7 +63,7 @@
 									 <?php echo $box->warehouse->name;?>
 								</td>
 								<td>
-									 <?php echo $box->storage_category_id;?>
+									 <?php echo $box->storagecategory->name;?>
 								</td>			
 								<td>
 									 <?php echo $box->date_from ;?>
@@ -83,6 +83,7 @@
 								
 								<td>
 									<div class="margin-bottom-5">
+											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/warehouse/box_view/<?php echo $box->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button>
 											<button class="btn btn-xs yellow user-edit margin-bottom" onClick="javascript:window.location='/warehouse/box_edit/<?php echo $box->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
 											<button class="btn btn-xs red user-delete margin-bottom" onClick="javascript:window.location='/warehouse/box_delete/<?php echo $box->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>

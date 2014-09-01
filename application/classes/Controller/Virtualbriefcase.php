@@ -178,19 +178,22 @@ public $controller_title = 'Wirtualne teczki';
 	public function action_virtualbriefcase_edit() {
 		
 		if($this->request->param('id') > 0) {
-			$division = Division::instance($this->request->param('id'));
+			$virtualbriefcase = VirtualBriefcase::instance($this->request->param('id'));
 			$user = Auth::instance()->get_user();
+			$customer=Auth::instance()->get_user()->customer;
 			$customer_id = $user->customer->id;
-			$division_id = $user->customer->division->id;
+			$division_id = $virtualbriefcase->division->id;
+			$divisions = $customer->divisions->find_all();
+			$this->content->bind('divisions', $divisions);
 			$this->content->bind('user', $user);
 			$this->content->bind('customer', $user->customer);
-			$this->content->bind('division', $division);
+			$this->content->bind('virtualbriefcase', $virtualbriefcase);
 				
 			if($this->request->method()===HTTP_Request::POST) {
 				$params=$_POST;
 				$params['division_id'] = $division_id;
 	
-				if($warehouse->updateBox($params)) {
+				if($virtualbriefcase->updateVirtualBriefcase($params)) {
 					Message::success(ucfirst(__('Wirtualna teczka została zaktualizowana')),'/virtualbriefcase/virtualbriefcases');
 				}else {
 					Message::error(ucfirst(__('Nie udało się zaktualizować wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');

@@ -255,30 +255,32 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_box_edit() {
-	$customer=Auth::instance()->get_user()->customer;
-		$warehouses = $customer->warehouses->find_all();
+		
 		$storagecategories = ORM::factory('StorageCategory')->find_all();
 		$this->content->bind('storagecategories', $storagecategories);
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
 		$this->content->bind('customers', $customers);
 		$this->content->bind('warehouses', $warehouses);
-
 		
 		if($this->request->param('id') > 0) {
+			
 			$box = ORM::factory('Box',$this->request->param('id'));
 			$this->content->bind('box', $box);
 			
 			if($this->request->method()===HTTP_Request::POST) {
 				$params = $_POST;
-							 
-				if($box->updateBox($params)) {
-					Message::success(ucfirst(__('Dane pozycji zostaĹ‚y zaktualizowane')),'/admin/users');
-				}else{
-					Message::error(ucfirst(__('Nie udaĹ‚o siÄ™ zaktualizowaÄ‡ pozycji')." ".$validate->errors('msg')),'/admin/users');
+				//$box->values($_POST);
+				$box=Box::instance('id');
+				
+					if($box->updateBox($params)) {
+						Message::success(ucfirst(__('Dane pozycji zostały zaktualizowane')),'/warehouse/boxes');
+					}else{
+					Message::error(ucfirst(__('Nie udało się zaktualizować pozycji')." ".$validate->errors('msg')),'/warehouse/boxes');
 				}
-			
 			}
 		}else {
-			Message::error(ucfirst(__('Nie podaĹ‚eĹ› id uĹĽytkownika')));
+		Message::error(ucfirst(__('Nie podałeś id użytkownika')));
 		}
 	}
 	
@@ -297,11 +299,47 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_box_delete() {
-		
+		if($this->request->param('id') > 0) {
+			$box = Box::instance($this->request->param('id'));
+			$box_id = $box->id;
+					
+			if($box->deleteBox()) {
+				Message::success(ucfirst(__('Magazyn został usunięty')),'/warehouse/boxes/'.$id);
+			}else {
+				Message::error(ucfirst(__('Nie udało się usunąć magazynu')),'/warehouse/boxes/'.$id);
+			}
+		}
 	}
 	
 	public function action_document_add() {
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
 		
+		$warehouses_ids= array();
+		$boxes = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		$user = Auth::instance()->get_user();
+		$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('user', $user);
+		$this->content->bind('boxes', $boxes);
+		
+		if($this->request->method()===HTTP_Request::POST) {
+				
+			$params = $_POST;
+			
+			$document=Document::instance();
+			if($document->addDocument($params)) {
+				Message::success(ucfirst(__('Dokument został została dodany do Pozycji')),'/warehouses/documents');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać dokumentu do pozycji')),'/warehouses/documents');
+			}
+		}
 	}
 	
 	public function action_document_edit() {
@@ -309,11 +347,48 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_document_delete() {
-	
+		if($this->request->param('id') > 0) {
+			$document = Document::instance($this->request->param('id'));
+			$document_id = $document->id;
+			$name = $document->name;
+		
+			if($document->deleteDocument()) {
+				Message::success(ucfirst(__('Dokument został usunięty')),'/warehouse/documents/'.$name);
+			}else {
+				Message::error(ucfirst(__('Nie udało się usunąć dokumentu')),'/warehouse/documents/'.$name);
+			}
+		}
 	}
 	
 	public function action_documentlist_add() {
-	
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$this->content->bind('customer', $customer);
+		$warehouses_ids= array();
+		$boxes = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		$user = Auth::instance()->get_user();
+		//$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('user', $user);
+		$this->content->bind('boxes', $boxes);
+		
+		if($this->request->method()===HTTP_Request::POST) {
+		
+			$params = $_POST;
+				
+			$documentlist=DocumentList::instance();
+			if($document->addDocumentList($params)) {
+				Message::success(ucfirst(__('Lista dokumentów została dodany do Pozycji')),'/warehouses/documentlists');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji')),'/warehouses/documentlists');
+			}
+		}
 	}
 	
 	public function action_documentlist_edit() {
@@ -321,11 +396,49 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_documentlist_delete() {
-	
+		if($this->request->param('id') > 0) {
+			$documentlist = DocumentList::instance($this->request->param('id'));
+			$documentlist_id = $documentlist->id;
+			$name = $documentlist->name;
+		
+			if($documentlist->deleteDocumentList()) {
+				Message::success(ucfirst(__('Lista dokumentów została usunięta')),'/warehouse/documentlists/'.$name);
+			}else {
+				Message::error(ucfirst(__('Nie udało się usunąć Listy dokumentów')),'/warehouse/documentlists/'.$name);
+			}
+		}
 	}
 	
 	public function action_bulkpackaging_add() {
-	
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		
+		$warehouses_ids= array();
+		$boxes = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		$user = Auth::instance()->get_user();
+		$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('user', $user);
+		$this->content->bind('boxes', $boxes);
+		
+		if($this->request->method()===HTTP_Request::POST) {
+		
+			$params = $_POST;
+		
+			$bulkpackaging=BulkPackaging::instance();
+			
+			if($document->addBulkPackaging($params)) {
+				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do Pozycji')),'/warehouses/bulkpackagings');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do pozycji')),'/warehouses/bulkpackagings');
+			}
+		}
 	}
 	
 	public function action_bulkpackaging_edit() {
@@ -333,7 +446,17 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_bulkpackaging_delete() {
-	
+		if($this->request->param('id') > 0) {
+			$bulkpackaging = BulkPackaging::instance($this->request->param('id'));
+			$bulkpackaging_id = $bulkpackaging->id;
+			$name = $bulkpackaging->name;
+		
+			if($bulkpackaging->deleteBulkPackaging()) {
+				Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte')),'/warehouse/bulkpackagings/'.$name);
+			}else {
+				Message::error(ucfirst(__('Nie udało się usunąć Opakowania zbiorczego')),'/warehouse/bulkpackagings/'.$name);
+			}
+		}
 	}
 	
 	public function action_item_add() {

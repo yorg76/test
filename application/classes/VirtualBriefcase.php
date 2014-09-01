@@ -26,11 +26,11 @@ class VirtualBriefcase extends ORM {
 		if($id>0) {
 	
 			$this->virtualbriefcase = ORM::factory('VirtualBriefcase')->where('id','=',$id)->find();
-			$this->name=$this->virtualvriefcase->name;
-			$this->id=$this->virtualvriefcase->id;
-			$this->description=$this->VirtualBriefcase->description;
-			$this->division = $this->VirtualBriefcase->division;
-			$this->customer = $this->VirtualBriefcase->division->customer;
+			$this->name=$this->virtualbriefcase->name;
+			$this->id=$this->virtualbriefcase->id;
+			$this->description=$this->virtualbriefcase->description;
+			$this->division = $this->virtualbriefcase->division;
+			$this->customer = $this->virtualbriefcase->division->customer;
 				
 	
 	

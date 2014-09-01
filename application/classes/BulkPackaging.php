@@ -11,10 +11,55 @@ class BulkPackaging extends ORM {
 	public $id;
 	public $name;
 	public $description;
+	public $box;
 
-	public function addBulkPackaging() {
 
-		return;
+	
+	public static function instance($id=NULL) {
+		if($id>0) {
+			return new BulkPackaging($id);
+		}else{
+			return new BulkPackaging(NULL);
+		}
+	}
+	
+	public function __construct($id) {
+		if($id>0) {
+	
+			$this->bulkpackaging = ORM::factory('BulkPackaging')->where('id','=',$id)->find();
+			$this->id = $this->bulkpackaging->id;
+			$this->name = $this->bulkpackaging->name;
+			$this->description = $this->description;
+			$this->box = $this->box;
+			
+		}else {
+			$this->bulkpackaging = ORM::factory('BulkPackaging');
+			$this->box = ORM::factory('Box');
+		}
+	}
+	
+	public function addBulkPackaging($params) {
+		$log=Kohana_Log::instance();
+		$this->bulkpackaging->values($params);
+		$this->box=ORM::factory('Box',$params['box_id']);
+		$this->bulkpackaging->box_id=$this->box->id;
+			
+		if(is_array($params)) {
+		
+			try {
+					
+				if($bulkpackaging->save()) {
+					$log->add(Log::DEBUG,"Success: Dodano listę dokumentów z parametrami:".serialize($params)."\n");
+		
+				}else {
+					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodwania listy dokumentów'."\n");
+				}
+				return true;
+			}catch (Exception $e) {
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+				return false;
+			}
+		}
 	}
 
 	public function editBulkPackaging() {
@@ -23,7 +68,24 @@ class BulkPackaging extends ORM {
 	}
 	
 	public function deleteBulkPackaging() {
-	
+		$log=Kohana_Log::instance();
+		
+		if($this->bulkpackaging->loaded()) {
+			$name=$this->bulkpackaging->name;
+		
+			if($this->bulkpackaging->delete()) {
+				$log->add(Log::DEBUG,"Success: Removed bulkpackaging:".$name."\n");
+				return true;
+			}
+			else {
+				$log->add(Log::DEBUG,"Fail: Remove bulkpackaging:".$name."\n");
+				return false;
+			}
+		}else {
+			$log->add(Log::DEBUG,"Fail: Remove bulkpackaging:".$name."\n");
+			return false;
+		}
+		return;
 		return;
 	}
 

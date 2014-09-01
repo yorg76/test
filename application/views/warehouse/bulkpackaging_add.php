@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/warehouse/bulkpackaging_add/<?php echo $box->id ?>" method="POST" id="add_bulkpackaging_form">
+		<form role="form" action="/warehouse/bulkpackaging_add" method="POST" id="add_bulkpackaging_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -19,7 +19,21 @@
 			<div class="tab-content">
 			
 				<div id="tab_1-1" class="tab-pane active">
-					
+					<div class="form-group">
+						<label class="control-label">Wybór pozycji
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" name="box_id">
+								<option>-- Wybierz pozycję dla opakowania --</option>
+								<?php foreach ($boxes as $box):?>
+								<?php 
+											echo "<option value=\"".$box->id."\">".$box->id."</option>";
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>	
 					<div class="form-group">
 						<label class="control-label">Nazwa
 							<span class="required" aria-required="true"> * </span>

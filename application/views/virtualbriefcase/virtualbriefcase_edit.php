@@ -45,14 +45,17 @@
 								<option>-- Wybierz dział --</option>
 								<?php foreach ($divisions as $division):?>
 								<?php 
-											echo "<option value=\"".$division->id."\">".$division->name."</option>";
+										if ($virtualbriefcase->division->id == $division->id) $checked=" selected=\"true\"";
+											else $checked="";
+										echo "<option value=\"".$division->id."\"".$checked." >".$division->name."</option>";
+								
 								?>
 								<?php endforeach;?>
 							</select>
 						</div>
 					</div>
 					<br/>
-					<input type="hidden" value="<?php echo $division->id ?>" name="division_id" />
+					
 					<div class="margiv-top-10">
 						<a href="/virtualbriefcase/virtualbriefcases/" class="btn green" id="submit">
 						Zapisz zmiany</a>

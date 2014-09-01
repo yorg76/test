@@ -87,7 +87,7 @@ class Box extends ORM {
 	}
 
 
-	public function updateBox() {
+	public function updateBox($params) {
 		$log=Kohana_Log::instance();
 		$this->box->values($params);
 		$this->warehouse=ORM::factory('Warehouse',$params['warehouse_id']);
@@ -139,13 +139,13 @@ class Box extends ORM {
 	}
 
 
-	public function addBulkpackaging() {
+	public function addBulkPackaging() {
 
 		return;
 	}
 
 
-	public function addDocumentlist() {
+	public function addDocumentList() {
 
 		return;
 	}
@@ -156,13 +156,13 @@ class Box extends ORM {
 	}
 
 
-	public function deleteBulkpackaging() {
+	public function deleteBulkpPackaging() {
 
 		return;
 	}
 
 
-	public function deleteDocumentlist() {
+	public function deleteDocumentList() {
 
 		return;
 	}
