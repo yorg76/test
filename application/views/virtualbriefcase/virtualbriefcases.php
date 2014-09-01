@@ -16,12 +16,12 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_add/'">
+									<button class="btn green" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_add'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
 							</div>						
-							<table class="table table-striped table-hover table-bordered" id="virtualbriefcases_list">
+							<table class="table table-striped table-hover table-bordered" id="virtualbriefcases_list"">
 							<thead>
 							<tr>
 								<th>
@@ -40,13 +40,9 @@
 							</thead>
 							<tbody>
 							<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
-							
 							<tr>
 								<td>
-									 <?php 
-									 
-									 
-									 echo $virtualbriefcase->name;?>
+									 <?php echo $virtualbriefcase->name;?>
 								</td>
 															
 								<td>
@@ -57,6 +53,7 @@
 								</td>
 								<td>
 									<div class="margin-bottom-5">
+											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button>
 											<button class="btn btn-xs yellow margin-bottom" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_edit/<?php echo $virtualbriefcase->id ;?>';"><i class="icon-layers"></i> Edytuj</button>
 											<button class="btn btn-xs red margin-bottom" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_delete/<?php echo $virtualbriefcase->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>

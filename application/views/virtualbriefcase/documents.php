@@ -16,7 +16,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/warehouse/document_add'">
+									<button class="btn green" onClick="javascript:window.location='/virtualbriefcase/document_add'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
@@ -47,8 +47,8 @@
 								</td>
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';"><i class="icon-pencil"></i> Edytuj</button>
-											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/document_delete/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/virtualbriefcase/document_edit/<?php echo $document->id ;?>';"><i class="icon-pencil"></i> Edytuj</button>
+											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/virtualbriefcase/document_delete/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

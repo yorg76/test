@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/warehouse/bulkpackaging_edit/<?php echo $bulkpackaging->id ?>" method="POST" id="add_bulkpackaging_form">
+		<form role="form" action="/virtualbriefcase/bulkpackaging_edit/<?php echo $bulkpackaging->id ?>" method="POST" id="add_bulkpackaging_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -56,9 +56,9 @@
 					<br/>
 					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 					<div class="margiv-top-10">
-						<a href="/warehouse/bulkpackagings/" class="btn green" id="submit">
+						<a href="/virtualbriefcase/bulkpackagings/" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/warehouse/bulkpackagings/" class="btn default" id="cancel">
+						<a href="/virtualbriefcase/bulkpackagings/" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

@@ -57,6 +57,14 @@
 						</div>
 					</div>					
 					<div class="form-group">
+						<label class="control-label">Działy</label>
+						<select multiple class="form-control" name="divisions[]">
+							<?php foreach($divisions as $division):?>
+							<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
+							<?php endforeach;?>
+						</select>
+					</div>
+					<div class="form-group">
 						<label class="control-label">Hasło
 							<span class="required" aria-required="true"> * </span>
 						</label>

@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form enctype="multipart/form-data" role="form" action="/warehouse/document_add/" method="POST" id="add_document_form">
+		<form enctype="multipart/form-data" role="form" action="/virtualbriefcase/document_add/" method="POST" id="add_document_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -60,9 +60,9 @@
 					<br/>
 					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 					<div class="margiv-top-10">
-						<a href="/warehouse/documents" class="btn green" id="submit">
+						<a href="/virtualbriefcase/documents" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/warehouse/documents" class="btn default" id="cancel">
+						<a href="/virtualbriefcase/documents" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

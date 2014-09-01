@@ -55,7 +55,18 @@
 							<input type="text" placeholder="user@example.com" class="form-control" name="email" value="<?php echo $user->email?>" />
 							<span class="help-block"></span>
 						</div>
-					</div>					
+					</div>				
+					<div class="form-group">
+						<label class="control-label">Działy</label>
+						<select multiple class="form-control" name="divisions[]">
+							<?php foreach($divisions as $division):?>
+								<?php if ($user->has('divisions',$division->id)) $selected="selected=\"true\"";
+									  else $selected="";?>
+								<option value="<?php echo $division->id ?>" <?php echo $selected;?> ><?php echo $division->name?></option>
+							<?php endforeach;?>
+						</select>
+					</div>
+	
 					<div class="form-group">
 						<label class="control-label">Hasło
 							<span class="required" aria-required="true"> * </span>

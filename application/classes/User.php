@@ -21,7 +21,7 @@ class User extends ORM {
 	public $division;
 		
 	public static function instance($id=NULL) {
-		if($id>1) {
+		if($id!=NULL) {
 			return new User($id);
 		}else{
 			return new User(NULL);
@@ -29,7 +29,7 @@ class User extends ORM {
 	}
 	
 	public function __construct($id) {
-		if($id>1) {
+		if($id!=NULL) {
 			$this->user = ORM::factory('User')->where('id','=',$id)->find();
 			$this->id = $this->user->id;
 			$this->customer = $this->user->customer;
@@ -120,6 +120,20 @@ class User extends ORM {
 				$user->email=$params['email'];
 				$user->username=$params['username'];
 				$user->password=$params['pass'];
+				
+				if(is_array($params['divisions'])) {
+					foreach($params['divisions'] as $div) {
+						if(!$user->has('divisions',$div))	{
+							$user->add('divisions',$div);
+						}
+					}
+					foreach ($user->divisions->find_all() as $div) {
+						if(!in_array($div->id, $_POST['divisions'])) {
+							$user->remove('divisions',$div->id);
+						}
+					}
+				}
+				
 				$user->update();
 						
 					$log->add(Log::DEBUG,"Success: Updated user with params:".serialize($params)."\n");
