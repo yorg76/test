@@ -42,7 +42,7 @@ class Document extends ORM {
 		$this->document->values($params);
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->document->box_id=$this->box->id;
-		
+			
 		if(is_array($params)) {
 		
 			try {

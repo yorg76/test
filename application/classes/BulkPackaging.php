@@ -48,7 +48,7 @@ class BulkPackaging extends ORM {
 		
 			try {
 					
-				if($bulkpackaging->save()) {
+				if($this->bulkpackaging->save()) {
 					$log->add(Log::DEBUG,"Success: Dodano listę dokumentów z parametrami:".serialize($params)."\n");
 		
 				}else {

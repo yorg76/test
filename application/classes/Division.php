@@ -12,6 +12,7 @@ class Division extends ORM {
 	public $name;
 	public $description;
 	public $customer;
+	public $virtualbriefcases;
 	
 	public static function instance($id=NULL) {
 		if($id>0) {
@@ -29,6 +30,7 @@ class Division extends ORM {
 			$this->id=$this->division->id;
 			$this->description=$this->division->description;
 			$this->customer = $this->division->customer;
+			$this->virtualbriefcases = $this->division->virtualbriefcase->find();
 			
 	
 				

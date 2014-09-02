@@ -47,7 +47,7 @@ class DocumentList extends ORM {
 		
 			try {
 					
-				if($documentlist->save()) {
+				if($this->documentlist->save()) {
 					$log->add(Log::DEBUG,"Success: Dodano listę dokumentów z parametrami:".serialize($params)."\n");
 		
 				}else {

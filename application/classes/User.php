@@ -136,8 +136,8 @@ class User extends ORM {
 				
 				$user->update();
 						
-					$log->add(Log::DEBUG,"Success: Updated user with params:".serialize($params)."\n");
-					return true;
+				$log->add(Log::DEBUG,"Success: Updated user with params:".serialize($params)."\n");
+				return true;
 			}catch (Exception $e) {
 				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
 				return false;

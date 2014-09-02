@@ -233,7 +233,7 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_box_add() {
-		$customer=Auth::instance()->get_user()->customer;
+		$customer = Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
 		$storagecategory = ORM::factory('StorageCategory');
 		$storagecategories = $storagecategory->find_all();
@@ -258,7 +258,7 @@ class Controller_Warehouse extends Controller_Welcome {
 		
 		$storagecategories = ORM::factory('StorageCategory')->find_all();
 		$this->content->bind('storagecategories', $storagecategories);
-		$customer=Auth::instance()->get_user()->customer;
+		$customer = Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
 		$this->content->bind('customers', $customers);
 		$this->content->bind('warehouses', $warehouses);
@@ -312,7 +312,7 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_document_add() {
-		$customer=Auth::instance()->get_user()->customer;
+		$customer = Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
 		
 		$warehouses_ids= array();
@@ -333,7 +333,8 @@ class Controller_Warehouse extends Controller_Welcome {
 				
 			$params = $_POST;
 			
-			$document=Document::instance();
+			$document = Document::instance();
+			
 			if($document->addDocument($params)) {
 				Message::success(ucfirst(__('Dokument został została dodany do Pozycji')),'/warehouse/documents');
 			}else {
@@ -353,17 +354,16 @@ class Controller_Warehouse extends Controller_Welcome {
 			$name = $document->name;
 		
 			if($document->deleteDocument()) {
-				Message::success(ucfirst(__('Dokument został usunięty')),'/warehouse/documents/'.$name);
+				Message::success(ucfirst(__('Dokument został usunięty')),'/warehouse/documents');
 			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć dokumentu')),'/warehouse/documents/'.$name);
+				Message::error(ucfirst(__('Nie udało się usunąć dokumentu')),'/warehouse/documents');
 			}
 		}
 	}
 	
 	public function action_documentlist_add() {
-		$customer=Auth::instance()->get_user()->customer;
+		$customer = Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
-		$this->content->bind('customer', $customer);
 		$warehouses_ids= array();
 		$boxes = array();
 		
@@ -373,7 +373,7 @@ class Controller_Warehouse extends Controller_Welcome {
 		
 		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
 		$user = Auth::instance()->get_user();
-		//$this->content->bind('customer', $customer);
+		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
 		$this->content->bind('user', $user);
 		$this->content->bind('boxes', $boxes);
@@ -382,8 +382,9 @@ class Controller_Warehouse extends Controller_Welcome {
 		
 			$params = $_POST;
 				
-			$documentlist=DocumentList::instance();
-			if($document->addDocumentList($params)) {
+			$documentlist = DocumentList::instance();
+			
+			if($documentlist->addDocumentList($params)) {
 				Message::success(ucfirst(__('Lista dokumentów została dodany do Pozycji')),'/warehouses/documentlists');
 			}else {
 				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji')),'/warehouses/documentlists');
@@ -410,7 +411,7 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_bulkpackaging_add() {
-		$customer=Auth::instance()->get_user()->customer;
+		$customer = Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
 		
 		$warehouses_ids= array();
@@ -431,9 +432,9 @@ class Controller_Warehouse extends Controller_Welcome {
 		
 			$params = $_POST;
 		
-			$bulkpackaging=BulkPackaging::instance();
+			$bulkpackaging = BulkPackaging::instance();
 			
-			if($document->addBulkPackaging($params)) {
+			if($bulkpackaging->addBulkPackaging($params)) {
 				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do Pozycji')),'/warehouses/bulkpackagings');
 			}else {
 				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do pozycji')),'/warehouses/bulkpackagings');
