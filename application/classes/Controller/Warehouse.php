@@ -435,9 +435,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$bulkpackaging = BulkPackaging::instance();
 			
 			if($bulkpackaging->addBulkPackaging($params)) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do Pozycji')),'/warehouses/bulkpackagings');
+				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do Pozycji')),'/warehouse/bulkpackagings');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do pozycji')),'/warehouses/bulkpackagings');
+				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do pozycji')),'/warehouse/bulkpackagings');
 			}
 		}
 	}
