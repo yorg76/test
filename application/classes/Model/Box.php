@@ -20,7 +20,7 @@ class Model_Box extends ORM {
 	);
 	
 	protected $_has_one = array(
-			'boxbarcode'=> array('model' => 'BoxBarcode',	'foreign_key' => 'boxbarcode_id'),
+			'boxbarcode'=> array('model' => 'BoxBarcode',	'foreign_key' => 'box_id'),
 
 	);
 }

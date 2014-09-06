@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Nowe opakowanie zbiorcze</a>
+				<i class="fa fa-cog"></i>Dodaj opakowanie zbiorcze</a>
 				<span class="after">
 				</span>
 			</li>
@@ -20,15 +20,15 @@
 			
 				<div id="tab_1-1" class="tab-pane active">
 					<div class="form-group">
-						<label class="control-label">Wybór pozycji
+						<label class="control-label">Wybór wirtualnej teczki
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz pozycję dla opakowania --</option>
-								<?php foreach ($boxes as $box):?>
+								<option>-- Wybierz teczkę dla opakowania --</option><!-- TODO MULTISEELECT -->
+								<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 								<?php 
-											echo "<option value=\"".$box->id."\">".$box->id."</option>";
+											echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->id."</option>";
 								?>
 								<?php endforeach;?>
 							</select>
@@ -52,7 +52,7 @@
 						<span class="help-block"></span>
 					</div>
 					<br/>
-					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
+					<input type="hidden" value="<?php echo $virtualbriefcase->id ?>" name="virtualbriefcase_id" />
 					<div class="margiv-top-10">
 						<a href="/virtualbriefcase/bulkpackagings" class="btn green" id="submit">
 						Zapisz zmiany</a>

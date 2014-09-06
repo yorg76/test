@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-layers"></i>Wirtualne teczki
+								<i class="icon-briefcase"></i>Wirtualne teczki
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -25,6 +25,9 @@
 							<thead>
 							<tr>
 								<th>
+									 ID
+								</th>
+								<th>
 									 Nazwa
 								</th>							
 								<th>
@@ -42,6 +45,9 @@
 							<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 							<tr>
 								<td>
+									 <?php echo $virtualbriefcase->id;?>
+								</td>
+								<td>
 									 <?php echo $virtualbriefcase->name;?>
 								</td>
 															
@@ -53,7 +59,7 @@
 								</td>
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button>
+											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Info</button>
 											<button class="btn btn-xs yellow margin-bottom" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_edit/<?php echo $virtualbriefcase->id ;?>';"><i class="icon-layers"></i> Edytuj</button>
 											<button class="btn btn-xs red margin-bottom" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_delete/<?php echo $virtualbriefcase->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>

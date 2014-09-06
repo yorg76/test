@@ -4,12 +4,12 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="glyphicon glyphicon-inbox"></i>Pozycje
+								<i class="glyphicon glyphicon-inbox"></i>Magazyn <?php echo $warehouse->name ?> - Pozycje
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
 								</a>
-								<a href="javascript:;" class="reload">
+								<a href="javascript:;" class="reload"> 
 								</a>
 							</div>
 						</div>
@@ -26,9 +26,6 @@
 							<tr>
 								<th>
 									 ID
-								</th>
-								<th>
-									 Magazyn
 								</th>
 								<th>
 									 Kategoria przechowywania
@@ -58,9 +55,6 @@
 							<tr>
 								<td>
 									 <?php echo $box->id;?>
-								</td>
-								<td>
-									 <?php echo $box->warehouse->name;?>
 								</td>
 								<td>
 									 <?php echo $box->storagecategory->name;?>

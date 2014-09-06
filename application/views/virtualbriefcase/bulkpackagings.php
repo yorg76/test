@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Opakowania zbiorcze
+								<i class="icon-briefcase"></i>Wirtualne teczki - Opakowania zbiorcze
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -25,7 +25,10 @@
 							<thead>
 							<tr>
 								<th>
-									 Nazwa
+									 ID
+								</th>
+								<th>
+									 Opakowanie zbiorcze
 								</th>							
 								<th>
 									 Opis
@@ -39,6 +42,9 @@
 							<?php foreach ($bulkpackagings as $bulkpackaging):?>
 							<tr>
 								<td>
+									 <?php echo $bulkpackaging->id;?>
+								</td>
+								<td>
 									 <?php echo $bulkpackaging->name;?>
 								</td>
 															
@@ -48,7 +54,7 @@
 								<td>
 									<div class="margin-bottom-5">
 											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/virtualbriefcase/bulkpackaging_edit/<?php echo $bulkpackaging->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/virtualbriefcase/bulkpackaging_delete/<?php echo $bulkpackaging->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/virtualbriefcase/bulkpackaging_remove/<?php echo $bulkpackaging->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

@@ -25,6 +25,9 @@
 							<thead>
 							<tr>
 								<th>
+									 ID
+								</th>
+								<th>
 									 Nazwa
 								</th>							
 								<th>
@@ -38,14 +41,17 @@
 							<tbody>
 							<?php foreach ($documents as $document):?>
 							<tr>
-								<td>
+								<td style="width:10%">
+									 <?php echo $document->id;?>
+								</td>
+								<td style="width:20%">
 									 <?php echo $document->name;?>
 								</td>
 															
-								<td>
+								<td style="width:50%">
 									 <?php echo $document->description;?>
 								</td>
-								<td>
+								<td style="width:20%">
 									<div class="margin-bottom-5">
 											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';"><i class="icon-pencil"></i> Edytuj</button>
 											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/document_delete/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>

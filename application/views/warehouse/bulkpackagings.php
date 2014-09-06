@@ -25,6 +25,9 @@
 							<thead>
 							<tr>
 								<th>
+									 ID
+								</th>
+								<th>
 									 Nazwa
 								</th>							
 								<th>
@@ -38,14 +41,17 @@
 							<tbody>
 							<?php foreach ($bulkpackagings as $bulkpackaging):?>
 							<tr>
-								<td>
+								<td style="width:10%">
+									 <?php echo $bulkpackaging->id;?>
+								</td>
+								<td style="width:20%">
 									 <?php echo $bulkpackaging->name;?>
 								</td>
 															
-								<td>
+								<td style="width:50%">
 									 <?php echo $bulkpackaging->description;?>
 								</td>
-								<td>
+								<td style="width:20%">
 									<div class="margin-bottom-5">
 											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/bulkpackaging_edit/<?php echo $bulkpackaging->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
 											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/bulkpackaging_delete/<?php echo $bulkpackaging->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>

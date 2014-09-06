@@ -1,9 +1,9 @@
-﻿<div class="row profile-account">	
+<div class="row profile-account">	
 	<div class="col-md-3">
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Nowa lista dokumentów</a>
+				<i class="fa fa-cog"></i>Dodaj wirtualną teczkę</a>
 				<span class="after">
 				</span>
 			</li>
@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/virtualbriefcase/documentlist_add" method="POST" id="add_documentlist_form">
+		<form enctype="multipart/form-data" role="form" action="/virtualbriefcase/nested_virtualbriefcase_add/" method="POST" id="add_nested_virtualbriefcase_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -19,21 +19,21 @@
 			<div class="tab-content">
 			
 				<div id="tab_1-1" class="tab-pane active">
-				<div class="form-group">
+					<div class="form-group">
 						<label class="control-label">Wybór wirtualnej teczki
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<select class="form-control" name="box_id">
-								<option>-- Wybierz teczkę dla listy dokumentów --</option>
-								<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
+							<select class="form-control" name="virtualbriefcase_id">
+								<option>-- Wybierz teczkę --</option>
+								<?php foreach ($virtualbriefcases as $virtualbriefca):?>
 								<?php 
 											echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->id."</option>";
 								?>
 								<?php endforeach;?>
 							</select>
 						</div>
-					</div>	
+					</div>
 					<div class="form-group">
 						<label class="control-label">Nazwa
 							<span class="required" aria-required="true"> * </span>
@@ -51,17 +51,23 @@
 						</textarea>
 						<span class="help-block"></span>
 					</div>
+					<div class="form-group">
+						<label for="control-label">Skan dokumentu</label>
+						<input name="plik" type="file" id="upload">
+						<!-- TODO UPLOAD (CZY AN FILESYSTEM CZY DO BAZY?)  -->
+						<span class="help-block"></span>
+					</div>
 					<br/>
 					<input type="hidden" value="<?php echo $virtualbriefcase->id ?>" name="virtualbriefcase_id" />
 					<div class="margiv-top-10">
-						<a href="/virtualbriefcase/documentlists" class="btn green" id="submit">
+						<a href="/virtualbriefcase/documents" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/virtualbriefcase/documentlists" class="btn default" id="cancel">
+						<a href="/virtualbriefcase/documents" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	
 			</div>
 		</form>
 	</div>
-	<!--end col-md-9-->
+<!--end col-md-9-->
 </div>

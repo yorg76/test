@@ -12,6 +12,7 @@ class Warehouse extends ORM {
 	public $name;
 	public $description;
 	public $customer;
+	public $boxes;
 	
 	public static function instance($id=NULL) {
 		if($id>0) {
@@ -29,6 +30,7 @@ class Warehouse extends ORM {
 			$this->id=$this->warehouse->id;
 			$this->description=$this->warehouse->description;
 			$this->customer = $this->warehouse->customer;
+			$this->boxes = $this->warehouse->boxes->find();
 			
 	
 				

@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Dokumenty
+								<i class="icon-briefcase"></i>Wirtualne teczki - Dokumenty
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -25,7 +25,10 @@
 							<thead>
 							<tr>
 								<th>
-									 Nazwa
+									 ID
+								</th>
+								<th>
+									 Dokument
 								</th>							
 								<th>
 									 Opis
@@ -39,6 +42,9 @@
 							<?php foreach ($documents as $document):?>
 							<tr>
 								<td>
+									 <?php echo $document->id;?>
+								</td>
+								<td>
 									 <?php echo $document->name;?>
 								</td>
 															
@@ -48,7 +54,7 @@
 								<td>
 									<div class="margin-bottom-5">
 											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/virtualbriefcase/document_edit/<?php echo $document->id ;?>';"><i class="icon-pencil"></i> Edytuj</button>
-											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/virtualbriefcase/document_delete/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/virtualbriefcase/document_remove/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

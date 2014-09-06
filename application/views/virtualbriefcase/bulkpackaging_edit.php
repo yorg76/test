@@ -20,41 +20,24 @@
 			
 				<div id="tab_1-1" class="tab-pane active">
 				<div class="form-group">
-						<label class="control-label">Wybór pozycji
+						<label class="control-label">Wybór wirtualnej teczki
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz pozycję dla opakowania --</option>
-								<?php foreach ($boxes as $box):?>
+								<option>-- Wybierz teczkę dla opakowania --</option><!-- TODO MULTISEELECT -->
+								<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 									<?php 
-										if ($box->id == $id) $checked=" selected=\"true\"";
+										if ($virtualbriefcase->id == $id) $checked=" selected=\"true\"";
 											else $checked="";
-										echo "<option value=\"".$box->id."\"".$checked." >".$box->id."</option>";
+										echo "<option value=\"".$virtualbriefcase->id."\"".$checked." >".$virtualbriefcase->id."</option>";
 								
 									?>
 								<?php endforeach;?>
 							</select>
 						</div>
 					</div>		
-					<div class="form-group">
-						<label class="control-label">Nazwa
-							<span class="required" aria-required="true"> * </span>
-						</label>
-						<div class="input-icon right">
-							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="<?php echo $bulkpackaging->name;?>" />
-							<span class="help-block"></span>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Opis
-							<span class="required" aria-required="true"> * </span>
-						</label>
-						<textarea class="form-control" name="description"><?php echo $bulkpackaging->description;?></textarea>
-					<span class="help-block"></span>
-					</div>
-					<br/>
-					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
+					<input type="hidden" value="<?php echo $virtualbriefcase->id ?>" name="virtualbriefcase_id" />
 					<div class="margiv-top-10">
 						<a href="/virtualbriefcase/bulkpackagings/" class="btn green" id="submit">
 						Zapisz zmiany</a>

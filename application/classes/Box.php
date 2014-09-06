@@ -39,7 +39,7 @@ class Box extends ORM {
 			$this->lock = $this->box->lock;
 			$this->seal = $this->box->seal;
 			$this->warehouse_id = $this->box->warehouse->id;
-			$this->boxbarcode_id = $this->box->boxbarcode->id;
+			//$this->boxbarcode_id = $this->box->boxbarcode->id;
 			$this->storage_category_id = $this->box->storagecategory->id;
 				
 	
@@ -47,7 +47,7 @@ class Box extends ORM {
 		}else {
 			$this->box = ORM::factory('Box');
 			$this->warehouse = ORM::factory('Warehouse');
-			$this->boxbarcode =  ORM::factory('BoxBarcode', NULL);
+			$this->boxbarcode =  ORM::factory('BoxBarcode');
 			$this->storagecategory = ORM::factory('StorageCategory', NULL);
 			
 		}
@@ -60,25 +60,33 @@ class Box extends ORM {
 		$boxbarcode=$this->boxbarcode;
 		$storagecategory=$this->storagecategory;
 		
-		$box->date_from=$params['date_from'];
-		$box->date_to=$params['date_to'];
-		$box->date_reception=$params['date_reception'];
-		$box->lock=$params['lock'];
-		$box->seal=$params['seal'];
-		$box->warehouse_id=$params['warehouse_id'];
-		$box->storage_category_id=$params['storage_category_id'];
+		$this->box->date_from=$params['date_from'];
+		$this->box->date_to=$params['date_to'];
+		$this->box->date_reception=$params['date_reception'];
+		$this->box->lock=$params['lock'];
+		$this->box->seal=$params['seal'];
+		$this->box->warehouse_id=$params['warehouse_id'];
+		$this->box->storage_category_id=$params['storage_category_id'];
+		
+		
+		
+		
 				
 		if(is_array($params)) {
 			
 			try {
-			
-				if($box->save()) {
+				Database::instance()->begin();
+				if($this->box->save() && $this->boxbarcode->save()) {
+					$this->id=$this->box->id;
+					$this->boxbarcode->box_id=$this->box->id;
+					$this->boxbarcode->box_number = '13';
 					$log->add(Log::DEBUG,"Success: Dodano pozycję z parametrami:".serialize($params)."\n");
-
+					Database::instance()->commit();
+					return true;
 				}else {
-					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodwania pozycji'."\n");
+					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodawania pozycji'."\n");
 				}
-				return true;
+				return false;
 			}catch (Exception $e) {
 				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
 				return false;

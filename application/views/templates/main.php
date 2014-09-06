@@ -258,23 +258,26 @@
 							</a>
 						</li>
 						
-								<li class="<?php if ($_action=='documents') echo "active";?>">
-									<a href="/virtualbriefcase/documents">
-									<i class="icon-pencil"></i>
-									Dokumenty</a>
-								</li>
-								<li class="<?php if ($_action=='documentlists') echo "active";?>">
-									<a href="/virtualbriefcase/documentlists">
-									<i class="glyphicon glyphicon-list-alt"></i>
-									Listy dokumentów</a>
-								</li>	
-								<li class="<?php if ($_action=='bulkpackagings') echo "active";?>">
-									<a href="/virtualbriefcase/bulkpackagings">
-									<i class="glyphicon glyphicon-th"></i>
-									Opakowania zbiorcze</a>
-								</li>
-							
-						
+						<li class="<?php if ($_action=='documents') echo "active";?>">
+							<a href="/virtualbriefcase/documents">
+							<i class="icon-pencil"></i>
+							Dokumenty</a>
+						</li>
+						<li class="<?php if ($_action=='documentlists') echo "active";?>">
+							<a href="/virtualbriefcase/documentlists">
+							<i class="glyphicon glyphicon-list-alt"></i>
+							Listy dokumentów</a>
+						</li>	
+						<li class="<?php if ($_action=='bulkpackagings') echo "active";?>">
+							<a href="/virtualbriefcase/bulkpackagings">
+							<i class="glyphicon glyphicon-th"></i>
+							Opakowania zbiorcze</a>
+						</li>
+						<li class="<?php if ($_action=='virtualbriefcases_in') echo "active";?>">
+							<a href="/virtualbriefcase/nested_virtualbriefcases">
+							<i class="icon-briefcase"></i>
+							Wirtualne teczki</a>
+						</li>
 					</ul>
 				</li>
 				<li class="<?php if ($_controller=='order') echo "active open";?>">
