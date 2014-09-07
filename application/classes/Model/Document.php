@@ -13,6 +13,11 @@ class Model_Document extends ORM {
 			'box'=> array('model' => 'Box', 'foreign_key' => 'box_id'),
 	);
 	
+	protected $_has_one = array(
+		'scan' => array('model'=>'DocumentScan'),
+	);
+	
+			
 	protected $_has_many = array(
 			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through' => 'virtualbriefcases_documents'),
 			'files' => array ('model'=>'DocumentScan'),

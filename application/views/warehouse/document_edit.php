@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form enctype="multipart/form-data" role="form" action="/warehouse/document_edit/" method="POST" id="add_document_form">
+		<form enctype="multipart/form-data" role="form" action="/warehouse/document_edit/<?php echo $document->id; ?>" method="POST" id="add_document_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>

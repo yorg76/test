@@ -154,7 +154,7 @@ define('JS','/public/js/');
 define('CSS','/public/css/');
 define('IMG', '/public/images/');
 define('LIB', '/public/lib/');
-define('UPLOAD','upload');
+define('UPLOAD', APPPATH.'upload');
 
 Cookie::$salt = 'Parrarell Thinking';
 

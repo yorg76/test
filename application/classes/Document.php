@@ -12,6 +12,7 @@ class Document extends ORM {
 	public $name;
 	public $description;
 	public $box;
+	public $documentscan;
 
 	
 	public static function instance($id=NULL) {
@@ -30,6 +31,7 @@ class Document extends ORM {
 			$this->name = $this->document->name;
 			$this->description = $this->document->description;
 			$this->box = $this->document->box;
+			$this->documentscan = $this->document->scan;
 			
 		}else {
 			$this->document = ORM::factory('Document');
@@ -61,9 +63,37 @@ class Document extends ORM {
 		}
 	}
 	
-	public function editDocument() {
+	public function editDocument($params) {
+		$log=Kohana_Log::instance();
 		
-		return;
+		$this->document->values($params);
+		$this->box=ORM::factory('Box',$params['box_id']);
+		$this->document->box_id=$this->box->id;
+
+		if($params['file']) {
+			$file = ORM::factory('DocumentScan');
+			$file->file=$params['file'];
+			$file->type='scan';
+			$file->document_id=$this->document->id;
+			$file->save();
+		}
+		
+		if(is_array($params)) {
+		
+			try {
+					
+				if($this->document->update()) {
+					$log->add(Log::DEBUG,"Success: Zaktualizowano dokument z parametrami:".serialize($params)."\n");
+		
+				}else {
+					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas aktualizacji dokumentu'."\n");
+				}
+				return true;
+			}catch (Exception $e) {
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+				return false;
+			}
+		}
 	}
 
 	public function deleteDocument() {
@@ -85,11 +115,7 @@ class Document extends ORM {
 			return false;
 		}
 		return;
-		return;
 	}
-
-
 }
-
 
 ?>
