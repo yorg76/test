@@ -207,7 +207,9 @@
 							<a href="/warehouse/boxes">
 							<i class="glyphicon glyphicon-inbox"></i>
 							Pozycje</a>
-							<ul class="sub-menu">
+																				
+							<ul class="sub-menu" <?php if ($_action=='boxes' || $_action=='documents' || $_action=='documentlists' || $_action=='bulkpackagings') echo "style=\"display:block;\"" ?> >
+							
 								<li class="<?php if ($_action=='boxes') echo "active";?>">
 									<a href="/warehouse/boxes">
 									<i class="icon-list"></i>
