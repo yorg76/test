@@ -129,7 +129,7 @@ var ComponentsPickers = function () {
 
     var handleDatetimePicker = function () {
 
-        $(".form_datetime").datetimepicker({
+      /*  $(".form_datetime").datetimepicker({
             autoclose: true,
             isRTL: Metronic.isRTL(),
             format: "dd MM yyyy - hh:ii",
@@ -153,7 +153,7 @@ var ComponentsPickers = function () {
             autoclose: true,
             pickerPosition: (Metronic.isRTL() ? "bottom-right" : "bottom-left"),
             todayBtn: true
-        });
+        }); */
 
         $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
     }

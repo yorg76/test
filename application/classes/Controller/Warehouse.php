@@ -247,7 +247,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			$params = $_POST;
 			//$params = $this->request->post();
 			$box=Box::instance();
-	
+			
 			if($box->addBox($params)) {
 				Message::success(ucfirst(__('Pozycja została dodana do magazynu')),'/warehouse/boxes');
 			}else {

@@ -11,7 +11,33 @@ class Order extends ORM {
 	public $id;
 	public $status;
 	public $type;
+	
+	public $types = array('Zamówienie pudeł i kodów kreskowych','Zamówienie odbioru i magazynowania pudeł','Zamówienie zniszczenie magazynowanych pozycji','Zamówienie skanowania, kopii dokumentów','Zamówienie kopii notarialnej dokumentów');
 
+	public $statuses = array('Nowe','Przyjęte do realizacji','Oczekuje na wysłanie','W doręczeniu','Dostarczone','W trakcie realizacji','W trakcie odbioru','W dostrczeniu na magazyn','Na stanie magazynu','Odebrane','Zrealizowane');
+	
+	public static function instance($id=NULL) {
+		if($id !== NULL) {
+			return new Order($id);
+		}else{
+			return new Order(NULL);
+		}
+	}
+	
+	public function __construct($id) {
+	
+		if($id !== NULL) {
+			$this->order=ORM::factory('Order',$id);
+			$this->id=$this->order->id;
+			$this->status=$this->order->status;
+			$this->type=$this->order->type;
+		}else {
+			$this->order=ORM::factory('Order');
+			$this->order->status='Nowe';
+			$this->status='Nowe';
+		}
+	}
+	
 	public function register() {
 
 		return;
