@@ -364,13 +364,12 @@
 										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="ul. Pana Jana " class="form-control" name="street"  value=""/>
+										<input  type="text" placeholder="ul. Pana Jana " class="form-control" name="street"  value="" />
 										<span class="help-block"></span>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-3">Numer
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Numer <span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
 										<input  type="text" placeholder="1" class="form-control" name="number"  value=""/>
