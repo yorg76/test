@@ -93,6 +93,8 @@ var OrderWizard = function () {
                     if(order_type > -1) {
                     	$("#tab2 [class^=\"order_type_\"]").hide();
                     	$("#tab2 .order_type_"+order_type).show();
+                    	$("#tab4 [class^=\"order_type_\"]").hide();
+                    	$("#tab4 .order_type_"+order_type).show();
                     	
                     	if(order_type == 0) {
                     		

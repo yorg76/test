@@ -502,11 +502,177 @@
 							
 						<div class="tab-pane" id="tab4">
 							<h3 class="block">Potwierdzenie zamówienia</h3>
+							
 							<h4 class="form-section">Rodzaj zamówienia</h4>
+							
+							<div class="form-group">
+								<label class="control-label col-md-3">Rodzaj:</label>
+								<div class="col-md-4">
+									<p class="form-control-static" data-display="order_type">
+									</p>
+								</div>
+							</div>
+							
 													
 							<h4 class="form-section">Zawartość</h4>
+							
+							<div class="order_type_0" style="display: none;" >
 								
+								<div class="form-group">
+									<label class="control-label col-md-3">Magazyn</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="warehouse">
+									</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Dział</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="division">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Pudła</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="boxes[]">
+										</p>
+									</div>
+								</div>
+								
+							</div>
+							
+							<div class="order_type_1" style="display: none;" >
+								<h3 class="block">Zamówienie odbioru i magazynowania pudeł</h3>
+								<div class="form-group">
+									<label class="control-label col-md-3">Magazyn</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="warehouse">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Dział</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="division">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Ilość pozycji<span class="required">	
+									* </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="box_quantity">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Data odbioru
+										<span class="required" aria-required="true"> * </span>
+									</label>
+										<div class="col-md-4">
+										<p class="form-control-static" data-display="date_reception">
+										</p>
+										</div>
+								</div>
+								
+								<div class="margiv-top-10" id="description-container">
+								</div>
+							</div>
+							
+							<div class="order_type_2" style="display: none;" >
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Magazyn</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="warehouse">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Dział</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="division">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Pudła</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="boxes[]">
+										</p>
+									</div>
+								</div>
+							</div>
+							
+							<div class="order_type_3" style="display: none;" >
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Magazyn</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="warehouse">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Dział</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="division">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Pudła</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="boxes[]">
+										</p>
+									</div>
+								</div>
+								
+							</div>
+							
+							<div class="order_type_4" style="display: none;" >
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Magazyn</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="warehouse">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Dział</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="division">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Pudła</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="boxes[]">
+										</p>
+									</div>
+								</div>
+								
+							</div>
+							
+							
 							<h4 class="form-section">Adres</h4>
+							
+							
 								
 						</div>
 					</div>
