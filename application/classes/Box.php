@@ -54,45 +54,28 @@ class Box extends ORM {
 	}
 	
 	public function addBox($params) {
-		$log=Kohana_Log::instance();
-		$box=$this->box;
-		$warehouse=$this->warehouse;
-		$boxbarcode=$this->boxbarcode;
-		$storagecategory=$this->storagecategory;
-		
-		$this->box->date_from=$params['date_from'];
-		$this->box->date_to=$params['date_to'];
-		$this->box->date_reception=$params['date_reception'];
-		$this->box->lock=$params['lock'];
-		$this->box->seal=$params['seal'];
-		$this->box->warehouse_id=$params['warehouse_id'];
-		$this->box->storage_category_id=$params['storage_category_id'];
-		
-		
-		
-		
-				
-		if(is_array($params)) {
-			
-			try {
-				Database::instance()->begin();
-				if($this->box->save() && $this->boxbarcode->save()) {
-					$this->id=$this->box->id;
-					$this->boxbarcode->box_id=$this->box->id;
-					$this->boxbarcode->box_number = '13';
-					$log->add(Log::DEBUG,"Success: Dodano pozycję z parametrami:".serialize($params)."\n");
-					Database::instance()->commit();
-					return true;
-				}else {
-					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodawania pozycji'."\n");
-				}
-				return false;
-			}catch (Exception $e) {
-				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
-				return false;
-			}
-		}
-	}
+        $log=Kohana_Log::instance();
+
+        $this->box->values($params);
+            
+        if(is_array($params)) {
+            try {
+                Database::instance()->begin();
+                if($this->box->save()) {
+                    $this->id=$this->box->id;
+                    $log->add(Log::DEBUG,"Success: Dodano pozycję z parametrami:".serialize($params)."\n");
+                    Database::instance()->commit();
+                    return true;
+                }else {
+                    $log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodawania pozycji'."\n");
+                }
+                return false;
+            }catch (Exception $e) {
+                $log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+                return false;
+            }
+        }
+    }
 
 
 	public function updateBox($params) {
