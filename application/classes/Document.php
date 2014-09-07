@@ -28,8 +28,8 @@ class Document extends ORM {
 			$this->document = ORM::factory('Document')->where('id','=',$id)->find();
 			$this->id = $this->document->id;
 			$this->name = $this->document->name;
-			$this->description = $this->description;
-			$this->box = $this->box;
+			$this->description = $this->document->description;
+			$this->box = $this->document->box;
 			
 		}else {
 			$this->document = ORM::factory('Document');

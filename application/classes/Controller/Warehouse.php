@@ -346,7 +346,29 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_document_edit() {
-	
+		if($this->request->param('id') > 0) {
+			
+			$document = Document::instance($this->request->param('id'));
+			$user = Auth::instance()->get_user();
+			$customer = $user->customer;
+			$warehouses = $customer->warehouses->find_all();
+			
+			$warehouses_ids= array();
+			$boxes = array();
+			
+			foreach ($warehouses as $warehouse) {
+				array_push($warehouses_ids, $warehouse->id);
+			}
+			
+			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+			
+			$this->content->bind('customer', $customer);
+			$this->content->bind('warehouses', $warehouses);
+			$this->content->bind('user', $user);
+			$this->content->bind('boxes', $boxes);
+			$this->content->bind('document', $document);
+			
+		}
 	}
 	
 	public function action_document_delete() {

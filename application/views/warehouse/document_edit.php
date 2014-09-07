@@ -28,6 +28,7 @@
 								<option>-- Wybierz pozycję dla dokumentu --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
+										$id = $document->box->id;
 										if ($box->id == $id) $checked=" selected=\"true\"";
 											else $checked="";
 										echo "<option value=\"".$box->id."\"".$checked." >".$box->id."</option>";
@@ -42,7 +43,7 @@
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="" />
+							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="<?php echo $document->name; ?>" />
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -50,14 +51,13 @@
 						<label class="control-label">Opis
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<textarea class="form-control" name="description">
+						<textarea class="form-control" name="description"><?php echo $document->description; ?>
 						</textarea>
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label for="control-label">Skan dokumentu</label>
 						<input name="plik" type="file" id="upload">
-						<!-- TODO UPLOAD (CZY AN FILESYSTEM CZY DO BAZY?)  -->
 						<span class="help-block"></span>
 					</div>
 					<br/>
