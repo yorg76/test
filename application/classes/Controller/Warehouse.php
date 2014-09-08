@@ -593,7 +593,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			$document = Document::instance();
 				
 			if($document->addDocument($params)) {
-				Message::success(ucfirst(__('Dokument został została dodany do pozycji.')),'/warehouse/documents');
+				Message::success(ucfirst(__('Dokument został dodany do pozycji.')),'/warehouse/documents');
 			}else {
 				Message::error(ucfirst(__('Nie udało się dodać dokumentu do pozycji.')),'/warehouse/documents');
 			}
