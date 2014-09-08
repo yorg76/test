@@ -436,9 +436,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$documentlist = DocumentList::instance();
 			
 			if($documentlist->addDocumentList($params)) {
-				Message::success(ucfirst(__('Lista dokumentów została dodana do pozycji.')),'/warehouses/documentlists');
+				Message::success(ucfirst(__('Lista dokumentów została dodana do pozycji.')),'/warehouse/documentlists');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouses/documentlists');
+				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documentlists');
 			}
 		}
 	}
@@ -527,7 +527,39 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_bulkpackaging_edit() {
-	
+		if($this->request->param('id') > 0) {
+			$customer = Auth::instance()->get_user()->customer;
+			$warehouses = $customer->warehouses->find_all();
+			$bulkpackaging = BulkPackaging::instance($this->request->param('id'));
+			
+			$warehouses_ids= array();
+			$boxes = array();
+		
+			foreach ($warehouses as $warehouse) {
+				array_push($warehouses_ids, $warehouse->id);
+			}
+		
+			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+			$user = Auth::instance()->get_user();
+			$this->content->bind('customer', $customer);
+			$this->content->bind('warehouses', $warehouses);
+			$this->content->bind('user', $user);
+			$this->content->bind('boxes', $boxes);
+			$this->content->bind('bulkpackaging', $bulkpackaging);
+				
+			if($this->request->method()===HTTP_Request::POST) {
+			
+				$params = $_POST;
+			
+			
+				
+				if($bulkpackaging->editBulkPackaging($params)) {
+					Message::success(ucfirst(__('Opakowanie zbiorcze zostało zaktualizowane')),'/warehouse/bulkpackagings');
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować opakowania zbiorczego')),'/warehouse/bulkpackagings');
+				}
+			}
+		}
 	}
 	
 	public function action_bulkpackaging_delete() {

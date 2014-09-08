@@ -70,12 +70,18 @@ class Document extends ORM {
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->document->box_id=$this->box->id;
 
-		if(isset($params['file'])) {
+		if(isset($params['file']) && $this->document->scan->id < 0) {
 			$file = ORM::factory('DocumentScan');
 			$file->file=$params['file'];
 			$file->type='scan';
 			$file->document_id=$this->document->id;
 			$file->save();
+		}else {
+			$file = $this->document->scan;
+			$file->file=$params['file'];
+			$file->type='scan';
+			$file->document_id=$this->document->id;
+			$file->update();
 		}
 		
 		if(is_array($params)) {

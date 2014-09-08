@@ -29,8 +29,8 @@ class BulkPackaging extends ORM {
 			$this->bulkpackaging = ORM::factory('BulkPackaging')->where('id','=',$id)->find();
 			$this->id = $this->bulkpackaging->id;
 			$this->name = $this->bulkpackaging->name;
-			$this->description = $this->description;
-			$this->box = $this->box;
+			$this->description = $this->bulkpackaging->description;
+			$this->box = $this->bulkpackaging->box;
 			
 		}else {
 			$this->bulkpackaging = ORM::factory('BulkPackaging');
@@ -62,9 +62,30 @@ class BulkPackaging extends ORM {
 		}
 	}
 
-	public function editBulkPackaging() {
-
-		return;
+	public function editBulkPackaging($params) {
+		
+		$log=Kohana_Log::instance();
+		
+		$this->bulkpackaging->values($params);
+		$this->box=ORM::factory('Box',$params['box_id']);
+		$this->bulkpackaging->box_id=$this->box->id;
+			
+		if(is_array($params)) {
+		
+			try {
+					
+				if($this->bulkpackaging->update()) {
+					$log->add(Log::DEBUG,"Success: Zaktualizowano listę dokumentów z parametrami:".serialize($params)."\n");
+		
+				}else {
+					$log->add(Log::ERROR,'Exception: Wystąpił błąd podczas aktualizacji listy dokumentów'."\n");
+				}
+				return true;
+			}catch (Exception $e) {
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+				return false;
+			}
+		}
 	}
 	
 	public function deleteBulkPackaging() {

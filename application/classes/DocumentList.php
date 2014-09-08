@@ -61,7 +61,7 @@ class DocumentList extends ORM {
 		}
 	}
 	
-	public function editDocumentList() {
+	public function editDocumentList($params) {
 		$log=Kohana_Log::instance();
 		
 		$this->documentlist->values($params);

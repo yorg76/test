@@ -28,6 +28,7 @@
 								<option>-- Wybierz pozycję dla opakowania --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
+										$id=$bulkpackaging->bulkpackaging->box->id;
 										if ($box->id == $id) $checked=" selected=\"true\"";
 											else $checked="";
 										echo "<option value=\"".$box->id."\"".$checked." >".$box->id."</option>";
