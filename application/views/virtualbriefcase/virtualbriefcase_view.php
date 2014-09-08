@@ -64,10 +64,10 @@
 							</table>
 						</div>
 					</div>
-					<div class="portlet virtualbriefcase blue">
+					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Pozycja <?php echo $virtualbriefcase->id ?> - Listy Dokumentów
+								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->id ?> - Listy Dokumentów
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -126,10 +126,10 @@
 							</table>
 						</div>
 					</div>
-					<div class="portlet virtualbriefcase blue">
+					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Pozycja <?php echo $virtualbriefcase->id ?> - Opakowania zbiorcze
+								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->id ?> - Opakowania zbiorcze
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
