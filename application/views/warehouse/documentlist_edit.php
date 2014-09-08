@@ -28,6 +28,7 @@
 								<option>-- Wybierz pozycję dla listy dokumentów --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
+										$id = $documentlist->box->id; 
 										if ($box->id == $id) $checked=" selected=\"true\"";
 											else $checked="";
 										echo "<option value=\"".$box->id."\"".$checked." >".$box->id."</option>";

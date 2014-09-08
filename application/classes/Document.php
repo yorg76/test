@@ -70,7 +70,7 @@ class Document extends ORM {
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->document->box_id=$this->box->id;
 
-		if($params['file']) {
+		if(isset($params['file'])) {
 			$file = ORM::factory('DocumentScan');
 			$file->file=$params['file'];
 			$file->type='scan';

@@ -430,34 +430,23 @@ public $controller_title = 'Wirtualne teczki';
 	}
 	
 	public function action_virtualbriefcase_view() {
-		$customer=Auth::instance()->get_user()->customer;
-		$divisions = $customer->divisions->find_all();
-		$divisions_ids= array();
-		$virtualbriefcases_ids = array();
 		
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
+		if($this->request->param('id') > 0) {
+			$virtualbriefcase = VirtualBriefcase::instance($this->request->param('id'));
+			$virtualbriefcase_id = $virtualbriefcase->id;
+			$this->content->bind('virtualbriefcase', $virtualbriefcase);
 		
-		}
-		
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
-		
-		foreach ($virtualbriefcases as $virtualbriefcase) {
-			array_push($virtualbriefcases_ids, $virtualbriefcase->id);
-		}
-		
-		$documents = ORM::factory('Document')->join('virtualbriefcases_documents')->on('virtualbriefcase.id', '=','virtualbriefcases_documents.virtualbriefcase_id')->where('virtualbriefcases_documents.virtualbriefcase_id','IN',$virtualbriefcases_ids)->find_all();
-		$documentlists = ORM::factory('DocumentList')->join('virtualbriefcases_documentlists')->on('virtualbriefcase.id', '=','virtualbriefcases_documentlists.virtualbriefcase_id')->where('virtualbriefcases_documentlists.virtualbriefcase_id','IN',$virtualbriefcases_ids)->find_all();
-		$bulkpackagings = ORM::factory('Bulkpackaging')->join('virtualbriefcases_bulkpackagings')->on('virtualbriefcase.id', '=','virtualbriefcases_bulkpackagings.virtualbriefcase_id')->where('virtualbriefcases_bulkpackagings.virtualbriefcase_id','IN',$virtualbriefcases_ids)->find_all();
+		$documents = ORM::factory('Document')->join('virtualbriefcases_documents')->on('document.id', '=','virtualbriefcases_documents.document_id')->where('virtualbriefcases_documents.virtualbriefcase_id','=',$virtualbriefcase_id)->find_all();
+		$documentlists = ORM::factory('DocumentList')->join('virtualbriefcases_documentlists')->on('documentlist.id', '=','virtualbriefcases_documentlists.documentlist_id')->where('virtualbriefcases_documentlists.virtualbriefcase_id','=',$virtualbriefcase_id)->find_all();
+		$bulkpackagings = ORM::factory('BulkPackaging')->join('virtualbriefcases_bulkpackagings')->on('bulkpackaging.id', '=','virtualbriefcases_bulkpackagings.bulkpackaging_id')->where('virtualbriefcases_bulkpackagings.virtualbriefcase_id','=',$virtualbriefcase_id)->find_all();
 		
 		
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);
-		$this->content->bind('virtualbriefcases', $virtualbriefcases);
 		$this->content->bind('documents', $documents);
 		$this->content->bind('documentlists', $documentlists);
 		$this->content->bind('bulkpackagings', $bulkpackagings);
-		
+		}
 	}
 }

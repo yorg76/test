@@ -67,7 +67,7 @@
 												<label class="control-label">Data końca magazynowania
 													<span class="required" aria-required="true"> * </span>
 												</label>
-													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
+													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
 														<input type="text" class="form-control form-filter input-sm" readonly name="date_to" placeholder="Do" size="16">
 														<span class="input-group-btn">
 														<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -79,7 +79,7 @@
 												<label class="control-label">Data odbioru
 													<span class="required" aria-required="true"> * </span>
 												</label>
-													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
+													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
 														<input type="text" class="form-control form-filter input-sm" readonly name="date_reception" placeholder="Termin odbioru" size="16">
 														<span class="input-group-btn">
 														<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>

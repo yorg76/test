@@ -28,8 +28,8 @@ class DocumentList extends ORM {
 			$this->documentlist = ORM::factory('DocumentList')->where('id','=',$id)->find();
 			$this->id = $this->documentlist->id;
 			$this->name = $this->documentlist->name;
-			$this->description = $this->description;
-			$this->box = $this->box;
+			$this->description = $this->documentlist->description;
+			$this->box = $this->documentlist->box;
 			
 		}else {
 			$this->documentlist = ORM::factory('DocumentList');
@@ -62,7 +62,28 @@ class DocumentList extends ORM {
 	}
 	
 	public function editDocumentList() {
-	
+		$log=Kohana_Log::instance();
+		
+		$this->documentlist->values($params);
+		$this->box=ORM::factory('Box',$params['box_id']);
+		$this->documentlist->box_id=$this->box->id;
+		
+		if(is_array($params)) {
+		
+			try {
+					
+				if($this->documentlist->update()) {
+					$log->add(Log::DEBUG,"Success: Zaktualizowano listę dokumentów z parametrami:".serialize($params)."\n");
+		
+				}else {
+					$log->add(Log::ERROR,'Exception:Wystąpił błąd podczas aktualizacji listy dokumentów'."\n");
+				}
+				return true;
+			}catch (Exception $e) {
+				$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+				return false;
+			}
+		}
 		return;
 	}
 	
