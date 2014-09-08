@@ -371,20 +371,24 @@ class Controller_Warehouse extends Controller_Welcome {
 			if($this->request->method()===HTTP_Request::POST) {
 			
 				$params = $_POST;
-							
-				$filename = isset($_FILES["plik"]) ? $_FILES["plik"] : '';
 				
-				$path_parts = pathinfo($_FILES["plik"]["name"]);
-				$extension = $path_parts['extension'];
 				
-				if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
-					Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documents');
-				}
+				if(isset($_FILES["plik"]) && $_FILES['plik']['name'] != "") {
+					$filename =  $_FILES["plik"];
 				
-				if ($file = Upload::save($filename, "scan-".$customer->id."-".$document->id."-".time().".".$extension, UPLOAD)) {
-					$params['file'] = $file;	
-				}else {
-					Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documents');
+					$path_parts = pathinfo($_FILES["plik"]["name"]);
+					
+					$extension = $path_parts['extension'];
+				
+					if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
+						Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documents');
+					}
+				
+					if ($file = Upload::save($filename, "scan-".$customer->id."-".$document->id."-".time().".".$extension, UPLOAD)) {
+						$params['file'] = $file;	
+					}else {
+						Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documents');
+					}
 				}
 					
 				if($document->editDocument($params)) {
@@ -443,7 +447,40 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_documentlist_edit() {
-	
+		if($this->request->param('id') > 0) {
+				
+			$documentlist = DocumentList::instance($this->request->param('id'));
+			$user = Auth::instance()->get_user();
+			$customer = $user->customer;
+			$warehouses = $customer->warehouses->find_all();
+				
+			$warehouses_ids= array();
+			$boxes = array();
+				
+			foreach ($warehouses as $warehouse) {
+				array_push($warehouses_ids, $warehouse->id);
+			}
+				
+			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+				
+			$this->content->bind('customer', $customer);
+			$this->content->bind('warehouses', $warehouses);
+			$this->content->bind('user', $user);
+			$this->content->bind('boxes', $boxes);
+			$this->content->bind('documentlist', $documentlist);
+				
+			if($this->request->method()===HTTP_Request::POST) {
+					
+				$params = $_POST;
+					
+				if($documentlist->editDocumentList($params)) {
+						
+					Message::success(ucfirst(__('Lista dokumentów została dodana do pozycji.')),'/warehouse/documentlists');
+				}else {
+					Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documentlists');
+				}
+			}
+		}
 	}
 	
 	public function action_documentlist_delete() {
