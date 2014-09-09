@@ -9,12 +9,12 @@ class Model_Division extends ORM {
 
 	protected $_has_many = array(
 			'users'=> array('model' =>  'User', 'through' => 'divisions_users'),
-			'virtualbriefcases'=> array('model' => 'VirtualBriefcase'),
+			'virtualbriefcases'=> array('model' => 'VirtualBriefcase')
 			
 	);
 		
 	protected $_belongs_to = array(
-			'customer'=> array('model' => 'Customer', 'foreign_key' => 'customer_id'),
+			'customer'=> array('model' => 'Customer', 'foreign_key' => 'customer_id')
 	);
 }
 

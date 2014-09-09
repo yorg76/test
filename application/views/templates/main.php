@@ -289,6 +289,13 @@
 					<span class="arrow <?php if ($_controller=='orders') echo "open";?>"></span>
 					</a>
 					<ul class="sub-menu">
+						
+						<li class="<?php if ($_action=='order') echo "active";?>">
+							<a href="/order/orders">
+								<i class="icon-list"></i>
+									Lista zamówień
+							</a>
+						</li>
 						<li>
 							<a href="/order/add">
 							<i class="icon-plus"></i>
@@ -296,22 +303,22 @@
 							</a>
 						</li>
 						<li>
-							<a href="/order/new">
+							<a href="/order/orders_new">
 							<i class="icon-basket"></i>
 							Nowe</a>
 						</li>
 						<li>
-							<a href="/order/inprogress">
+							<a href="/order/orders_inprogress">
 							<i class="icon-basket-loaded"></i>
 							W trakcie</a>
 						</li>
 						<li>
-							<a href="/order/new">
+							<a href="/order/orders_realized">
 							<i class="icon-cup"></i>
 							Zrealizowane</a>
 						</li>
 						<li>
-							<a href="/order/search">
+							<a href="/order/orders_search">
 							<i class="icon-direction"></i>
 							Szukaj</a>
 						</li>						
