@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="glyphicon glyphicon-inbox"></i>Zmówienia w trakcie realizacji
+								<i class="icon-shopping-cart"></i>Zmówienia w trakcie realizacji
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">

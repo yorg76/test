@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="glyphicon glyphicon-inbox"></i>Zamówienia zrealizowane
+								<i class="icon-shopping-cart"></i>Zamówienia zrealizowane
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">

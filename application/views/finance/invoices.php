@@ -15,7 +15,7 @@
 						</div>
 						<div class="portlet-body">
 												
-							<table class="table table-striped table-hover table-bordered" id="orders_list">
+							<table class="table table-striped table-hover table-bordered" id="invoices_list">
 							<thead>
 							<tr>
 								<th>
