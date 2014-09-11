@@ -43,5 +43,8 @@ class Controller_Finance extends Controller_Welcome {
 	public function action_index() {
 		
 	}
+	public function action_invoices() {
+	 
+	}
 	
 }

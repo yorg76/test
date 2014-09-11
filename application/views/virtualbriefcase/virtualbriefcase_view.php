@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->id ?> - Dokumenty
+								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - Dokumenty
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -67,7 +67,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->id ?> - Listy Dokumentów
+								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - Listy Dokumentów
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -129,7 +129,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->id ?> - Opakowania zbiorcze
+								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - Opakowania zbiorcze
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">

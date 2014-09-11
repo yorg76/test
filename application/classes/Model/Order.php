@@ -17,7 +17,7 @@ class Model_Order extends ORM {
 	);
 	
 	protected $_has_many = array(
-			'boxes'=> array('model' => 'Box', 'foreign_key' => 'box_id'),
+			'boxes'=> array('model' => 'Box', 'foreign_key' => 'box_id')
 	);
 }
 

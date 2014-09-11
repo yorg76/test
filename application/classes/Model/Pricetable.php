@@ -8,7 +8,7 @@
 class Model_Pricetable extends ORM {
 
 	protected $_belongs_to = array(
-			'customer'=> array('model' => 'Customer', 'foreign_key' => 'customer_id'),
+			'customer'=> array('model' => 'Customer', 'foreign_key' => 'customer_id')
 	);
 }
 

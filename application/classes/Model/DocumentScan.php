@@ -8,7 +8,7 @@
 class Model_DocumentScan extends ORM {
 	
 	protected $_belongs_to = array(
-			'document'=> array('model' => 'Document', 'foreign_key' => 'document_id'),
+			'document'=> array('model' => 'Document', 'foreign_key' => 'document_id')
 	);
 	
 }

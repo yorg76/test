@@ -10,7 +10,7 @@
 	</div>
 </div>
 <div class="portlet-body form">
-		<form action="#" class="form-horizontal" id="submit_form" method="POST">
+		<form action="/order/new" class="form-horizontal" id="submit_form" method="POST">
 			<div class="form-wizard">
 				<div class="form-body">
 					<ul class="nav nav-pills nav-justified steps">
@@ -67,7 +67,7 @@
 								<label class="control-label col-md-3">Rodzaj zamówienia</label>
 								<div class="col-md-4">
 								<select class="form-control" name="order_type">
-										<option value=""> -- Wybierz -- </option>
+										<option > -- Wybierz -- </option>
 									<?php foreach($order_types as $kt=>$ot):?>
 										<option value="<?php echo $kt ?>" ><?php echo $ot?></option>
 									<?php endforeach;?>
@@ -179,7 +179,7 @@
 									* </span>
 									</label>
 									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_id"/>
+										<input type="text" class="form-control" name="box_id_template"/>
 										<span class="help-block">
 										Musisz podać numer pozycji</span>
 									</div>
@@ -190,7 +190,7 @@
 									* </span>
 									</label>
 									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_description"/>
+										<input type="text" class="form-control" name="box_description_template"/>
 										<span class="help-block">
 										Musisz opisać pozycję</span>
 									</div>
@@ -201,7 +201,7 @@
 									* </span>
 									</label>
 									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_date"/>
+										<input type="text" class="form-control" name="box_date_template"/>
 										<span class="help-block">
 										Musisz podać jaki okres pudło ma być składowane pozycję</span>
 									</div>
@@ -352,7 +352,7 @@
 									<label class="control-label col-md-3">Adres odbioru</label>
 									<div class="col-md-4">
 										<select class="form-control" name="pickup_address">
-												<option value=""> -- Wybierz -- </option>
+												<option > -- Wybierz -- </option>
 											<?php foreach ($pickup_addresses as $pa):?>
 												<option value="<?php echo $pa->id ?>" ><?php echo $pa->street." ".$pa->number."/".$pa->flat.", ".$pa->postal.", ".$pa->city; ?></option>
 											<?php endforeach;?>
@@ -364,7 +364,7 @@
 										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="ul. Pana Jana " class="form-control" name="street"  value="" />
+										<input  type="text" placeholder="ul. Pana Jana " class="form-control" name="street"   />
 										<span class="help-block"></span>
 									</div>
 								</div>
@@ -372,7 +372,7 @@
 									<label class="control-label col-md-3">Numer <span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="1" class="form-control" name="number"  value=""/>
+										<input  type="text" placeholder="1" class="form-control" name="number"  />
 										<span class="help-block"></span>
 									</div>
 								</div>					
@@ -380,7 +380,7 @@
 									<label class="control-label col-md-3">Lokal							
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="1" class="form-control" name="flat"  value=""/>
+										<input  type="text" placeholder="1" class="form-control" name="flat"  />
 										<span class="help-block"></span>
 									</div>
 								</div>					
@@ -390,7 +390,7 @@
 										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="Warszawa" class="form-control" name="city"  value="" />
+										<input  type="text" placeholder="Warszawa" class="form-control" name="city"   />
 										<span class="help-block"></span>
 									</div>
 								</div>
@@ -399,7 +399,7 @@
 										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="00-001" class="form-control" name='postal' value="" />
+										<input  type="text" placeholder="00-001" class="form-control" name='postal'  />
 										<span class="help-block"></span>
 									</div>
 								</div>															
@@ -407,7 +407,7 @@
 									<label class="control-label col-md-3">Kraj							
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="" class="form-control" name="country"  value=""/>
+										<input  type="text" placeholder="" class="form-control" name="country"  />
 										<span class="help-block"></span>
 									</div>
 								</div>					
@@ -416,7 +416,7 @@
 									<label class="control-label col-md-3">Telefon							
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="+48666999000" class="form-control" name="telephone"  value=""/>
+										<input  type="text" placeholder="+48666999000" class="form-control" name="telephone"  />
 										<span class="help-block"></span>
 									</div>
 								</div>					
@@ -427,7 +427,7 @@
 									<label class="control-label col-md-3">Adres odbioru</label>
 									<div class="col-md-4">
 										<select class="form-control" name="delivery_address">
-											<option value=""> -- Wybierz -- </option>
+											<option > -- Wybierz -- </option>
 											<?php foreach ($delivery_addresses as $da):?>
 												<option value="<?php echo $da->id ?>" ><?php echo $da->street." ".$da->number."/".$da->flat.", ".$da->postal.", ".$da->city; ?></option>
 											<?php endforeach;?>
@@ -439,16 +439,16 @@
 										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="ul. Pana Jana " class="form-control" name="street"  value=""/>
+										<input  type="text" placeholder="ul. Pana Jana " class="form-control" name="street"  />
 										<span class="help-block"></span>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-3">Numer
-										<span class="required col-md-3" aria-required="true"> * </span>
+										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="1" class="form-control" name="number"  value=""/>
+										<input  type="text" placeholder="1" class="form-control" name="number"  />
 										<span class="help-block"></span>
 									</div>
 								</div>					
@@ -456,7 +456,7 @@
 									<label class="control-label col-md-3">Lokal							
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="1" class="form-control" name="flat"  value=""/>
+										<input  type="text" placeholder="1" class="form-control" name="flat"  />
 										<span class="help-block"></span>
 									</div>
 								</div>					
@@ -466,7 +466,7 @@
 										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="Warszawa" class="form-control" name="city"  value="" />
+										<input  type="text" placeholder="Warszawa" class="form-control" name="city"   />
 										<span class="help-block"></span>
 									</div>
 								</div>
@@ -475,7 +475,7 @@
 										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="00-001" class="form-control" name='postal' value="" />
+										<input  type="text" placeholder="00-001" class="form-control" name='postal'  />
 										<span class="help-block"></span>
 									</div>
 								</div>															
@@ -483,7 +483,7 @@
 									<label class="control-label col-md-3">Kraj							
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="" class="form-control" name="country"  value=""/>
+										<input  type="text" placeholder="" class="form-control" name="country"  />
 										<span class="help-block"></span>
 									</div>
 								</div>					
@@ -492,7 +492,7 @@
 									<label class="control-label col-md-3">Telefon							
 									</label>
 									<div class="col-md-4">
-										<input  type="text" placeholder="+48666999000" class="form-control" name="telephone"  value=""/>
+										<input  type="text" placeholder="+48666999000" class="form-control" name="telephone"  />
 										<span class="help-block"></span>
 									</div>
 								</div>					
@@ -669,9 +669,167 @@
 							</div>
 							
 							
-							<h4 class="form-section">Adres</h4>
+							<h4 class="form-section">Adres / Dokumenty</h4>
 							
+							<div id="skip" style="display:none">
+								<div class="margiv-top-10">
+									<p class="btn green">W tym rodzaju zamówienia adres pobierany jest z ustawień firmy, 
+									proszę wcisnąć dalej.
+									</p>
+								</div>								
+							</div>		
+							<div id="doc" style="display:none">
+								<div class="margiv-top-10">
+									<a href="#" class="btn green" id="show_utilisation_document">
+									Pokaż dokument utylizacji</a>
+									<a href="#" class="btn default" id="print_utilisation_document">
+									Drukuj do PDF</a>
+								</div>								
+							</div>		
+											
+							<div id="pickup_address" style="display:none">						
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Adres odbioru</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="pickup_address">
+										</p>
+									</div>
+								</div>				
+								<div class="form-group">
+									<label class="control-label  col-md-3">Ulica
+										<span class="required" aria-required="true"> * </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="street">
+										</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3">Numer <span class="required" aria-required="true"> * </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="number">
+										</p>
+									</div>
+								</div>					
+								<div class="form-group">
+									<label class="control-label col-md-3">Lokal							
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="flat">
+										</p>
+									</div>
+								</div>					
+																		
+								<div class="form-group">
+									<label class="control-label col-md-3">Miasto
+										<span class="required" aria-required="true"> * </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="city">
+										</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3">Kod pocztowy
+										<span class="required" aria-required="true"> * </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="postal">
+										</p>
+									</div>
+								</div>															
+								<div class="form-group">
+									<label class="control-label col-md-3">Kraj							
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="caountry">
+										</p>
+									</div>
+								</div>					
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Telefon							
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="telephone">
+										</p>
+									</div>
+								</div>					
+							</div>
 							
+							<div id="delivery_address" style="display:none">
+								<div class="form-group">
+									<label class="control-label col-md-3">Adres odbioru</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="delivery_address">
+										</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3">Ulica
+										<span class="required" aria-required="true"> * </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="street">
+										</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3">Numer
+										<span class="required" aria-required="true"> * </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="number">
+										</p>
+									</div>
+								</div>					
+								<div class="form-group">
+									<label class="control-label col-md-3">Lokal							
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="flat">
+										</p>
+									</div>
+								</div>					
+																		
+								<div class="form-group">
+									<label class="control-label col-md-3">Miasto
+										<span class="required" aria-required="true"> * </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="city">
+										</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3">Kod pocztowy
+										<span class="required" aria-required="true"> * </span>
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="postal">
+										</p>
+									</div>
+								</div>															
+								<div class="form-group">
+									<label class="control-label col-md-3">Kraj							
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="country">
+										</p>
+									</div>
+								</div>					
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Telefon							
+									</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="telephone">
+										</p>
+									</div>
+								</div>					
+							</div>		
 								
 						</div>
 					</div>

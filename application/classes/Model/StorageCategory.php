@@ -8,7 +8,7 @@
 class Model_StorageCategory extends ORM {
 	
 	protected $_has_many = array(
-			'boxes'=> array('model' => 'Box', 'foreign_key' => 'storage_category_id'),
+			'boxes'=> array('model' => 'Box', 'foreign_key' => 'storage_category_id')
 				
 	);
 }

@@ -4,6 +4,17 @@ var OrderWizard = function () {
     return {
         //main function to initiate the module
         init: function () {
+        	
+        	Array.prototype.unique = function() {
+        	    var unique = [];
+        	    for (var i = 0; i < this.length; i++) {
+        	        if (unique.indexOf(this[i]) == -1) {
+        	            unique.push(this[i]);
+        	        }
+        	    }
+        	    return unique;
+        	};
+        	
             if (!jQuery().bootstrapWizard) {
                 return;
             }
@@ -99,10 +110,14 @@ var OrderWizard = function () {
                     	if(order_type == 0) {
                     		
                     		$("#tab3 #delivery_address").show();
+                    		$("#tab4 #delivery_address").show();
                     		$("#tab3 #doc").hide();
+                    		$("#tab4 #doc").hide();
                     		$("#tab3 #skip").hide();
+                    		$("#tab4 #skip").hide();
                     		$("#tab3 #pickup_address").hide();
-
+                    		$("#tab4 #pickup_address").hide();
+                    		
                     		$(".nav-pills a").each(function(){
                     			if($(this).attr('href') == '#tab3') {
 
@@ -117,6 +132,12 @@ var OrderWizard = function () {
                     		$("#tab3 #doc").hide();
                     		$("#tab3 #skip").hide();
                     		$("#tab3 #pickup_address").show();
+                    		
+                    		$("#tab4 #delivery_address").hide();
+                    		$("#tab4 #doc").hide();
+                    		$("#tab4 #skip").hide();
+                    		$("#tab4 #pickup_address").show();
+                    		
                     		$(".nav-pills a").each(function(){
                     			if($(this).attr('href') == '#tab3') {
 
@@ -132,6 +153,11 @@ var OrderWizard = function () {
                     		$("#tab3 #pickup_address").hide();
                     		$("#tab3 #doc").show();
                     		$("#tab3 #skip").hide();
+                    		
+                    		$("#tab4 #delivery_address").hide();
+                    		$("#tab4 #pickup_address").hide();
+                    		$("#tab4 #doc").show();
+                    		$("#tab4 #skip").hide();
                     		
                     		$(".nav-pills a").each(function(){
                     			if($(this).attr('href') == '#tab3') {
@@ -158,21 +184,43 @@ var OrderWizard = function () {
                 submitHandler: function (form) {
                     success.show();
                     error.hide();
+                    form.submit();
                     //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
                 }
 
             });
 
             var displayConfirm = function() {
+            	           	 
                 $('#tab4 .form-control-static', form).each(function(){
                     var input = $('[name="'+$(this).attr("data-display")+'"]', form);
+                    
                     if (input.is(":radio")) {
                         input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
                     }
+                    
                     if (input.is(":text") || input.is("textarea")) {
+                    	
+                    	input.each(function() {
+                    		if($(this).val() != "") {
+                    			input = $(this);
+                    			return;
+                    		}
+                    	});
+                    	
                         $(this).html(input.val());
+                        
                     } else if (input.is("select")) {
-                        $(this).html(input.find('option:selected').text());
+                    	//input.find('option:selected').text()
+                    	//input.html().replace(/<option.*>(.*)<\/option>/gm,'$1 <br />')
+                    	var txt = [];
+                    	
+                    	input.find('option:selected').each(function () {
+                    		txt.push($(this).text());
+                    	});
+                    	
+                        $(this).html(txt.unique().join('<br />'));
+                        
                     } else if (input.is(":radio") && input.is(":checked")) {
                         $(this).html(input.attr("data-title"));
                     } else if ($(this).attr("data-display") == 'payment') {
@@ -266,7 +314,8 @@ var OrderWizard = function () {
 
             $('#form_wizard_1').find('.button-previous').hide();
             $('#form_wizard_1 .button-submit').click(function () {
-                alert('Finished! Hope you like it :)');
+                //alert('Finished! Hope you like it :)');
+            	form.submit();
             }).hide();
             
             $('#add_box_description').click(function(){
@@ -275,16 +324,16 @@ var OrderWizard = function () {
             	
             	
             	
-            	var number = $('input[name=box_id]', box).val();
-            	var descripton = $('input[name=box_description]', box).val();
-            	var date = $('input[name=box_date]', box).val();
+            	var number = $('input[name=box_id_template]', box).val();
+            	var descripton = $('input[name=box_description_template]', box).val();
+            	var date = $('input[name=box_date_template]', box).val();
             	
             
-            	$('input[name=box_id]', box).attr('name','box_id['+number+']');
+            	$('input[name=box_id_template]', box).attr('name','box_id['+number+']');
             	
-            	$('input[name=box_description]', box).attr('name','box_description['+number+'][description]');
+            	$('input[name=box_description_template]', box).attr('name','box_description['+number+'][description]');
             	
-            	$('input[name=box_date]', box).attr('name','box_date['+number+'][date]');
+            	$('input[name=box_date_template]', box).attr('name','box_date['+number+'][date]');
             	
             	$('#description-container').append('<h4 class="form-section">Opis pozycji numer '+number+'</h4>');
             	$('#description-container').append(box.html());
@@ -295,9 +344,9 @@ var OrderWizard = function () {
              	$('input[name=box_description\\['+number+'\\]\\[description\\]]',  $('#description-container')).attr('value',descripton);
              	$('input[name=box_date\\['+number+'\\]\\[date\\]]', $('#description-container')).attr('value',date);
              	
-             	$('.form-control', $('#description-container')).each(function() {
-            		$(this).attr('readonly',true);
-            	});
+             	//$('.form-control', $('#description-container')).each(function() {
+            	//	$(this).attr('readonly',true);
+            	//});
              	
             	return false;
             	

@@ -90,6 +90,8 @@ class Controller_Order extends Controller_Welcome {
 	
 	public function action_orders_realized() {
 	
+	public function action_orders() {
+	
 	}
 	
 	public function action_add() {
