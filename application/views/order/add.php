@@ -10,7 +10,7 @@
 	</div>
 </div>
 <div class="portlet-body form">
-		<form action="/order/new" class="form-horizontal" id="submit_form" method="POST">
+		<form action="/order/add" class="form-horizontal" id="submit_form" method="POST">
 			<div class="form-wizard">
 				<div class="form-body">
 					<ul class="nav nav-pills nav-justified steps">

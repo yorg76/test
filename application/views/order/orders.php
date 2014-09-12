@@ -28,31 +28,37 @@
 									Status
 								</th>
 								<th>
+									Adres
+								</th>								
+								<th>
 									 Opcje
 								</th>
 							</tr>
 							</thead>
 							<tbody>
-							
+							<?php foreach ($orders as $order):?>
 							<tr>
-								<td style="width:10%">
-									 1
+								<td>
+									 <?php echo $order->id;?>
 								</td>
-								<td style="width:20%">
-									 Do odbioru
+								<td>
+									 <?php echo $order->type;?>
 								</td>
-								<td style="width:50%">
-									 nowe
+								<td>
+									 <?php echo $order->status;?>
 								</td>			
-								
-								<td style="width:20%">
+								<td>
+									 <?php echo $order->address->street;?> <?php echo $order->address->number;?> / <?php echo $order->address->flat;?> <?php echo $order->address->city;?>, <?php echo $order->address->postal;?>
+								</td>											
+								<td>
 								<div class="margin-bottom-5">
-											<button class="btn btn-xs green margin-bottom" ><i class="glyphicon glyphicon-info-sign"></i> Akceptuj</button>
-											<button class="btn btn-xs yellow user-edit margin-bottom" ><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-xs red user-delete margin-bottom" o><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs green margin-bottom" ><i class="glyphicon glyphicon-info-sign"></i> Akceptuj</button> <br />
+											<button class="btn btn-xs yellow user-edit margin-bottom" ><i class="fa fa-user"></i> Edytuj</button> <br />
+											<button class="btn btn-xs red user-delete margin-bottom" o><i class="fa fa-recycle"></i> Usuń</button> <br />
 									</div>
 								</td>
 							</tr>
+							<?php endforeach;?>
 							</tbody>
 							</table>
 						</div>

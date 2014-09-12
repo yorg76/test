@@ -75,24 +75,75 @@ class Controller_Order extends Controller_Welcome {
 	}
 	
 	public function action_orders() {
-	
+		$user = Auth::instance()->get_user();
+		$customer=$user->customer;
+		$users = $customer->users->find_all();
+		$users_ids=array();
+		
+		foreach ($users as $u) {
+			array_push($users_ids, $u->id);
+		}
+		
+		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->find_all();
+		
+		//var_dump($orders);
+		
+		$this->content->bind('orders', $orders);
 	}
 	
 	public function action_orders_new() {
-		var_dump($_POST);
+		$user = Auth::instance()->get_user();
+		$customer=$user->customer;
+		$users = $customer->users->find_all();
+		$users_ids=array();
+		
+		foreach ($users as $u) {
+			array_push($users_ids, $u->id);
+		}
+		
+		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Nowe')->find_all();
+		
+		//var_dump($orders);
+		
+		$this->content->bind('orders', $orders);
 	}
 	
 	public function action_orders_inprogress() {
-	
+		$user = Auth::instance()->get_user();
+		$customer=$user->customer;
+		$users = $customer->users->find_all();
+		$users_ids=array();
+		
+		foreach ($users as $u) {
+			array_push($users_ids, $u->id);
+		}
+		
+		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '!=', 'Nowe')->and_where('status', '!=', 'Zrealizowane')->find_all();		
+		//var_dump($orders);
+		
+		$this->content->bind('orders', $orders);
 	}
 	
 	public function action_orders_realized() {
-
+		$user = Auth::instance()->get_user();
+		$customer=$user->customer;
+		$users = $customer->users->find_all();
+		$users_ids=array();
+		
+		foreach ($users as $u) {
+			array_push($users_ids, $u->id);
+		}
+		
+				$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Zrealizowane')->find_all();		
+		//var_dump($orders);
+		
+		$this->content->bind('orders', $orders);
 	}
 	
 	public function action_add() {
+		$user = Auth::instance()->get_user();
 		$order=Order::instance();
-		$customer=Auth::instance()->get_user()->customer;
+		$customer=$user->customer;
 		$divisions = $customer->divisions->find_all();
 		$divisions_ids= array();
 		$virtualbriefcases = array();
@@ -115,7 +166,7 @@ class Controller_Order extends Controller_Welcome {
 		$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 		$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 		
-		$user = Auth::instance()->get_user();
+		
 		$this->content->bind('order_types',$order->types);
 		$this->content->bind('order_statuses',$order->statuses);
 		$this->content->bind('customer', $customer);
@@ -127,5 +178,17 @@ class Controller_Order extends Controller_Welcome {
 		$this->content->bind('delivery_addresses',$delivery_addresses);
 		$this->content->bind('pickup_addresses',$pickup_addresses);
 		
+		if($this->request->method()===HTTP_Request::POST) {
+			$params = $_POST;
+			
+			$params['customer_id'] = $customer->id;
+			
+			if($order->register($params)) {
+				Message::success(ucfirst(__('Zamówienie zostało utworzone')),'/order/orders_new/');
+			}else {
+				Message::error(ucfirst(__('Zamówienie nie zostało utworzony')),'/order/orders_new/');
+			}
+			
+		}
 	}
 }
