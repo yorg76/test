@@ -13,6 +13,8 @@ class Document extends ORM {
 	public $description;
 	public $box;
 	public $documentscan;
+	public $documentlist;
+	public $bulkpackaging;
 
 	
 	public static function instance($id=NULL) {
@@ -32,6 +34,9 @@ class Document extends ORM {
 			$this->description = $this->document->description;
 			$this->box = $this->document->box;
 			$this->documentscan = $this->document->scan;
+			$this->documentlist = $this->document->documentlist;
+			$this->bulkpackaging = $this->document->bulkpackaging;
+			
 			
 		}else {
 			$this->document = ORM::factory('Document');
@@ -44,6 +49,12 @@ class Document extends ORM {
 		$this->document->values($params);
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->document->box_id=$this->box->id;
+		
+		$this->documentlist=ORM::factory('DocumentList',$params['documentlist_id']);
+		$this->document->documentlist_id=$this->documentlist->id;
+		
+		$this->bulkpackaging=ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
+		$this->document->bulkpackaging_id=$this->bulkpackaging->id;
 			
 		if(is_array($params)) {
 		

@@ -35,6 +35,36 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="control-label">Wybór listy dokumentów
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" name="documentlist_id">
+								<option>-- Wybierz listę dla dokumentu --</option>
+								<?php foreach ($documentlists as $documentlist):?>
+								<?php 
+											echo "<option value=\"".$documentlist->id."\">".$documentlist->name."</option>";
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Wybór opakowania zbiorczego
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" name="bulkpackaging_id">
+								<option>-- Wybierz opakowanie dla dokumentu --</option>
+								<?php foreach ($bulkpackagings as $bulkpackaging):?>
+								<?php 
+											echo "<option value=\"".$bulkpackaging->id."\">".$bulkpackaging->name."</option>";
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="control-label">Nazwa
 							<span class="required" aria-required="true"> * </span>
 						</label>
@@ -58,6 +88,8 @@
 					</div>
 					<br/>
 					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
+					<input type="hidden" value="<?php echo $documentlist->id ?>" name="documentlist_id" />
+					<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging_id" />
 					<div class="margiv-top-10">
 						<a href="/warehouse/documents" class="btn green" id="submit">
 						Zapisz zmiany</a>

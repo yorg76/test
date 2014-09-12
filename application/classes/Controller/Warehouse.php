@@ -320,17 +320,28 @@ class Controller_Warehouse extends Controller_Welcome {
 		
 		$warehouses_ids= array();
 		$boxes = array();
+		$boxes_ids = array();
 		
 		foreach ($warehouses as $warehouse) {
 			array_push($warehouses_ids, $warehouse->id);
 		}
 		
 		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		
+		foreach ($boxes as $box) {
+			array_push($boxes_ids, $box->id);
+		}
+		$documentlists = ORM::factory('DocumentList')->where('box_id','IN', $boxes_ids)->find_all();
+		$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
+		
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
 		$this->content->bind('user', $user);
 		$this->content->bind('boxes', $boxes);
+		$this->content->bind('documentlists', $documentlists);
+		$this->content->bind('bulkpackagings', $bulkpackagings);
+		
 		
 		if($this->request->method()===HTTP_Request::POST) {
 				
