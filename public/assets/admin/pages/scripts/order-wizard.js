@@ -118,6 +118,14 @@ var OrderWizard = function () {
                     		$("#tab3 #pickup_address").hide();
                     		$("#tab4 #pickup_address").hide();
                     		
+                    		$('.form-control', $('#pickup_address')).each(function() {
+                        		$(this).attr('disabled',true);
+                        	});
+                    		
+                    		$('.form-control', $('#delivery_address')).each(function() {
+                        		$(this).attr('disabled',false);
+                        	});
+                    		
                     		$(".nav-pills a").each(function(){
                     			if($(this).attr('href') == '#tab3') {
 
@@ -137,6 +145,14 @@ var OrderWizard = function () {
                     		$("#tab4 #doc").hide();
                     		$("#tab4 #skip").hide();
                     		$("#tab4 #pickup_address").show();
+
+                    		$('.form-control', $('#delivery_address')).each(function() {
+                        		$(this).attr('disabled',true);
+                        	});
+                    		
+                    		$('.form-control', $('#pickup_address')).each(function() {
+                        		$(this).attr('disabled',false);
+                        	});
                     		
                     		$(".nav-pills a").each(function(){
                     			if($(this).attr('href') == '#tab3') {
@@ -318,6 +334,12 @@ var OrderWizard = function () {
             	form.submit();
             }).hide();
             
+            
+            $('#add_box_cancel').click(function(){
+            	$('#description-container').html("");
+            	return false;
+            });
+            
             $('#add_box_description').click(function(){
             	
             	var box=$('.box_description_template').clone();
@@ -326,10 +348,13 @@ var OrderWizard = function () {
             	
             	var number = $('input[name=box_id_template]', box).val();
             	var descripton = $('input[name=box_description_template]', box).val();
+            	var storagecategory = $('select[name=box_storagecategory_template] option:selected').val();
             	var date = $('input[name=box_date_template]', box).val();
             	
             
             	$('input[name=box_id_template]', box).attr('name','box_id['+number+']');
+            	
+            	$('select[name=box_storagecategory_template]', box).attr('name','box_storagecategory['+number+'][storagecategory]');
             	
             	$('input[name=box_description_template]', box).attr('name','box_description['+number+'][description]');
             	
@@ -341,12 +366,14 @@ var OrderWizard = function () {
 
              	
              	$('input[name=box_id\\['+number+'\\]]', $('#description-container')).attr('value',number);
+             	$('select[name=box_storagecategory\\['+number+'\\]\\[storagecategory\\]]',  $('#description-container')).attr('value',storagecategory);
+             	$('select[name=box_storagecategory\\['+number+'\\]\\[storagecategory\\]]',  $('#description-container')).val(storagecategory);
              	$('input[name=box_description\\['+number+'\\]\\[description\\]]',  $('#description-container')).attr('value',descripton);
              	$('input[name=box_date\\['+number+'\\]\\[date\\]]', $('#description-container')).attr('value',date);
              	
-             	//$('.form-control', $('#description-container')).each(function() {
-            	//	$(this).attr('readonly',true);
-            	//});
+             	$('.form-control', $('#description-container')).each(function() {
+            		$(this).attr('readonly',true);
+            	});
              	
             	return false;
             	

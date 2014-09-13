@@ -22,6 +22,9 @@
 									 ID
 								</th>
 								<th>
+									Data
+								</th>
+								<th>
 									 Typ
 								</th>
 								<th>
@@ -40,6 +43,9 @@
 							<tr>
 								<td>
 									 <?php echo $order->id;?>
+								</td>
+								<td>
+									 <?php echo $order->create_date;?>
 								</td>
 								<td>
 									 <?php echo $order->type;?>

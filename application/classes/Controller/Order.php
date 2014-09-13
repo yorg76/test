@@ -18,6 +18,11 @@ class Controller_Order extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'add') $this->add_init("OrderWizard.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'add') $this->add_init("ComponentsPickers.init();\t\n");
 		
+		if(strtolower ( $this->request->action()) == 'orders_new') $this->add_init("TableOrdersNew.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'orders_inprogress') $this->add_init("TableOrdersInprogress.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'orders_realized') $this->add_init("TableOrdersRealized.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'orders') $this->add_init("TableOrders.init();\t\n");
+		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 		
 	}
@@ -43,8 +48,9 @@ class Controller_Order extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'components-pickers.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-wizard/jquery.bootstrap.wizard.min.js');
-		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery.cokie.min.js');
+		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery.cookie.min.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order-wizard.js');
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-orders.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		
@@ -101,7 +107,7 @@ class Controller_Order extends Controller_Welcome {
 			array_push($users_ids, $u->id);
 		}
 		
-		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Nowe')->find_all();
+		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Nowe')->order_by('id','DESC')->find_all();
 		
 		//var_dump($orders);
 		
@@ -149,6 +155,7 @@ class Controller_Order extends Controller_Welcome {
 		$virtualbriefcases = array();
 		$warehouses = $customer->warehouses->find_all();
 		$warehouses_ids = array();
+		$storagecategories = ORM::factory('StorageCategory')->find_all();
 		
 		foreach ($divisions as $division) {
 			array_push($divisions_ids, $division->id);
@@ -161,7 +168,7 @@ class Controller_Order extends Controller_Welcome {
 			array_push($warehouses_ids, $warehouse->id);
 		}
 		
-		$boxes = ORM::factory('Box')->where('warehouse_id','IN',$warehouses_ids)->find_all();
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN',$warehouses_ids)->and_where('lock', '=', 0)->find_all();
 		
 		$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 		$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
@@ -177,17 +184,21 @@ class Controller_Order extends Controller_Welcome {
 		$this->content->bind('boxes',$boxes);
 		$this->content->bind('delivery_addresses',$delivery_addresses);
 		$this->content->bind('pickup_addresses',$pickup_addresses);
+		$this->content->bind('storagecategories',$storagecategories);
 		
 		if($this->request->method()===HTTP_Request::POST) {
 			$params = $_POST;
 			
 			$params['customer_id'] = $customer->id;
 			
-			if($order->register($params)) {
+
+			$order->register($params);
+			
+			/*if($order->register($params)) {
 				Message::success(ucfirst(__('Zamówienie zostało utworzone')),'/order/orders_new/');
 			}else {
-				Message::error(ucfirst(__('Zamówienie nie zostało utworzony')),'/order/orders_new/');
-			}
+				Message::error(ucfirst(__('Wystąpił problem podczas dodawania zamówienia')),'/order/orders_new/');
+			}*/
 			
 		}
 	}

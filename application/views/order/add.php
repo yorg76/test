@@ -174,45 +174,58 @@
 								
 								<div class="box_description_template">	
 								
-								<div class="form-group">
-									<label class="control-label col-md-3">Numer paczki<span class="required">	
-									* </span>
-									</label>
-									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_id_template"/>
-										<span class="help-block">
-										Musisz podać numer pozycji</span>
+									<div class="form-group">
+										<label class="control-label col-md-3">Numer paczki<span class="required">	
+										* </span>
+										</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="box_id_template"/>
+											<span class="help-block">
+											Musisz podać numer pozycji</span>
+										</div>
 									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Opis zawartości pozycji<span class="required">	
-									* </span>
-									</label>
-									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_description_template"/>
-										<span class="help-block">
-										Musisz opisać pozycję</span>
+									
+									<div class="form-group">
+										<label class="control-label col-md-3">Kategoria magazynowania</label>
+										<div class="col-md-4">
+											<select class="form-control" name="box_storagecategory_template" id="box_storagecategory_template">
+												<?php foreach($storagecategories as $storagecategory):?>
+													<option value="<?php echo $storagecategory->id ?>" ><?php echo $storagecategory->name?></option>
+												<?php endforeach;?>
+											</select>
+											<span class="help-block">
+											Wybierz kategorię magazynowania</span>
+										</div>
+									</div>							
+										
+									<div class="form-group">
+										<label class="control-label col-md-3">Opis zawartości pozycji<span class="required">	
+										* </span>
+										</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="box_description_template"/>
+											<span class="help-block">
+											Musisz opisać pozycję</span>
+										</div>
 									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Okres przez jaki pozycja ma być magazynowana<span class="required">	
-									* </span>
-									</label>
-									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_date_template"/>
-										<span class="help-block">
-										Musisz podać jaki okres pudło ma być składowane pozycję</span>
+									
+									<div class="form-group">
+										<label class="control-label col-md-3">Okres przez jaki pozycja ma być magazynowana<span class="required">	
+										* </span>
+										</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" name="box_date_template"/>
+											<span class="help-block">
+											Musisz podać jaki okres pudło ma być składowane pozycję</span>
+										</div>
 									</div>
-								</div>
 								
 								</div>
 								
 								<div class="margiv-top-10">
 									<a href="#" class="btn green" id="add_box_description">
 									Dodaj </a>
-									<a href="#" class="btn default" id="cancel">
+									<a href="#" class="btn default" id="add_box_cancel">
 									Anuluj </a>
 								</div>	
 							</div>

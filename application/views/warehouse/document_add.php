@@ -25,7 +25,7 @@
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz pozycję dla dokumentu --</option>
+								<option value="">-- Wybierz pozycję dla dokumentu --</option>
 								<?php foreach ($boxes as $box):?>
 								<?php 
 											echo "<option value=\"".$box->id."\">".$box->id."</option>";
@@ -40,7 +40,7 @@
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="documentlist_id">
-								<option>-- Wybierz listę dla dokumentu --</option>
+								<option value="">-- Wybierz listę dla dokumentu --</option>
 								<?php foreach ($documentlists as $documentlist):?>
 								<?php 
 											echo "<option value=\"".$documentlist->id."\">".$documentlist->name."</option>";
@@ -55,7 +55,7 @@
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="bulkpackaging_id">
-								<option>-- Wybierz opakowanie dla dokumentu --</option>
+								<option value="">-- Wybierz opakowanie dla dokumentu --</option>
 								<?php foreach ($bulkpackagings as $bulkpackaging):?>
 								<?php 
 											echo "<option value=\"".$bulkpackaging->id."\">".$bulkpackaging->name."</option>";

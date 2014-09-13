@@ -19,10 +19,13 @@
 							<thead>
 							<tr>
 								<th>
-									 ID
+									ID
 								</th>
 								<th>
-									 Typ
+									Data
+								</th>
+								<th>
+									Typ
 								</th>
 								<th>
 									Status
@@ -31,7 +34,7 @@
 									Adres
 								</th>								
 								<th>
-									 Opcje
+									Opcje
 								</th>
 							</tr>
 							</thead>
@@ -41,6 +44,9 @@
 								<td>
 									 <?php echo $order->id;?>
 								</td>
+								<td>
+									 <?php echo $order->create_date;?>
+								</td>								
 								<td>
 									 <?php echo $order->type;?>
 								</td>

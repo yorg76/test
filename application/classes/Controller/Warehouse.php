@@ -383,22 +383,24 @@ class Controller_Warehouse extends Controller_Welcome {
 			if($this->request->method()===HTTP_Request::POST) {
 			
 				$params = $_POST;
-							
-				$filename = isset($_FILES["plik"]) ? $_FILES["plik"] : '';
 				
-				$path_parts = pathinfo($_FILES["plik"]["name"]);
-				$extension = $path_parts['extension'];
+				if(isset($_FILES['plik'])) { 			
+					$filename = isset($_FILES["plik"]) ? $_FILES["plik"] : '';
 				
-				if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
-					Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documents');
+					$path_parts = pathinfo($_FILES["plik"]["name"]);
+					$extension = $path_parts['extension'];
+				
+					if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
+						Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documents');
+					}
+				
+					if ($file = Upload::save($filename, "scan-".$customer->id."-".$document->id."-".time().".".$extension, UPLOAD)) {
+						$params['file'] = $file;	
+					}else {
+						Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documents');
+					}
 				}
 				
-				if ($file = Upload::save($filename, "scan-".$customer->id."-".$document->id."-".time().".".$extension, UPLOAD)) {
-					$params['file'] = $file;	
-				}else {
-					Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documents');
-				}
-					
 				if($document->editDocument($params)) {
 					
 					Message::success(ucfirst(__('Lista dokumentów została dodana do pozycji.')),'/warehouse/documents');

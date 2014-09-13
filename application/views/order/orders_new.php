@@ -19,10 +19,13 @@
 							<thead>
 							<tr>
 								<th>
-									 ID
+									Numer
 								</th>
 								<th>
-									 Typ
+									Data
+								</th>
+								<th>
+									Typ
 								</th>
 								<th>
 									Status
@@ -31,7 +34,7 @@
 									Adres
 								</th>								
 								<th>
-									 Opcje
+									Opcje
 								</th>
 							</tr>
 							</thead>
@@ -41,6 +44,9 @@
 								<td>
 									 <?php echo $order->id;?>
 								</td>
+								<td>
+									 <?php echo $order->create_date;?>
+								</td>								
 								<td>
 									 <?php echo $order->type;?>
 								</td>
@@ -52,9 +58,9 @@
 								</td>											
 								<td>
 								<div class="margin-bottom-5">
-											<button class="btn btn-xs green margin-bottom" ><i class="glyphicon glyphicon-info-sign"></i> Akceptuj</button> <br />
-											<button class="btn btn-xs yellow user-edit margin-bottom" ><i class="fa fa-user"></i> Edytuj</button> <br />
-											<button class="btn btn-xs red user-delete margin-bottom" o><i class="fa fa-recycle"></i> Usuń</button> <br />
+											<button class="btn btn-xs green margin-bottom" ><i class="glyphicon glyphicon-ok"></i> Akceptuj</button> <br />
+											<button class="btn btn-xs yellow user-edit margin-bottom" ><i class="glyphicon glyphicon-pencil"></i> Edytuj</button> <br />
+											<button class="btn btn-xs red user-delete margin-bottom" ><i class="glyphicon glyphicon-remove"></i> Usuń</button> <br />
 									</div>
 								</td>
 							</tr>

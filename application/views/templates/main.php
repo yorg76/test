@@ -289,19 +289,18 @@
 					<span class="arrow <?php if ($_controller=='orders') echo "open";?>"></span>
 					</a>
 					<ul class="sub-menu">
-						
-						<li class="<?php if ($_action=='order') echo "active";?>">
-							<a href="/order/orders">
-								<i class="icon-list"></i>
-									Lista zamówień
-							</a>
-						</li>
-						<li>
+						<li class="<?php if ($_action=='add') echo "active";?>">
 							<a href="/order/add">
 							<i class="icon-plus"></i>
 							Dodaj
 							</a>
 						</li>
+						<li class="<?php if ($_action=='order') echo "active";?>">
+							<a href="/order/orders">
+								<i class="icon-list"></i>
+									Lista zamówień
+							</a>
+						</li>						
 						<li>
 							<a href="/order/orders_new">
 							<i class="icon-basket"></i>

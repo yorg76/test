@@ -20,6 +20,7 @@ class Model_Order extends ORM {
 	
 	protected $_has_many = array(
 			'boxes'=> array('model' => 'Box', 'through' => 'orders_boxes'),
+			'orderdetails'=>array('model' => 'OrderDetail')
 	);
 }
 
