@@ -92,7 +92,6 @@ class Order extends ORM {
 					
 				if($this->order->save()) {
 					if($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4) {
-
 						if(isset($params['boxes']) && is_array($params['boxes']) && $params['order_type'] == 0) {
 							foreach ($params['boxes'] as $box) {
 								$bbox=ORM::factory('Box')->where('id', '=', $box)->find();

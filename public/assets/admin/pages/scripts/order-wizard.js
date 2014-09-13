@@ -198,9 +198,9 @@ var OrderWizard = function () {
                 },
 
                 submitHandler: function (form) {
-                    success.show();
+                	form.submit();
                     error.hide();
-                    form.submit();
+                    success.show();
                     //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
                 }
 
@@ -306,28 +306,30 @@ var OrderWizard = function () {
                     
                     if(index == '2') {
 
-
-            			var warehouse = $('select[name=warehouse] option:selected').val();
-            			var division = $('select[name=division] option:selected').val();
+                        var order_type=$("select[name=order_type]").val();
+                        
+                        if(order_type == '2') {
+                        	var warehouse = $('select[name=warehouse] option:selected').val();
+                        	var division = $('select[name=division] option:selected').val();
             			
-            			var boxes = []; 
+                        	var boxes = []; 
             			
-            			$('select[name=boxes\\[\\]] option:selected').each(function(){
-            				boxes.push($(this).val());
-            			});
+                        	$('select[name=boxes\\[\\]] option:selected').each(function(){
+                        		boxes.push($(this).val());
+                        	});
             		
-            			$.ajax({
-            				type:'POST',
-            				url: "/ajax/get_utilisation_document",
-            				data: {'warehouse':warehouse, 'division':division, 'boxes[]':boxes},
-            				dataType:"json",
-            			}).success(function(data) {
-            				console.log(data);
-            				if(data.status=="OK") {
-            					$("#doc .modal-body").html("");
-            					$("#doc .modal-body").html(Base64.decode(data.body));
-            				}
-            			});
+                        	$.ajax({
+                        		type:'POST',
+                        		url: "/ajax/get_utilisation_document",
+                        		data: {'warehouse':warehouse, 'division':division, 'boxes[]':boxes},
+                        		dataType:"json",
+                        	}).success(function(data) {
+                        		if(data.status=="OK") {
+                        			$("#doc .modal-body").html("");
+                        			$("#doc .modal-body").html(Base64.decode(data.body));
+                        		}
+                        	});
+                        }
                     }
             		
                     handleTitle(tab, navigation, index);

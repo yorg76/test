@@ -17,11 +17,13 @@ class Controller_Ajax extends Controller_Welcome {
 	}
 	
 	public function action_get_utilisation_document_pdf() {
+
+		//TODO Szablon dokumentu utylizacji / wypełnianie treścią
 		
 		if($this->request->method()===HTTP_Request::POST) {
 				
 			$document_template = View_MPDF::factory('templates/document_template_full');
-			$document_filename=time()."-".$_POST['warehouse']."-".$_POST['division'].".pdf";
+			$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$_POST['warehouse']."-".$_POST['division'].".pdf";
 			$document_template->write_to_disk(PDF.$document_filename);
 							
 			echo json_encode(array('status'=>'OK','body'=>URL::base().'public/pdf/'.$document_filename));
@@ -30,6 +32,9 @@ class Controller_Ajax extends Controller_Welcome {
 	}
 	
 	public function action_get_utilisation_document() {
+		
+		//TODO Szablon dokumentu utylizacji / wypełnianie treścią
+		
 		if($this->request->method()===HTTP_Request::POST) {
 			
 			$document_template = View::factory('templates/document_template_full');
