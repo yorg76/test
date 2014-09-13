@@ -153,40 +153,25 @@ class User extends ORM {
 		
 		$message_template = View::factory('templates/email_template');
 		$title = $params['subject'];
+		
 		$message_template->bind('title', $title);
-		
 		$message_template->bind('email_title', $params['email_title']);
-		
-		
 		$message_template->bind('email_info', $params['email_info']);
-		
-		
 		$message_template->bind('email_content', $params['email_content']);
-			
-		$message = $message_template->render();
-			
+
 		$logo = $email->embed(DOCROOT.ASSETS_ADMIN_LAYOUT_IMG."logo-big.png");
-			
-		$message = str_replace("logo.png", $logo, $message);
-			
 		$social_facebook= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_facebook.png");
-			
-		$message = str_replace("social_facebook.png", $social_facebook, $message);
-			
 		$social_twitter= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_twitter.png");
-			
-		$message = str_replace("social_twitter.png", $social_twitter, $message);
-			
 		$social_googleplus= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_googleplus.png");
-			
-		$message = str_replace("social_googleplus.png", $social_googleplus, $message);
-			
 		$social_linkedin= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_linkedin.png");
-			
-		$message = str_replace("social_linkedin.png", $social_linkedin, $message);
-			
 		$social_rss= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_rss.png");
-			
+						
+		$message = $message_template->render();
+		$message = str_replace("logo.png", $logo, $message);
+		$message = str_replace("social_facebook.png", $social_facebook, $message);
+		$message = str_replace("social_twitter.png", $social_twitter, $message);
+		$message = str_replace("social_googleplus.png", $social_googleplus, $message);
+		$message = str_replace("social_linkedin.png", $social_linkedin, $message);
 		$message = str_replace("social_rss.png", $social_rss, $message);
 			
 		$email->message($message, 'text/html');

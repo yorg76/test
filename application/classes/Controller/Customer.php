@@ -128,7 +128,7 @@ class Controller_Customer extends Controller_Welcome {
     	if($this->request->param('id') > 0 ) {
     		
         	$user = ORM::factory('User')->where('id','=',$this->request->param('id'))->find();
-        	
+        	$roles = ORM::factory('Role')->where('name','!=','admin')->find_all();
         	$divisions = $user->customer->divisions->find_all();
         	
         	$user_divisions = $user->divisions->find_all();
@@ -137,7 +137,8 @@ class Controller_Customer extends Controller_Welcome {
         	
         	$this->content->bind('divisions', $divisions);
         	$this->content->bind('user_divisions', $user_divisions);
-        	
+        	$this->content->bind('roles', $roles);
+        	 
  		    if($this->request->method()===HTTP_Request::POST) {
             	
  		    	if(is_array($_POST['divisions'])) {
@@ -156,7 +157,19 @@ class Controller_Customer extends Controller_Welcome {
  		    	
  		    	
  		    	$user->values($_POST);
-            	
+ 		    	
+ 		    	foreach ($_POST['roles'] as $role) {
+ 		    		if(!$user->has('roles',$role)) {
+ 		    			$user->add('roles',$role);
+ 		    		}
+ 		    	}
+ 		    	
+ 		    	foreach($user->roles->find_all() as $role) {
+ 		    		if(!in_array($role->id, $_POST['roles'])) {
+ 		    			$user->remove('roles',$role);
+ 		    		}
+ 		    	}
+ 		    	
             	$validate = new Validation($_POST);
             	$validate->rule('firstname', 'not_empty')
                 	     ->rule('lastname', 'not_empty')

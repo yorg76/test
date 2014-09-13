@@ -227,18 +227,35 @@ class Controller_Admin extends Controller_Welcome {
 		
 		if($this->request->param('id') > 0) {
 			$user = ORM::factory('User',$this->request->param('id'));
+			$roles = ORM::factory('Role')->find_all(); 
+			
 			$this->content->bind('user', $user);
+			$this->content->bind('roles', $roles);
+			
 			if($this->request->method()===HTTP_Request::POST) {
-				 
+				
+				
 				$user->values($_POST);	
-				 
+
+				foreach ($_POST['roles'] as $role) {
+					if(!$user->has('roles',$role)) {
+						$user->add('roles',$role);
+					}
+				}
+				
+				foreach($user->roles->find_all() as $role) {
+					if(!in_array($role->id, $_POST['roles'])) {
+						$user->remove('roles',$role);
+					} 
+				}
+				
 				$validate = new Validation($_POST);
 				$validate->rule('firstname', 'not_empty')
 				->rule('lastname', 'not_empty')
 				->rule('username', 'not_empty');
 			
 				if($validate->check() && $user->update($validate)){
-					Message::success(ucfirst(__('Dane klienta zostały zaktualizowane')),'/admin/users');
+					Message::success(ucfirst(__('Dane użytkownika zostały zaktualizowane')),'/admin/users');
 				}else{
 					Message::error(ucfirst(__('Wystąpił błąd')." ".$validate->errors('msg')),'/admin/users');
 				}

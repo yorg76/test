@@ -71,6 +71,10 @@ var User_edit = function () {
 	                    required: true,
 	                    email: true
 	                },
+	                
+	                "divisions[]": {
+	                    required: true,
+	                },
                 
 	            },
 
@@ -90,7 +94,9 @@ var User_edit = function () {
 	                    required: "Podaj adres email",
 	                    email: "Ten adres jest nie prawidłowy"
 	                },
-
+	                "divisions[]": {
+	                    required: "Wybierz dział",
+	                },
 	            },
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
