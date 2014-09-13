@@ -124,33 +124,50 @@ class Order extends ORM {
 					
 					$user = Auth_ORM::instance()->get_user();
 					
-					$notification = ORM::factory('Notification');
+					$operators=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','operator')->find_all(); 
+
+					foreach($operators as $opertor) {
 					
-					$notification->status=0;
-					$notification->message="Nowe zamówienie w systemie<br /><br />";
-					$notification->message.="<p>Link do akceptacji: <a href=\"".URL::base('https',FALSE)."order/accept/".$this->order->id."\">Kliknij aby zaakceptować zamówienie</a></p>";
-					$notification->user_id=$user->id;
-					try {
-						$notification->save();
-					}catch (Exception $e) {
-						$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+						$paramse['subject']="Nowe zamówienie w systemie";
+						$paramse['email_title'] = "Złożono nowe zamówienie: ".$this->order->id;
+						$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+						$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+						$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
+						$paramse['email_content'] .="<p>Użytkownik: ".$this->order->user->username."</p>";
+						$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+						$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
+						$paramse['email_content'] .="<p>Link do akceptacji: <a href=\"".URL::base('https',FALSE)."order/accept/".$this->order->id."\">Kliknij aby zaakceptować zamówienie</a></p>";					
+						$paramse['email'] = $opertor->email;
+						$paramse['firstname'] = $opertor->firstname;
+						$paramse['lastname']= $opertor->lastname;
+						
+						$this->sendEmail($paramse);
+						
+						$notification = ORM::factory('Notification');
+							
+						$notification->status=0;
+						$notification->message="Nowe zamówienie w systemie<br /><br />";
+						$notification->message.="<p>Link do akceptacji: <a href=\"".URL::base('https',FALSE)."order/accept/".$this->order->id."\">Kliknij aby zaakceptować zamówienie</a></p>";
+						$notification->user_id=$opertor->id;
+						
+						try {
+							$notification->save();
+						}catch (Exception $e) {
+							$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+						}
 					}
 					
-					//TODO Dodawać notyfikcaje do wszystkich którzy mają role magazyniera / admina 
-					
-					$paramse['subject']="Nowe zamówienie w systemie";
-					$paramse['email_title'] = "Złożono nowe zamówienie: ".$this->order->id;
+					$paramse['subject']="Twoje nowe zamówienie w systemie";
+					$paramse['email_title'] = "Nowe zamówienie zostało dodane pod numerem: ".$this->order->id;
 					$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
 					$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
 					$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
-					$paramse['email_content'] .="<p>Użytkownik: ".$this->order->user->username."</p>";
 					$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
 					$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
-					$paramse['email_content'] .="<p>Link do akceptacji: <a href=\"".URL::base('https',FALSE)."order/accept/".$this->order->id."\">Kliknij aby zaakceptować zamówienie</a></p>";					
 					$paramse['email'] = $user->email;
 					$paramse['firstname'] = $user->firstname;
 					$paramse['lastname']= $user->lastname;
-						
+					
 					$this->sendEmail($paramse);
 					
 					$log->add(Log::DEBUG,"Success: Dodano zamówienie parametrami:".serialize($params)."\n");

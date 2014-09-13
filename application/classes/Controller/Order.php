@@ -191,14 +191,13 @@ class Controller_Order extends Controller_Welcome {
 			
 			$params['customer_id'] = $customer->id;
 			
-
 			$order->register($params);
 			
-			/*if($order->register($params)) {
+			if($order->register($params)) {
 				Message::success(ucfirst(__('Zamówienie zostało utworzone')),'/order/orders_new/');
 			}else {
 				Message::error(ucfirst(__('Wystąpił problem podczas dodawania zamówienia')),'/order/orders_new/');
-			}*/
+			}
 			
 		}
 	}
