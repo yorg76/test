@@ -87,7 +87,7 @@ class Document extends ORM {
 			$file->type='scan';
 			$file->document_id=$this->document->id;
 			$file->save();
-		}else {
+		}elseif(isset($params['file']) && $params['file'] != NULL) {
 			$file = $this->document->scan;
 			$file->file=$params['file'];
 			$file->type='scan';

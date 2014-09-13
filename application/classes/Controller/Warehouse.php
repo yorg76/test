@@ -384,7 +384,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			
 				$params = $_POST;
 				
-				if(isset($_FILES['plik'])) { 			
+				if(isset($_FILES['plik']['size']) && $_FILES['plik']['size'] > 0) { 			
 					$filename = isset($_FILES["plik"]) ? $_FILES["plik"] : '';
 				
 					$path_parts = pathinfo($_FILES["plik"]["name"]);
