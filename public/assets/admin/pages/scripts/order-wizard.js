@@ -360,6 +360,28 @@ var OrderWizard = function () {
             	form.submit();
             }).hide();
             
+            $('#print_utilisation_document').click(function(e){
+     			var warehouse = $('select[name=warehouse] option:selected').val();
+    			var division = $('select[name=division] option:selected').val();
+    			
+    			var boxes = []; 
+    			
+    			$('select[name=boxes\\[\\]] option:selected').each(function(){
+    				boxes.push($(this).val());
+    			});
+    			
+    			$.ajax({
+    				type:'POST',
+    				url: "/ajax/get_utilisation_document_pdf",
+    				data: {'warehouse':warehouse, 'division':division, 'boxes[]':boxes},
+    				dataType:"json",
+    			}).success(function(data) {
+    				if(data.status=="OK") {
+    					window.location.href=data.body;
+    				}
+    			});
+    			return false;
+            });
             
             $('#add_box_cancel').click(function(){
             	$('#description-container').html("");
@@ -369,9 +391,6 @@ var OrderWizard = function () {
             $('#add_box_description').click(function(){
             	
             	var box=$('.box_description_template').clone();
-            	
-            	
-            	
             	var number = $('input[name=box_id_template]', box).val();
             	var descripton = $('input[name=box_description_template]', box).val();
             	var storagecategory = $('select[name=box_storagecategory_template] option:selected').val();

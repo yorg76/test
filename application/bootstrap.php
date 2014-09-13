@@ -131,7 +131,9 @@ Kohana::modules(array(
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
        'formo'		=> MODPATH.'formo',		 // Formularze
 	   'pagination' => MODPATH.'pagination',  // Pagination module access
-	   'email' => MODPATH.'email',  
+	   'email' 		=> MODPATH.'email',
+	   'mpdf' 		=> MODPATH.'mpdf',
+	   'phpexcel' 		=> MODPATH.'phpexcel',
 	));
 
 //Aplication skin and folders
@@ -155,6 +157,7 @@ define('CSS','/public/css/');
 define('IMG', '/public/images/');
 define('LIB', '/public/lib/');
 define('UPLOAD', APPPATH.'upload');
+define('PDF', DOCROOT.'/public/pdf/');
 
 Cookie::$salt = 'Parrarell Thinking';
 

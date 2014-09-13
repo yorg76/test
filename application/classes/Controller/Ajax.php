@@ -16,6 +16,19 @@ class Controller_Ajax extends Controller_Welcome {
 		
 	}
 	
+	public function action_get_utilisation_document_pdf() {
+		
+		if($this->request->method()===HTTP_Request::POST) {
+				
+			$document_template = View_MPDF::factory('templates/document_template_full');
+			$document_filename=time()."-".$_POST['warehouse']."-".$_POST['division'].".pdf";
+			$document_template->write_to_disk(PDF.$document_filename);
+							
+			echo json_encode(array('status'=>'OK','body'=>URL::base().'public/pdf/'.$document_filename));
+		}else echo json_encode(array('status'=>'OK','body'=>'<br><br>Dokument<br><br>'));
+	
+	}
+	
 	public function action_get_utilisation_document() {
 		if($this->request->method()===HTTP_Request::POST) {
 			
