@@ -11,7 +11,8 @@ class Model_User extends Model_Auth_User {
 			'user_tokens'=> array('model' => 'User_Token'),
 			'roles'=> array('model' => 'role', 'through' => 'roles_users'),
 			'divisions'=> array('model' =>  'Division', 'through' => 'divisions_users'),
-			'orders'=> array('model' =>  'Order', 'foreign_key' => 'user_id')
+			'orders'=> array('model' =>  'Order', 'foreign_key' => 'user_id'),
+			'notifications' => array('model'=>'Notification','foreign_key'=>'user_id')
 	);
 				
 	protected $_belongs_to = array(

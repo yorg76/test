@@ -16,6 +16,24 @@ class Controller_Ajax extends Controller_Welcome {
 		
 	}
 	
+	public function action_get_user_notifications() {
+		$user= Auth_ORM::instance()->get_user();
+		if($user->loaded()) {
+			$notification=$user->notifications->where('status','=','0')->find();
+		
+			if($notification->loaded()) {
+				$notification->status=1;
+				if($notification->update()) {
+					echo json_encode(array('status'=>'OK',
+							   'message'=>$notification->message));
+				}
+			}else {
+				echo json_encode(array('status'=>'EMPTY'));
+			}
+		}
+	}
+	
+	
 	public function action_generate_password() {
 		echo json_encode(array('status'=>'OK',
 							   'password'=>Text::random()));	

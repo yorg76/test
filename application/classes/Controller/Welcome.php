@@ -43,7 +43,8 @@ class Controller_Welcome extends Controller_Template {
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap/css/bootstrap.min.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'uniform/css/uniform.default.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-switch/css/bootstrap-switch.min.css');
-
+		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'gritter/css/jquery.gritter.css');
+		
 
 		$this->add_css ( ASSETS_GLOBAL_CSS.'components.css');
 		$this->add_css ( ASSETS_GLOBAL_CSS.'plugins.css');
@@ -64,10 +65,13 @@ class Controller_Welcome extends Controller_Template {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery.cokie.min.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'uniform/jquery.uniform.min.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-switch/js/bootstrap-switch.min.js');
+		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'gritter/js/jquery.gritter.js');
+		
 		$this->add_fjs ( ASSETS_GLOBAL_SCRIPTS.'metronic.js');
 		$this->add_fjs ( ASSETS_ADMIN_LAYOUT_SCRIPTS.'layout.js');
 		$this->add_fjs ( ASSETS_ADMIN_LAYOUT_SCRIPTS.'quick-sidebar.js');
-				
+		$this->add_fjs ( ASSETS_ADMIN_LAYOUT_SCRIPTS.'notifications.js');
+		
 		$this->_req = strtolower ( $this->request->controller () . '/' . $this->request->action () );
 		
 		
@@ -95,6 +99,7 @@ class Controller_Welcome extends Controller_Template {
 		$_init[] = "Metronic.init(); // init metronic core components";
 		$_init[] = "Layout.init(); // init current layout";
 		$_init[] = "QuickSidebar.init() // init quick sidebar";
+		$_init[] = "Notifications.init() // init quick sidebar";
 		$_init[] = join ( $this->_init  );
 		
 		return join ( "\n\t", $_init);

@@ -48,7 +48,7 @@ class Controller_Order extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'components-pickers.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-wizard/jquery.bootstrap.wizard.min.js');
-		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery.cookie.min.js');
+		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery.cokie.min.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order-wizard.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-orders.js');
 		

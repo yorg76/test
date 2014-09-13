@@ -124,6 +124,20 @@ class Order extends ORM {
 					
 					$user = Auth_ORM::instance()->get_user();
 					
+					$notification = ORM::factory('Notification');
+					
+					$notification->status=0;
+					$notification->message="Nowe zamówienie w systemie<br /><br />";
+					$notification->message.="<p>Link do akceptacji: <a href=\"".URL::base('https',FALSE)."order/accept/".$this->order->id."\">Kliknij aby zaakceptować zamówienie</a></p>";
+					$notification->user_id=$user->id;
+					try {
+						$notification->save();
+					}catch (Exception $e) {
+						$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+					}
+					
+					//TODO Dodawać notyfikcaje do wszystkich którzy mają role magazyniera / admina 
+					
 					$paramse['subject']="Nowe zamówienie w systemie";
 					$paramse['email_title'] = "Złożono nowe zamówienie: ".$this->order->id;
 					$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
