@@ -174,7 +174,7 @@ var OrderWizard = function () {
                     		$("#tab4 #pickup_address").hide();
                     		$("#tab4 #doc").show();
                     		$("#tab4 #skip").hide();
-                    		
+                    		                    		
                     		$(".nav-pills a").each(function(){
                     			if($(this).attr('href') == '#tab3') {
                      				$('span.desc',$(this)).html('<i class="fa fa-check"></i> Dokument utylizacji</span>');
@@ -304,6 +304,32 @@ var OrderWizard = function () {
                         $.cookie($(this).attr('name'), $(this).val());
                     });
                     
+                    if(index == '2') {
+
+
+            			var warehouse = $('select[name=warehouse] option:selected').val();
+            			var division = $('select[name=division] option:selected').val();
+            			
+            			var boxes = []; 
+            			
+            			$('select[name=boxes\\[\\]] option:selected').each(function(){
+            				boxes.push($(this).val());
+            			});
+            		
+            			$.ajax({
+            				type:'POST',
+            				url: "/ajax/get_utilisation_document",
+            				data: {'warehouse':warehouse, 'division':division, 'boxes[]':boxes},
+            				dataType:"json",
+            			}).success(function(data) {
+            				console.log(data);
+            				if(data.status=="OK") {
+            					$("#doc .modal-body").html("");
+            					$("#doc .modal-body").html(Base64.decode(data.body));
+            				}
+            			});
+                    }
+            		
                     handleTitle(tab, navigation, index);
                 },
                 onPrevious: function (tab, navigation, index) {

@@ -32,6 +32,8 @@ class Controller_Order extends Controller_Welcome {
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'select2/select2.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/css/datepicker.css');
+		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal-bs3patch.css');
+		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal.css');
 		
 		if(strtolower ( $this->request->action()) == 'info') $this->add_css ( ASSETS_ADMIN_PAGES_CSS.'profile.css');
 		
@@ -49,8 +51,17 @@ class Controller_Order extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-wizard/jquery.bootstrap.wizard.min.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery.cokie.min.js');
+		
+		
+		
+		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/js/bootstrap-modalmanager.js');
+		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/js/bootstrap-modal.js');
+		
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'base64.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order-wizard.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-orders.js');
+		
+		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-extended-modals.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		

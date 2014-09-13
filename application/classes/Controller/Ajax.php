@@ -16,6 +16,17 @@ class Controller_Ajax extends Controller_Welcome {
 		
 	}
 	
+	public function action_get_utilisation_document() {
+		if($this->request->method()===HTTP_Request::POST) {
+			
+			$document_template = View::factory('templates/document_template_full');
+			$document = $document_template->render();
+			
+			echo json_encode(array('status'=>'OK','body'=>base64_encode($document)));
+		}else echo json_encode(array('status'=>'OK','body'=>'<br><br>Dokument<br><br>'));
+
+	}
+	
 	public function action_get_user_notifications() {
 		$user= Auth_ORM::instance()->get_user();
 		if($user->loaded()) {

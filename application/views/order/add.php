@@ -352,11 +352,26 @@
 							</div>		
 							<div id="doc" style="display:none">
 								<div class="margiv-top-10">
-									<a href="#" class="btn green" id="show_utilisation_document">
+									<a href="#" class="btn green" id="show_utilisation_document" data-toggle="modal" data-target="#long">
 									Pokaż dokument utylizacji</a>
 									<a href="#" class="btn default" id="print_utilisation_document">
 									Drukuj do PDF</a>
-								</div>								
+								</div>		
+								
+								<div id="long" class="modal fade modal-scroll" tabindex="-1" data-replace="true" aria-hidden="true" style="display: none; margin-top: -475px;">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+										<h4 class="modal-title">Dokument utylizacji</h4>
+									</div>
+									<div class="modal-body">
+										<img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg">
+									</div>
+									<div class="modal-footer">
+										<button type="button" data-dismiss="modal" class="btn btn-default">Zamknij</button>
+									</div>
+								</div>
+								
+														
 							</div>		
 											
 							<div id="pickup_address" style="display:none">						
