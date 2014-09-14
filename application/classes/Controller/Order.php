@@ -32,8 +32,11 @@ class Controller_Order extends Controller_Welcome {
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'select2/select2.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/css/datepicker.css');
-		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal-bs3patch.css');
-		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal.css');
+		
+		if(strtolower ( $this->request->action()) == 'add') {
+			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal-bs3patch.css');
+			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal.css');
+		}
 		
 		if(strtolower ( $this->request->action()) == 'info') $this->add_css ( ASSETS_ADMIN_PAGES_CSS.'profile.css');
 		
@@ -50,19 +53,17 @@ class Controller_Order extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'components-pickers.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-wizard/jquery.bootstrap.wizard.min.js');
-		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery.cokie.min.js');
 		
+		if(strtolower ( $this->request->action()) == 'add') {
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/js/bootstrap-modalmanager.js');
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/js/bootstrap-modal.js');
 		
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'base64.js');
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order-wizard.js');
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-extended-modals.js');
+		}
 		
-		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/js/bootstrap-modalmanager.js');
-		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/js/bootstrap-modal.js');
-		
-		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'base64.js');
-		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order-wizard.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-orders.js');
-		
-		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-extended-modals.js');
-		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		
 		if (file_exists (DOCROOT.ASSETS_ADMIN_PAGES_SCRIPTS . strtolower ( $this->request->action()) . '.js' )) {
@@ -160,14 +161,55 @@ class Controller_Order extends Controller_Welcome {
 	public function action_accept() {
 		if($this->request->param('id') > 0) {
 			$order = Order::instance($this->request->param('id'));
-			if($order->status="Nowe") {
+			if($order->status=="Nowe") {
 				if($order->acceptOrder()) {
 					Message::success(ucfirst(__('Zamówienie zostało zaakceptowane')),'/order/orders_inprogress');
 				}else {
 					Message::error(ucfirst(__('Wystąpił problem podczas akceptacji zamówienia')),'/order/orders_inprogress');
 				}
+			}else {
+				Message::error(ucfirst(__('Zamówienia w tym statusie nie można zaakceptować')),'/order/orders_inprogress');
 			}
 		}	
+	}
+
+	public function action_complete() {
+		if($this->request->param('id') > 0) {
+			$order = Order::instance($this->request->param('id'));
+			if($order->status=="Przyjęte do realizacji") {
+				if($order->completeOrder()) {
+					Message::success(ucfirst(__('Zamówienie zostało skompletowane')),'/order/orders_inprogress');
+				}else {
+					Message::error(ucfirst(__('Wystąpił problem podczas kompletowania zamówienia')),'/order/orders_inprogress');
+				}
+			}else {
+				Message::error(ucfirst(__('Zamówienia w tym statusie nie można skompletować')),'/order/orders_inprogress');
+			}
+		}
+	}
+	
+	
+	public function action_send() {
+		if($this->request->param('id') > 0) {
+			$order = Order::instance($this->request->param('id'));			
+		}
+	}
+	
+	public function action_delete() {
+		if($this->request->param('id') > 0) {
+			
+			$order = Order::instance($this->request->param('id'));
+			
+			if($order->status=="Nowe") {
+				if($order->deleteOrder()) {
+					Message::success(ucfirst(__('Zamówienie zostało usuniete')),'/order/orders');
+				}else {
+					Message::error(ucfirst(__('Wystąpił problem podczas usuwania zamówienia')),'/order/orders');
+				}
+			}else {
+				Message::error(ucfirst(__('Zamówienia w tym statusie nie można usunąć')),'/order/orders');
+			}
+		}
 	}
 	
 	public function action_add() {
@@ -216,9 +258,9 @@ class Controller_Order extends Controller_Welcome {
 			$params['customer_id'] = $customer->id;
 			
 			if($order->registerOrder($params)) {
-				Message::success(ucfirst(__('Zamówienie zostało utworzone')),'/order/orders_new/');
+				Message::success(ucfirst(__('Zamówienie zostało utworzone')),'/order/orders_new');
 			}else {
-				Message::error(ucfirst(__('Wystąpił problem podczas dodawania zamówienia')),'/order/orders_new/');
+				Message::error(ucfirst(__('Wystąpił problem podczas dodawania zamówienia')),'/order/orders_new');
 			}
 			
 		}

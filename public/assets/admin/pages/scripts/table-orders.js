@@ -15,11 +15,12 @@ var TableOrders = function () {
     		window.location.href='/order/edit/'+id;
     	});
     	
-    	$("button[id*=order_delete_]").click(function(e){
+    	$("button[id*=order_complete_]").click(function(e){
     		e.preventDefault();
-    		var id = $(this).attr('id').replace('order_delete_','');
-    		window.location.href='/order/delete/'+id;
+    		var id = $(this).attr('id').replace('order_complete_','');
+    		window.location.href='/order/complete/'+id;
     	});
+    	
     	
         function restoreRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
@@ -186,6 +187,20 @@ var TableOrders = function () {
 
 var TableOrdersNew = function () {
     var id = 0;
+    
+	$("button[id*=order_accept_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_accept_','');
+		
+		window.location.href='/order/accept/'+id;
+	});
+	
+	$("button[id*=order_edit_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_edit_','');
+		window.location.href='/order/edit/'+id;
+	});
+		
     var handleTable = function () {
 
         function restoreRow(oTable, nRow) {
@@ -352,7 +367,27 @@ var TableOrdersNew = function () {
 }();
 
 var TableOrdersInprogress = function () {
-    var id = 0;
+    
+	var id = 0;
+    
+	$("button[id*=order_edit_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_edit_','');
+		window.location.href='/order/edit/'+id;
+	});
+	
+	$("button[id*=order_complete_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_complete_','');
+		window.location.href='/order/complete/'+id;
+	});
+	
+	$("button[id*=order_send_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_send_','');
+		window.location.href='/order/send/'+id;
+	});
+	
     var handleTable = function () {
 
         function restoreRow(oTable, nRow) {
