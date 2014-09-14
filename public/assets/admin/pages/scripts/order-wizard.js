@@ -303,36 +303,33 @@ var OrderWizard = function () {
                         
                         $.cookie($(this).attr('name'), $(this).val());
                     });
-                    
-                    if(index == '2') {
 
-                        var order_type=$("select[name=order_type]").val();
-                        
-                        if(order_type == '2') {
-                        	var warehouse = $('select[name=warehouse] option:selected').val();
-                        	var division = $('select[name=division] option:selected').val();
-            			
-                        	var boxes = []; 
-            			
-                        	$('select[name=boxes\\[\\]] option:selected').each(function(){
-                        		boxes.push($(this).val());
-                        	});
-            		
-                        	$.ajax({
-                        		type:'POST',
-                        		url: "/ajax/get_utilisation_document",
-                        		data: {'warehouse':warehouse, 'division':division, 'boxes[]':boxes},
-                        		dataType:"json",
-                        	}).success(function(data) {
-                        		if(data.status=="OK") {
-                        			$("#doc .modal-body").html("");
-                        			$("#doc .modal-body").html(Base64.decode(data.body));
-                        		}
-                        	});
-                        }
-                    }
-            		
                     handleTitle(tab, navigation, index);
+                    
+                    var order_type=$("select[name=order_type]").val();
+                    
+                    if(index == '2' && order_type=='2') {
+                    	var warehouse = $('select[name=warehouse] option:selected').val();
+                    	var division = $('select[name=division] option:selected').val();
+        			
+                    	var boxes = []; 
+        			
+                    	$('select[name=boxes\\[\\]] option:selected').each(function(){
+                    		boxes.push($(this).val());
+                    	});
+        		
+                    	$.ajax({
+                    		type:'POST',
+                    		url: "/ajax/get_utilisation_document",
+                    		data: {'warehouse':warehouse, 'division':division, 'boxes[]':boxes},
+                    		dataType:"json",
+                    	}).success(function(data) {
+                    		if(data.status=="OK") {
+                    			$("#doc .modal-body").html("");
+                    			$("#doc .modal-body").html(Base64.decode(data.body));
+                    		}
+                    	});
+                    }
                 },
                 onPrevious: function (tab, navigation, index) {
                     success.hide();
@@ -358,7 +355,6 @@ var OrderWizard = function () {
 
             $('#form_wizard_1').find('.button-previous').hide();
             $('#form_wizard_1 .button-submit').click(function () {
-                //alert('Finished! Hope you like it :)');
             	form.submit();
             }).hide();
             

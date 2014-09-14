@@ -68,7 +68,7 @@ mb_substitute_character('none');
 /**
  * Set the default language
  */
-I18n::lang('en-us');
+I18n::lang('pl');
 
 if (isset($_SERVER['SERVER_PROTOCOL']))
 {
@@ -133,7 +133,8 @@ Kohana::modules(array(
 	   'pagination' => MODPATH.'pagination',  // Pagination module access
 	   'email' 		=> MODPATH.'email',
 	   'mpdf' 		=> MODPATH.'mpdf',
-	   'phpexcel' 		=> MODPATH.'phpexcel',
+	   'phpexcel' 	=> MODPATH.'phpexcel',
+	   'multilang'	=> MODPATH.'multilang',
 	));
 
 //Aplication skin and folders

@@ -38,7 +38,58 @@ class Order extends ORM {
 		}
 	}
 	
-	public function register($params) {
+	public function acceptOrder() {
+		$log=Kohana_Log::instance();
+		
+		if($this->order->loaded()) {
+			$this->status='Przyjęte do realizacji';
+			$this->order->status='Przyjęte do realizacji';
+			if($this->order->update()) {
+				$paramse = array();
+					
+				$paramse['subject']="Twoje zamówienie zostało zaakceptowane";
+				$paramse['email_title'] = "Zamówienie numer ".$this->order->id." zmieniło status.";
+				$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+				$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+				$paramse['email_content'] = "<p>Status zamówienia: ".$this->order->status." </p>";
+				$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
+				$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+				$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
+				$paramse['email'] = $this->order->user->email;
+				$paramse['firstname'] = $this->order->user->firstname;
+				$paramse['lastname']= $this->order->user->lastname;
+				
+				$this->sendEmail($paramse);
+				
+				$notification = ORM::factory('Notification');
+					
+				$notification->status=0;
+				$notification->message="Zamówienie ".$this->order->id." zmieniło status<br /><br />";
+				$notification->user_id=$this->order->user->id;
+				
+				try {
+					$notification->save();
+				}catch (Exception $e) {
+					$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+				}
+				
+				$log->add(Log::DEBUG,"Success: Zamówienie zostało zaakceptowane parametrami:".$this->order->id."\n");
+				
+				return true;
+			}else return false;
+		}else return false;
+			
+	}
+	
+	public function updateOrder() {
+	
+	}
+	
+	public function deleteOrder() {
+	
+	}
+	
+	public function registerOrder($params) {
 
 		$log=Kohana_Log::instance();
 		
@@ -155,6 +206,8 @@ class Order extends ORM {
 							$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
 						}
 					}
+					
+					$paramse = array();
 					
 					$paramse['subject']="Twoje nowe zamówienie w systemie";
 					$paramse['email_title'] = "Nowe zamówienie zostało dodane pod numerem: ".$this->order->id;

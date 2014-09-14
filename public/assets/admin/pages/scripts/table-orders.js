@@ -2,6 +2,25 @@ var TableOrders = function () {
     var id = 0;
     var handleTable = function () {
 
+    	$("button[id*=order_accept_]").click(function(e){
+    		e.preventDefault();
+    		var id = $(this).attr('id').replace('order_accept_','');
+    		
+    		window.location.href='/order/accept/'+id;
+    	});
+    	
+    	$("button[id*=order_edit_]").click(function(e){
+    		e.preventDefault();
+    		var id = $(this).attr('id').replace('order_edit_','');
+    		window.location.href='/order/edit/'+id;
+    	});
+    	
+    	$("button[id*=order_delete_]").click(function(e){
+    		e.preventDefault();
+    		var id = $(this).attr('id').replace('order_delete_','');
+    		window.location.href='/order/delete/'+id;
+    	});
+    	
         function restoreRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);

@@ -157,6 +157,19 @@ class Controller_Order extends Controller_Welcome {
 		$this->content->bind('orders', $orders);
 	}
 	
+	public function action_accept() {
+		if($this->request->param('id') > 0) {
+			$order = Order::instance($this->request->param('id'));
+			if($order->status="Nowe") {
+				if($order->acceptOrder()) {
+					Message::success(ucfirst(__('Zamówienie zostało zaakceptowane')),'/order/orders_inprogress');
+				}else {
+					Message::error(ucfirst(__('Wystąpił problem podczas akceptacji zamówienia')),'/order/orders_inprogress');
+				}
+			}
+		}	
+	}
+	
 	public function action_add() {
 		$user = Auth::instance()->get_user();
 		$order=Order::instance();
@@ -202,9 +215,7 @@ class Controller_Order extends Controller_Welcome {
 			
 			$params['customer_id'] = $customer->id;
 			
-			$order->register($params);
-			
-			if($order->register($params)) {
+			if($order->registerOrder($params)) {
 				Message::success(ucfirst(__('Zamówienie zostało utworzone')),'/order/orders_new/');
 			}else {
 				Message::error(ucfirst(__('Wystąpił problem podczas dodawania zamówienia')),'/order/orders_new/');
