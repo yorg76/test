@@ -12,6 +12,7 @@ class DocumentList extends ORM {
 	public $name;
 	public $description;
 	public $box;
+	public $bulkpackaging;
 
 	
 	public static function instance($id=NULL) {
@@ -30,6 +31,7 @@ class DocumentList extends ORM {
 			$this->name = $this->documentlist->name;
 			$this->description = $this->documentlist->description;
 			$this->box = $this->documentlist->box;
+			$this->bulkpackaging = $this->documentlist->bulkpackaging;
 			
 		}else {
 			$this->documentlist = ORM::factory('DocumentList');
@@ -67,6 +69,8 @@ class DocumentList extends ORM {
 		$this->documentlist->values($params);
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->documentlist->box_id=$this->box->id;
+		$this->bulkpackaging=ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
+		$this->documentlist->bulkpackaging_id=$this->bulkpackaging->id;
 		
 		if(is_array($params)) {
 		
