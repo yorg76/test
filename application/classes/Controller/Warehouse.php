@@ -246,7 +246,7 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->content->bind('boxbarcode', $boxbarcode);
 		$this->content->bind('warehouses', $warehouses);
 		
-	if($this->request->method()===HTTP_Request::POST) {
+		if($this->request->method()===HTTP_Request::POST) {
 			$params = $_POST;
 			//$params = $this->request->post();
 			$box=Box::instance();
@@ -276,7 +276,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			if($this->request->method()===HTTP_Request::POST) {
 				$params = $_POST;
 				//$box->values($_POST);
-				$box=Box::instance('id');
+				$box=Box::instance($this->request->param('id'));
 				
 					if($box->updateBox($params)) {
 						Message::success(ucfirst(__('Dane pozycji zostały zaktualizowane')),'/warehouse/boxes');
