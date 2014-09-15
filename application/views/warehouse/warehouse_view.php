@@ -92,5 +92,3 @@
 				</div>
 			</div>
 			<!-- END PAGE CONTENT -->
-		</div>
-	</div>

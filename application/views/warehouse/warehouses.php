@@ -21,7 +21,7 @@
 									</button>
 								</div>
 							</div>						
-							<table class="table table-striped table-hover table-bordered" id="warehouses_list"">
+							<table class="table table-striped table-hover table-bordered" id="warehouses_list">
 							<thead>
 							<tr>
 								<th>
@@ -68,5 +68,3 @@
 				</div>
 			</div>
 			<!-- END PAGE CONTENT -->
-		</div>
-	</div>

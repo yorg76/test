@@ -723,14 +723,66 @@ class Controller_Warehouse extends Controller_Welcome {
 	
 	}
 	
-	public function action_boxes_search() {
-	
-	
+public function action_document_search() {
+		
+		
+		if($this->request->method()===HTTP_Request::POST) {
+		
+			$params = $_POST;
+			
+			$name=$_POST['name'];
+			$description=$_POST['description'];
+			
+			$documents = ORM::factory('Document')->where_open()->where('document.name', 'like', '%' . $name . '%')->or_where('document.description', 'like', '%' . $description . '%')->where_close()->find_all();
+			
+			$count = $documents->count();
+			$this->content->bind('documents', $documents);
+			$this->content->bind('count', $count);
+			
+		}
 	}
 	
-	public function action_document_search() {
+	public function action_boxes_search() {
 	
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$warehouses_ids= array();
+		$boxes_ids = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		
+		foreach ($boxes as $box) {
+			array_push($boxes_ids, $box->id);
+		}
+		$documents = ORM::factory('Document')->where('box_id','IN', $boxes_ids)->find_all();
+		
+		$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('boxes', $boxes);
+		$this->content->bind('documents', $documents);
+		
+		if($this->request->method()===HTTP_Request::POST) {
+			
+			$params=$_POST;
+			$params['box_id'] = $box_id;
+			$params['warehouse_id'] = $warehouse_id;
+			$params['date_from'] = $date_from;
+			$params['date_to'] = $date_to;
+			$params['date_reception'] = $date_reception;
+			$params['lock'] = $lock;
+			$params['seal'] = $seal;
+			$params['storage_category_id'] = $storage_category_id;
+			
+			
+			
+			$this->content->bind('boxes', $boxes);
+			$this->content->bind('count', $count);
 	
+		}
 	}
 	
 	public function action_warehouse_view() {
@@ -760,6 +812,32 @@ class Controller_Warehouse extends Controller_Welcome {
 			$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','=', $box_id)->find_all();
 			
 			$this->content->bind('storagecategories', $storagecategories);
+			$this->content->bind('documents', $documents);
+			$this->content->bind('documentlists', $documentlists);
+			$this->content->bind('bulkpackagings', $bulkpackagings);
+		}
+	}
+	
+	public function action_documentlist_view() {
+		if($this->request->param('id') > 0) {
+			$documentlist = DocumentList::instance($this->request->param('id'));
+			$documentlist_id = $documentlist->id;
+			$this->content->bind('documentlist', $documentlist);
+	
+			$documents = ORM::factory('Document')->where('documentlist_id','=', $documentlist_id)->find_all();
+			$this->content->bind('documents', $documents);
+		}
+	}
+	
+	public function action_bulkpackaging_view() {
+		if($this->request->param('id') > 0) {
+			$bulkpackaging = BulkPackaging::instance($this->request->param('id'));
+			$bulkpackaging_id = $bulkpackaging->id;
+			$this->content->bind('bulkpackaging', $bulkpackaging);
+	
+			$documents = ORM::factory('Document')->where('bulkpackaging_id','=', $bulkpackaging_id)->find_all();
+			$documentlists = ORM::factory('DocumentList')->where('bulkpackaging_id','=', $bulkpackaging_id)->find_all();
+			$bulkpackagings = ORM::factory('BulkPackaging')->join('bulkpackagings_bulkpackagings')->on('bulkpackaging.id', '=','bulkpackagings_bulkpackagings.bulkpackaging2_id')->where('bulkpackagings_bulkpackagings.bulkpackaging1_id','=',$bulkpackaging_id)->find_all();
 			$this->content->bind('documents', $documents);
 			$this->content->bind('documentlists', $documentlists);
 			$this->content->bind('bulkpackagings', $bulkpackagings);
