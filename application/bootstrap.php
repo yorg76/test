@@ -68,7 +68,7 @@ mb_substitute_character('none');
 /**
  * Set the default language
  */
-I18n::lang('pl');
+I18n::lang('pl-pl');
 
 if (isset($_SERVER['SERVER_PROTOCOL']))
 {
@@ -122,13 +122,9 @@ Kohana::$config->attach(new Config_File);
 Kohana::modules(array(
 	   'auth'       => MODPATH.'auth',       // Basic authentication
 	   'cache'      => MODPATH.'cache',      // Caching with multiple backends
-	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	   'database'   => MODPATH.'database',   // Database access
 	   'image'      => MODPATH.'image',      // Image manipulation
-	// 'minion'     => MODPATH.'minion',     // CLI Tasks
 	   'orm'        => MODPATH.'orm',        // Object Relationship Mapping
-	// 'unittest'   => MODPATH.'unittest',   // Unit testing
-	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
        'formo'		=> MODPATH.'formo',		 // Formularze
 	   'pagination' => MODPATH.'pagination',  // Pagination module access
 	   'email' 		=> MODPATH.'email',
@@ -136,6 +132,15 @@ Kohana::modules(array(
 	   'phpexcel' 	=> MODPATH.'phpexcel',
 	   'multilang'	=> MODPATH.'multilang',
 	));
+
+$languages = array();
+
+$config = Kohana::$config->load('multilang');
+
+foreach($config->languages as $lang => $settings)
+{
+	$languages[] = $lang;
+}
 
 //Aplication skin and folders
 
@@ -166,12 +171,14 @@ Cookie::$salt = 'Parrarell Thinking';
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-
-Route::set('default', '(<controller>(/<action>(/<id>)))')
-	->defaults(
+	
+Route::set('default', '(<lang>)(/)(<controller>(/<action>(/<id>)))',
 	array(
-	'controller' => 'default',
-	'action'     => 'index',
-	'id' =>''
+		'lang'	=> '('.  implode('|', $languages).')',)
+	)->defaults(
+	array(
+		'controller' => 'default',
+		'action'     => 'index',
+		'lang'			=> (Cookie::get('lang') != '' ? Cookie::get('lang') : $config->default)
 	));
 	
