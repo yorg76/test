@@ -125,7 +125,7 @@
 				<li class="start <?php if ($_controller=='user') echo "active open";?>">
 					<a href="/user/dashboard">
 					<i class="glyphicon glyphicon-dashboard"></i>
-					<span class="title">Dashboard</span>
+					<span class="title">Panel</span>
 					<span class="arrow <?php if ($_controller=='user') echo "open";?>"></span>
 					</a>
 				</li>
@@ -275,11 +275,7 @@
 							<i class="glyphicon glyphicon-th"></i>
 							Opakowania zbiorcze</a>
 						</li>
-						<li class="<?php if ($_action=='virtualbriefcases_in') echo "active";?>">
-							<a href="/virtualbriefcase/nested_virtualbriefcases">
-							<i class="icon-briefcase"></i>
-							Wirtualne teczki</a>
-						</li>
+						
 					</ul>
 				</li>
 				<li class="<?php if ($_controller=='order') echo "active open";?>">

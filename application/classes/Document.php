@@ -50,12 +50,7 @@ class Document extends ORM {
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->document->box_id=$this->box->id;
 		
-		$this->documentlist=ORM::factory('DocumentList',$params['documentlist_id']);
-		$this->document->documentlist_id=$this->documentlist->id;
-		
-		$this->bulkpackaging=ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
-		$this->document->bulkpackaging_id=$this->bulkpackaging->id;
-			
+					
 		if(is_array($params)) {
 		
 			try {
@@ -80,6 +75,12 @@ class Document extends ORM {
 		$this->document->values($params);
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->document->box_id=$this->box->id;
+		
+		$this->documentlist=ORM::factory('DocumentList',$params['documentlist_id']);
+		$this->document->documentlist_id=$this->documentlist->id;
+		
+		$this->bulkpackaging=ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
+		$this->document->bulkpackaging_id=$this->bulkpackaging->id;
 
 		if(isset($params['file']) && $this->document->scan->id < 0) {
 			$file = ORM::factory('DocumentScan');

@@ -93,6 +93,13 @@
 								<?php endforeach;?>
 							</select>
 						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Opis
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<textarea class="form-control" name="description"><?php echo $document->description; ?></textarea>
+						<span class="help-block"></span>
 					</div>				
 					<div class="form-group">
 						<label class="control-label">Status blokady
@@ -112,13 +119,13 @@
 							<i class="fa fa-lock fa-fw"></i>
 							<input id="seal" class="form-control" type="text" name="seal" value="<?php echo $box->seal;?>">
 						</div>
-					</div>		
+					</div>
 					<br/>
 					<br/>
 					<div class="margiv-top-10">
-						<a href="/warehouse/boxes/" class="btn green" id="submit">
+						<a href="/warehouse/boxes" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/warehouse/boxes/" class="btn default" id="cancel">
+						<a href="/warehouse/boxes" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

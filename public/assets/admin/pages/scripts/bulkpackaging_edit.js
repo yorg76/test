@@ -58,11 +58,7 @@ var BulkPackaging_edit = function () {
 	        });
         	
         	
-        	$('input[name=IsIndividual]').change(function(){
-        	    if($(this).val() == 0) Add_user.firmaEnable();
-        	    else if($(this).val() == 1) Add_user.firmaDisable();
-        	    
-        	});
+        	
         	
         	$("#add_bulkpackaging_form #submit").bind('click',function(e){
                 if ($('#add_bulkpackaging_form').validate().form()) {

@@ -20,51 +20,6 @@
 			
 				<div id="tab_1-1" class="tab-pane active">
 					<div class="form-group">
-						<label class="control-label">Wybór pozycji
-							<span class="required" aria-required="true"> * </span>
-						</label>
-						<div class="input-icon right">
-							<select class="form-control" name="box_id">
-								<option value="">-- Wybierz pozycję dla dokumentu --</option>
-								<?php foreach ($boxes as $box):?>
-								<?php 
-											echo "<option value=\"".$box->id."\">".$box->id."</option>";
-								?>
-								<?php endforeach;?>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Wybór listy dokumentów
-							<span class="required" aria-required="true"> * </span>
-						</label>
-						<div class="input-icon right">
-							<select class="form-control" name="documentlist_id">
-								<option value="">-- Wybierz listę dla dokumentu --</option>
-								<?php foreach ($documentlists as $documentlist):?>
-								<?php 
-											echo "<option value=\"".$documentlist->id."\">".$documentlist->name."</option>";
-								?>
-								<?php endforeach;?>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Wybór opakowania zbiorczego
-							<span class="required" aria-required="true"> * </span>
-						</label>
-						<div class="input-icon right">
-							<select class="form-control" name="bulkpackaging_id">
-								<option value="">-- Wybierz opakowanie dla dokumentu --</option>
-								<?php foreach ($bulkpackagings as $bulkpackaging):?>
-								<?php 
-											echo "<option value=\"".$bulkpackaging->id."\">".$bulkpackaging->name."</option>";
-								?>
-								<?php endforeach;?>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
 						<label class="control-label">Nazwa
 							<span class="required" aria-required="true"> * </span>
 						</label>
@@ -86,10 +41,25 @@
 						<!-- TODO UPLOAD (CZY AN FILESYSTEM CZY DO BAZY?)  -->
 						<span class="help-block"></span>
 					</div>
+					<div class="form-group">
+						<label class="control-label">Wybór pozycji
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" name="box_id">
+								<option>-- Wybierz pozycję dla dokumentu --</option>
+								<?php foreach ($boxes as $box):?>
+									<?php 
+										echo "<option value=\"".$box->id."\">".$box->id."</option>";
+									?>
+								<?php endforeach;?>
+							</select>
+							<span class="help-block"></span>
+						</div>
+					</div>
+					
 					<br/>
 					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
-					<input type="hidden" value="<?php echo $documentlist->id ?>" name="documentlist_id" />
-					<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging_id" />
 					<div class="margiv-top-10">
 						<a href="/warehouse/documents" class="btn green" id="submit">
 						Zapisz zmiany</a>

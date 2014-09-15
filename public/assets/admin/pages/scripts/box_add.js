@@ -19,6 +19,9 @@ var Box_add = function () {
 	            	storage_category: {
 	                    required: true
 	                },
+	                description: {
+	                    required: true
+	                },
 					date_from: {
 	                    required: true
 	                },
@@ -39,6 +42,9 @@ var Box_add = function () {
 	            messages: {
 	            	storage_category: {
 	                    required: "Wybierz kategorię magazynowania pozycji"
+	                },
+	                description: {
+	                    required: "Podaj krótki opis magazynowanej pozycji"
 	                },
 					date_from: {
 	                    required: "Podaj datę początkową magazynowania pozycji"

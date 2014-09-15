@@ -439,7 +439,7 @@ public $controller_title = 'Wirtualne teczki';
 		$documents = ORM::factory('Document')->join('virtualbriefcases_documents')->on('document.id', '=','virtualbriefcases_documents.document_id')->where('virtualbriefcases_documents.virtualbriefcase_id','=',$virtualbriefcase_id)->find_all();
 		$documentlists = ORM::factory('DocumentList')->join('virtualbriefcases_documentlists')->on('documentlist.id', '=','virtualbriefcases_documentlists.documentlist_id')->where('virtualbriefcases_documentlists.virtualbriefcase_id','=',$virtualbriefcase_id)->find_all();
 		$bulkpackagings = ORM::factory('BulkPackaging')->join('virtualbriefcases_bulkpackagings')->on('bulkpackaging.id', '=','virtualbriefcases_bulkpackagings.bulkpackaging_id')->where('virtualbriefcases_bulkpackagings.virtualbriefcase_id','=',$virtualbriefcase_id)->find_all();
-		
+		$virtualbriefcases = ORM::factory('virtualbriefcase')->join('virtualbriefcases_virtualbriefcases')->on('virtualbriefcase.id', '=','virtualbriefcases_virtualbriefcases.virtualbriefcase2_id')->where('virtualbriefcases_virtualbriefcases.virtualbriefcase1_id','=',$virtualbriefcase_id)->find_all();
 		
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
@@ -447,6 +447,7 @@ public $controller_title = 'Wirtualne teczki';
 		$this->content->bind('documents', $documents);
 		$this->content->bind('documentlists', $documentlists);
 		$this->content->bind('bulkpackagings', $bulkpackagings);
+		$this->content->bind('virtualbriefcases', $virtualbriefcases);
 		}
 	}
 }

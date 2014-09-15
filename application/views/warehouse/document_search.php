@@ -1,182 +1,262 @@
 <div class="row">
-				<div class="col-md-6 ">
-					<!-- BEGIN SAMPLE FORM PORTLET-->
-					<div class="portlet box blue">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-gift"></i> Wyszukaj dokument
-							</div>
-							<div class="tools">
-								<a href="" class="collapse">
-								</a>
-								<a href="#portlet-config" data-toggle="modal" class="config">
-								</a>
-								<a href="" class="reload">
-								</a>
-								<a href="" class="remove">
-								</a>
-							</div>
-						</div>
-						<div class="portlet-body form">
-							<form role="form">
-								<div class="form-body">
-									<div class="form-group">
-										<label>Email Address</label>
-										<div class="input-group">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-											<input type="text" class="form-control" placeholder="Email Address">
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Circle Input</label>
-										<div class="input-group">
-											<span class="input-group-addon input-circle-left">
-											<i class="fa fa-envelope"></i>
-											</span>
-											<input type="text" class="form-control input-circle-right" placeholder="Email Address">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">Password</label>
-										<div class="input-group">
-											<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-											<span class="input-group-addon">
-											<i class="fa fa-user"></i>
-											</span>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Left Icon</label>
-										<div class="input-icon">
-											<i class="fa fa-bell-o"></i>
-											<input type="text" class="form-control" placeholder="Left icon">
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Right Icon</label>
-										<div class="input-icon right">
-											<i class="fa fa-microphone"></i>
-											<input type="text" class="form-control" placeholder="Right icon">
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Circle Input</label>
-										<div class="input-icon right">
-											<i class="fa fa-microphone"></i>
-											<input type="text" class="form-control input-circle" placeholder="Right icon">
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Input with Icon</label>
-										<div class="input-group input-icon right">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-											<i class="fa fa-exclamation tooltips" data-original-title="Invalid email." data-container="body"></i>
-											<input id="email" class="input-error form-control" type="text" value="">
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Input With Spinner</label>
-										<input class="form-control spinner" type="text" placeholder="Process something"/>
-									</div>
-									<div class="form-group">
-										<label>Static Control</label>
-										<p class="form-control-static">
-											 email@example.com
-										</p>
-									</div>
-									<div class="form-group">
-										<label>Disabled</label>
-										<input type="text" class="form-control" placeholder="Disabled" disabled>
-									</div>
-									<div class="form-group">
-										<label>Readonly</label>
-										<input type="text" class="form-control" placeholder="Readonly" readonly>
-									</div>
-									<div class="form-group">
-										<label>Dropdown</label>
-										<select class="form-control">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-											<option>Option 5</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Multiple Select</label>
-										<select multiple class="form-control">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-											<option>Option 5</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Textarea</label>
-										<textarea class="form-control" rows="3"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="exampleInputFile1">File input</label>
-										<input type="file" id="exampleInputFile1">
-										<p class="help-block">
-											 some help text here.
-										</p>
-									</div>
-									<div class="form-group">
-										<label>Checkboxes</label>
-										<div class="checkbox-list">
-											<label>
-											<input type="checkbox"> Checkbox 1 </label>
-											<label>
-											<input type="checkbox"> Checkbox 2 </label>
-											<label>
-											<input type="checkbox" disabled> Disabled </label>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Inline Checkboxes</label>
-										<div class="checkbox-list">
-											<label class="checkbox-inline">
-											<input type="checkbox" id="inlineCheckbox1" value="option1"> Checkbox 1 </label>
-											<label class="checkbox-inline">
-											<input type="checkbox" id="inlineCheckbox2" value="option2"> Checkbox 2 </label>
-											<label class="checkbox-inline">
-											<input type="checkbox" id="inlineCheckbox3" value="option3" disabled> Disabled </label>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Radio</label>
-										<div class="radio-list">
-											<label>
-											<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked> Option 1</label>
-											<label>
-											<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Option 2 </label>
-											<label>
-											<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled> Disabled </label>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Inline Radio</label>
-										<div class="radio-list">
-											<label class="radio-inline">
-											<input type="radio" name="optionsRadios" id="optionsRadios4" value="option1" checked> Option 1 </label>
-											<label class="radio-inline">
-											<input type="radio" name="optionsRadios" id="optionsRadios5" value="option2"> Option 2 </label>
-											<label class="radio-inline">
-											<input type="radio" name="optionsRadios" id="optionsRadios6" value="option3" disabled> Disabled </label>
-										</div>
-									</div>
+	<div class="col-md-12">
+		<div class="tabbable tabbable-custom tabbable-full-width">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a data-toggle="tab" href="#tab_box"> Wyszukaj pozycję</a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#tab_document"> Wyszukaj dokument</a>
+				</li>
+			</ul>
+		
+			<div class="tab-content">
+				<div id="tab_box" class="tab-pane">
+					<h4>Dane pozycji</h4>
+							<form class="form-inline" role="form" action="/warehouse/boxes_search" method="POST" id="search_box_form">
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Numer</label>
+									<input type="text" class="form-control" id="box_id" placeholder="Numer">
 								</div>
-								<div class="form-actions">
-									<button type="submit" class="btn blue">Submit</button>
-									<button type="button" class="btn default">Cancel</button>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Magazyn</label>
+									<input type="text" class="form-control" id="warehouse_id" placeholder="Magazyn">
 								</div>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Kategoria przechowywania</label>
+									<input type="text" class="form-control" id="storage_category_id" placeholder="Kategoria przechowywania">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Data początku magazynowania</label>
+									<input type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="date_from" placeholder="Data od">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Data końca magazynowania</label>
+									<input type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="date_to" placeholder="Data do">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Data odbioru</label>
+									<input type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="date_reception" placeholder="Data odbioru">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Blokady</label>
+									<input type="text" class="form-control" id="lock" placeholder="Blokady">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Plomby</label>
+									<input type="text" class="form-control" id="seal" placeholder="Plomby">
+								</div>
+								<button type="submit" class="btn green">
+									Szukaj &nbsp; <i class="m-icon-swapright m-icon-white"></i>
+								</button>
+								
 							</form>
-						</div>
-					</div>
-					<!-- END SAMPLE FORM PORTLET-->
+							<br>
+							<br>
+					
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-advance table-hover">
+									<thead>
+									<tr>
+										<th>
+											 Numer
+										</th>
+										<th>
+											 Magazyn
+										</th>
+										<th>
+											 Kategoria przechowywania
+										</th>							
+										<th>
+											 Data początku magazynowania
+										</th>
+										<th>
+											 Data końca magazynowania
+										</th>
+										<th>
+											 Data odbioru
+										</th>							
+										<th>
+											Blokady
+										</th>
+										<th>
+											 Plomby
+										</th>
+										<th>
+											 Opcje
+										</th>
+									</tr>
+									</thead>
+									<tbody>
+									
+							<tr>
+								<td>
+									 ID
+								</td>
+								<td>
+									 warehause->name
+								</td>
+								<td>
+									 storagecategory->name
+								</td>			
+								<td>
+									 box->date_from
+								</td>
+								<td>
+									 box->date_to
+								</td>
+								<td>
+									 box->date_reception
+								</td>
+								<td>
+									 box->lock
+								</td>
+								<td>
+									 box->seal
+								</td>
+								
+								<td>
+									opcje
+								</td>
+							</tr>
+							
+									</tbody>
+									</table>
+								</div>
+								<div class="margin-top-20">
+									<ul class="pagination">
+										<li>
+											<a href="#">
+											Prev </a>
+										</li>
+										<li>
+											<a href="#">
+											1 </a>
+										</li>
+										<li>
+											<a href="#">
+											2 </a>
+										</li>
+										<li class="active">
+											<a href="#">
+											3 </a>
+										</li>
+										<li>
+											<a href="#">
+											4 </a>
+										</li>
+										<li>
+											<a href="#">
+											5 </a>
+										</li>
+										<li>
+											<a href="#">
+											Next </a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!--end tab-pane-->
+				<!--end tab-pane-->
+				<div id="tab_document" class="tab-pane active">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="booking-search">
+								<h4>Dane dokumentu</h4>
+							<form class="form-inline" role="form" action="/warehouse/boxes_search#tab_document" method="POST" id="search_document_form">
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Numer</label>
+									<input type="text" class="form-control" id="document_id" placeholder="Numer">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">Nazwa</label>
+									<input type="text" class="form-control" id="name" placeholder="Nazwa">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="exampleInputtext2">opis</label>
+									<input type="text" class="form-control" id="description" placeholder="Opis">
+								</div>
+								<button type="submit" class="btn green">
+									Szukaj &nbsp; <i class="m-icon-swapright m-icon-white"></i>
+								</button>
+								
+							</form>
+							<br>
+							<br>
+					
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-advance table-hover">
+									<thead>
+									<tr>
+										<th>
+											 Numer
+										</th>
+										<th>
+											 Nazwa
+										</th>
+										<th>
+											 Opis
+										</th>							
+									</tr>
+									</thead>
+									<tbody>
+										<?php foreach ($documents as $document):?>
+										<tr>
+											<td style="width:10%">
+												 <?php echo $document->id;?>
+											</td>
+											<td style="width:20%">
+												 <?php echo $document->name;?>
+											</td>
+																		
+											<td style="width:50%">
+												 <?php echo $document->description;?>
+											</td>
+											
+										</tr>
+										<?php endforeach;?>
+									</tbody>
+									</table>
+								</div>
+								<div class="margin-top-20">
+									<ul class="pagination">
+										<li>
+											<a href="#">
+											Prev </a>
+										</li>
+										<li>
+											<a href="#">
+											1 </a>
+										</li>
+										<li>
+											<a href="#">
+											2 </a>
+										</li>
+										<li class="active">
+											<a href="#">
+											3 </a>
+										</li>
+										<li>
+											<a href="#">
+											4 </a>
+										</li>
+										<li>
+											<a href="#">
+											5 </a>
+										</li>
+										<li>
+											<a href="#">
+											Next </a>
+										</li>
+									</ul>
+								</div>
+							</div>
+				<!--end tab-pane-->
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+					

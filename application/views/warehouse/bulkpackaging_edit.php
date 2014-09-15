@@ -54,12 +54,14 @@
 						<textarea class="form-control" name="description"><?php echo $bulkpackaging->description;?></textarea>
 					<span class="help-block"></span>
 					</div>
+					
+					
 					<br/>
 					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 					<div class="margiv-top-10">
-						<a href="/warehouse/bulkpackagings/" class="btn green" id="submit">
+						<a href="/warehouse/bulkpackagings" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/warehouse/bulkpackagings/" class="btn default" id="cancel">
+						<a href="/warehouse/bulkpackagings" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	
