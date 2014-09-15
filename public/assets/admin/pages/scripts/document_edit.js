@@ -59,15 +59,20 @@ var Document_edit = function () {
 				
 	        });
         	       		
-				
+			$("select[name=bulkpackaging_id]").attr('disabled',true);
+			$("select[name=documentlist_id]").attr('disabled',true);
+
+			
         	$('input[name=radio]').change(function(e){
-        	    if($(this).val() == 'bulk') {
-					$('#bulkpackaging_id').removeProp("disabled");
-				}else {
-					if($(this).val() == 'list') {
-						$('#bulkpackaging_id').prop("disabled", "disabled");
-				}
-        	   } 
+        	    
+        		if($(this).val() == 'bulk') {
+        			$("select[name=bulkpackaging_id]").attr('disabled',false);
+        			$("select[name=documentlist_id]").attr('disabled',true);
+				}else if($(this).val() == 'list') {
+        			$("select[name=bulkpackaging_id]").attr('disabled',true);
+        			$("select[name=documentlist_id]").attr('disabled',false);
+
+				} 
         	});
         	
         	$("#edit_document_form #submit").bind('click',function(e){

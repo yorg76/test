@@ -94,7 +94,7 @@
 						<label class="control-label">Wybór opakowania zbiorczego
 							</label>
 						<div class="input-icon right">
-							<select class="form-control" name="bulkpackaging_id" disabled="disabled">
+							<select class="form-control" name="bulkpackaging_id">
 								<option>-- Nie przypisany --</option>
 								<?php foreach ($bulkpackagings as $bulkpackaging):?>
 									<?php 
