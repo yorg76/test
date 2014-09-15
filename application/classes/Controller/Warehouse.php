@@ -5,6 +5,8 @@
  * @copyright  BSDterminal 2014
  * @version    1.0
  */
+
+/* Celem updateu u Mańka ;-) */
  
 class Controller_Warehouse extends Controller_Welcome {
 		
