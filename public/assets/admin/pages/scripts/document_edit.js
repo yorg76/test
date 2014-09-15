@@ -10,7 +10,7 @@ var Document_edit = function () {
         init: function () {
             //initialize here something.    
         	
-        	$('#add_document_form').validate({
+        	$('#edit_document_form').validate({
 	            errorElement: 'span', //default input error message container
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
@@ -33,46 +33,53 @@ var Document_edit = function () {
 	            },
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
-	                $('.alert-danger',$('#add_document_form')).show();
-	                Metronic.scrollTo( $('.alert-danger',$('#add_document_form')), -200);
-	                $("#add_document_form").removeAttr("novalidate");
+	                $('.alert-danger',$('#edit_document_form')).show();
+	                Metronic.scrollTo( $('.alert-danger',$('#edit_document_form')), -200);
+	                $("#edit_document_form").removeAttr("novalidate");
 	                
 	            },
 
 	            highlight: function (element) { // hightlight error inputs
 	                $(element)
 	                    .closest('.form-group').addClass('has-error'); // set error class to the control group
-	                $("#add_document_form").removeAttr("novalidate");
+	                $("#edit_document_form").removeAttr("novalidate");
 	              
 	            },
 
 	            success: function (label) {
 	                label.closest('.form-group').removeClass('has-error');
 	                label.remove();
-	                $("#add_document_form").removeAttr("novalidate");
+	                $("#edit_document_form").removeAttr("novalidate");
 	            },
 	            
 	            submitHandler: function (form) {
 	                form.submit();
 	            }
+				
+				
 	        });
-        	
-        	
-        	$('input[name=IsIndividual]').change(function(){
-        	    if($(this).val() == 0) Add_user.firmaEnable();
-        	    else if($(this).val() == 1) Add_user.firmaDisable();
-        	    
+        	       		
+				
+        	$('input[name=radio]').change(function(e){
+        	    if($(this).val() == 'bulk') {
+					$('#bulkpackaging_id').removeProp("disabled");
+				}else {
+					if($(this).val() == 'list') {
+						$('#bulkpackaging_id').prop("disabled", "disabled");
+				}
+        	   } 
         	});
         	
-        	$("#add_document_form #submit").bind('click',function(e){
-                if ($('#add_document_form').validate().form()) {
-                    $('#add_document_form').submit();
+        	$("#edit_document_form #submit").bind('click',function(e){
+                if ($('#edit_document_form').validate().form()) {
+                    $('#edit_document_form').submit();
                 }
-                $("#add_document_form").removeAttr("novalidate");
+                $("#edit_document_form").removeAttr("novalidate");
                 return false;
         	});       	
         },
-    };
+		
+	};
 
 }();
 

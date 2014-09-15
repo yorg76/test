@@ -1,7 +1,7 @@
 <div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
-					<div class="portlet box blue">
+					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="icon-pencil"></i>Pozycja <?php echo $box->id ?> - Dokumenty
@@ -64,7 +64,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="portlet box blue">
+					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="icon-pencil"></i>Pozycja <?php echo $box->id ?> - Listy Dokumentów
@@ -126,7 +126,7 @@
 							</table>
 						</div>
 					</div>
-					<div class="portlet box blue">
+					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="icon-pencil"></i>Pozycja <?php echo $box->id ?> - Opakowania zbiorcze
