@@ -125,12 +125,12 @@
 											<br/>
 											<br/>
 											<div class="margiv-top-10">
-												<a href="/warehouse/boxes/" class="btn green" id="submit">
+												<a href="/warehouse/boxes" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/warehouse/boxes/" class="btn default" id="cancel">
+												<a href="/warehouse/boxes" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
-										<form>
+										</form>
 										</div>
 										</div>
 									</div>
@@ -141,7 +141,7 @@
 								<div class="row">
 									<div class="col-md-8">
 										<div class="booking-search">
-											<form enctype="multipart/form-data" role="form" action="/warehouse/document_add/" method="POST" id="add_document_form">
+											<form enctype="multipart/form-data" role="form" action="/warehouse/document_add" method="POST" id="add_document_form">
 												<div class="alert alert-danger display-hide">
 													<button class="close" data-close="alert"></button>
 													<span>Popraw błędy w formularzu</span>
@@ -327,7 +327,7 @@
 								<div class="row">	
 									<div class="col-md-8">
 										<div class="booking-search">
-											<form role="form" action="/virtualbriefcase/virtualbriefcase_add" method="POST" id="add_virtualbriefcase_form">
+											<form role="form" action="/virtualbriefcase/virtualbriefcase_add/" method="POST" id="add_virtualbriefcase_form">
 												<div class="alert alert-danger display-hide">
 													<button class="close" data-close="alert"></button>
 													<span>Popraw błędy w formularzu</span>
@@ -370,9 +370,9 @@
 														</div>
 														<br/>
 														<div class="margiv-top-10">
-															<a href="/virtualbriefcase/virtualbriefcases/" class="btn green" id="submit">
+															<a href="/virtualbriefcase/virtualbriefcases" class="btn green" id="submit">
 															Zapisz zmiany</a>
-															<a href="/virtualbriefcase/virtualbriefcases/" class="btn default" id="cancel">
+															<a href="/virtualbriefcase/virtualbriefcases" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>
 													</div>	

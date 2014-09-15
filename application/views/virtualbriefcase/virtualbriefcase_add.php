@@ -54,9 +54,9 @@
 					</div>
 					<br/>
 					<div class="margiv-top-10">
-						<a href="/virtualbriefcase/virtualbriefcases/" class="btn green" id="submit">
+						<a href="/virtualbriefcase/virtualbriefcases" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/virtualbriefcase/virtualbriefcases/" class="btn default" id="cancel">
+						<a href="/virtualbriefcase/virtualbriefcases" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

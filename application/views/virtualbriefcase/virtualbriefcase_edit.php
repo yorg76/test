@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/virtualbriefcase/virtualbriefcase_edit/<?php echo $virtualbriefcase->id ?>" method="POST" id="add_virtualbriefcase_form">
+		<form role="form" action="/virtualbriefcase/virtualbriefcase_edit<?php echo $virtualbriefcase->id ?>" method="POST" id="add_virtualbriefcase_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
