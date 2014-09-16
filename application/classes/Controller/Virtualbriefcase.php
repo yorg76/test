@@ -119,11 +119,11 @@ public $controller_title = 'Wirtualne teczki';
 				
 			$params = $_POST;
 			//$params['division_id'] = $division->id;
-			//$virtualbriefcase=VirtualBriefcase::instance();
+			$virtualbriefcase=VirtualBriefcase::instance();
 			if($virtualbriefcase->addVirtualBriefcase($params)) {
-				Message::success(ucfirst(__('Wirtualna teczka zostaĹ‚a dodana do dziaĹ‚u')),'/virtualbriefcase/virtualbriefcases');
+				Message::success(ucfirst(__('Wirtualna teczka została dodana do działu.')),'/virtualbriefcase/virtualbriefcases');
 			}else {
-				Message::error(ucfirst(__('Nie udaĹ‚o siÄ™ dodaÄ‡ wirtualnej teczki do dziaĹ‚u')),'/virtualbriefcase/virtualbriefcases');
+				Message::error(ucfirst(__('Nie udało się dodać wirtualnej teczki do działu.')),'/virtualbriefcase/virtualbriefcases');
 			}
 		}
 	}
@@ -144,12 +144,11 @@ public $controller_title = 'Wirtualne teczki';
 	
 			if($this->request->method()===HTTP_Request::POST) {
 				$params=$_POST;
-				$params['division_id'] = $division_id;
-	
+					
 				if($virtualbriefcase->updateVirtualBriefcase($params)) {
-					Message::success(ucfirst(__('Wirtualna teczka zostaĹ‚a zaktualizowana')),'/virtualbriefcase/virtualbriefcases');
+					Message::success(ucfirst(__('Wirtualna teczka została zaktualizowana.')),'/virtualbriefcase/virtualbriefcases');
 				}else {
-					Message::error(ucfirst(__('Nie udaĹ‚o siÄ™ zaktualizowaÄ‡ wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
+					Message::error(ucfirst(__('Nie udało się zaktualizawać wirtualnej teczki.')),'/virtualbriefcase/virtualbriefcases');
 				}
 			}
 		}

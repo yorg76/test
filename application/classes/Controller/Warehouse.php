@@ -260,24 +260,22 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_box_edit() {
+		$storagecategories = ORM::factory('StorageCategory')->find_all();
+		$this->content->bind('storagecategories', $storagecategories);
+		$customer = Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$this->content->bind('customers', $customers);
+		$this->content->bind('warehouses', $warehouses);
+		
 		if($this->request->param('id') > 0) {
-			$box = Box::instance($this->request->param('id'));
-			$storagecategories = ORM::factory('StorageCategory')->find_all();
-			$this->content->bind('storagecategories', $storagecategories);
-			$customer = Auth::instance()->get_user()->customer;
-			$warehouses = $customer->warehouses->find_all();
-			$this->content->bind('customers', $customers);
-			$this->content->bind('warehouses', $warehouses);
+			
+			$box = ORM::factory('Box',$this->request->param('id'));
 			$this->content->bind('box', $box);
 			
 			if($this->request->method()===HTTP_Request::POST) {
 				$params = $_POST;
-
-				//$box=Box::instance('id');
-
 				//$box->values($_POST);
 				$box=Box::instance($this->request->param('id'));
-
 				
 					if($box->updateBox($params)) {
 						Message::success(ucfirst(__('Dane pozycji zostały zaktualizowane')),'/warehouse/boxes');
@@ -720,16 +718,15 @@ class Controller_Warehouse extends Controller_Welcome {
 		}
 		
 		$customer=Auth::instance()->get_user()->customer;
-		$virtualbriefcase = VirtualBriefcase::instance();
 		$divisions = $customer->divisions->find_all();
-		
+	
 		$this->content->bind('divisions', $divisions);
-		
+	
 		if($this->request->method()===HTTP_Request::POST) {
-		
+				
 			$params = $_POST;
 			//$params['division_id'] = $division->id;
-			//$virtualbriefcase=VirtualBriefcase::instance();
+			$virtualbriefcase=VirtualBriefcase::instance();
 			if($virtualbriefcase->addVirtualBriefcase($params)) {
 				Message::success(ucfirst(__('Wirtualna teczka została dodana do działu.')),'/virtualbriefcase/virtualbriefcases');
 			}else {

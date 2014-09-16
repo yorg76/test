@@ -30,7 +30,7 @@ class Division extends ORM {
 			$this->id=$this->division->id;
 			$this->description=$this->division->description;
 			$this->customer = $this->division->customer;
-			$this->virtualbriefcases = $this->division->virtualbriefcase->find();
+			$this->virtualbriefcases = $this->division->virtualbriefcases->find();
 			
 	
 				

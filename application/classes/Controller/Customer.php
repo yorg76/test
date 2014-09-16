@@ -263,10 +263,23 @@ class Controller_Customer extends Controller_Welcome {
 	public function action_divisions() {
 		$customer=Auth::instance()->get_user()->customer;
 		$divisions = $customer->divisions->find_all();
+		$virtualbriefcases = $customer->divisions->virtualbriefcases->find_all();
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);
 		$this->content->bind('user', $user);
+		$this->content->bind('virtualbriefcases', $virtualbriefcases);
+	}
+	
+	public function action_division_view() {
+		if($this->request->param('id') > 0) {
+			$division = Division::instance($this->request->param('id'));
+			$division_id = $division->id;
+			$this->content->bind('division', $division);
+		
+			$virtualbriefcases = ORM::factory('Virtualbriefcase')->where('division_id','=', $division_id)->find_all();
+			$this->content->bind('virtualbriefcases', $virtualbriefcases);
+		}
 	}
 	
 	public function action_division_add() {

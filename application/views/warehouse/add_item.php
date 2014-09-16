@@ -49,6 +49,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
+													<span class="help-block">Help</span>
 												</div>
 											</div>
 											<div class="form-group">
@@ -101,6 +102,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
+													<span class="help-block"></span>
 												</div>
 											</div>				
 											<div class="form-group">
@@ -163,6 +165,7 @@
 																	<?php endforeach;?>
 																</select>
 															</div>
+															<span class="help-block"></span>
 														</div>
 														<div class="form-group">
 															<label class="control-label">Nazwa
@@ -228,6 +231,7 @@
 																	<?php endforeach;?>
 																</select>
 															</div>
+															<span class="help-block"></span>
 														</div>	
 														<div class="form-group">
 															<label class="control-label">Nazwa
@@ -289,6 +293,7 @@
 																	<?php endforeach;?>
 																</select>
 															</div>
+															<span class="help-block"></span>
 														</div>	
 														<div class="form-group">
 															<label class="control-label">Nazwa
@@ -327,7 +332,7 @@
 								<div class="row">	
 									<div class="col-md-8">
 										<div class="booking-search">
-											<form role="form" action="/virtualbriefcase/virtualbriefcase_add/" method="POST" id="add_virtualbriefcase_form">
+											<form role="form" action="/virtualbriefcase/virtualbriefcase_add" method="POST" id="add_virtualbriefcase_form">
 												<div class="alert alert-danger display-hide">
 													<button class="close" data-close="alert"></button>
 													<span>Popraw błędy w formularzu</span>
@@ -367,6 +372,7 @@
 																	<?php endforeach;?>
 																</select>
 															</div>
+															<span class="help-block"></span>
 														</div>
 														<br/>
 														<div class="margiv-top-10">
