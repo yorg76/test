@@ -16,7 +16,7 @@ var Add_item = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	storage_category: {
+	            	storage_category_id: {
 	                    required: true
 	                },
 					date_from: {
@@ -26,6 +26,9 @@ var Add_item = function () {
 	                    required: true
 	                },
 					date_reception: {
+	                    required: true
+	                },
+	                warehouse_id: {
 	                    required: true
 	                },
 					lock: {
@@ -37,7 +40,7 @@ var Add_item = function () {
 	            },
 
 	            messages: {
-	            	storage_category: {
+	            	storage_category_id: {
 	                    required: "Wybierz kategorię magazynowania pozycji"
 	                },
 					date_from: {
@@ -48,6 +51,9 @@ var Add_item = function () {
 	                },
 					date_reception: {
 	                    required: "Podaj datę odbioru magaznowanej pozycji"
+	                },
+	                warehouse_id: {
+	                    required: "Wybierz magazyn dla pozycji"
 	                },
 					lock: {
 	                    required: "Wybierz status"
@@ -83,13 +89,7 @@ var Add_item = function () {
 	        });
         	
         	
-        	$('input[name=IsIndividual]').change(function(){
-        	    if($(this).val() == 0) Add_user.firmaEnable();
-        	    else if($(this).val() == 1) Add_user.firmaDisable();
-        	    
-        	});
-        	
-			$("#add_box_form #submit").bind('click',function(e){
+        	$("#add_box_form #submit").bind('click',function(e){
                 if ($('#add_box_form').validate().form()) {
                     $('#add_box_form').submit();
                 }
@@ -144,13 +144,7 @@ var Add_item = function () {
 	            }
 	        });
         	
-        	
-        	$('input[name=IsIndividual]').change(function(){
-        	    if($(this).val() == 0) Add_user.firmaEnable();
-        	    else if($(this).val() == 1) Add_user.firmaDisable();
-        	    
-        	});
-        	
+  	
         	$("#add_document_form #submit").bind('click',function(e){
                 if ($('#add_document_form').validate().form()) {
                     $('#add_document_form').submit();
@@ -206,13 +200,7 @@ var Add_item = function () {
 	            }
 	        });
         	
-        	
-        	$('input[name=IsIndividual]').change(function(){
-        	    if($(this).val() == 0) Add_user.firmaEnable();
-        	    else if($(this).val() == 1) Add_user.firmaDisable();
-        	    
-        	});
-        	
+			
         	$("#add_documentlist_form #submit").bind('click',function(e){
                 if ($('#add_documentlist_form').validate().form()) {
                     $('#add_documentlist_form').submit();
@@ -232,14 +220,20 @@ var Add_item = function () {
 					description: {
 	                    required: true
 	                },
+	                division: {
+	                    required: true
+	                },
 	            },
 
 	            messages: {
 	            	name: {
-	                    required: "Podaj nazwę opakowania zbiorczego"
+	                    required: "Podaj nazwę wirtualnej teczki"
 	                },
 					description: {
-	                    required: "Podaj krótki opis opakowania zbiorczego"
+	                    required: "Podaj krótki opis wirtualnej teczki"
+	                },
+	                division: {
+	                    required: "Wybierz dział dla wirtualnej teczki"
 	                },
 	            },
 
@@ -267,19 +261,69 @@ var Add_item = function () {
 	                form.submit();
 	            }
 	        });
-        	
-        	
-        	$('input[name=IsIndividual]').change(function(){
-        	    if($(this).val() == 0) Add_user.firmaEnable();
-        	    else if($(this).val() == 1) Add_user.firmaDisable();
-        	    
-        	});
-        	
+        	       	
+        	       	
         	$("#add_bulkpackaging_form #submit").bind('click',function(e){
                 if ($('#add_bulkpackaging_form').validate().form()) {
                     $('#add_bulkpackaging_form').submit();
                 }
                 $("#add_bulkpackaging_form").removeAttr("novalidate");
+                return false;
+        	});
+        	
+        	$('#add_virtualbriefcase_form').validate({
+	            errorElement: 'span', //default input error message container
+	            errorClass: 'help-block', // default input error message class
+	            focusInvalid: false, // do not focus the last invalid input
+	            rules: {
+	            	name: {
+	                    required: true
+	                },
+					description: {
+	                    required: true
+	                },
+	            },
+
+	            messages: {
+	            	name: {
+	                    required: "Podaj nazwę opakowania zbiorczego"
+	                },
+					description: {
+	                    required: "Podaj krótki opis opakowania zbiorczego"
+	                },
+	            },
+
+	            invalidHandler: function (event, validator) { //display error alert on form submit   
+	                $('.alert-danger',$('#add_virtualbriefcase_form')).show();
+	                Metronic.scrollTo( $('.alert-danger',$('#add_virtualbriefcase_form')), -200);
+	                $("#add_virtualbriefcase_form").removeAttr("novalidate");
+	                
+	            },
+
+	            highlight: function (element) { // hightlight error inputs
+	                $(element)
+	                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+	                $("#add_virtualbriefcase_form").removeAttr("novalidate");
+	              
+	            },
+
+	            success: function (label) {
+	                label.closest('.form-group').removeClass('has-error');
+	                label.remove();
+	                $("#add_virtualbriefcase_form").removeAttr("novalidate");
+	            },
+	            
+	            submitHandler: function (form) {
+	                form.submit();
+	            }
+	        });
+        	       	
+        	       	
+        	$("#add_virtualbriefcase_form #submit").bind('click',function(e){
+                if ($('#add_virtualbriefcase_form').validate().form()) {
+                    $('#add_virtualbriefcase_form').submit();
+                }
+                $("#add_virtualbriefcase_form").removeAttr("novalidate");
                 return false;
         	});       				
         },

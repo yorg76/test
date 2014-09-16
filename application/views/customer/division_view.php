@@ -1,10 +1,10 @@
-<div class="row">
+Dział <div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-layers"></i>Wirtualne teczki
+								<i class="icon-layers"></i>Dział <?php echo $division->name;?> - wirtualne teczki
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">

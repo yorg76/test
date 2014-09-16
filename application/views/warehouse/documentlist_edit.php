@@ -76,9 +76,9 @@
 					<br/>
 					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 					<div class="margiv-top-10">
-						<a href="/warehouse/documentlists/" class="btn green" id="submit">
+						<a href="/warehouse/documentlists" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/warehouse/documentlists/" class="btn default" id="cancel">
+						<a href="/warehouse/documentlists" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

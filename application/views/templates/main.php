@@ -149,13 +149,12 @@
 						<li class="<?php if ($_action=='user_add') echo "active";?>">
 							<a href="/admin/user_add">
 							<i class="icon-user"></i>
-							Dodaj nowego</a>
+							Dodaj użytkownika</a>
 						</li>
 						<li class="<?php if ($_action=='storagecategories') echo "active";?>">
 							<a href="/admin/storagecategories">
 							<i class="icon-layers"></i>
 							Kategorie</a>
-						</li>
 						</li>
 					</ul>
 				</li>
@@ -177,6 +176,13 @@
 							<i class="icon-list"></i>
 							Lista działów</a>
 						</li>
+						
+						<li class="<?php if ($_action=='shipmentcompanies') echo "active";?>">
+							<a href="/customer/shipmentcompanies">
+							<i class="icon-handbag"></i>
+							Firmy kurierskie</a>
+						</li>
+						
 						<li class="<?php if ($_action=='info') echo "active";?>">
 							<a href="/customer/info">
 							<i class="icon-notebook"></i>
@@ -240,7 +246,7 @@
 						<li>
 							<a href="/warehouse/add_item">
 							<i class="icon-docs"></i>
-							Dodaj...</a>
+							Dodaj do magazynu</a>
 						</li>
 					</ul>
 				</li>
@@ -274,6 +280,11 @@
 							<a href="/virtualbriefcase/bulkpackagings">
 							<i class="glyphicon glyphicon-th"></i>
 							Opakowania zbiorcze</a>
+						</li>
+						<li>
+							<a href="/virtualbriefcase/add_item">
+							<i class="icon-docs"></i>
+							Dodaj do teczki</a>
 						</li>
 						
 					</ul>

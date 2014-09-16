@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Dokumenty
+								<i class="fa fa-edit"></i>Użytkownicy
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -16,17 +16,14 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/warehouse/document_add'">
+									<button class="btn green" onClick="javascript:window.location='/customer/division_add/<?php echo $customer->id; ?>'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
 							</div>						
-							<table class="table table-striped table-hover table-bordered" id="documents_list">
+							<table class="table table-striped table-hover table-bordered" id="customer_users_list">
 							<thead>
 							<tr>
-								<th>
-									 ID
-								</th>
 								<th>
 									 Nazwa
 								</th>							
@@ -39,22 +36,19 @@
 							</tr>
 							</thead>
 							<tbody>
-							<?php foreach ($documents as $document):?>
+							<?php foreach ($divisions as $division):?>
 							<tr>
-								<td style="width:10%">
-									 <?php echo $document->id;?>
-								</td>
-								<td style="width:20%">
-									 <?php echo $document->name;?>
+								<td>
+									 <?php echo $division->name;?>
 								</td>
 															
-								<td style="width:50%">
-									 <?php echo $document->description;?>
+								<td>
+									 <?php echo $division->description;?>
 								</td>
-								<td style="width:20%">
+								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';"><i class="icon-pencil"></i> Edytuj</button>
-											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/document_delete/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-sm yellow division-edit margin-bottom" onClick="javascript:window.location='/customer/division_edit/<?php echo $user->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-sm red division-delete margin-bottom" id="<?php echo $user->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>
@@ -67,3 +61,5 @@
 				</div>
 			</div>
 			<!-- END PAGE CONTENT -->
+		</div>
+	</div>

@@ -109,6 +109,22 @@ class BulkPackaging extends ORM {
 		return;
 		return;
 	}
+	
+	public function removeBulkPackaging() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->remove('bulkpackaging',$this->bulkpackaging)) {
+				$log->add(Log::DEBUG,"Success: Remove BulkPackaging:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Removing BulkPackaging:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+		}
+		return;
+	}
 
 
 	public function addDocumentlist() {

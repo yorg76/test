@@ -97,32 +97,21 @@ class Controller_Customer extends Controller_Welcome {
     
     }
     
-    public function action_add(){
-        $Model = new Model_Customer();
-                
-        if($this->request->method()===HTTP_Request::POST) {
-            $validate = new Validation($_POST);
-            $validate->rule('nazwa', 'not_empty')
-                     ->rule('nip', 'not_empty')
-					 ->rule('regon', 'not_empty');
-            
-            if($validate->check()){
-                $Model->add($_POST);
-                $success = "Nowy klient zosta� utworzony";
-            }else{
-                $error = $validate->errors('msg');
-            }
-        }
-        $this->template->content = View::factory('Customer/add')
-                                        ->bind('success',$success)
-                                        ->bind('error',$error);;       
-    } 
-    public function action_delete(){        
-        $id = $this->request->param('id');
-        $modelCustomer = new Model_Customer();
-        $modelCustomer->delete($id);
-        $this->request->redirect('Customer/index');
-    } 
+    public function action_shipmentcompanies() {
+    	
+    }
+    
+    public function action_shipmentcompany_add() {
+    	 
+    }
+
+    public function action_shipmentcompany_edit() {
+    
+    }
+    
+    public function action_shipmentcompany_delete() {
+    
+    }
     
     public function action_user_edit(){   
     	if($this->request->param('id') > 0 ) {
@@ -263,10 +252,23 @@ class Controller_Customer extends Controller_Welcome {
 	public function action_divisions() {
 		$customer=Auth::instance()->get_user()->customer;
 		$divisions = $customer->divisions->find_all();
+		$virtualbriefcases = $customer->divisions->virtualbriefcases->find_all();
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);
 		$this->content->bind('user', $user);
+		$this->content->bind('virtualbriefcases', $virtualbriefcases);
+	}
+	
+	public function action_division_view() {
+		if($this->request->param('id') > 0) {
+			$division = Division::instance($this->request->param('id'));
+			$division_id = $division->id;
+			$this->content->bind('division', $division);
+		
+			$virtualbriefcases = ORM::factory('Virtualbriefcase')->where('division_id','=', $division_id)->find_all();
+			$this->content->bind('virtualbriefcases', $virtualbriefcases);
+		}
 	}
 	
 	public function action_division_add() {

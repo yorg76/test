@@ -98,53 +98,182 @@ class VirtualBriefcase extends ORM {
 		return;
 	}
 			
-	public function addBulkpackaging() {
-
+	public function addBox() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->add('box',$this->box)) {
+				$log->add(Log::DEBUG,"Success: Added Box:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Adding Box:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
 		return;
 	}
-
-
-	public function addDocumentlist() {
-
+	
+	public function addBulkPackaging() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->add('bulkpackaging',$this->bulkpackaging)) {
+				$log->add(Log::DEBUG,"Success: Added BulkPackaging:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Adding BulkPackaging:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
 		return;
+		
 	}
 
 
 	public function addDocument() {
-
-		return;
-	}
-
-
-	public function removeBulkpackaging() {
-
-		return;
-	}
-
-
-	public function removeDocumentlist() {
-
-		return;
-	}
-
-
-	public function removeDocument() {
-
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->add('document',$this->document)) {
+				$log->add(Log::DEBUG,"Success: Added Document:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Adding Document:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
 		return;
 	}
 	
-
-	public function addBox() {
-
+	public function addDocumentList() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->add('documentlist',$this->documentlist)) {
+				$log->add(Log::DEBUG,"Success: Added DocumentList:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Adding DocumentList:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
+		return;
+	}
+	
+	public function addChildVirtualBriefcase() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->add('virtualbriefcase',$this->virtualbriefcase)) {
+				$log->add(Log::DEBUG,"Success: Added VirtualBriefcase:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Adding VirtualBriefcase:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
 		return;
 	}
 
 
 	public function removeBox() {
-
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->remove('box',$this->box)) {
+				$log->add(Log::DEBUG,"Success: Remove Box:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Removing Box:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
+		return;
+	}
+	
+	public function removeBulkPackaging() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->remove('bulkpackaging',$this->bulkpackaging)) {
+				$log->add(Log::DEBUG,"Success: Remove BulkPackaging:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Removing BulkPackaging:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
 		return;
 	}
 
+
+	public function removeDocument() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->remove('document',$this->document)) {
+				$log->add(Log::DEBUG,"Success: Remove Document:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Removing Document:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
+		return;
+	}
+	
+	public function removeDocumentList() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->remove('documentlist',$this->documentlist)) {
+				$log->add(Log::DEBUG,"Success: Remove DocumentList:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Removing DocumentList:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
+		return;
+	}
+	
+	
+	public function removeVirtualBriefcase() {
+		$log=Kohana_Log::instance();
+		try {
+			if($this->virtualbriefcase->remove('virtualbriefcase',$this->virtualbriefcase)) {
+				$log->add(Log::DEBUG,"Success: Removed VirtualBriefcase:".$id."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Removing VirtualBriefcase:".$id."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+			return $e->getMessage();
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+		}
+		return;
+	}
+	
+	
 
 }
 

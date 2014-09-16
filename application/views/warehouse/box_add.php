@@ -126,4 +126,3 @@
 		</form>
 	</div>
 	<!--end col-md-9-->
-</div>

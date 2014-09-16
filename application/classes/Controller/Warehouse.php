@@ -260,24 +260,22 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_box_edit() {
+		$storagecategories = ORM::factory('StorageCategory')->find_all();
+		$this->content->bind('storagecategories', $storagecategories);
+		$customer = Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$this->content->bind('customers', $customers);
+		$this->content->bind('warehouses', $warehouses);
+		
 		if($this->request->param('id') > 0) {
-			$box = Box::instance($this->request->param('id'));
-			$storagecategories = ORM::factory('StorageCategory')->find_all();
-			$this->content->bind('storagecategories', $storagecategories);
-			$customer = Auth::instance()->get_user()->customer;
-			$warehouses = $customer->warehouses->find_all();
-			$this->content->bind('customers', $customers);
-			$this->content->bind('warehouses', $warehouses);
+			
+			$box = ORM::factory('Box',$this->request->param('id'));
 			$this->content->bind('box', $box);
 			
 			if($this->request->method()===HTTP_Request::POST) {
 				$params = $_POST;
-
-				//$box=Box::instance('id');
-
 				//$box->values($_POST);
 				$box=Box::instance($this->request->param('id'));
-
 				
 					if($box->updateBox($params)) {
 						Message::success(ucfirst(__('Dane pozycji zostały zaktualizowane')),'/warehouse/boxes');
@@ -720,16 +718,15 @@ class Controller_Warehouse extends Controller_Welcome {
 		}
 		
 		$customer=Auth::instance()->get_user()->customer;
-		$virtualbriefcase = VirtualBriefcase::instance();
 		$divisions = $customer->divisions->find_all();
-		
+	
 		$this->content->bind('divisions', $divisions);
-		
+	
 		if($this->request->method()===HTTP_Request::POST) {
-		
+				
 			$params = $_POST;
 			//$params['division_id'] = $division->id;
-			//$virtualbriefcase=VirtualBriefcase::instance();
+			$virtualbriefcase=VirtualBriefcase::instance();
 			if($virtualbriefcase->addVirtualBriefcase($params)) {
 				Message::success(ucfirst(__('Wirtualna teczka została dodana do działu.')),'/virtualbriefcase/virtualbriefcases');
 			}else {
@@ -743,6 +740,27 @@ class Controller_Warehouse extends Controller_Welcome {
 	public function action_document_search() {
 		
 		
+		$customer=Auth::instance()->get_user()->customer;
+		$warehouses = $customer->warehouses->find_all();
+		$warehouses_ids= array();
+		$boxes_ids = array();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		
+		foreach ($boxes as $box) {
+			array_push($boxes_ids, $box->id);
+		}
+		$documents = ORM::factory('Document')->where('box_id','IN', $boxes_ids)->find_all();
+		
+		$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('boxes', $boxes);
+		$this->content->bind('documents', $documents);
+		
 		if($this->request->method()===HTTP_Request::POST) {
 		
 			$params = $_POST;
@@ -751,6 +769,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			$description=$_POST['description'];
 			
 			$documents = ORM::factory('Document')->where_open()->where('document.name', 'like', '%' . $name . '%')->or_where('document.description', 'like', '%' . $description . '%')->where_close()->find_all();
+			$documents = ORM::factory('Document')->where_open()->where('document.name', '=', $name)->or_where('document.description', '=' , $description)->where_close()->find_all();
 			
 			$count = $documents->count();
 			$this->content->bind('documents', $documents);
