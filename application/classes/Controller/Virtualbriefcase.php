@@ -154,13 +154,13 @@ public $controller_title = 'Wirtualne teczki';
 		}
 	}
 	
-	public function action_virtualbriefcase_delete() {
+	public function action_virtualbriefcase_remove() {
 		if($this->request->param('id') > 0) {
 			$virtualbriefcase = VirtualBriefcase::instance($this->request->param('id'));
 			$virtualbriefcase_id = $virtualbriefcase->id;
 			$name = $virtualbriefcase->name;
 	
-			if($virtualbriefcase->deleteVirtualBriefcase()) {
+			if($virtualbriefcase->removeVirtualBriefcase()) {
 				Message::success(ucfirst(__('Wirtualna teczka została usunięta')),'/virtualbriefcase/virtualbriefcases/'.$name);
 			}else {
 				Message::error(ucfirst(__('Nie udało się usunąć wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases/'.$name);
@@ -277,51 +277,66 @@ public $controller_title = 'Wirtualne teczki';
 		$this->content->bind('parent_virtualbriefcases', $parent_virtualbriefcases);
 		$this->content->bind('bulkpackagings', $bulkpackagings);
 		$this->content->bind('user', $user);
+		
 	}
 	
-	public function action_document_add() {
-		$customer=Auth::instance()->get_user()->customer;
-		$divisions = $customer->divisions->find_all();
-		$divisions_ids= array();
-		$virtualbriefcases_ids = array();
-		
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
-			
-		} 
-				
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
-
-		$user = Auth::instance()->get_user();
-		$this->content->bind('customer', $customer);
-		$this->content->bind('divisions', $divisions);
-		$this->content->bind('virtualbriefcases', $virtualbriefcases);
-		$this->content->bind('user', $user);
-		
+	public function action_box_add() {
+	
 		if($this->request->method()===HTTP_Request::POST) {
-				
+	
 			$params = $_POST;
-			
-			$document=Document::instance();
-			if($document->addDocument($params)) {
-				Message::success(ucfirst(__('Dokument został dodany do wirtualnej teczki')),'/virtualbriefcase/documentlists');
+			print_r($_POST);
+			$box=Box::instance();
+			if($document->addBox($params)) {
+				Message::success(ucfirst(__('Pozycja została dodana do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać dokumentu do do wirtualnej teczki')),'/virtualbriefcase/documentlists');
+				Message::error(ucfirst(__('Nie udało się dodać pozycji do do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
+			}
+		}
+	
+	}
+	
+	public function action_box_remove() {
+		if($this->request->param('id') > 0) {
+			$box = Box::instance($this->request->param('id'));
+			$box_id = $box->id;
+			
+			if($box->removeBox()) {
+				Message::success(ucfirst(__('Pozycja została usunięta z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases/'.$name);
+			}else {
+				Message::error(ucfirst(__('Nie udało się usunąć dokumentu z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases/'.$name);
 			}
 		}
 	}
 	
-	public function action_document_edit() {
-	
+	public function action_document_add() {
+				
+		if($this->request->method()===HTTP_Request::POST) {
+			
+			print_r($_POST);
+			$params = $_POST;
+			$document_id=$params['document_id'];
+			$document=Document::instance('document_id');
+			$virtualbriefcase_id=$params['virtualbriefcase_id'];
+			$virtualbriefcase=VirtualBriefcase::instance('virtualbriefcase_id');
+			
+			if($virtualbriefcase->add($document)) {
+			//if($document->addDocument($params)) {
+				Message::success(ucfirst(__('Dokument został dodany do wirtualnej teczki')),'/virtualbriefcase/documents');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać dokumentu do do wirtualnej teczki')),'/virtualbriefcase/documents');
+			}
+		}
+				
 	}
 	
-	public function action_document_delete() {
+	public function action_document_remove() {
 		if($this->request->param('id') > 0) {
 			$document = Document::instance($this->request->param('id'));
 			$document_id = $document->id;
 			$name = $document->name;
 		
-			if($document->deleteDocument()) {
+			if($document->removeDocument()) {
 				Message::success(ucfirst(__('Dokument został usunięty')),'/virtualbriefcase/documents/'.$name);
 			}else {
 				Message::error(ucfirst(__('Nie udało się usunąć dokumentu')),'/virtualbriefcase/documents/'.$name);
@@ -330,100 +345,58 @@ public $controller_title = 'Wirtualne teczki';
 	}
 	
 	public function action_documentlist_add() {
-		$customer=Auth::instance()->get_user()->customer;
-		$warehouses = $customer->warehouses->find_all();
-		$this->content->bind('customer', $customer);
-		$warehouses_ids= array();
-		$boxes = array();
-		
-		foreach ($warehouses as $warehouse) {
-			array_push($warehouses_ids, $warehouse->id);
-		}
-		
-		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
-		$user = Auth::instance()->get_user();
-		//$this->content->bind('customer', $customer);
-		$this->content->bind('warehouses', $warehouses);
-		$this->content->bind('user', $user);
-		$this->content->bind('boxes', $boxes);
-		
-		if($this->request->method()===HTTP_Request::POST) {
-		
-			$params = $_POST;
+	if($this->request->method()===HTTP_Request::POST) {
 				
-			$documentlist=DocumentList::instance();
+			$params = $_POST;
+			
+			$document=Document::instance();
 			if($document->addDocumentList($params)) {
-				Message::success(ucfirst(__('Lista dokumentów została dodany do Pozycji')),'/warehouses/documentlists');
+				Message::success(ucfirst(__('Lista dokumentów została dodana do wirtualnej teczki')),'/virtualbriefcase/documentlists');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji')),'/warehouses/documentlists');
+				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do do wirtualnej teczki')),'/virtualbriefcase/documentlists');
 			}
 		}
 	}
 	
-	public function action_documentlist_edit() {
-	
-	}
-	
-	public function action_documentlist_delete() {
+	public function action_documentlist_remove() {
 		if($this->request->param('id') > 0) {
 			$documentlist = DocumentList::instance($this->request->param('id'));
 			$documentlist_id = $documentlist->id;
 			$name = $documentlist->name;
 		
-			if($documentlist->deleteDocumentList()) {
-				Message::success(ucfirst(__('Lista dokumentów została usunięta')),'/warehouse/documentlists/'.$name);
+			if($documentlist->removeDocumentList()) {
+				Message::success(ucfirst(__('Lista dokumentów została usunięta z wirtualnej teczki')),'/virtualbriefcase/documentlists/'.$name);
 			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć Listy dokumentów')),'/warehouse/documentlists/'.$name);
+				Message::error(ucfirst(__('Nie udało się usunąć Listy dokumentów z wirtualnej teczki')),'/virtualbriefcase/documentlists/'.$name);
 			}
 		}
 	}
 	
 	public function action_bulkpackaging_add() {
-		$customer=Auth::instance()->get_user()->customer;
-		$warehouses = $customer->warehouses->find_all();
-		
-		$warehouses_ids= array();
-		$boxes = array();
-		
-		foreach ($warehouses as $warehouse) {
-			array_push($warehouses_ids, $warehouse->id);
-		}
-		
-		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
-		$user = Auth::instance()->get_user();
-		$this->content->bind('customer', $customer);
-		$this->content->bind('warehouses', $warehouses);
-		$this->content->bind('user', $user);
-		$this->content->bind('boxes', $boxes);
-		
-		if($this->request->method()===HTTP_Request::POST) {
-		
+	if($this->request->method()===HTTP_Request::POST) {
+				
 			$params = $_POST;
-		
-			$bulkpackaging=BulkPackaging::instance();
 			
-			if($document->addBulkPackaging($params)) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do Pozycji')),'/warehouses/bulkpackagings');
+			$bulkpackaging=BulkPackaging::instance();
+			if($bulkpackaging->addBulkPackaging($params)) {
+				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do pozycji')),'/warehouses/bulkpackagings');
+				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
 			}
 		}
 	}
 	
-	public function action_bulkpackaging_edit() {
-	
-	}
-	
-	public function action_bulkpackaging_delete() {
+	public function action_bulkpackaging_remove() {
 		if($this->request->param('id') > 0) {
 			$bulkpackaging = BulkPackaging::instance($this->request->param('id'));
 			$bulkpackaging_id = $bulkpackaging->id;
 			$name = $bulkpackaging->name;
+			$virtualbriefcase = VirtualBriefcase::instance($user->customer->id);
 		
-			if($bulkpackaging->deleteBulkPackaging()) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte')),'/warehouse/bulkpackagings/'.$name);
+			if($bulkpackaging->removeBulkPackaging()) {
+				Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings/'.$name);
 			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć Opakowania zbiorczego')),'/warehouse/bulkpackagings/'.$name);
+				Message::error(ucfirst(__('Nie udało się usunąć Opakowania zbiorczego z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings/'.$name);
 			}
 		}
 	}
@@ -448,5 +421,63 @@ public $controller_title = 'Wirtualne teczki';
 		$this->content->bind('bulkpackagings', $bulkpackagings);
 		$this->content->bind('virtualbriefcases', $virtualbriefcases);
 		}
+	}
+	
+	public function action_add_item() {
+		
+		$customer=Auth::instance()->get_user()->customer;
+		$divisions = $customer->divisions->find_all();
+		$warehouses = $customer->warehouses->find_all();
+		$warehouses_ids= array();
+		$divisions_ids= array();
+		$boxes_ids = array();
+		$virtualbriefcases_ids = array();
+		$virtualbriefcases = array();
+		
+		foreach ($divisions as $division) {
+			array_push($divisions_ids, $division->id);
+			
+		} 
+				
+		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		
+		foreach ($boxes as $box) {
+			array_push($boxes_ids, $box->id);
+		}
+		$documents = ORM::factory('Document')->where('box_id','IN', $boxes_ids)->find_all();
+		$documentlists = ORM::factory('DocumentList')->where('box_id','IN', $boxes_ids)->find_all();
+		$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
+					
+		$user = Auth::instance()->get_user();
+		$this->content->bind('customer', $customer);
+		$this->content->bind('divisions', $divisions);
+		$this->content->bind('user', $user);
+		$this->content->bind('boxes', $boxes);
+		$this->content->bind('documents', $documents);
+		$this->content->bind('documentlists', $documentlists);
+		$this->content->bind('bulkpackagings', $bulkpackagings);
+		$this->content->bind('virtualbriefcases', $virtualbriefcases);
+		
+		if($this->request->method()===HTTP_Request::POST) {
+				
+			$params = $_POST;
+			
+			$document=Document::instance();
+			if($document->add($params)) {
+				Message::success(ucfirst(__('Dokument został dodany do wirtualnej teczki')),'/virtualbriefcase/documentlists');
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać dokumentu do do wirtualnej teczki')),'/virtualbriefcase/documentlists');
+			}
+		}
+		
+		
+		
+		
 	}
 }

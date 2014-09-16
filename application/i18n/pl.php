@@ -11,6 +11,7 @@ return array
 	'storagecategories'=>'Kategorie magazynowania',
 	'customer'=>'Klient',
 	'divisions'=>'Lista działów',
+	'division_view'=>'Przegląd działu',
 	'info'=>'Informacje o firmie',
 	'edit'=>'Edycja danych firmowych',
 	'boxes'=>'Lista pozycji',

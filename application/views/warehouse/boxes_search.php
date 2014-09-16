@@ -11,7 +11,7 @@
 			</ul>
 		
 			<div class="tab-content">
-				<div id="tab_box" class="tab-pane">
+				<div id="tab_box" class="tab-pane active">
 					<h4>Dane pozycji</h4>
 							<form class="form-inline" role="form" action="/warehouse/boxes_search" method="POST" id="search_box_form">
 								<div class="form-group">
@@ -123,47 +123,15 @@
 									</tbody>
 									</table>
 								</div>
-								<div class="margin-top-20">
-									<ul class="pagination">
-										<li>
-											<a href="#">
-											Prev </a>
-										</li>
-										<li>
-											<a href="#">
-											1 </a>
-										</li>
-										<li>
-											<a href="#">
-											2 </a>
-										</li>
-										<li class="active">
-											<a href="#">
-											3 </a>
-										</li>
-										<li>
-											<a href="#">
-											4 </a>
-										</li>
-										<li>
-											<a href="#">
-											5 </a>
-										</li>
-										<li>
-											<a href="#">
-											Next </a>
-										</li>
-									</ul>
-								</div>
 							</div>
 							<!--end tab-pane-->
 				<!--end tab-pane-->
-				<div id="tab_document" class="tab-pane active">
+				<div id="tab_document" class="tab-pane">
 					<div class="row">
 						<div class="col-md-8">
 							<div class="booking-search">
 								<h4>Dane dokumentu</h4>
-							<form class="form-inline" role="form" action="/warehouse/boxes_search#tab_document" method="POST" id="search_document_form">
+							<form class="form-inline" role="form" action="/warehouse/document_search" method="POST" id="search_document_form">
 								<div class="form-group">
 									<label class="sr-only" for="exampleInputtext2">Numer</label>
 									<input type="text" class="form-control" id="document_id" placeholder="Numer">
@@ -217,38 +185,6 @@
 										<?php endforeach;?>
 									</tbody>
 									</table>
-								</div>
-								<div class="margin-top-20">
-									<ul class="pagination">
-										<li>
-											<a href="#">
-											Prev </a>
-										</li>
-										<li>
-											<a href="#">
-											1 </a>
-										</li>
-										<li>
-											<a href="#">
-											2 </a>
-										</li>
-										<li class="active">
-											<a href="#">
-											3 </a>
-										</li>
-										<li>
-											<a href="#">
-											4 </a>
-										</li>
-										<li>
-											<a href="#">
-											5 </a>
-										</li>
-										<li>
-											<a href="#">
-											Next </a>
-										</li>
-									</ul>
 								</div>
 							</div>
 				<!--end tab-pane-->

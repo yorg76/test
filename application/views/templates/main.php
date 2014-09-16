@@ -240,7 +240,7 @@
 						<li>
 							<a href="/warehouse/add_item">
 							<i class="icon-docs"></i>
-							Dodaj...</a>
+							Dodaj do magazynu</a>
 						</li>
 					</ul>
 				</li>
@@ -274,6 +274,11 @@
 							<a href="/virtualbriefcase/bulkpackagings">
 							<i class="glyphicon glyphicon-th"></i>
 							Opakowania zbiorcze</a>
+						</li>
+						<li>
+							<a href="/virtualbriefcase/add_item">
+							<i class="icon-docs"></i>
+							Dodaj do teczki</a>
 						</li>
 						
 					</ul>
