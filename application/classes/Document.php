@@ -136,6 +136,9 @@ class Document extends ORM {
 	}
 }
 
+<<<<<<< HEAD
 ?>
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/yorg76/test.git
