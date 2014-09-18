@@ -131,6 +131,7 @@ Kohana::modules(array(
 	   'mpdf' 		=> MODPATH.'mpdf',
 	   'phpexcel' 	=> MODPATH.'phpexcel',
 	   'multilang'	=> MODPATH.'multilang',
+	   'barcode'	=> MODPATH.'barcode',
 	));
 
 $languages = array();

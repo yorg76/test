@@ -38,15 +38,15 @@
 								</th>
 								<th>
 									 Data końca magazynowania
-								</th>
-								<th>
-									 Data odbioru
-								</th>							
+								</th>					
 								<th>
 									Blokady
 								</th>
 								<th>
-									 Plomby
+									Plomby
+								</th>
+								<th>
+									Kod QR
 								</th>
 								<th>
 									 Opcje
@@ -72,19 +72,18 @@
 									 <?php echo $box->date_to ;?>
 								</td>
 								<td>
-									 <?php echo $box->date_reception;?>
-								</td>
-								<td>
 									 <?php echo $box->lock;?>
 								</td>
 								<td>
 									 <?php echo $box->seal;?>
 								</td>
-								
+								<td>
+									 <?php echo QRBarcode::encode($box->id);?>
+								</td>
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/warehouse/box_view/<?php echo $box->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button>
-											<button class="btn btn-xs yellow user-edit margin-bottom" onClick="javascript:window.location='/warehouse/box_edit/<?php echo $box->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/warehouse/box_view/<?php echo $box->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button> <br />
+											<button class="btn btn-xs yellow user-edit margin-bottom" onClick="javascript:window.location='/warehouse/box_edit/<?php echo $box->id ;?>';"><i class="fa fa-user"></i> Edytuj</button><br />
 											<button class="btn btn-xs red user-delete margin-bottom" onClick="javascript:window.location='/warehouse/box_delete/<?php echo $box->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>

@@ -34,6 +34,9 @@
 									 Liczba pozycji
 								</th>
 								<th>
+									Kod QR
+								</th>
+								<th>
 									 Opcje
 								</th>
 							</tr>
@@ -50,6 +53,9 @@
 								</td>
 								<td>
 									 <?php echo $warehouse->boxes->count_all();?>
+								</td>
+								<td style="text-align: center;">
+									<?php echo QRBarcode::encode($warehouse->id);?>
 								</td>
 								<td>
 									<div class="margin-bottom-5">

@@ -1,6 +1,6 @@
 ﻿<div class="row">
-				<div class="col-md-12">
-					<!-- BEGIN EXAMPLE TABLE PORTLET-->
+				<div class="col-md-12">	
+				<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
@@ -20,7 +20,8 @@
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
-							</div>						
+							</div>		
+								
 							<table class="table table-striped table-hover table-bordered" id="boxes_list">
 							<thead>
 							<tr>
