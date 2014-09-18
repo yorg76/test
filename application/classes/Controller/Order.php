@@ -22,6 +22,7 @@ class Controller_Order extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'orders_inprogress') $this->add_init("TableOrdersInprogress.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'orders_realized') $this->add_init("TableOrdersRealized.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'orders') $this->add_init("TableOrders.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'send') $this->add_init("SendOrder.init();\t\n");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 		
@@ -61,6 +62,10 @@ class Controller_Order extends Controller_Welcome {
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'base64.js');
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order-wizard.js');
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-extended-modals.js');
+		}
+		
+		if(strtolower ( $this->request->action()) == 'send') {
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order_send.js');
 		}
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-orders.js');
@@ -136,7 +141,7 @@ class Controller_Order extends Controller_Welcome {
 			array_push($users_ids, $u->id);
 		}
 		
-		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '!=', 'Nowe')->and_where('status', '!=', 'Zrealizowane')->find_all();		
+		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '!=', 'Nowe')->and_where('status', '!=', 'Dostarczone')->and_where('status', '!=', 'Zrealizowane')->find_all();		
 		//var_dump($orders);
 		
 		$this->content->bind('orders', $orders);
@@ -152,7 +157,7 @@ class Controller_Order extends Controller_Welcome {
 			array_push($users_ids, $u->id);
 		}
 		
-				$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Zrealizowane')->find_all();		
+				$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Dostarczone')->or_where('status', '=', 'Zrealizowane')->find_all();		
 		//var_dump($orders);
 		
 		$this->content->bind('orders', $orders);
@@ -191,7 +196,33 @@ class Controller_Order extends Controller_Welcome {
 	
 	public function action_send() {
 		if($this->request->param('id') > 0) {
-			$order = Order::instance($this->request->param('id'));			
+			$order = Order::instance($this->request->param('id'));
+			$shipmentcompanies = Auth_ORM::instance()->get_user()->customer->shipmentcompanies->find_all();
+			
+			$this->content->bind('order', $order);
+			$this->content->bind('shipmentcompanies', $shipmentcompanies);
+			
+			if($this->request->method()===HTTP_Request::POST) {
+				$params = $_POST;
+				if($order->sendOrder($params)) {
+					Message::success(ucfirst(__('Zamówienie zostało przygotowane do wysłania')),'/order/orders_inprogress');
+				}else {
+					Message::error(ucfirst(__('Wystąpił problem podczas wysyłania zamówienia')),'/order/orders_inprogress');
+				}
+					
+			}
+		}
+	}
+	
+	public function action_deliver() {
+		if($this->request->param('id') > 0) {
+			$order = Order::instance($this->request->param('id'));
+								
+			if($order->deliverOrder($params)) {
+				Message::success(ucfirst(__('Zamówienie zostało przygotowane do wysłania')),'/order/orders_realized');
+			}else {
+				Message::error(ucfirst(__('Wystąpił problem podczas wysyłania zamówienia')),'/order/orders_realized');
+			}
 		}
 	}
 	

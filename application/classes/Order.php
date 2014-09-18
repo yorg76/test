@@ -38,6 +38,182 @@ class Order extends ORM {
 		}
 	}
 	
+	
+	public function deliverOrder() {
+		$log=Kohana_Log::instance();
+	
+		//TODO API firmy kurierskiej
+	
+		if($this->order->loaded()) {
+			$this->status='Dostarczone';
+			$this->order->status='Dostarczone';
+				
+			if($this->order->update()) {
+				$paramse = array();
+					
+				$paramse['subject']="Twoje zamówienie zmieniło status";
+				$paramse['email_title'] = "Zamówienie numer ".$this->order->id." zmieniło status.";
+				$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+				$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+				$paramse['email_content'] = "<p>Status zamówienia: ".$this->order->status." </p>";
+				$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
+				$paramse['email_content'] .="<p>Firma kurierska: ".$this->order->shipmentcompany->name."</p>";
+				$paramse['email_content'] .="<p>Numer paczki: ".$this->order->shipping_number."</p>";
+				$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+				$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
+				$paramse['email'] = $this->order->user->email;
+				$paramse['firstname'] = $this->order->user->firstname;
+				$paramse['lastname']= $this->order->user->lastname;
+	
+				$this->sendEmail($paramse);
+	
+				$notification = ORM::factory('Notification');
+					
+				$notification->status=0;
+				$notification->message="Zamówienie ".$this->order->id." zmieniło status<br /><br />";
+				$notification->user_id=$this->order->user->id;
+	
+				try {
+					$notification->save();
+				}catch (Exception $e) {
+					$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+				}
+	
+				$paramse = array();
+					
+				$user = Auth_ORM::instance()->get_user();
+					
+				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','delivery_maganager')->find_all();
+	
+				foreach($delivery_managers as $dm) {
+	
+					$paramse['subject']="Zamówienie zmieniło status";
+					$paramse['email_title'] = "Zamówienie numer ".$this->order->id." zmieniło status.";
+					$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+					$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+					$paramse['email_content'] = "<p>Status zamówienia: ".$this->order->status." </p>";
+					$paramse['email_content'] .="<p>Firma kurierska: ".$this->order->shipmentcompany->name."</p>";
+					$paramse['email_content'] .="<p>Numer paczki: ".$this->order->shipping_number."</p>";
+					$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
+					$paramse['email_content'] .="<p>Użytkownik: ".$this->order->user->username."</p>";
+					$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+					$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
+					$paramse['email'] = $dm->email;
+					$paramse['firstname'] = $dm->firstname;
+					$paramse['lastname']= $dm->lastname;
+	
+					$this->sendEmail($paramse);
+	
+					$notification = ORM::factory('Notification');
+	
+					$notification->status=0;
+					$notification->message="Nowe zamówienie zostało wysłane<br /><br />";
+					$notification->user_id=$dm->id;
+	
+					try {
+						$notification->save();
+					}catch (Exception $e) {
+						$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+					}
+				}
+	
+				$log->add(Log::DEBUG,"Success: Zamówienie zostało zaakceptowane parametrami:".$this->order->id."\n");
+	
+				return true;
+			}else return false;
+		}else return false;
+			
+	}
+	
+	public function sendOrder($params) {
+		$log=Kohana_Log::instance();
+	
+		//TODO API firmy kurierskiej
+	
+		if($this->order->loaded()) {
+			$this->status='W doręczeniu';
+			$this->order->status='W doręczeniu';
+			$this->order->shipmentcompany_id=$params['shipmentcompany_id'];
+			$this->order->shipping_number=$params['shipping_number'];
+			
+			if($this->order->update()) {
+				$paramse = array();
+					
+				$paramse['subject']="Twoje zamówienie zmieniło status";
+				$paramse['email_title'] = "Zamówienie numer ".$this->order->id." zmieniło status.";
+				$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+				$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+				$paramse['email_content'] = "<p>Status zamówienia: ".$this->order->status." </p>";
+				$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
+				$paramse['email_content'] .="<p>Firma kurierska: ".$this->order->shipmentcompany->name."</p>";
+				$paramse['email_content'] .="<p>Numer paczki: ".$this->order->shipping_number."</p>";
+				$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+				$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
+				$paramse['email'] = $this->order->user->email;
+				$paramse['firstname'] = $this->order->user->firstname;
+				$paramse['lastname']= $this->order->user->lastname;
+	
+				$this->sendEmail($paramse);
+	
+				$notification = ORM::factory('Notification');
+					
+				$notification->status=0;
+				$notification->message="Zamówienie ".$this->order->id." zmieniło status<br /><br />";
+				$notification->user_id=$this->order->user->id;
+	
+				try {
+					$notification->save();
+				}catch (Exception $e) {
+					$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+				}
+	
+				$paramse = array();
+					
+				$user = Auth_ORM::instance()->get_user();
+					
+				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','delivery_maganager')->find_all();
+	
+				foreach($delivery_managers as $dm) {
+	
+					$paramse['subject']="Zamówienie zmieniło status";
+					$paramse['email_title'] = "Zamówienie numer ".$this->order->id." zmieniło status.";
+					$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+					$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+					$paramse['email_content'] = "<p>Status zamówienia: ".$this->order->status." </p>";
+					$paramse['email_content'] .="<p>Firma kurierska: ".$this->order->shipmentcompany->name."</p>";
+					$paramse['email_content'] .="<p>Numer paczki: ".$this->order->shipping_number."</p>";
+					$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
+					$paramse['email_content'] .="<p>Użytkownik: ".$this->order->user->username."</p>";
+					$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+					$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
+					$paramse['email'] = $dm->email;
+					$paramse['firstname'] = $dm->firstname;
+					$paramse['lastname']= $dm->lastname;
+	
+					$this->sendEmail($paramse);
+	
+					$notification = ORM::factory('Notification');
+	
+					$notification->status=0;
+					$notification->message="Nowe zamówienie zostało wysłane<br /><br />";
+					$notification->user_id=$dm->id;
+	
+					try {
+						$notification->save();
+					}catch (Exception $e) {
+						$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+					}
+				}
+	
+				$log->add(Log::DEBUG,"Success: Zamówienie zostało zaakceptowane parametrami:".$this->order->id."\n");
+	
+				return true;
+			}else return false;
+		}else return false;
+			
+	}
+	
+	
 	public function completeOrder() {
 		$log=Kohana_Log::instance();
 	

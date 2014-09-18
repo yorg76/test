@@ -124,6 +124,7 @@
 											<br/>
 											<br/>
 											<div class="margiv-top-10">
+												<input type="submit" />
 												<a href="/virtualbriefcase/documents" class="btn green" id="submit">
 												Zapisz zmiany</a>
 												<a href="/virtualbriefcase/documents" class="btn default" id="cancel">

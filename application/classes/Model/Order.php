@@ -11,7 +11,8 @@ class Model_Order extends ORM {
 			'user'=> array('model' => 'User', 'foreign_key' => 'user_id'),
 			'address'=> array('model' => 'Address', 'foreign_key' => 'address_id'),
 			'warehouse' => array('model'=>'Warehouse','foreign_key' => 'warehouse_id'),
-			'division' =>array('model'=>'Division','foreign_key' => 'division_id')
+			'division' =>array('model'=>'Division','foreign_key' => 'division_id'),
+			'shipmentcompany'=> array('model' => 'ShipmentCompany', 'foreign_key' => 'shipmentcompany_id'),
 	);
 	
 	protected $_has_one = array(

@@ -302,28 +302,28 @@
 							Dodaj
 							</a>
 						</li>
-						<li class="<?php if ($_action=='order') echo "active";?>">
+						<li class="<?php if ($_action=='orders') echo "active";?>">
 							<a href="/order/orders">
 								<i class="icon-list"></i>
 									Lista zamówień
 							</a>
 						</li>						
-						<li>
+						<li class="<?php if ($_action=='orders_new') echo "active";?>">
 							<a href="/order/orders_new">
 							<i class="icon-basket"></i>
 							Nowe</a>
 						</li>
-						<li>
+						<li class="<?php if ($_action=='orders_inprogress') echo "active";?>">
 							<a href="/order/orders_inprogress">
 							<i class="icon-basket-loaded"></i>
 							W trakcie</a>
 						</li>
-						<li>
+						<li class="<?php if ($_action=='orders_realized') echo "active";?>">
 							<a href="/order/orders_realized">
 							<i class="icon-cup"></i>
 							Zrealizowane</a>
 						</li>
-						<li>
+						<li class="<?php if ($_action=='orders_search') echo "active";?>">
 							<a href="/order/orders_search">
 							<i class="icon-direction"></i>
 							Szukaj</a>

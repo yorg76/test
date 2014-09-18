@@ -58,8 +58,9 @@
 								</td>											
 								<td>
 									<div class="margin-bottom-5">
-												<?php if($order->status=='Przyjęte do realizacji'):?><button class="btn btn-xs green margin-bottom" id="order_complete_<?php echo $order->id?>"><i class="glyphicon glyphicon-qrcode"></i> Skompletowane</button> <br /> <?php endif;?>
-												<?php if($order->status=='Oczekuje na wysłanie'):?><button class="btn btn-xs yellow margin-bottom" id="order_send_<?php echo $order->id?>"><i class="glyphicon glyphicon-plane"></i> Wyślij</button> <br /> <?php endif;?> 
+												<?php if($order->status=='Przyjęte do realizacji'):?><button class="btn btn-xs blue margin-bottom" id="order_complete_<?php echo $order->id?>"><i class="glyphicon glyphicon-qrcode"></i> Skompletowane</button> <br /> <?php endif;?>
+												<?php if($order->status=='Oczekuje na wysłanie'):?><button class="btn btn-xs yellow margin-bottom" id="order_send_<?php echo $order->id?>"><i class="glyphicon glyphicon-plane"></i> Wyślij</button> <br /> <?php endif;?>
+												<?php if($order->status=='W doręczeniu'):?><button class="btn btn-xs green margin-bottom" id="order_deliver_<?php echo $order->id?>"><i class="glyphicon glyphicon-thumbs-up"></i> Doręczone</button> <br /> <?php endif;?>
 									</div>
 								</td>
 							</tr>

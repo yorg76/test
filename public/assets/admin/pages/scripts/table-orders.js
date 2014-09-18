@@ -388,6 +388,12 @@ var TableOrdersInprogress = function () {
 		window.location.href='/order/send/'+id;
 	});
 	
+	$("button[id*=order_deliver_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_deliver_','');
+		window.location.href='/order/deliver/'+id;
+	});
+	
     var handleTable = function () {
 
         function restoreRow(oTable, nRow) {
