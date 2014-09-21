@@ -380,8 +380,8 @@ class Controller_Warehouse extends Controller_Welcome {
 			foreach ($boxes as $box) {
 				array_push($boxes_ids, $box->id);
 			}
-			$documentlists = ORM::factory('DocumentList')->where('box_id','=', $box->id)->find_all();
-			$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','=', $box->id)->find_all();
+			$documentlists = ORM::factory('DocumentList')->where('box_id','IN', $boxes_ids)->find_all();
+			$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
 			
 			$this->content->bind('customer', $customer);
 			$this->content->bind('warehouses', $warehouses);
@@ -488,7 +488,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			foreach ($boxes as $box) {
 				array_push($boxes_ids, $box->id);
 			}
-			$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','=', $box->id)->find_all();
+			$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
 			
 			$this->content->bind('customer', $customer);
 			$this->content->bind('warehouses', $warehouses);
@@ -565,10 +565,18 @@ class Controller_Warehouse extends Controller_Welcome {
 			
 			$warehouses_ids= array();
 			$boxes = array();
-		
+				
 			foreach ($warehouses as $warehouse) {
 				array_push($warehouses_ids, $warehouse->id);
 			}
+				
+			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+			$boxes_ids = array();
+				
+			foreach ($boxes as $box) {
+				array_push($boxes_ids, $box->id);
+			}
+			$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
 		
 			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
 			$user = Auth::instance()->get_user();
@@ -577,6 +585,8 @@ class Controller_Warehouse extends Controller_Welcome {
 			$this->content->bind('user', $user);
 			$this->content->bind('boxes', $boxes);
 			$this->content->bind('bulkpackaging', $bulkpackaging);
+			$this->content->bind('bulkpackagings', $bulkpackagings);
+			
 				
 			if($this->request->method()===HTTP_Request::POST) {
 			

@@ -54,6 +54,25 @@
 								<?php endforeach;?>
 							</select>
 						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Wybór opakowania zbiorczego
+							</label>
+						<div class="input-icon right">
+							<select class="form-control" name="bulkpackaging_id">
+								<option>-- Nie przypisany --</option>
+								<?php foreach ($bulkpackagings as $bulkpackaging):?>
+									<?php 
+										$id = $document->bulkpackaging->id;
+										if ($bulkpackaging->id == $id) $checked=" selected=\"true\"";
+											else $checked="";
+										echo "<option value=\"".$bulkpackaging->id."\"".$checked." >".$bulkpackaging->name."</option>";
+								
+								?>
+								<?php endforeach;?>
+							</select>
+							<span class="help-block">Wybierz opakowanie zbiorcze, do którgo chcesz dodać dokument</span>
+						</div>
 					</div>		
 					<br/>
 					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />

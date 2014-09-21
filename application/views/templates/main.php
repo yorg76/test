@@ -282,7 +282,7 @@
 							Opakowania zbiorcze</a>
 						</li>
 						<li>
-							<a href="/virtualbriefcase/add_item">
+							<a href="/virtualbriefcase/add_item_vb">
 							<i class="icon-docs"></i>
 							Dodaj do teczki</a>
 						</li>

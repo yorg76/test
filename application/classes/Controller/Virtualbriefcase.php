@@ -305,6 +305,8 @@ public $controller_title = 'Wirtualne teczki';
 		if($this->request->param('id') > 0) {
 			$box = Box::instance($this->request->param('id'));
 			$box_id = $box->id;
+			$virtualbriefcase_id=$params['virtualbriefcase_id'];
+			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 			
 			
 			if($virtualbriefcase->removeBox()) {
@@ -340,7 +342,8 @@ public $controller_title = 'Wirtualne teczki';
 			$document = Document::instance($this->request->param('id'));
 			$document_id = $document->id;
 			$name = $document->name;
-			$document = ORM::factory('Document',$params['document_id']);
+			$virtualbriefcase_id=$params['virtualbriefcase_id'];
+			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 		
 			if($virtualbriefcase->removeDocument($document)) {
 				Message::success(ucfirst(__('Dokument został usunięty')),'/virtualbriefcase/documents/'.$name);
@@ -372,6 +375,8 @@ public $controller_title = 'Wirtualne teczki';
 			$documentlist = DocumentList::instance($this->request->param('id'));
 			$documentlist_id = $documentlist->id;
 			$name = $documentlist->name;
+			$virtualbriefcase_id=$params['virtualbriefcase_id'];
+			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 		
 			if($virtualbriefcase->removeDocumentList()) {
 				Message::success(ucfirst(__('Lista dokumentów została usunięta z wirtualnej teczki')),'/virtualbriefcase/documentlists/'.$name);
@@ -403,7 +408,8 @@ public $controller_title = 'Wirtualne teczki';
 			$bulkpackaging = BulkPackaging::instance($this->request->param('id'));
 			$bulkpackaging_id = $bulkpackaging->id;
 			$name = $bulkpackaging->name;
-			$virtualbriefcase = VirtualBriefcase::instance($user->customer->id);
+			$virtualbriefcase_id=$params['virtualbriefcase_id'];
+			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 		
 			if($bulkpackaging->removeBulkPackaging()) {
 				Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings/'.$name);

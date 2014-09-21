@@ -12,7 +12,7 @@
 								</li>
 								<li>
 									<a data-toggle="tab" href="#documentlist">
-									Dodaj listę kokumentów</a>
+									Dodaj listę dokumentów</a>
 								</li>
 								<li>
 									<a data-toggle="tab" href="#bulkpackaging">
