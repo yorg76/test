@@ -38,7 +38,10 @@ class Order extends ORM {
 		}
 	}
 	
-	
+	public function updateOrder($params) {
+		return false;
+	}
+		
 	public function deliverOrder() {
 		$log=Kohana_Log::instance();
 	
@@ -337,10 +340,6 @@ class Order extends ORM {
 			
 	}
 	
-	public function updateOrder() {
-	
-	}
-	
 	public function deleteOrder() {
 		
 		//TODO zwolnienie locka z zamówień
@@ -348,6 +347,15 @@ class Order extends ORM {
 		$log=Kohana_Log::instance();
 		
 		if($this->order->loaded()) {
+			
+			$boxes = $this->order->boxes->find_all();
+			
+			foreach ($boxes as $box) {
+				$box->lock=0;
+				$box->update();
+				$this->order->remove('boxes',$box);
+			}
+			
 			if($this->order->delete()) {
 				$paramse = array();
 					
@@ -360,8 +368,12 @@ class Order extends ORM {
 				$paramse['email'] = $this->order->user->email;
 				$paramse['firstname'] = $this->order->user->firstname;
 				$paramse['lastname']= $this->order->user->lastname;
-		
-				$this->sendEmail($paramse);
+				try {
+					$this->sendEmail($paramse);
+					
+				}catch (Exception $e) {
+					$log->add(Log::ERROR,'Nie udało się powiadomić użytkownika'."\n");
+				}
 		
 				$notification = ORM::factory('Notification');
 					

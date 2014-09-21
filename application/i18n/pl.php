@@ -2,6 +2,7 @@
  
 return array
 (
+	'edit_order' => 'Edycja zamówienia',
     'user'=>'Użytkownik',
 	'dashboard'=>'Panel użytkownika',
 	'admin'=>'Panel administracyjny',

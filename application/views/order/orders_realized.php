@@ -58,7 +58,8 @@
 								</td>											
 								<td>
 								<div class="margin-bottom-5">
-											<button class="btn btn-xs green margin-bottom" ><i class="glyphicon glyphicon-info-sign"></i> Szczegóły</button> <br />
+
+											<button class="btn btn-xs purple order-details margin-bottom" id="order_details_<?php echo $order->id?>" ><i class="glyphicon glyphicon-info-sign"></i> Szczegóły</button> <br />
 									</div>
 								</td>
 							</tr>

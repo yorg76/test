@@ -2,14 +2,12 @@ var UIAlertDialogApi = function () {
 
     var handleDialogs = function() {
     	
-    	 $('.order-delete').click(function(e){
+    	 $('.order-delete').live('click',function(e){
     		 e.preventDefault();
     		 var id = $(this).attr('id').replace('order_delete_','');
              bootbox.confirm("Czy napewno chcesz usunąć to zamówienie ?", function(result) {
             	 if(result==true) {
             		 window.location='/order/delete/'+id;
-            	 }else {
-            		 return false;
             	 }
              }); 
          });
@@ -21,8 +19,6 @@ var UIAlertDialogApi = function () {
              bootbox.confirm("Czy napewno chcesz usunąć użytkownika, ta operacja jest nie odwracalna !", function(result) {
             	 if(result==true) {
             		 window.location='/admin/user_delete/'+id;
-            	 }else {
-            		 return false;
             	 }
              }); 
          });
@@ -34,8 +30,6 @@ var UIAlertDialogApi = function () {
              bootbox.confirm("Czy napewno chcesz usunąć klienta, ta operacja jest nie odwracalna !", function(result) {
             	 if(result==true) {
             		 window.location='/admin/customer_delete/'+id;
-            	 }else {
-            		 return false;
             	 }
              }); 
          });

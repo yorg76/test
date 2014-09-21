@@ -1,7 +1,14 @@
 var TableOrders = function () {
     var id = 0;
     var handleTable = function () {
-
+    	
+    	$("button[id*=order_details_]").click(function(e){
+    		e.preventDefault();
+    		var id = $(this).attr('id').replace('order_details_','');
+    		
+    		window.location.href='/order/view_order/'+id;
+    	});
+    	
     	$("button[id*=order_accept_]").click(function(e){
     		e.preventDefault();
     		var id = $(this).attr('id').replace('order_accept_','');
@@ -12,7 +19,7 @@ var TableOrders = function () {
     	$("button[id*=order_edit_]").click(function(e){
     		e.preventDefault();
     		var id = $(this).attr('id').replace('order_edit_','');
-    		window.location.href='/order/edit/'+id;
+    		window.location.href='/order/edit_order/'+id;
     	});
     	
     	$("button[id*=order_complete_]").click(function(e){
@@ -187,7 +194,14 @@ var TableOrders = function () {
 
 var TableOrdersNew = function () {
     var id = 0;
-    
+
+	$("button[id*=order_details_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_details_','');
+		
+		window.location.href='/order/view_order/'+id;
+	});
+	
 	$("button[id*=order_accept_]").click(function(e){
 		e.preventDefault();
 		var id = $(this).attr('id').replace('order_accept_','');
@@ -198,7 +212,7 @@ var TableOrdersNew = function () {
 	$("button[id*=order_edit_]").click(function(e){
 		e.preventDefault();
 		var id = $(this).attr('id').replace('order_edit_','');
-		window.location.href='/order/edit/'+id;
+		window.location.href='/order/edit_order/'+id;
 	});
 		
     var handleTable = function () {
@@ -369,11 +383,18 @@ var TableOrdersNew = function () {
 var TableOrdersInprogress = function () {
     
 	var id = 0;
-    
+	
+	$("button[id*=order_details_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_details_','');
+		
+		window.location.href='/order/view_order/'+id;
+	});
+	
 	$("button[id*=order_edit_]").click(function(e){
 		e.preventDefault();
 		var id = $(this).attr('id').replace('order_edit_','');
-		window.location.href='/order/edit/'+id;
+		window.location.href='/order/edit_order/'+id;
 	});
 	
 	$("button[id*=order_complete_]").click(function(e){
@@ -559,10 +580,17 @@ var TableOrdersInprogress = function () {
 
 }();
 
-var TableRealized = function () {
+var TableOrdersRealized = function () {
     var id = 0;
     var handleTable = function () {
 
+    	$("button[id*=order_details_]").click(function(e){
+    		e.preventDefault();
+    		var id = $(this).attr('id').replace('order_details_','');
+    		
+    		window.location.href='/order/view_order/'+id;
+    	});
+    	
         function restoreRow(oTable, nRow) {
             var aData = oTable.fnGetData(nRow);
             var jqTds = $('>td', nRow);
@@ -725,5 +753,3 @@ var TableRealized = function () {
     };
 
 }();
-
-

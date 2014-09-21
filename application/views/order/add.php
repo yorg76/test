@@ -85,6 +85,7 @@
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
 										<select class="form-control" name="warehouse">
+												<option > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -96,6 +97,7 @@
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
 										<select class="form-control" name="division">
+												<option > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -122,6 +124,7 @@
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
 										<select class="form-control" name="warehouse">
+												<option > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -133,6 +136,7 @@
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
 										<select class="form-control" name="division">
+												<option > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -189,6 +193,7 @@
 										<label class="control-label col-md-3">Kategoria magazynowania</label>
 										<div class="col-md-4">
 											<select class="form-control" name="box_storagecategory_template" id="box_storagecategory_template">
+													<option > -- Wybierz -- </option>
 												<?php foreach($storagecategories as $storagecategory):?>
 													<option value="<?php echo $storagecategory->id ?>" ><?php echo $storagecategory->name?></option>
 												<?php endforeach;?>
@@ -237,6 +242,7 @@
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
 										<select class="form-control" name="warehouse">
+												<option > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -248,6 +254,7 @@
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
 										<select class="form-control" name="division">
+												<option > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -273,6 +280,7 @@
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
 										<select class="form-control" name="warehouse">
+												<option > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -284,6 +292,7 @@
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
 										<select class="form-control" name="division">
+												<option > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -310,6 +319,7 @@
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
 										<select class="form-control" name="warehouse">
+												<option > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -321,6 +331,7 @@
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
 										<select class="form-control" name="division">
+												<option > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
