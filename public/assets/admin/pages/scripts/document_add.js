@@ -21,6 +21,9 @@ var Document_add = function () {
 					description: {
 	                    required: true
 	                },
+					box_id: {
+	                    required: true
+	                },
 	            },
 
 	            messages: {
@@ -29,6 +32,9 @@ var Document_add = function () {
 	                },
 					description: {
 	                    required: "Podaj krótki opis dokumentu"
+	                },
+					box_id: {
+	                    required: "Wybierz pozycję dla dokumentu"
 	                },
 	            },
 
@@ -57,12 +63,10 @@ var Document_add = function () {
 	            }
 	        });
         	
+			
+
         	
-        	$('input[name=IsIndividual]').change(function(){
-        	    if($(this).val() == 0) Add_user.firmaEnable();
-        	    else if($(this).val() == 1) Add_user.firmaDisable();
-        	    
-        	});
+        	
         	
         	$("#add_document_form #submit").bind('click',function(e){
                 if ($('#add_document_form').validate().form()) {

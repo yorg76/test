@@ -10,7 +10,8 @@ class Model_BulkPackaging extends ORM {
 	protected $_has_many = array(
 			'bulkpackagings'=> array('model' => 'BulkPackaging', 'through' => 'bulkpackagings_bulkpackagings'),
 			'documentlists'=> array('model' => 'DocumentList', 'foreign_key' => 'bulkpackaging_id'),
-			'documents'=> array('model' => 'Document', 'foreign_key' => 'bulkpackaging_id')
+			'documents'=> array('model' => 'Document', 'foreign_key' => 'bulkpackaging_id'),
+			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through' => 'virtualbriefcases_bulkpackagings')
 	);
 	
 	protected $_belongs_to = array(

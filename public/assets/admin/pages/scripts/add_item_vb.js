@@ -2,7 +2,7 @@
 Custom module for you to write your own javascript functions
 
 **/
-var Add_item = function () {
+var Add_item_vb = function () {
 	
 	// public functions
     return {
@@ -16,52 +16,22 @@ var Add_item = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	storage_category_id: {
+	            	box_id: {
 	                    required: true
 	                },
-					date_from: {
-	                    required: true
-	                },
-					date_to: {
-	                    required: true
-	                },
-					date_reception: {
-	                    required: true
-	                },
-	                warehouse_id: {
-	                    required: true
-	                },
-					lock: {
-	                    required: true
-	                },
-					seal: {
+					virtualbriefcase_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	storage_category_id: {
-	                    required: "Wybierz kategorię magazynowania pozycji"
+	            	box_id: {
+	                    required: "Wybierz dodawaną pozycję do wirtualnej teczki."
 	                },
-					date_from: {
-	                    required: "Podaj datę początkową magazynowania pozycji"
+					virtualbriefcase_id: {
+	                    required: "Wybierz docelową wirtualną teczkę."
 	                },
-					date_to: {
-	                    required: "Podaj datę końcową magazynowania pozycji"
-	                },
-					date_reception: {
-	                    required: "Podaj datę odbioru magaznowanej pozycji"
-	                },
-	                warehouse_id: {
-	                    required: "Wybierz magazyn dla pozycji"
-	                },
-					lock: {
-	                    required: "Wybierz status"
-	                },
-					seal: {
-	                    required: "Wybierz status"
-	                },
-	            },
+				},
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
 	                $('.alert-danger',$('#add_box_form')).show();
@@ -102,22 +72,22 @@ var Add_item = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	name: {
+	            	document_id: {
 	                    required: true
 	                },
-					description: {
+	                virtualbriefcase_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	name: {
-	                    required: "Podaj nazwę dokumentuu"
+	            	document_id: {
+	                    required: "Wybierz dodawany dokument do wirtualnej teczki."
 	                },
-					description: {
-	                    required: "Podaj krótki opis dokumentu"
+					virtualbriefcase_id: {
+	                    required: "Wybierz docelową wirtualną teczkę."
 	                },
-	            },
+				},
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
 	                $('.alert-danger',$('#add_document_form')).show();
@@ -158,22 +128,22 @@ var Add_item = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	name: {
+	            	documentlist_id: {
 	                    required: true
 	                },
-					description: {
+	                virtualbriefcase_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	name: {
-	                    required: "Podaj nazwę listy dokumentów"
+	            	documentlist_id: {
+	                    required: "Wybierz dodawaną listę dokumentów do wirtualnej teczki."
 	                },
-					description: {
-	                    required: "Podaj krótki opis listy dokumentów"
+					virtualbriefcase_id: {
+	                    required: "Wybierz docelową wirtualną teczkę."
 	                },
-	            },
+				},
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
 	                $('.alert-danger',$('#add_documentlist_form')).show();
@@ -214,28 +184,22 @@ var Add_item = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	name: {
+	            	bulkpackaging_id: {
 	                    required: true
 	                },
-					description: {
-	                    required: true
-	                },
-	                division: {
+	                virtualbriefcase_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	name: {
-	                    required: "Podaj nazwę wirtualnej teczki"
+	            	bulkpackaging_id: {
+	                    required: "Wybierz dodawane opakowanie zbiorcze do wirtualnej teczki."
 	                },
-					description: {
-	                    required: "Podaj krótki opis wirtualnej teczki"
+					virtualbriefcase_id: {
+	                    required: "Wybierz docelową wirtualną teczkę."
 	                },
-	                division: {
-	                    required: "Wybierz dział dla wirtualnej teczki"
-	                },
-	            },
+				},
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
 	                $('.alert-danger',$('#add_bulkpackaging_form')).show();
@@ -276,22 +240,22 @@ var Add_item = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	name: {
+	            	virtualbriefcase1_id: {
 	                    required: true
 	                },
-					description: {
+	                virtualbriefcase2_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	name: {
-	                    required: "Podaj nazwę wirualnej teczki"
+	            	virtualbriefcase1_id: {
+	                    required: "Wybierz dodawaną wirtualną teczkę."
 	                },
-					description: {
-	                    required: "Podaj krótki opis wirtualnej teczki"
+					virtualbriefcase2_id: {
+	                    required: "Wybierz docelową wirtualną teczkę."
 	                },
-	            },
+				},
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
 	                $('.alert-danger',$('#add_virtualbriefcase_form')).show();

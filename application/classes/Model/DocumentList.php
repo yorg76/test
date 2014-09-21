@@ -8,7 +8,8 @@
 class Model_DocumentList extends ORM {
 
 	protected $_has_many = array(
-			'documents'=> array('model' =>  'Document', 'foreign_key' => 'documentlist_id')
+			'documents'=> array('model' =>  'Document', 'foreign_key' => 'documentlist_id'),
+			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through' => 'virtualbriefcases_documentlists')
 			
 	);
 	

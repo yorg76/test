@@ -15,7 +15,8 @@ class Model_Box extends ORM {
 	protected $_has_many = array(
 			'bulkpackagings'=> array('model' => 'BulkPackaging', 'foreign_key' => 'box_id'),
 			'documents'=> array('model' => 'Document', 'foreign_key' => 'box_id'),
-			'documentlists'=> array('model' => 'DocumentList', 'foreign_key' => 'box_id')
+			'documentlists'=> array('model' => 'DocumentList', 'foreign_key' => 'box_id'),
+			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through' => 'virtualbriefcases_boxes')
 			
 	);
 	

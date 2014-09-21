@@ -24,6 +24,7 @@ class Controller_Warehouse extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'warehouse_edit') $this->add_init("Warehouse_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'boxes') $this->add_init("TableBoxes.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'box_add') $this->add_init("Box_add.init();\t\nComponentsPickers.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'boxes_search') $this->add_init("Boxes_search.init();\t\nComponentsPickers.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'add_item') $this->add_init("Add_item.init();\t\nComponentsPickers.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'box_edit') $this->add_init("Box_edit.init();\t\nComponentsPickers.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'documents') $this->add_init("TableDocuments.init();\t\n");
@@ -737,44 +738,51 @@ class Controller_Warehouse extends Controller_Welcome {
 	
 	}
 	
-	public function action_document_search() {
+	public function action_documents_search() {
 		
 		
+	}
+	
+	public function action_documents_search_result() {
+	
+	
 		$customer=Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
 		$warehouses_ids= array();
 		$boxes_ids = array();
-		
+	
 		foreach ($warehouses as $warehouse) {
 			array_push($warehouses_ids, $warehouse->id);
 		}
-		
+	
 		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
-		
+	
 		foreach ($boxes as $box) {
 			array_push($boxes_ids, $box->id);
 		}
-		$documents = ORM::factory('Document')->where('box_id','IN', $boxes_ids)->find_all();
-		
+		//$documents = ORM::factory('Document')->where('box_id','IN', $boxes_ids)->find_all();
+	
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
 		$this->content->bind('boxes', $boxes);
-		$this->content->bind('documents', $documents);
 		
 		if($this->request->method()===HTTP_Request::POST) {
-		
+	
 			$params = $_POST;
-			
 			$name=$_POST['name'];
 			$description=$_POST['description'];
-			
-			$documents = ORM::factory('Document')->where_open()->where('document.name', 'like', '%' . $name . '%')->or_where('document.description', 'like', '%' . $description . '%')->where_close()->find_all();
-			$documents = ORM::factory('Document')->where_open()->where('document.name', '=', $name)->or_where('document.description', '=' , $description)->where_close()->find_all();
-			
+				
+			$documents = ORM::factory('Document')
+				->where_open()
+				->where('document.name', 'LIKE', "%$name%")
+				->and_where('document.description', 'LIKE', "%$description%")
+				->where_close()
+				->find_all();
+						
 			$count = $documents->count();
 			$this->content->bind('documents', $documents);
 			$this->content->bind('count', $count);
-			
+				
 		}
 	}
 	
@@ -782,43 +790,73 @@ class Controller_Warehouse extends Controller_Welcome {
 	
 		$customer=Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
+		$storagecategory = ORM::factory('StorageCategory');
+		$storagecategories = $storagecategory->find_all();
 		$warehouses_ids= array();
 		$boxes_ids = array();
 		
-		foreach ($warehouses as $warehouse) {
-			array_push($warehouses_ids, $warehouse->id);
-		}
+		//foreach ($warehouses as $warehouse) {
+		//	array_push($warehouses_ids, $warehouse->id);
+		//}
 		
-		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		//$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
 		
-		foreach ($boxes as $box) {
-			array_push($boxes_ids, $box->id);
-		}
-		$documents = ORM::factory('Document')->where('box_id','IN', $boxes_ids)->find_all();
+		//foreach ($boxes as $box) {
+		//	array_push($boxes_ids, $box->id);
+		//}
+		//$documents = ORM::factory('Document')->where('box_id','IN', $boxes_ids)->find_all();
 		
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
-		$this->content->bind('boxes', $boxes);
-		$this->content->bind('documents', $documents);
+		$this->content->bind('storagecategories', $storagecategories);
+		//$this->content->bind('boxes', $boxes);
+		//$this->content->bind('documents', $documents);
 		
-		if($this->request->method()===HTTP_Request::POST) {
+		
+	}
+		
+		public function action_boxes_search_result() {
+		
+			$customer=Auth::instance()->get_user()->customer;
+			$warehouses = $customer->warehouses->find_all();
+			$storagecategory = ORM::factory('StorageCategory');
+			$storagecategories = $storagecategory->find_all();
+			$warehouses_ids= array();
+			$boxes_ids = array();
+		
+			$this->content->bind('customer', $customer);
+			$this->content->bind('warehouses', $warehouses);
+			$this->content->bind('storagecategories', $storagecategories);
 			
-			$params=$_POST;
-			$params['box_id'] = $box_id;
-			$params['warehouse_id'] = $warehouse_id;
-			$params['date_from'] = $date_from;
-			$params['date_to'] = $date_to;
-			$params['date_reception'] = $date_reception;
-			$params['lock'] = $lock;
-			$params['seal'] = $seal;
-			$params['storage_category_id'] = $storage_category_id;
-			
-			
-			
-			$this->content->bind('boxes', $boxes);
-			$this->content->bind('count', $count);
-	
-		}
+			if($this->request->method()===HTTP_Request::POST) {
+					
+				$params=$_POST;
+				$warehouse_id = $params['warehouse_id'];
+				$date_from = $params['date_from'];
+				$date_to = $params['date_to'];
+				$date_reception = $params['date_reception'];
+				$storage_category_id = $params['storage_category_id'];
+				
+				foreach ($warehouses as $warehouse) {
+					array_push($warehouses_ids, $warehouse->id);
+				}
+				
+				$boxes = ORM::factory('Box')->where_open()->where('box.warehouse_id', '=', $warehouse_id)
+				->and_where('box.storage_category_id', '=', $storage_category_id)
+				->where_close()
+				->where_open()
+				->where('box.date_from', '=', $date_from)
+				->where('box.date_to', '=', $date_to)
+				->where('box.date_reception', '=', $date_reception)
+				->where('box.description', 'LIKE', "%$description%")
+				->where_close()->find_all();
+
+				$count = $boxes->count();
+				$this->content->bind('boxes', $boxes);
+				$this->content->bind('count', $count);
+		
+			}
+		
 		
 	
 	}

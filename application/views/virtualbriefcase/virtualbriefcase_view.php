@@ -4,6 +4,68 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
+								<i class="glyphicon glyphicon-inbox"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - Pozycje
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse">
+								</a>
+								<a href="javascript:;" class="reload"> 
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="btn-group">
+									<button class="btn green" onClick="javascript:window.location='/warehouse/box_add'">
+									Dodaj <i class="fa fa-plus"></i>
+									</button>
+								</div>
+							</div>		
+								
+							<table class="table table-striped table-hover table-bordered" id="boxes_list">
+							<thead>
+							<tr>
+								<th>
+									 ID
+								</th>
+								<th>
+									 Kategoria przechowywania
+								</th>							
+								<th>
+									 Opis
+								</th>
+								<th>
+									 Opcje
+								</th>
+							</tr>
+							</thead>
+							<tbody>
+							<?php foreach ($boxes as $box):?>
+							<tr>
+								<td>
+									 <?php echo $box->id;?>
+								</td>
+								<td>
+									 <?php echo $box->storagecategory->name;?>
+								</td>			
+								<td>
+									 <?php echo $box->description ;?>
+								</td>
+								<td>
+									<div class="margin-bottom-5">
+											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/virtualbriefcase/document_edit/<?php echo $document->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/virtualbriefcase/document_remove/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń z teczki</button>
+									</div>
+								</td>
+							</tr>
+							<?php endforeach;?>
+							</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="portlet box grey">
+						<div class="portlet-title">
+							<div class="caption">
 								<i class="icon-pencil"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - Dokumenty
 							</div>
 							<div class="tools">

@@ -40,6 +40,7 @@
 												<label class="control-label">Kategoria przechowywania
 													<span class="required" aria-required="true"> * </span>
 												</label>
+												<span class="help-block"></span>
 												<div class="input-icon right">
 													<select class="form-control" name="storage_category_id">
 														<option>-- Wybierz kategorię --</option>
@@ -49,7 +50,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block">Help</span>
+													
 												</div>
 											</div>
 											<div class="form-group">
@@ -375,6 +376,7 @@
 															<span class="help-block"></span>
 														</div>
 														<br/>
+														<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 														<div class="margiv-top-10">
 															<a href="/virtualbriefcase/virtualbriefcases" class="btn green" id="submit">
 															Zapisz zmiany</a>

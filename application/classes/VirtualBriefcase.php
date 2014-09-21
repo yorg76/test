@@ -100,12 +100,13 @@ class VirtualBriefcase extends ORM {
 			
 	public function addBox() {
 		$log=Kohana_Log::instance();
+		$box = ORM::factory('Box',$params['box_id']);
 		try {
-			if($this->virtualbriefcase->add('box',$this->box)) {
-				$log->add(Log::DEBUG,"Success: Added Box:".$id."\n");
+			if($this->virtualbriefcase->add('boxes',$box)) {
+				$log->add(Log::DEBUG,"Success: Added Box with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Adding Box:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Adding Box with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
@@ -117,12 +118,13 @@ class VirtualBriefcase extends ORM {
 	
 	public function addBulkPackaging() {
 		$log=Kohana_Log::instance();
+		$bulkpackaging = ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
 		try {
-			if($this->virtualbriefcase->add('bulkpackaging',$this->bulkpackaging)) {
-				$log->add(Log::DEBUG,"Success: Added BulkPackaging:".$id."\n");
+			if($this->virtualbriefcase->add('bulkpackagings',$bulkpackaging)) {
+				$log->add(Log::DEBUG,"Success: Added BulkPackaging with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Adding BulkPackaging:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Adding BulkPackaging with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
@@ -132,33 +134,33 @@ class VirtualBriefcase extends ORM {
 		return;
 		
 	}
-
-
-	public function addDocument() {
+	
+	public function addDocument($params) {
 		$log=Kohana_Log::instance();
+		$document = ORM::factory('Document',$params['document_id']);
 		try {
-			if($this->virtualbriefcase->add('document',$this->document)) {
-				$log->add(Log::DEBUG,"Success: Added Document:".$id."\n");
+			if($this->virtualbriefcase->add('documents',$document)) {
+				$log->add(Log::DEBUG,"Success: Added Document with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Adding Document:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Adding Document with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
 		}
 		return;
 	}
-	
+
 	public function addDocumentList() {
 		$log=Kohana_Log::instance();
+		$documentlist = ORM::factory('DocumentList',$params['documentlist_id']);
 		try {
-			if($this->virtualbriefcase->add('documentlist',$this->documentlist)) {
-				$log->add(Log::DEBUG,"Success: Added DocumentList:".$id."\n");
+			if($this->virtualbriefcase->add('documentlists',$documentlist)) {
+				$log->add(Log::DEBUG,"Success: Added DocumentList with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Adding DocumentList:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Adding DocumentList with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
@@ -170,12 +172,13 @@ class VirtualBriefcase extends ORM {
 	
 	public function addChildVirtualBriefcase() {
 		$log=Kohana_Log::instance();
+		$childvirtualbriefcase = ORM::factory('VirtualBriefcase',$params['virtualbriefcase_id']);
 		try {
-			if($this->virtualbriefcase->add('virtualbriefcase',$this->virtualbriefcase)) {
-				$log->add(Log::DEBUG,"Success: Added VirtualBriefcase:".$id."\n");
+			if($this->virtualbriefcase->add('virtualbriefcases',$childvirtualbriefcase)) {
+				$log->add(Log::DEBUG,"Success: Added VirtualBriefcase with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Adding VirtualBriefcase:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Adding VirtualBriefcase with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
@@ -188,12 +191,13 @@ class VirtualBriefcase extends ORM {
 
 	public function removeBox() {
 		$log=Kohana_Log::instance();
+		$box = ORM::factory('Box',$params['box_id']);
 		try {
-			if($this->virtualbriefcase->remove('box',$this->box)) {
-				$log->add(Log::DEBUG,"Success: Remove Box:".$id."\n");
+			if($this->virtualbriefcase->remove('boxes',$box)) {
+				$log->add(Log::DEBUG,"Success: Remove Box with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Removing Box:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Removing Box with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
@@ -205,12 +209,13 @@ class VirtualBriefcase extends ORM {
 	
 	public function removeBulkPackaging() {
 		$log=Kohana_Log::instance();
+		$bulkpackaging = ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
 		try {
-			if($this->virtualbriefcase->remove('bulkpackaging',$this->bulkpackaging)) {
-				$log->add(Log::DEBUG,"Success: Remove BulkPackaging:".$id."\n");
+			if($this->virtualbriefcase->remove('bulkpackagings',$this->bulkpackaging)) {
+				$log->add(Log::DEBUG,"Success: Remove BulkPackaging with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Removing BulkPackaging:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Removing BulkPackaging with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
@@ -221,14 +226,15 @@ class VirtualBriefcase extends ORM {
 	}
 
 
-	public function removeDocument() {
+	public function removeDocument($params) {
 		$log=Kohana_Log::instance();
+		$document = ORM::factory('Document',$params['document_id']);
 		try {
-			if($this->virtualbriefcase->remove('document',$this->document)) {
-				$log->add(Log::DEBUG,"Success: Remove Document:".$id."\n");
+			if($this->virtualbriefcase->remove('documents',$document)) {
+				$log->add(Log::DEBUG,"Success: Remove Document with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Removing Document:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Removing Document with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
@@ -240,12 +246,13 @@ class VirtualBriefcase extends ORM {
 	
 	public function removeDocumentList() {
 		$log=Kohana_Log::instance();
+		$documentlist = ORM::factory('DocumentList',$params['documentlist_id']);
 		try {
-			if($this->virtualbriefcase->remove('documentlist',$this->documentlist)) {
-				$log->add(Log::DEBUG,"Success: Remove DocumentList:".$id."\n");
+			if($this->virtualbriefcase->remove('documentlist',$documentlist)) {
+				$log->add(Log::DEBUG,"Success: Remove DocumentList with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Removing DocumentList:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Removing DocumentList with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
@@ -258,12 +265,13 @@ class VirtualBriefcase extends ORM {
 	
 	public function removeVirtualBriefcase() {
 		$log=Kohana_Log::instance();
+		$childvirtualbriefcase = ORM::factory('VirtualBriefcase',$params['virtualbriefcase2_id']);
 		try {
-			if($this->virtualbriefcase->remove('virtualbriefcase',$this->virtualbriefcase)) {
-				$log->add(Log::DEBUG,"Success: Removed VirtualBriefcase:".$id."\n");
+			if($this->virtualbriefcase->remove('virtualbriefcase',$childvirtualbriefcase)) {
+				$log->add(Log::DEBUG,"Success: Removed VirtualBriefcase with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Removing VirtualBriefcase:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Removing VirtualBriefcase with params:".serialize($params)."\n");
 				return false;
 			}
 		}catch (Exception $e) {
