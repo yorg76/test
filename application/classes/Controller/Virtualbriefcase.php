@@ -308,12 +308,16 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase_id=$params['virtualbriefcase_id'];
 			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 			
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->join('virtualbriefcases_boxes')->on('virtualbriefcase.id', '=','virtualbriefcases_boxes.virtualbriefcase_id')->where('virtualbriefcases_boxes.box_id','=',$box_id)->find_all();
+			$this->content->bind('virtualbriefcases', $virtualbriefcases);
+			$this->content->bind('box', $box);
 			
-			if($virtualbriefcase->removeBox()) {
-				Message::success(ucfirst(__('Pozycja została usunięta z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases/'.$id);
-			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć dokumentu z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases/'.$id);
-			}
+			
+			//if($virtualbriefcase->removeBox($params)) {
+			//	Message::success(ucfirst(__('Pozycja została usunięta z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases/'.$id);
+			//}else {
+			//	Message::error(ucfirst(__('Nie udało się usunąć dokumentu z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases/'.$id);
+			//}
 		}
 	}
 	
@@ -340,16 +344,22 @@ public $controller_title = 'Wirtualne teczki';
 	public function action_document_remove() {
 		if($this->request->param('id') > 0) {
 			$document = Document::instance($this->request->param('id'));
+			//$document = ORM::factory('Document',$params['document_id']);
 			$document_id = $document->id;
 			$name = $document->name;
-			$virtualbriefcase_id=$params['virtualbriefcase_id'];
-			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
+					
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->join('virtualbriefcases_documents')->on('virtualbriefcase.id', '=','virtualbriefcases_documents.virtualbriefcase_id')->where('virtualbriefcases_documents.document_id','=',$document_id)->find_all();
+			$this->content->bind('virtualbriefcases', $virtualbriefcases);
+			$this->content->bind('document', $document);
+			
+			//$virtualbriefcase_id=$params['virtualbriefcase_id'];
+			//$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 		
-			if($virtualbriefcase->removeDocument($document)) {
-				Message::success(ucfirst(__('Dokument został usunięty')),'/virtualbriefcase/documents/'.$name);
-			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć dokumentu')),'/virtualbriefcase/documents/'.$name);
-			}
+			//if($virtualbriefcase->removeDocument($document)) {
+			//	Message::success(ucfirst(__('Dokument został usunięty')),'/virtualbriefcase/documents/'.$name);
+			//}else {
+			//	Message::error(ucfirst(__('Nie udało się usunąć dokumentu')),'/virtualbriefcase/documents/'.$name);
+			//}
 		}
 	}
 	
@@ -378,11 +388,15 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase_id=$params['virtualbriefcase_id'];
 			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 		
-			if($virtualbriefcase->removeDocumentList()) {
-				Message::success(ucfirst(__('Lista dokumentów została usunięta z wirtualnej teczki')),'/virtualbriefcase/documentlists/'.$name);
-			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć Listy dokumentów z wirtualnej teczki')),'/virtualbriefcase/documentlists/'.$name);
-			}
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->join('virtualbriefcases_documentlists')->on('virtualbriefcase.id', '=','virtualbriefcases_documentlists.virtualbriefcase_id')->where('virtualbriefcases_documentlists.documentlist_id','=',$documentlist_id)->find_all();
+			$this->content->bind('virtualbriefcases', $virtualbriefcases);
+			$this->content->bind('documentlist', $documentlist);
+			
+			//if($virtualbriefcase->removeDocumentList($params)) {
+			//	Message::success(ucfirst(__('Lista dokumentów została usunięta z wirtualnej teczki')),'/virtualbriefcase/documentlists/'.$name);
+			//}else {
+			//	Message::error(ucfirst(__('Nie udało się usunąć Listy dokumentów z wirtualnej teczki')),'/virtualbriefcase/documentlists/'.$name);
+			//}
 		}
 	}
 	
@@ -411,11 +425,15 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase_id=$params['virtualbriefcase_id'];
 			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 		
-			if($bulkpackaging->removeBulkPackaging()) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings/'.$name);
-			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć Opakowania zbiorczego z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings/'.$name);
-			}
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->join('virtualbriefcases_bulkpackagings')->on('virtualbriefcase.id', '=','virtualbriefcases_bulkpackagings.virtualbriefcase_id')->where('virtualbriefcases_bulkpackagings.bulkpackaging_id','=',$bulkpackaging_id)->find_all();
+			$this->content->bind('virtualbriefcases', $virtualbriefcases);
+			$this->content->bind('bulkpackaging', $bulkpackaging);
+			
+			//if($bulkpackaging->removeBulkPackaging($params)) {
+			//	Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings/'.$name);
+			//}else {
+			//	Message::error(ucfirst(__('Nie udało się usunąć Opakowania zbiorczego z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings/'.$name);
+			//}
 		}
 	}
 	

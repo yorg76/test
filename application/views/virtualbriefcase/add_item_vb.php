@@ -49,7 +49,7 @@
 													</select>
 													
 												</div>
-												<span class="help-block">bla bla</span>
+												<span class="help-block"></span>
 											</div>
 											<div class="form-group">
 											<span class="help-block"></span>
@@ -267,7 +267,7 @@
 												<span>Popraw błędy w formularzu</span>
 											</div>
 											<div class="form-group">
-												<label class="control-label">Wybór opakowania zbiorczego
+												<label class="control-label">Wybór wirtualnej teczki
 													<span class="required" aria-required="true"> * </span>
 												</label>
 												<div class="input-icon right">

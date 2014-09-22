@@ -16,8 +16,8 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/virtualbriefcase/bulkpackaging_add'">
-									Dodaj <i class="fa fa-plus"></i>
+									<button class="btn green" onClick="javascript:window.location='/virtualbriefcase/add_item_vb'">
+									Dodaj do teczki <i class="fa fa-plus"></i>
 									</button>
 								</div>
 							</div>						
