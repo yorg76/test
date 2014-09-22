@@ -98,7 +98,7 @@ class VirtualBriefcase extends ORM {
 		return;
 	}
 			
-	public function addBox() {
+	public function addBox($params) {
 		$log=Kohana_Log::instance();
 		$box = ORM::factory('Box',$params['box_id']);
 		try {
@@ -116,7 +116,7 @@ class VirtualBriefcase extends ORM {
 		return;
 	}
 	
-	public function addBulkPackaging() {
+	public function addBulkPackaging($params) {
 		$log=Kohana_Log::instance();
 		$bulkpackaging = ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
 		try {
@@ -152,7 +152,7 @@ class VirtualBriefcase extends ORM {
 		return;
 	}
 
-	public function addDocumentList() {
+	public function addDocumentList($params) {
 		$log=Kohana_Log::instance();
 		$documentlist = ORM::factory('DocumentList',$params['documentlist_id']);
 		try {
@@ -189,7 +189,7 @@ class VirtualBriefcase extends ORM {
 	}
 
 
-	public function removeBox() {
+	public function removeBox($params) {
 		$log=Kohana_Log::instance();
 		$box = ORM::factory('Box',$params['box_id']);
 		try {
@@ -207,7 +207,7 @@ class VirtualBriefcase extends ORM {
 		return;
 	}
 	
-	public function removeBulkPackaging() {
+	public function removeBulkPackaging($params) {
 		$log=Kohana_Log::instance();
 		$bulkpackaging = ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
 		try {
@@ -229,6 +229,7 @@ class VirtualBriefcase extends ORM {
 	public function removeDocument($params) {
 		$log=Kohana_Log::instance();
 		$document = ORM::factory('Document',$params['document_id']);
+		
 		try {
 			if($this->virtualbriefcase->remove('documents',$document)) {
 				$log->add(Log::DEBUG,"Success: Remove Document with params:".serialize($params)."\n");
@@ -244,7 +245,7 @@ class VirtualBriefcase extends ORM {
 		return;
 	}
 	
-	public function removeDocumentList() {
+	public function removeDocumentList($params) {
 		$log=Kohana_Log::instance();
 		$documentlist = ORM::factory('DocumentList',$params['documentlist_id']);
 		try {
@@ -263,7 +264,7 @@ class VirtualBriefcase extends ORM {
 	}
 	
 	
-	public function removeVirtualBriefcase() {
+	public function removeVirtualBriefcase($params) {
 		$log=Kohana_Log::instance();
 		$childvirtualbriefcase = ORM::factory('VirtualBriefcase',$params['virtualbriefcase2_id']);
 		try {
