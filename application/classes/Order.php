@@ -471,6 +471,8 @@ class Order extends ORM {
 								$log->add(Log::DEBUG,"Success: Dodano pudła do zamówienia:".serialize($i)."\n");
 							}
 						}
+						
+						
 					}
 					
 					$this->id=$this->order->id;

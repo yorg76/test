@@ -227,12 +227,12 @@ var OrderWizard = function () {
                         $(this).html(input.val());
                         
                     } else if (input.is("select")) {
-                    	//input.find('option:selected').text()
-                    	//input.html().replace(/<option.*>(.*)<\/option>/gm,'$1 <br />')
                     	var txt = [];
                     	
                     	input.find('option:selected').each(function () {
-                    		txt.push($(this).text());
+                    		if($(this).val() != '') { 
+                    			txt.push($(this).text());
+                    		}
                     	});
                     	
                         $(this).html(txt.unique().join('<br />'));

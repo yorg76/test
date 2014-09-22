@@ -429,12 +429,49 @@ class Controller_Order extends Controller_Welcome {
 			
 			$params['customer_id'] = $customer->id;
 			
+			$params['warehouse'] =$params['warehouse_'.$params['order_type']]; 
+			$params['division'] =$params['division_'.$params['order_type']];
+			$params['boxes'] = $params['boxes_'.$params['order_type']];
+		
 			if($order->registerOrder($params)) {
+				die;
 				Message::success(ucfirst(__('Zamówienie zostało utworzone')),'/order/orders_new');
 			}else {
+				die;
 				Message::error(ucfirst(__('Wystąpił problem podczas dodawania zamówienia')),'/order/orders_new');
 			}
 			
 		}
 	}
+	
+	public function action_order_document() {
+		
+		if($this->request->param('id') > 0) {
+			$user = Auth::instance()->get_user();
+			$customer=$user->customer;
+			$order = Order::instance($this->request->param('id'));
+				
+			
+			$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$_POST['warehouse']."-".$_POST['division'].".pdf";
+			
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+			
+			$document_template = View_MPDF::factory('order/order_document');
+
+			$document_template->bind_global('customer', $customer);
+			$document_template->bind_global('user', $user);
+			
+			$document_template->bind_global('order',$order);
+			
+			$document_template->get_mpdf()->SetDisplayMode('fullpage');
+			$document_template->get_mpdf()->WriteHTML($document_css,1);
+			$document_template->download($document_filename);
+		}
+	}
 }
+

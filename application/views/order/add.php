@@ -67,7 +67,7 @@
 								<label class="control-label col-md-3">Rodzaj zamówienia</label>
 								<div class="col-md-4">
 								<select class="form-control" name="order_type">
-										<option > -- Wybierz -- </option>
+										<option value="" > -- Wybierz -- </option>
 									<?php foreach($order_types as $kt=>$ot):?>
 										<option value="<?php echo $kt ?>" ><?php echo $ot?></option>
 									<?php endforeach;?>
@@ -84,8 +84,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<select class="form-control" name="warehouse">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="warehouse_0">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -96,8 +96,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<select class="form-control" name="division">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="division_0">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -108,7 +108,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes[]">
+										<select multiple class="form-control" name="boxes_0[]">
 											<?php foreach($boxes as $box):?>
 												<option value="<?php echo $box->id ?>" ><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
 											<?php endforeach;?>
@@ -123,8 +123,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<select class="form-control" name="warehouse">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="warehouse_1">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -135,8 +135,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<select class="form-control" name="division">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="division_1">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -193,7 +193,7 @@
 										<label class="control-label col-md-3">Kategoria magazynowania</label>
 										<div class="col-md-4">
 											<select class="form-control" name="box_storagecategory_template" id="box_storagecategory_template">
-													<option > -- Wybierz -- </option>
+													<option value="" > -- Wybierz -- </option>
 												<?php foreach($storagecategories as $storagecategory):?>
 													<option value="<?php echo $storagecategory->id ?>" ><?php echo $storagecategory->name?></option>
 												<?php endforeach;?>
@@ -241,8 +241,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<select class="form-control" name="warehouse">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="warehouse_2">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -253,8 +253,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<select class="form-control" name="division">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="division_2">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -265,7 +265,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes[]">
+										<select multiple class="form-control" name="boxes_2[]">
 											<?php foreach($boxes as $box):?>
 												<option value="<?php echo $box->id ?>" ><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
 											<?php endforeach;?>
@@ -279,8 +279,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<select class="form-control" name="warehouse">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="warehouse_3">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -291,8 +291,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<select class="form-control" name="division">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="division_3">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -303,7 +303,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes[]">
+										<select multiple class="form-control" name="boxes_3[]">
 											<?php foreach($boxes as $box):?>
 												<option value="<?php echo $box->id ?>" ><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
 											<?php endforeach;?>
@@ -318,8 +318,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<select class="form-control" name="warehouse">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="warehouse_4">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($warehouses as $warehouse):?>
 												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
 											<?php endforeach;?>
@@ -330,8 +330,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<select class="form-control" name="division">
-												<option > -- Wybierz -- </option>
+										<select class="form-control" name="division_4">
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach($divisions as $division):?>
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
@@ -342,7 +342,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes[]">
+										<select multiple class="form-control" name="boxes_4[]">
 											<?php foreach($boxes as $box):?>
 												<option value="<?php echo $box->id ?>" ><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
 											<?php endforeach;?>
@@ -391,7 +391,7 @@
 									<label class="control-label col-md-3">Adres odbioru</label>
 									<div class="col-md-4">
 										<select class="form-control" name="pickup_address">
-												<option > -- Wybierz -- </option>
+												<option value="" > -- Wybierz -- </option>
 											<?php foreach ($pickup_addresses as $pa):?>
 												<option value="<?php echo $pa->id ?>" ><?php echo $pa->street." ".$pa->number."/".$pa->flat.", ".$pa->postal.", ".$pa->city; ?></option>
 											<?php endforeach;?>
@@ -466,7 +466,7 @@
 									<label class="control-label col-md-3">Adres odbioru</label>
 									<div class="col-md-4">
 										<select class="form-control" name="delivery_address">
-											<option > -- Wybierz -- </option>
+											<option value="" > -- Wybierz -- </option>
 											<?php foreach ($delivery_addresses as $da):?>
 												<option value="<?php echo $da->id ?>" ><?php echo $da->street." ".$da->number."/".$da->flat.", ".$da->postal.", ".$da->city; ?></option>
 											<?php endforeach;?>
@@ -559,24 +559,21 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse">
-									</p>
+										<p class="form-control-static" data-display="warehouse_0"></p>
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="division">
-										</p>
+										<p class="form-control-static" data-display="division_0"></p>
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="boxes[]">
-										</p>
+										<p class="form-control-static" data-display="boxes_0[]"></p>
 									</div>
 								</div>
 								
@@ -587,7 +584,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse">
+										<p class="form-control-static" data-display="warehouse_1">
 										</p>
 									</div>
 								</div>
@@ -595,7 +592,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="division">
+										<p class="form-control-static" data-display="division_1">
 										</p>
 									</div>
 								</div>
@@ -629,7 +626,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse">
+										<p class="form-control-static" data-display="warehouse_2">
 										</p>
 									</div>
 								</div>
@@ -637,7 +634,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="division">
+										<p class="form-control-static" data-display="division_2">
 										</p>
 									</div>
 								</div>
@@ -645,7 +642,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="boxes[]">
+										<p class="form-control-static" data-display="boxes_2[]">
 										</p>
 									</div>
 								</div>
@@ -656,7 +653,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse">
+										<p class="form-control-static" data-display="warehouse_3">
 										</p>
 									</div>
 								</div>
@@ -664,7 +661,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="division">
+										<p class="form-control-static" data-display="division_3">
 										</p>
 									</div>
 								</div>
@@ -672,7 +669,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="boxes[]">
+										<p class="form-control-static" data-display="boxes_3[]">
 										</p>
 									</div>
 								</div>
@@ -684,7 +681,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse">
+										<p class="form-control-static" data-display="warehouse_4">
 										</p>
 									</div>
 								</div>
@@ -692,7 +689,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="division">
+										<p class="form-control-static" data-display="division_4">
 										</p>
 									</div>
 								</div>
@@ -700,7 +697,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="boxes[]">
+										<p class="form-control-static" data-display="boxes_4[]">
 										</p>
 									</div>
 								</div>
