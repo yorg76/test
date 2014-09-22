@@ -57,7 +57,7 @@
 					<br/>
 					<div class="margiv-top-10">
 						<a href="/virtualbriefcase/bulkpackagings" class="btn green" id="submit">
-						Usuń dokument</a>
+						Usuń opakowanie</a>
 						<a href="/virtualbriefcase/bulkpackagings" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>

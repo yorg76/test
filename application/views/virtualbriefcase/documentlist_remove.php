@@ -57,7 +57,7 @@
 					<br/>
 					<div class="margiv-top-10">
 						<a href="/virtualbriefcase/documentlists" class="btn green" id="submit">
-						Usuń dokument</a>
+						Usuń listę</a>
 						<a href="/virtualbriefcase/documentlists" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
