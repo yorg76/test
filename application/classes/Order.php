@@ -447,6 +447,9 @@ class Order extends ORM {
 			try {
 					
 				if($this->order->save()) {
+					$this->id=$this->order->id;
+					$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$params['order_type']."-".$order->order->id.".pdf";
+					
 					if($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4) {
 						if(isset($params['boxes']) && is_array($params['boxes']) && $params['order_type'] == 0) {
 							foreach ($params['boxes'] as $box) {
@@ -472,10 +475,33 @@ class Order extends ORM {
 							}
 						}
 						
+						$user = Auth::instance()->get_user();
+						$customer=$user->customer;
+						$address=$user->customer->addresses->where('address_type','=','firmowy')->find();
+						$order = $this;
+							
+						$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
+						$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
+						$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+						$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
+						$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
+						$document_css .= @file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
+						$document_css .= @file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+							
+						$document_template = View_MPDF::factory('order/order_document');
 						
+						$document_template->bind_global('customer', $customer);
+						$document_template->bind_global('address', $address);
+						$document_template->bind_global('user', $user);
+							
+						$document_template->bind_global('order',$order);
+							
+						$document_template->get_mpdf()->SetDisplayMode('fullpage');
+						$document_template->get_mpdf()->WriteHTML($document_css,1);
+						$document_template->write_to_disk(PDF.$document_filename);
 					}
 					
-					$this->id=$this->order->id;
+					
 					
 					$paramse = array();
 					
@@ -497,7 +523,7 @@ class Order extends ORM {
 						$paramse['email'] = $opertor->email;
 						$paramse['firstname'] = $opertor->firstname;
 						$paramse['lastname']= $opertor->lastname;
-						
+						$paramse['attachments'] = array(0=>PDF.$document_filename);
 						$this->sendEmail($paramse);
 						
 						$notification = ORM::factory('Notification');
@@ -526,7 +552,7 @@ class Order extends ORM {
 					$paramse['email'] = $user->email;
 					$paramse['firstname'] = $user->firstname;
 					$paramse['lastname']= $user->lastname;
-					
+					$paramse['attachments'] = array(0=>PDF.$document_filename);
 					$this->sendEmail($paramse);
 					
 					$log->add(Log::DEBUG,"Success: Dodano zamówienie parametrami:".serialize($params)."\n");
@@ -586,7 +612,11 @@ class Order extends ORM {
 		$social_rss= $email->embed(DOCROOT.ASSETS_ADMIN_PAGES_MEDIA . "email/social_rss.png");
 			
 		$message = str_replace("social_rss.png", $social_rss, $message);
-			
+		
+		foreach ($params['attachments'] as $attachment) {
+			$email->attach_file($attachment);
+		}
+		
 		$email->message($message, 'text/html');
 		$email->to($params['email'],$params['firstname']." ".$params['lastname']);
 		$email->from(Kohana::$config->load('email')->as_array()['default']['options']['fromemail'],"System magazynowy");
@@ -595,7 +625,7 @@ class Order extends ORM {
 			if($email->send()) $log->add(Log::DEBUG,"Success: User email sent\n");
 			else $log->add(Log::ERROR,"Error: User email not sent\n");
 		}catch (Exception $e) {
-			$log->add(Log::ERROR,"Error: User email not sent\n");
+			$log->add(Log::ERROR,"Error: User email not sent".$e->getMessage()."\n\n");
 		}
 	}
 

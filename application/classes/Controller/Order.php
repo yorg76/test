@@ -449,6 +449,7 @@ class Controller_Order extends Controller_Welcome {
 		if($this->request->param('id') > 0) {
 			$user = Auth::instance()->get_user();
 			$customer=$user->customer;
+			$address=$user->customer->addresses->where('address_type','=','firmowy')->find();
 			$order = Order::instance($this->request->param('id'));
 				
 			
@@ -457,6 +458,7 @@ class Controller_Order extends Controller_Welcome {
 			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
 			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
 			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
 			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
 			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
 			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
@@ -464,6 +466,7 @@ class Controller_Order extends Controller_Welcome {
 			$document_template = View_MPDF::factory('order/order_document');
 
 			$document_template->bind_global('customer', $customer);
+			$document_template->bind_global('address', $address);
 			$document_template->bind_global('user', $user);
 			
 			$document_template->bind_global('order',$order);

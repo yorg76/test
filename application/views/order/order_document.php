@@ -4,8 +4,8 @@
 						<img src="<?php echo DOCROOT.ASSETS_ADMIN_LAYOUT_IMG ?>document_logo.jpg" class="img-responsive" alt="" >
 					</div>
 
-					<div class="col-xs-5">
-						<p>Potwierdzenie zlecenia numer: <span class="muted"> <?php echo $order->id; ?></span>
+					<div class="col-xs-8">
+						<p>Potwierdzenie zlecenia numer: <span class="muted"> <?php echo $order->id; ?> / <?php echo date('d-m-Y',strtotime($order->order->create_date)); ?></span>
 						</p>
 					</div>
 				</div>
@@ -15,36 +15,39 @@
 						<h3>Klient:</h3>
 						<ul class="list-unstyled">
 							<li>
-								 <?php echo $customer->name; ?>
+								<strong>Nazwa: </strong> <?php echo $customer->name; ?>
 							</li>
 							<li>
-								 <?php echo $customer->nip; ?>
+								<strong>NIP: </strong><?php echo $customer->nip; ?>
 							</li>
 							<li>
-								 <?php echo $customer->regon; ?>
+								<strong>REGON: </strong><?php echo $customer->regon; ?>
 							</li>
+							<li>
+								<strong>Adres: </strong><br /><?php echo $address->street ." ".$address->number. "/".$address->flat ; ?>
+							</li>
+							<li>
+								 <?php echo $address->postal.", ".$address->city; ?>
+							</li>														
 						</ul>
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-4" style="width:200px;">
 						<h3>Zlecenie:</h3>
 						<ul class="list-unstyled">
 							<li>
-								 Drem psum dolor sit amet
+								 <strong>Typ: </strong><?php echo $order->order->type;?>
 							</li>
 							<li>
-								 Laoreet dolore magna
+								 <strong>Magazyn: </strong><?php echo $order->order->warehouse->name;?>
 							</li>
 							<li>
-								 Consectetuer adipiscing elit
+								 <strong>Dział: </strong><?php echo $order->order->division->name;?>
 							</li>
 							<li>
-								 Magna aliquam tincidunt erat volutpat
+								 <strong>Ilość pozycji: </strong><?php echo $order->order->quantity;?>
 							</li>
 							<li>
-								 Olor sit amet adipiscing eli
-							</li>
-							<li>
-								 Laoreet dolore magna
+								 <strong>Data odbioru: </strong><?php echo $order->order->pickup_date;?>
 							</li>
 						</ul>
 					</div>
@@ -52,132 +55,55 @@
 						<h3>Adres odbioru:</h3>
 						<ul class="list-unstyled">
 							<li>
-								<strong>V.A.T Reg #:</strong> 542554(DEMO)78
+								<strong>Adres: </strong><br /><?php echo $order->order->address->street ." ".$order->order->address->number. "/".$order->order->address->flat ; ?>
 							</li>
 							<li>
-								<strong>Account Name:</strong> FoodMaster Ltd
-							</li>
+								 <?php echo $order->order->address->postal.", ".$order->order->address->city; ?>
+							</li>													
 							<li>
-								<strong>SWIFT code:</strong> 45454DEMO545DEMO
-							</li>
-							<li>
-								<strong>V.A.T Reg #:</strong> 542554(DEMO)78
-							</li>
-							<li>
-								<strong>Account Name:</strong> FoodMaster Ltd
-							</li>
-							<li>
-								<strong>SWIFT code:</strong> 45454DEMO545DEMO
-							</li>
+								 <?php echo $order->order->address->country?>
+							</li>													
 						</ul>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<table class="table table-striped table-hover">
+						<table class="table table-striped table-hover" style="border:1px solid lightgrey; padding:5px;">
 						<thead>
 						<tr>
-							<th>
+							<th style="border:1px solid lightgrey; padding:5px;">
 								 #
 							</th>
-							<th>
-								 Item
+							<th class="hidden-480"  style="border:1px solid lightgrey; padding:5px;">
+								 Opis
 							</th>
-							<th class="hidden-480">
-								 Description
+							<th class="hidden-480"  style="border:1px solid lightgrey; padding:5px;">
+								 Kategoria
 							</th>
-							<th class="hidden-480">
-								 Quantity
-							</th>
-							<th class="hidden-480">
-								 Unit Cost
-							</th>
-							<th>
-								 Total
+							<th class="hidden-480" style="border:1px solid lightgrey; padding:5px;">
+								 Data składowania
 							</th>
 						</tr>
 						</thead>
 						<tbody>
+						
+						<?php foreach ($order->order->orderdetails->find_all() as $ord):?>
+						
 						<tr>
-							<td>
-								 1
+							<td  style="border:1px solid lightgrey; padding:5px;">
+								 <?php echo $ord->box_number; ?>
 							</td>
-							<td>
-								 Hardware
+							<td  style="border:1px solid lightgrey; padding:5px;">
+								 <?php echo $ord->box_description; ?>
 							</td>
-							<td class="hidden-480">
-								 Server hardware purchase
+							<td class="hidden-480"  style="border:1px solid lightgrey; padding:5px;">
+								 <?php echo $ord->storagecategory->name; ?>
 							</td>
-							<td class="hidden-480">
-								 32
-							</td>
-							<td class="hidden-480">
-								 $75
-							</td>
-							<td>
-								 $2152
+							<td class="hidden-480"  style="border:1px solid lightgrey; padding:5px;">
+								 <?php echo $ord->box_date; ?>
 							</td>
 						</tr>
-						<tr>
-							<td>
-								 2
-							</td>
-							<td>
-								 Furniture
-							</td>
-							<td class="hidden-480">
-								 Office furniture purchase
-							</td>
-							<td class="hidden-480">
-								 15
-							</td>
-							<td class="hidden-480">
-								 $169
-							</td>
-							<td>
-								 $4169
-							</td>
-						</tr>
-						<tr>
-							<td>
-								 3
-							</td>
-							<td>
-								 Foods
-							</td>
-							<td class="hidden-480">
-								 Company Anual Dinner Catering
-							</td>
-							<td class="hidden-480">
-								 69
-							</td>
-							<td class="hidden-480">
-								 $49
-							</td>
-							<td>
-								 $1260
-							</td>
-						</tr>
-						<tr>
-							<td>
-								 3
-							</td>
-							<td>
-								 Software
-							</td>
-							<td class="hidden-480">
-								 Payment for Jan 2013
-							</td>
-							<td class="hidden-480">
-								 149
-							</td>
-							<td class="hidden-480">
-								 $12
-							</td>
-							<td>
-								 $866
-							</td>
-						</tr>
+						<?php endforeach;?>
 						</tbody>
 						</table>
 					</div>
@@ -185,33 +111,43 @@
 				<div class="row">
 					<div class="col-xs-4">
 						<div class="well">
-							<address>
-							<strong>Loop, Inc.</strong><br>
-							795 Park Ave, Suite 120<br>
-							San Francisco, CA 94107<br>
-							<abbr title="Phone">P:</abbr> (234) 145-1810 </address>
-							<address>
-							<strong>Full Name</strong><br>
-							<a href="mailto:#">
-							first.last@email.com </a>
-							</address>
+							<center>
+								<?php echo QRBarcode::encode($order->id);?>
+							</center>
 						</div>
 					</div>
-					<div class="col-xs-8 invoice-block">
+					<div class="col-xs-6 invoice-block">
 						<ul class="list-unstyled amounts">
 							<li>
-								<strong>Sub - Total amount:</strong> $9265
-							</li>
-							<li>
-								<strong>Discount:</strong> 12.9%
+								<strong>Suma zamówienia:</strong> $9265
 							</li>
 							<li>
 								<strong>VAT:</strong> -----
 							</li>
 							<li>
-								<strong>Grand Total:</strong> $12489
+								<strong>Suma brutto:</strong> $12489
 							</li>
 						</ul>
 					</div>
 				</div>
+				<hr>
+				<div class="row">
+					<p>Klauzula: 
+					<i>
+						Tutaj powinna znajdować się klauzula informująca o przeznaczeniu dokumentu, albo i nie powinna tutaj się znadować taka kluzula, tego nie wiem ale 
+						pewnie się kiedyś dowiem.
+					</i> 
+					</p>
+				</div>
+				<pagebreak />
+					<?php foreach ($order->order->orderdetails->find_all() as $ord):?>
+						<hr>
+							Pozycja: <?php echo $ord->box_number; ?> - <?php echo $ord->box_description; ?>
+						<hr>
+						<div style="text-align:center;">
+							<?php echo QRBarcode::factory($ord->box_number."/".$ord->storagecategory->id."/".$ord->box_date,500)->render();?>
+						</div>
+					<pagebreak />
+					<?php endforeach;?>
+				
 			</div>
