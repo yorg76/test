@@ -37,6 +37,8 @@ class Controller_Ajax extends Controller_Welcome {
 		
 		if($this->request->method()===HTTP_Request::POST) {
 			
+			$order=Order::instance();
+			
 			$document_template = View::factory('templates/document_template_full');
 			$document = $document_template->render();
 			

@@ -363,10 +363,13 @@
 							</div>		
 							<div id="doc" style="display:none">
 								<div class="margiv-top-10">
-									<a href="#" class="btn green" id="show_utilisation_document" data-toggle="modal" data-target="#long">
+									<!--  <a href="#" class="btn green" id="show_utilisation_document" data-toggle="modal" data-target="#long">
 									Pokaż dokument utylizacji</a>
 									<a href="#" class="btn default" id="print_utilisation_document">
 									Drukuj do PDF</a>
+									-->
+									<p class="btn green">Po złożeniu zamówienia dokument utylizacji zostanie przesłany za pomocą poczty elektornicznej, proszę wcisnąć dalej.
+									</p>
 								</div>		
 								
 								<div id="long" class="modal fade modal-scroll" tabindex="-1" data-replace="true" aria-hidden="true" style="display: none; margin-top: -475px;">
@@ -715,12 +718,8 @@
 								</div>								
 							</div>		
 							<div id="doc" style="display:none">
-								<div class="margiv-top-10">
-									<a href="#" class="btn green" id="show_utilisation_document">
-									Pokaż dokument utylizacji</a>
-									<a href="#" class="btn default" id="print_utilisation_document">
-									Drukuj do PDF</a>
-								</div>								
+									<p class="btn green">Wciśnij prześlij aby otrzymać dokument utlizacji.
+									</p>		
 							</div>		
 											
 							<div id="pickup_address" style="display:none">						

@@ -448,19 +448,60 @@ class Order extends ORM {
 					
 				if($this->order->save()) {
 					$this->id=$this->order->id;
+					$this->order->reload();
+					$paramse = array();
 					$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$params['order_type']."-".$order->order->id.".pdf";
 					
 					if($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4) {
-						if(isset($params['boxes']) && is_array($params['boxes']) && $params['order_type'] == 0) {
+						if(isset($params['boxes']) && is_array($params['boxes']) && ($params['order_type'] == 0 || $params['order_type'] == 2)) {
 							foreach ($params['boxes'] as $box) {
 								$bbox=ORM::factory('Box')->where('id', '=', $box)->find();
 								if($bbox->lock != 1) {
 									$bbox->lock='1';
 									if($bbox->update()) {
 										$this->order->add('boxes', $box);
+										
 									}
 								}
 							}
+						}
+						
+						if($params['order_type'] == 2) {
+							$user = Auth::instance()->get_user();
+							$customer=$user->customer;
+							$address=$user->customer->addresses->where('address_type','=','firmowy')->find();
+							$order = $this;
+								
+							$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
+							$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
+							$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+							$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
+							$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
+							$document_css .= @file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
+							$document_css .= @file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+								
+							$document_template = View_MPDF::factory('order/utilisation_document');
+							
+							$document_template->bind_global('customer', $customer);
+							$document_template->bind_global('address', $address);
+							$document_template->bind_global('user', $user);
+								
+							$document_template->bind_global('order',$order);
+								
+							$document_template->get_mpdf()->SetDisplayMode('fullpage');
+							$document_template->get_mpdf()->WriteHTML($document_css,1);
+							$document_template->write_to_disk(PDF.$document_filename);
+							
+							if(file_exists(PDF.$document_filename)) {
+								$this->order->utilisation_document=$document_filename;
+								$log->add(Log::DEBUG,'Dokument utylizacji został wygenerowany'."\n");
+								$paramse['attachments'] = array(0=>PDF.$document_filename);
+								try {
+									$this->order->update();
+								}catch (Exception $e) {
+									$log->add(Log::ERROR,'Exception: Wystąpił błąd podczas dodwania dokumentu zamówienia'."\n");
+								}
+							}	
 						}
 					}elseif($params['order_type'] == 1 && $params['box_quantity'] > 0) {
 						for($i=1; $i <= $params['box_quantity']; $i++) {
@@ -499,11 +540,18 @@ class Order extends ORM {
 						$document_template->get_mpdf()->SetDisplayMode('fullpage');
 						$document_template->get_mpdf()->WriteHTML($document_css,1);
 						$document_template->write_to_disk(PDF.$document_filename);
+						
+						if(file_exists(PDF.$document_filename)) {
+							$this->order->order_document=$document_filename;
+							$log->add(Log::DEBUG,'Dokument zamówienia został wygenerowany'."\n");
+							$paramse['attachments'] = array(0=>PDF.$document_filename);
+							try {
+								$this->order->update();
+							}catch (Exception $e) {
+								$log->add(Log::ERROR,'Exception: Wystąpił błąd podczas dodwania dokumentu zamówienia'."\n");
+							}
+						}
 					}
-					
-					
-					
-					$paramse = array();
 					
 					$user = Auth_ORM::instance()->get_user();
 					
@@ -523,7 +571,7 @@ class Order extends ORM {
 						$paramse['email'] = $opertor->email;
 						$paramse['firstname'] = $opertor->firstname;
 						$paramse['lastname']= $opertor->lastname;
-						$paramse['attachments'] = array(0=>PDF.$document_filename);
+						
 						$this->sendEmail($paramse);
 						
 						$notification = ORM::factory('Notification');
@@ -540,8 +588,6 @@ class Order extends ORM {
 						}
 					}
 					
-					$paramse = array();
-					
 					$paramse['subject']="Twoje nowe zamówienie w systemie";
 					$paramse['email_title'] = "Nowe zamówienie zostało dodane pod numerem: ".$this->order->id;
 					$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
@@ -552,7 +598,6 @@ class Order extends ORM {
 					$paramse['email'] = $user->email;
 					$paramse['firstname'] = $user->firstname;
 					$paramse['lastname']= $user->lastname;
-					$paramse['attachments'] = array(0=>PDF.$document_filename);
 					$this->sendEmail($paramse);
 					
 					$log->add(Log::DEBUG,"Success: Dodano zamówienie parametrami:".serialize($params)."\n");

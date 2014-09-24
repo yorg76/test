@@ -15,7 +15,7 @@ class Controller_User extends Controller_Welcome {
 		array_push($this->_bread, ucfirst($this->request->action ()));
 		$this->template->message = Message::factory();
 
-		
+		if(strtolower ( $this->request->action()) == 'calendar') $this->add_init(" Calendar.init();\t\n");
 		
 	}
 	
@@ -25,6 +25,12 @@ class Controller_User extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery-validation/js/jquery.validate.min.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ecommerce-index.js');
+		
+		if(strtolower ( $this->request->action()) == 'calendar') {
+			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar/fullcalendar.css');
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar/fullcalendar.min.js');
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'calendar.js');
+		}
 		
 		$this->class='page-header-fixed page-quick-sidebar-over-content';
 	
@@ -48,6 +54,10 @@ class Controller_User extends Controller_Welcome {
 		
 	}
 	public function action_dashboard() {
+		
+	}
+	
+	public function action_calendar() {
 		
 	}
 
