@@ -174,7 +174,7 @@ class VirtualBriefcase extends ORM {
 		$log=Kohana_Log::instance();
 		$childvirtualbriefcase = ORM::factory('VirtualBriefcase',$params['virtualbriefcase2_id']);
 		try {
-			if($this->parentvirtualbriefcase->add('virtualbriefcases',$childvirtualbriefcase)) {
+			if($this->virtualbriefcase->add('virtualbriefcases',$childvirtualbriefcase)) {
 				$log->add(Log::DEBUG,"Success: Added VirtualBriefcase with params:".serialize($params)."\n");
 				return true;
 			} else {
@@ -286,7 +286,7 @@ class VirtualBriefcase extends ORM {
 		$log=Kohana_Log::instance();
 		$childvirtualbriefcase = ORM::factory('VirtualBriefcase',$params['virtualbriefcase2_id']);
 		try {
-			if($this->parentvirtualbriefcase->remove('virtualbriefcases',$childvirtualbriefcase)) {
+			if($this->virtualbriefcase->remove('virtualbriefcases',$childvirtualbriefcase)) {
 				$log->add(Log::DEBUG,"Success: Removed VirtualBriefcase with params:".serialize($params)."\n");
 				return true;
 			} else {

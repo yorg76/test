@@ -41,7 +41,7 @@ public $controller_title = 'Wirtualne teczki';
 		if(strtolower ( $this->request->action()) == 'bulkpackaging_add') $this->add_init("BulkPackaging_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'bulkpackaging_edit') $this->add_init("BulkPackaging_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'bulkpackaging_remove') $this->add_init("Remove_item_vb.init();\t\n");
-		if(strtolower ( $this->request->action()) == 'childvirualbriefcase_remove') $this->add_init("Remove_item_vb.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'childvirtualbriefcase_remove') $this->add_init("Remove_item_vb.init();\t\n");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 	}
@@ -68,6 +68,9 @@ public $controller_title = 'Wirtualne teczki';
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-virtualbriefcases.js');
 		
+		if(strtolower ( $this->request->action()) == 'childvirtualbriefcase_remove' || $this->request->action() == 'box_remove' || $this->request->action() == 'document_remove' || $this->request->action() == 'documentlist_remove' || $this->request->action() == 'bulkpackaging_remove') {
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'remove_item_vb.js');
+		}
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
 		
 		if (file_exists (DOCROOT.ASSETS_ADMIN_PAGES_SCRIPTS . strtolower ( $this->request->action()) . '.js' )) {
@@ -165,13 +168,13 @@ public $controller_title = 'Wirtualne teczki';
 		}
 	}
 	
-	public function action_virtualbriefcase_remove() {
+	public function action_virtualbriefcase_delete() {
 		if($this->request->param('id') > 0) {
 			$virtualbriefcase = VirtualBriefcase::instance($this->request->param('id'));
 			$virtualbriefcase_id = $virtualbriefcase->id;
 			$name = $virtualbriefcase->name;
 	
-			if($virtualbriefcase->removeVirtualBriefcase()) {
+			if($virtualbriefcase->deleteVirtualBriefcase()) {
 				Message::success(ucfirst(__('Wirtualna teczka została usunięta')),'/virtualbriefcase/virtualbriefcases/'.$name);
 			}else {
 				Message::error(ucfirst(__('Nie udało się usunąć wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases/'.$name);
@@ -510,9 +513,9 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase2_id = $params['virtualbriefcase2_id'];
 			$childvirtualbriefcase = Virtualbriefcase::instance($virtualbriefcase2_id);
 			$virtualbriefcase1_id = $params['virtualbriefcase1_id'];
-			$parentvirtualbriefcase = VirtualBriefcase::instance($virtualbriefcase1_id);
+			$virtualbriefcase = VirtualBriefcase::instance($virtualbriefcase1_id);
 				
-			if($parentvirtualbriefcase->addChildVirtualBriefcase($params)) {
+			if($virtualbriefcase->addChildVirtualBriefcase($params)) {
 				Message::success(ucfirst(__('Wirtualna teczka została dodana do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 				var_dump($_POST);
 			}else {
@@ -525,9 +528,9 @@ public $controller_title = 'Wirtualne teczki';
 	public function action_childvirtualbriefcase_remove() {
 		if($this->request->param('id') > 0) {
 			$childvirtualbriefcase = Virtualbriefcase::instance($this->request->param('id'));
-			$childvirtualbriefcase_id = $childvirtualbriefcase->id;
+			$virtualbriefcase2_id = $childvirtualbriefcase->id;
 							
-			$virtualbriefcases = ORM::factory('VirtualBriefcase')->join('virtualbriefcases_virtualbriefcases')->on('virtualbriefcase.id', '=','virtualbriefcases_virtualbriefcases.virtualbriefcase1_id')->where('virtualbriefcases_virtualbriefcases.virtualbriefcase2_id','=',$childvirtualbriefcase_id)->find_all();
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->join('virtualbriefcases_virtualbriefcases')->on('virtualbriefcase.id', '=','virtualbriefcases_virtualbriefcases.virtualbriefcase1_id')->where('virtualbriefcases_virtualbriefcases.virtualbriefcase2_id','=',$virtualbriefcase2_id)->find_all();
 	
 			$this->content->bind('virtualbriefcases', $virtualbriefcases);
 			$this->content->bind('childvirtualbriefcase', $childvirtualbriefcase);
@@ -536,11 +539,11 @@ public $controller_title = 'Wirtualne teczki';
 					
 				$params = $_POST;
 				$virtualbriefcase1_id = $params['virtualbriefcase1_id'];
-				$parentvirtualbriefcase = VirtualBriefcase::instance($virtualbriefcase1_id);
+				$virtualbriefcase = VirtualBriefcase::instance($virtualbriefcase1_id);
 				$virtualbriefcase2_id = $params['virtualbriefcase2_id'];
 				$childvirtualbriefcase = VirtualBriefcase::instance($virtualbriefcase2_id);
 	
-				if($parentvirtualbriefcase->removeChildVirtualBriefcase($params)) {
+				if($virtualbriefcase->removeChildVirtualBriefcase($params)) {
 					Message::success(ucfirst(__('Wirtualna teczka została usunięta z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 				}else {
 					Message::error(ucfirst(__('Nie udało się usunąć wirtulanej teczki z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
