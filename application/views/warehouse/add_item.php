@@ -12,7 +12,7 @@
 								</li>
 								<li>
 									<a data-toggle="tab" href="#tab_1_4">
-									Dodaj listę kokumentów</a>
+									Dodaj listę dokumentów</a>
 								</li>
 								<li>
 									<a data-toggle="tab" href="#tab_1_5">
@@ -40,10 +40,10 @@
 												<label class="control-label">Kategoria przechowywania
 													<span class="required" aria-required="true"> * </span>
 												</label>
-												<span class="help-block"></span>
+												<span class="help-block">Wybierz kategorię magazynowania pozycji</span>
 												<div class="input-icon right">
 													<select class="form-control" name="storage_category_id">
-														<option>-- Wybierz kategorię --</option>
+														<option value="">-- Wybierz kategorię --</option>
 														<?php foreach ($storagecategories as $storagecategory):?>
 														<?php 
 																	echo "<option value=\"".$storagecategory->id."\">".$storagecategory->name."</option>";
@@ -96,14 +96,14 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control" name="warehouse_id">
-														<option>-- Wybierz magazyn --</option>
+														<option value="">-- Wybierz magazyn --</option>
 														<?php foreach ($warehouses as $warehouse):?>
 														<?php 
 																	echo "<option value=\"".$warehouse->id."\">".$warehouse->name."</option>";
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block"></span>
+													<span class="help-block">Wybierz magazyn dla pozycji</span>
 												</div>
 											</div>				
 											<div class="form-group">
@@ -130,7 +130,7 @@
 											<div class="margiv-top-10">
 												<a href="/warehouse/boxes" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/warehouse/boxes" class="btn default" id="cancel">
+												<a href="/warehouse/add_item" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -158,7 +158,7 @@
 															</label>
 															<div class="input-icon right">
 																<select class="form-control" name="box_id">
-																	<option>-- Wybierz pozycję dla dokumentu --</option>
+																	<option value="">-- Wybierz pozycję dla dokumentu --</option>
 																	<?php foreach ($boxes as $box):?>
 																	<?php 
 																				echo "<option value=\"".$box->id."\">".$box->id."</option>";
@@ -195,7 +195,7 @@
 														<div class="margiv-top-10">
 															<a href="/warehouse/documents" class="btn green" id="submit">
 															Zapisz zmiany</a>
-															<a href="/warehouse/documents" class="btn default" id="cancel">
+															<a href="/warehouse/add_item" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>
 													</div>	
@@ -224,7 +224,7 @@
 															</label>
 															<div class="input-icon right">
 																<select class="form-control" name="box_id">
-																	<option>-- Wybierz pozycję dla listy dokumentów --</option>
+																	<option value="">-- Wybierz pozycję dla listy dokumentów --</option>
 																	<?php foreach ($boxes as $box):?>
 																	<?php 
 																				echo "<option value=\"".$box->id."\">".$box->id."</option>";
@@ -256,7 +256,7 @@
 														<div class="margiv-top-10">
 															<a href="/warehouse/documentlists" class="btn green" id="submit">
 															Zapisz zmiany</a>
-															<a href="/warehouse/documentlists" class="btn default" id="cancel">
+															<a href="/warehouse/add_item" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>
 													</div>	
@@ -286,7 +286,7 @@
 															</label>
 															<div class="input-icon right">
 																<select class="form-control" name="box_id">
-																	<option>-- Wybierz pozycję dla opakowania --</option>
+																	<option value="">-- Wybierz pozycję dla opakowania --</option>
 																	<?php foreach ($boxes as $box):?>
 																	<?php 
 																				echo "<option value=\"".$box->id."\">".$box->id."</option>";
@@ -318,7 +318,7 @@
 														<div class="margiv-top-10">
 															<a href="/warehouse/bulkpackagings" class="btn green" id="submit">
 															Zapisz zmiany</a>
-															<a href="/warehouse/bulkpackagings" class="btn default" id="cancel">
+															<a href="/warehouse/add_item" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>
 													</div>	
@@ -363,9 +363,10 @@
 															<label class="control-label">Dział
 																<span class="required" aria-required="true"> * </span>
 															</label>
+															<span class="help-block"></span>
 															<div class="input-icon right">
 																<select class="form-control" name="division_id">
-																	<option>-- Wybierz dział --</option>
+																	<option value="">-- Wybierz dział --</option>
 																	<?php foreach ($divisions as $division):?>
 																	<?php 
 																				echo "<option value=\"".$division->id."\">".$division->name."</option>";
@@ -373,14 +374,14 @@
 																	<?php endforeach;?>
 																</select>
 															</div>
-															<span class="help-block"></span>
+															
 														</div>
 														<br/>
 														<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 														<div class="margiv-top-10">
 															<a href="/virtualbriefcase/virtualbriefcases" class="btn green" id="submit">
 															Zapisz zmiany</a>
-															<a href="/virtualbriefcase/virtualbriefcases" class="btn default" id="cancel">
+															<a href="/warehouse/add_item" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>
 													</div>	

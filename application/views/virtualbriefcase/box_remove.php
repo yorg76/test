@@ -24,7 +24,7 @@
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="<?php echo $box->id; ?>" />
+							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="<?php echo $box->id; ?>" DISABLED/>
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -32,17 +32,17 @@
 						<label class="control-label">Opis
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<textarea class="form-control" name="description"><?php echo $box->description; ?>
+						<textarea class="form-control" name="description" DISABLED><?php echo $box->description; ?>
 						</textarea>
 						<span class="help-block"></span>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label">Wybór wirtualnej teczki
+						<label class="control-label">Wybór wirtualnej teczki<span class="required" aria-required="true"> * </span>
 							</label>
 						<div class="input-icon right">
 							<select class="form-control" name="virtualbriefcase_id">
-								<option>-- Wybierz teczkę --</option>
+								<option value="">-- Wybierz teczkę --</option>
 								<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 								<?php 
 											echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
@@ -57,9 +57,9 @@
 					<br/>
 					<div class="margiv-top-10">
 						<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
-						<a href="/virtualbriefcase/boxes" class="btn green" id="submit">
+						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 						Usuń dokument</a>
-						<a href="/virtualbriefcase/boxes" class="btn default" id="cancel">
+						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

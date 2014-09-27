@@ -544,6 +544,8 @@ public $controller_title = 'Wirtualne teczki';
 				$childvirtualbriefcase = VirtualBriefcase::instance($virtualbriefcase2_id);
 	
 				if($virtualbriefcase->removeChildVirtualBriefcase($params)) {
+					echo $_POST;
+					echo $params;
 					Message::success(ucfirst(__('Wirtualna teczka została usunięta z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 				}else {
 					Message::error(ucfirst(__('Nie udało się usunąć wirtulanej teczki z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');

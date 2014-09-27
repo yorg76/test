@@ -83,8 +83,8 @@
 								<td>
 									<div class="margin-bottom-5">
 											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/warehouse/box_view/<?php echo $box->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button> <br />
-											<button class="btn btn-xs yellow user-edit margin-bottom" onClick="javascript:window.location='/warehouse/box_edit/<?php echo $box->id ;?>';"><i class="fa fa-user"></i> Edytuj</button><br />
-											<button class="btn btn-xs red user-delete margin-bottom" onClick="javascript:window.location='/warehouse/box_delete/<?php echo $box->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs yellow margin-bottom" onClick="javascript:window.location='/warehouse/box_edit/<?php echo $box->id ;?>';"><i class="fa fa-user"></i> Edytuj</button><br />
+											<button class="btn btn-xs red box-delete margin-bottom" id="<?php echo $box->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

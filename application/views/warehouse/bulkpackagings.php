@@ -54,8 +54,8 @@
 								<td style="width:20%">
 									<div class="margin-bottom-5">
 											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button>
-											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/bulkpackaging_edit/<?php echo $bulkpackaging->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/bulkpackaging_delete/<?php echo $bulkpackaging->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs yellow margin-bottom" onClick="javascript:window.location='/warehouse/bulkpackaging_edit/<?php echo $bulkpackaging->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-xs red bulkpackaging-delete margin-bottom" id="<?php echo $bulkpackaging->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>

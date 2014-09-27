@@ -182,8 +182,9 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
+			
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
@@ -294,8 +295,9 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
+			
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}

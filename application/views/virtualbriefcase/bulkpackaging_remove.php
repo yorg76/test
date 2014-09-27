@@ -17,7 +17,7 @@
 				<span>Popraw błędy w formularzu</span>
 			</div>
 			<div class="tab-content">
-			iv class="form-group">
+			<div class="form-group">
 						<label class="control-label">Nazwa
 							<span class="required" aria-required="true"> * </span>
 						</label>
@@ -39,7 +39,7 @@
 							</label>
 						<div class="input-icon right">
 							<select class="form-control" name="virtualbriefcase_id">
-								<option>-- Wybierz teczkę --</option>
+								<option value="">-- Wybierz teczkę --</option>
 								<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 								<?php 
 											echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";

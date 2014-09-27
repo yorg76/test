@@ -16,7 +16,7 @@ var UIAlertDialogApi = function () {
     	 $('.user-delete').click(function(e){
     		 e.preventDefault();
     		 var id = $(this).attr('id');
-             bootbox.confirm("Czy napewno chcesz usunąć użytkownika, ta operacja jest nie odwracalna !", function(result) {
+             bootbox.confirm("Czy napewno chcesz usunąć użytkownika, ta operacja jest nieodwracalna !", function(result) {
             	 if(result==true) {
             		 window.location='/admin/user_delete/'+id;
             	 }
@@ -27,9 +27,78 @@ var UIAlertDialogApi = function () {
     		 e.preventDefault();
     		 var id = $(this).attr('id');
     		 
-             bootbox.confirm("Czy napewno chcesz usunąć klienta, ta operacja jest nie odwracalna !", function(result) {
+             bootbox.confirm("Czy napewno chcesz usunąć klienta, ta operacja jest nieodwracalna !", function(result) {
             	 if(result==true) {
             		 window.location='/admin/customer_delete/'+id;
+            	 }
+             }); 
+         });
+    	 
+    	 $('.warehouse-delete').click(function(e){
+    		 e.preventDefault();
+    		 var id = $(this).attr('id');
+    		 
+             bootbox.confirm("Czy napewno chcesz usunąć magazyn, ta operacja jest nieodwracalna !", function(result) {
+            	 if(result==true) {
+            		 javascript:window.location='/warehouse/warehouse_delete/'+id;
+            	 }
+             }); 
+         });
+    	 
+    	 $('.box-delete').click(function(e){
+    		 e.preventDefault();
+    		 var id = $(this).attr('id');
+    		 
+             bootbox.confirm("Czy napewno chcesz usunąć pozycję, ta operacja jest nieodwracalna !", function(result) {
+            	 if(result==true) {
+            		 javascript:window.location='/warehouse/box_delete/'+id;
+            	 }
+             }); 
+         });
+    	 
+    	 $('.document-delete').click(function(e){
+    		 e.preventDefault();
+    		 var id = $(this).attr('id');
+    		 
+             bootbox.confirm("Czy napewno chcesz usunąć dokument, ta operacja jest nieodwracalna !", function(result) {
+            	 if(result==true) {
+            		 javascript:window.location='/warehouse/document_delete/'+id;
+            	 }
+             }); 
+         });
+    	 
+    	 $('.documentlist-delete').click(function(e){
+    		 e.preventDefault();
+    		 var id = $(this).attr('id');
+    		 
+             bootbox.confirm("Czy napewno chcesz usunąć listę dokumentów, ta operacja jest nieodwracalna !", function(result) {
+            	 if(result==true) {
+            		 javascript:window.location='/warehouse/documentlist_delete/'+id;
+            	 }
+             }); 
+         });
+    	 
+    	   	 
+    	 $('.bulkpackaging-delete').click(function(e){
+    		 e.preventDefault();
+    		 var id = $(this).attr('id');
+    		 
+             bootbox.confirm("Czy napewno chcesz usunąć opakowanie zbiorcze, ta operacja jest nieodwracalna !", function(result) {
+            	 if(result==true) {
+            		 javascript:window.location='/warehouse/bulkpackaging_delete/'+id;
+            	 }
+             }); 
+         });
+    	 
+    	 
+    	 
+    	 $('.virtualbriefcase-delete').click(function(e){
+    		 e.preventDefault();
+    		 var id = $(this).attr('id');
+    		 
+             bootbox.confirm("Czy napewno chcesz usunąć wirtualną teczkę, ta operacja jest nieodwracalna !", function(result) {
+            	 if(result==true) {
+            		 javascript:window.location='/virtualbriefcase/virtualbriefcase_delete/'+id;
             	 }
              }); 
          });

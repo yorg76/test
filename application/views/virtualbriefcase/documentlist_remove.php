@@ -36,11 +36,11 @@
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
-						<label class="control-label">Wybór wirtualnej teczki
+						<label class="control-label">Wybór wirtualnej teczki<span class="required" aria-required="true"> * </span>
 							</label>
 						<div class="input-icon right">
 							<select class="form-control" name="virtualbriefcase_id">
-								<option>-- Wybierz teczkę --</option>
+								<option value="">-- Wybierz teczkę --</option>
 								<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 								<?php 
 											echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";

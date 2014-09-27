@@ -40,7 +40,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="box_id">
-														<option>-- Wybierz pozycję --</option>
+														<option value="">-- Wybierz pozycję --</option>
 														<?php foreach ($boxes as $box):?>
 														<?php 
 															echo "<option value=\"".$box->id."\">".$box->id."</option>";
@@ -58,7 +58,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="virtualbriefcase_id">
-														<option>-- Wybierz teczkę --</option>
+														<option value="">-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 														<?php 
 															echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
@@ -75,7 +75,7 @@
 											
 												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/add_item_vb" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -100,7 +100,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="document_id">
-														<option>-- Wybierz dokument --</option>
+														<option value="">-- Wybierz dokument --</option>
 														<?php foreach ($documents as $document):?>
 														<?php 
 															echo "<option value=\"".$document->id."\">".$document->name."</option>";
@@ -116,7 +116,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="virtualbriefcase_id">
-														<option>-- Wybierz teczkę --</option>
+														<option value="">-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 														<?php 
 															echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
@@ -132,7 +132,7 @@
 												
 												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/add_item_vb" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -157,7 +157,7 @@
 												<span class="help-block"></span>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="documentlist_id">
-														<option>-- Wybierz listę --</option>
+														<option value="">-- Wybierz listę --</option>
 														<?php foreach ($documentlists as $documentlist):?>
 														<?php 
 															echo "<option value=\"".$documentlist->id."\">".$documentlist->name."</option>";
@@ -173,7 +173,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="virtualbriefcase_id">
-														<option>-- Wybierz teczkę --</option>
+														<option value="">-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 														<?php 
 															echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
@@ -189,7 +189,7 @@
 												
 												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/add_item_vb" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -214,7 +214,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="bulkpackaging_id">
-														<option>-- Wybierz opakowanie --</option>
+														<option value="">-- Wybierz opakowanie --</option>
 														<?php foreach ($bulkpackagings as $bulkpackaging):?>
 														<?php 
 															echo "<option value=\"".$bulkpackaging->id."\">".$bulkpackaging->name."</option>";
@@ -230,7 +230,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="virtualbriefcase_id">
-														<option>-- Wybierz teczkę --</option>
+														<option value="">-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 														<?php 
 															echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
@@ -246,7 +246,7 @@
 												
 												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/add_item_vb" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -272,7 +272,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="virtualbriefcase1_id">
-														<option>-- Wybierz teczkę --</option>
+														<option value="">-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 														<?php 
 															echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
@@ -288,7 +288,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="virtualbriefcase2_id">
-														<option>-- Wybierz teczkę --</option>
+														<option value="">-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 														<?php 
 															echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
@@ -301,10 +301,9 @@
 											<br/>
 											<br/>
 											<div class="margiv-top-10">
-												<input type="submit" />
 												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/add_item_vb" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>

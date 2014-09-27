@@ -12,7 +12,7 @@ class Model_VirtualBriefcase extends ORM {
 	);
 	
 	protected $_has_many = array(
-			'viritualbriefcases'=> array('model' => 'ViritualBriefcase', 'through' => 'virtualbriefcases_virtualbriefcases'),
+			'virtualbriefcases'=> array('model' => 'ViritualBriefcase', 'through' => 'virtualbriefcases_virtualbriefcases', 'foreign_key' => 'virtualbriefcase1_id', 'far_key'=>'virtualbriefcase2_id'),
 			'bulkpackagings'=> array('model' => 'BulkPackaging', 'through' => 'virtualbriefcases_bulkpackagings'),
 			'documentlists'=> array('model' => 'DocumentList', 'through' => 'virtualbriefcases_documentlists'),
 			'boxes'=> array('model' => 'Box', 'through' => 'virtualbriefcases_boxes'),

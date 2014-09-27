@@ -54,8 +54,8 @@
 								</td>
 								<td style="width:20%">
 									<div class="margin-bottom-5">
-											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/document_remove/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń z listy</button>
+											<button class="btn btn-xs yellow margin-bottom" onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-xs red margin-bottom" onClick="javascript:window.location='/warehouse/document_remove/<?php echo $document->id ;?>';"><i class="fa fa-recycle"></i> Usuń z listy</button>
 									</div>
 								</td>
 							</tr>

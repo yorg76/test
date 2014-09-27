@@ -54,8 +54,8 @@
 								<td style="width:20%">
 									<div class="margin-bottom-5">
 											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/warehouse/documentlist_view/<?php echo $documentlist->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button>
-											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/warehouse/documentlist_edit/<?php echo $documentlist->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-xs red division-delete margin-bottom" onClick="javascript:window.location='/warehouse/documentlist_delete/<?php echo $documentlist->id ;?>';"><i class="fa fa-recycle"></i> Usuń</button>
+											<button class="btn btn-xs yellow margin-bottom" onClick="javascript:window.location='/warehouse/documentlist_edit/<?php echo $documentlist->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-xs red documentlist-delete margin-bottom" id="<?php echo $documentlist->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
 									</div>
 								</td>
 							</tr>
