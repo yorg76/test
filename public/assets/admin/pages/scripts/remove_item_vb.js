@@ -16,20 +16,14 @@ var Remove_item_vb = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	box_id: {
-	                    required: true
-	                },
-					virtualbriefcase_id: {
+	            	virtualbriefcase_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	box_id: {
-	                    required: "Wybierz dodawaną pozycję do wirtualnej teczki."
-	                },
-					virtualbriefcase_id: {
-	                    required: "Wybierz docelową wirtualną teczkę."
+	            	virtualbriefcase_id: {
+	                    required: "Wybierz teczkę, z której  chcesz usunąć wybrany element."
 	                },
 				},
 
@@ -72,20 +66,14 @@ var Remove_item_vb = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	document_id: {
-	                    required: true
-	                },
-	                virtualbriefcase_id: {
+	            	virtualbriefcase_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	document_id: {
-	                    required: "Wybierz dodawany dokument do wirtualnej teczki."
-	                },
-					virtualbriefcase_id: {
-	                    required: "Wybierz docelową wirtualną teczkę."
+	            	virtualbriefcase_id: {
+	                    required: "Wybierz teczkę, z której  chcesz usunąć wybrany element."
 	                },
 				},
 
@@ -128,20 +116,14 @@ var Remove_item_vb = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	documentlist_id: {
-	                    required: true
-	                },
-	                virtualbriefcase_id: {
+	            	virtualbriefcase_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	documentlist_id: {
-	                    required: "Wybierz dodawaną listę dokumentów do wirtualnej teczki."
-	                },
-					virtualbriefcase_id: {
-	                    required: "Wybierz docelową wirtualną teczkę."
+	            	virtualbriefcase_id: {
+	                    required: "Wybierz teczkę, z której  chcesz usunąć wybrany element."
 	                },
 				},
 
@@ -184,20 +166,14 @@ var Remove_item_vb = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	bulkpackaging_id: {
-	                    required: true
-	                },
-	                virtualbriefcase_id: {
+	            	virtualbriefcase_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	bulkpackaging_id: {
-	                    required: "Wybierz dodawane opakowanie zbiorcze do wirtualnej teczki."
-	                },
-					virtualbriefcase_id: {
-	                    required: "Wybierz docelową wirtualną teczkę."
+	            	virtualbriefcase_id: {
+	                    required: "Wybierz teczkę, z której  chcesz usunąć wybrany element."
 	                },
 				},
 
@@ -235,46 +211,40 @@ var Remove_item_vb = function () {
                 return false;
         	});
         	
-        	$('#remove_virtualbriefcase_form').validate({
+        	$('#remove_childvirtualbriefcase_form').validate({
 	            errorElement: 'span', //default input error message container
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	virtualbriefcase1_id: {
-	                    required: true
-	                },
-	                virtualbriefcase2_id: {
+	            	virtualbriefcase2_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	virtualbriefcase1_id: {
-	                    required: "Wybierz dodawaną wirtualną teczkę."
-	                },
-					virtualbriefcase2_id: {
-	                    required: "Wybierz docelową wirtualną teczkę."
+	            	virtualbriefcase2_id: {
+	                    required: "Wybierz teczkę, z której  chcesz usunąć wybrany element."
 	                },
 				},
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
-	                $('.alert-danger',$('#remove_virtualbriefcase_form')).show();
-	                Metronic.scrollTo( $('.alert-danger',$('#remove_virtualbriefcase_form')), -200);
-	                $("#remove_virtualbriefcase_form").removeAttr("novalidate");
+	                $('.alert-danger',$('#remove_childvirtualbriefcase_form')).show();
+	                Metronic.scrollTo( $('.alert-danger',$('#remove_childvirtualbriefcase_form')), -200);
+	                $("#remove_childvirtualbriefcase_form").removeAttr("novalidate");
 	                
 	            },
 
 	            highlight: function (element) { // hightlight error inputs
 	                $(element)
 	                    .closest('.form-group').addClass('has-error'); // set error class to the control group
-	                $("#remove_virtualbriefcase_form").removeAttr("novalidate");
+	                $("#remove_childvirtualbriefcase_form").removeAttr("novalidate");
 	              
 	            },
 
 	            success: function (label) {
 	                label.closest('.form-group').removeClass('has-error');
 	                label.remove();
-	                $("#remove_virtualbriefcase_form").removeAttr("novalidate");
+	                $("#remove_childvirtualbriefcase_form").removeAttr("novalidate");
 	            },
 	            
 	            submitHandler: function (form) {
@@ -283,11 +253,11 @@ var Remove_item_vb = function () {
 	        });
         	       	
         	       	
-        	$("#remove_virtualbriefcase_form #submit").bind('click',function(e){
-                if ($('#remove_virtualbriefcase_form').validate().form()) {
-                    $('#remove_virtualbriefcase_form').submit();
+        	$("#remove_childvirtualbriefcase_form #submit").bind('click',function(e){
+                if ($('#remove_childvirtualbriefcase_form').validate().form()) {
+                    $('#remove_childvirtualbriefcase_form').submit();
                 }
-                $("#remove_virtualbriefcase_form").removeAttr("novalidate");
+                $("#remove_childvirtualbriefcase_form").removeAttr("novalidate");
                 return false;
         	});       				
         },

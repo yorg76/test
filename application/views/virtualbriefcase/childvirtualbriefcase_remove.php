@@ -57,6 +57,7 @@
 					<br/>
 					<div class="margiv-top-10">
 					<input type="submit" />
+					<input type="hidden" value="<?php echo $childvirtualbriefcase->id ?>" name="virtualbriefcase2_id" />
 						<a href="/virtualbriefcase/virtualbriefcases" class="btn green" id="submit">
 						Usuń teczkę</a>
 						<a href="/virtualbriefcase/virtualbriefcases" class="btn default" id="cancel">
