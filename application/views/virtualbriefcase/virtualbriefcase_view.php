@@ -54,7 +54,7 @@
 										<i class="fa fa-user"></i> Edytuj
 									</button>
 									<button class="btn btn-xs red division-delete margin-bottom"
-										onClick="javascript:window.location='/virtualbriefcase/document_remove/<?php echo $box->id ;?>';">
+										onClick="javascript:window.location='/virtualbriefcase/box_remove/<?php echo $box->id ;?>';">
 										<i class="fa fa-recycle"></i> Usuń z teczki
 									</button>
 								</div>
@@ -289,13 +289,13 @@
 								</td>
 							<td style="width:10%">
 								<div class="margin-bottom-5">
-								<input type="hidden" value="<?php echo $virtualbriefcase->id ?>" name="virtualbriefcase_id" />
+								<input type="hidden" value="<?php echo $virtualbriefcase->id ?>" name="virtualbriefcase2_id" />
 									<button class="btn btn-xs yellow division-edit margin-bottom"
 										onClick="javascript:window.location='/warehouse/virtualbriefcase_edit/<?php echo $virtualbriefcase->id ;?>';">
 										<i class="fa fa-user"></i> Edytuj
 									</button>
 									<button class="btn btn-xs red division-delete margin-bottom"
-										onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_remove/<?php echo $virtualbriefcase->id ;?>';">
+										onClick="javascript:window.location='/virtualbriefcase/childvirtualbriefcase_remove/<?php echo $virtualbriefcase->id ;?>';">
 										<i class="fa fa-recycle"></i> Usuń z teczki
 									</button>
 								</div>

@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Usuwanie opakowania zbiorczego <?php echo $bulkpackaging->name; ?> z wirtualnej teczki</a>
+				<i class="fa fa-cog"></i>Usuwanie pozycji <?php echo $box->id; ?> z wirtualnej teczki</a>
 				<span class="after">
 				</span>
 			</li>
@@ -11,18 +11,20 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form enctype="multipart/form-data" role="form" action="/virtualbriefcase/bulkpackaging_remove/<?php echo $bulkpackaging->id; ?>" method="POST" id="remove_bulkpackaging_form">
+		<form enctype="multipart/form-data" role="form" action="/virtualbriefcase/box_remove/<?php echo $box->id; ?>" method="POST" id="remove_box_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
 			</div>
 			<div class="tab-content">
-			iv class="form-group">
-						<label class="control-label">Nazwa
+			
+				<div id="tab_1-1" class="tab-pane active">
+					<div class="form-group">
+						<label class="control-label">Numer
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="<?php echo $bulkpackaging->name; ?>" DISABLED/>
+							<input type="text" placeholder="Nazwa" class="form-control" name="name" value="<?php echo $box->id; ?>" />
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -30,10 +32,11 @@
 						<label class="control-label">Opis
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<textarea class="form-control" name="description" DISABLED><?php echo $bulkpackaging->description; ?></textarea>
+						<textarea class="form-control" name="description"><?php echo $box->description; ?>
+						</textarea>
 						<span class="help-block"></span>
 					</div>
-				<div id="tab_1-1" class="tab-pane active">
+					
 					<div class="form-group">
 						<label class="control-label">Wybór wirtualnej teczki
 							</label>
@@ -46,18 +49,18 @@
 								?>
 								<?php endforeach;?>
 							</select>
-							<span class="help-block">Wybierz wirtualną teczkę, z której chcesz usunąć dokument</span>
+							<span class="help-block">Wybierz wirtualną teczkę, z której chcesz usunąć pozycję</span>
 						</div>
 					</div>
 					
 					
 					<br/>
 					<div class="margiv-top-10">
-					<input type="submit" />
-					<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging_id" />
-						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
-						Usuń opakowanie</a>
-						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
+						<input type="submit" />
+						<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
+						<a href="/virtualbriefcase/boxes" class="btn green" id="submit">
+						Usuń dokument</a>
+						<a href="/virtualbriefcase/boxes" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

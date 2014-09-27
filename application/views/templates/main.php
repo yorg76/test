@@ -265,6 +265,11 @@
 									Lista wirtualnych teczek
 							</a>
 						</li>
+						<li class="<?php if ($_action=='boxes') echo "active";?>">
+							<a href="/virtualbriefcase/boxes">
+							<i class="glyphicon glyphicon-inbox"></i>
+							Pozycje</a>
+						</li>
 						
 						<li class="<?php if ($_action=='documents') echo "active";?>">
 							<a href="/virtualbriefcase/documents">

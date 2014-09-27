@@ -9,6 +9,7 @@ class Box extends ORM {
 
 	public $box;
 	public $id;
+	public $description;
 	public $date_from;
 	public $date_to;
 	public $date_reception;
@@ -17,6 +18,7 @@ class Box extends ORM {
 	public $storagecategory;
 	public $warehouse;
 	public $boxbarcode;
+
 
 	
 	

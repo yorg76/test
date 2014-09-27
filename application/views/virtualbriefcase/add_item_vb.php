@@ -34,7 +34,7 @@
 												<span>Popraw błędy w formularzu</span>
 											</div>
 											<div class="form-group">
-											
+											<span class="help-block"></span>
 												<label class="control-label">Wybór pozycji
 													<span class="required" aria-required="true"> * </span>
 												</label>
@@ -49,7 +49,7 @@
 													</select>
 													
 												</div>
-												<span class="help-block"></span>
+												
 											</div>
 											<div class="form-group">
 											<span class="help-block"></span>
@@ -73,9 +73,9 @@
 											
 											<div class="margiv-top-10">
 											
-												<a href="/virtualbriefcase/virtualbriefcases" class="btn green" id="submit">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/virtualbriefcases" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -130,9 +130,9 @@
 											<br/>
 											<div class="margiv-top-10">
 												
-												<a href="/virtualbriefcase/documents" class="btn green" id="submit">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/documents" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -187,9 +187,9 @@
 											<br/>
 											<div class="margiv-top-10">
 												
-												<a href="/virtualbriefcase/documentlists" class="btn green" id="submit">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/documentlists" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -244,9 +244,9 @@
 											<br/>
 											<div class="margiv-top-10">
 												
-												<a href="/virtualbriefcase/bulkpackagings" class="btn green" id="submit">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/bulkpackagings" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>
@@ -261,7 +261,7 @@
 							<div id="virtualbriefcase" class="tab-pane">
 								<div class="row">
 									<div class="col-md-8">
-											<form role="form" action="/virtualbriefcase/virtualbriefcase_add" method="POST" id="add_virtualbriefcase_form">
+											<form role="form" action="/virtualbriefcase/childvirtualbriefcase_add" method="POST" id="add_childvirtualbriefcase_form">
 											<div class="alert alert-danger display-hide">
 												<button class="close" data-close="alert"></button>
 												<span>Popraw błędy w formularzu</span>
@@ -271,7 +271,7 @@
 													<span class="required" aria-required="true"> * </span>
 												</label>
 												<div class="input-icon right">
-													<select class="form-control input-large" name="virtualbriefcase_id">
+													<select class="form-control input-large" name="virtualbriefcase1_id">
 														<option>-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 														<?php 
@@ -287,7 +287,7 @@
 													<span class="required" aria-required="true"> * </span>
 												</label>
 												<div class="input-icon right">
-													<select class="form-control input-large" name="virtualbriefcase_id">
+													<select class="form-control input-large" name="virtualbriefcase2_id">
 														<option>-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 														<?php 
@@ -301,10 +301,10 @@
 											<br/>
 											<br/>
 											<div class="margiv-top-10">
-												
-												<a href="/virtualbriefcase/virtualbriefcases" class="btn green" id="submit">
+												<input type="submit" />
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 												Zapisz zmiany</a>
-												<a href="/virtualbriefcase/virtualbriefcases" class="btn default" id="cancel">
+												<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 												Anuluj</a>
 											</div>
 										</form>

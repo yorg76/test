@@ -54,9 +54,9 @@
 					<br/>
 					<input type="hidden" value="<?php echo $virtualbriefcase->id ?>" name="virtualbriefcase_id" />
 					<div class="margiv-top-10">
-						<a href="/virtualbriefcase/bulkpackagings" class="btn green" id="submit">
+						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/virtualbriefcase/bulkpackagings" class="btn default" id="cancel">
+						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

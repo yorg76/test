@@ -4,7 +4,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="icon-briefcase"></i>Wirtualne teczki - Listy Dokumentów
+					<i class="icon-briefcase"></i>Wirtualne teczki - Pozycje
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a
@@ -21,32 +21,35 @@
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered"
-					id="documentlists_list">
+					id="boxes_list">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Lista dokumentów</th>
+							<th>Numer</th>
+							<th>Kategoria przechowywania</th>
 							<th>Opis</th>
+							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>
 					</thead>
 					<tbody>
-							<?php foreach ($documentlists as $documentlist):?>
+							<?php foreach ($boxes as $box):?>
 							<tr>
-							<td>
-									 <?php echo $documentlist->id;?>
+							<td style="width: 5%">
+									 <?php echo $box->id;?>
 								</td>
-							<td>
-									 <?php echo $documentlist->name;?>
+							<td style="width: 20%">
+									 <?php echo $box->storagecategory->name;?>
+							</td>
+							<td style="width: 30%">
+									 <?php echo $box->description ;?>
 								</td>
-
-							<td>
-									 <?php echo $documentlist->description;?>
+								<td>
+									 <?php echo $box->warehouse->name ;?>
 								</td>
-							<td>
+							<td style="width:10%">
 								<div class="margin-bottom-5">
 									<button class="btn btn-xs red division-delete margin-bottom"
-										onClick="javascript:window.location='/virtualbriefcase/documentlist_remove/<?php echo $documentlist->id ;?>';">
+										onClick="javascript:window.location='/virtualbriefcase/box_remove/<?php echo $box->id ;?>';">
 										<i class="fa fa-recycle"></i> Usuń z teczki
 									</button>
 								</div>
