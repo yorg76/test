@@ -49,14 +49,13 @@
 								?>
 								<?php endforeach;?>
 							</select>
-							<span class="help-block">Wybierz wirtualną teczkę, z której chcesz usunąć pozycję</span>
+							<span class="help-block">Wybierz wirtualną teczkę, z której  chcesz usunąć wybrany element.</span>
 						</div>
 					</div>
 					
 					
 					<br/>
 					<div class="margiv-top-10">
-						<input type="submit" />
 						<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 						<a href="/virtualbriefcase/boxes" class="btn green" id="submit">
 						Usuń dokument</a>

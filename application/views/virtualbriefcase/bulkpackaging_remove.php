@@ -46,15 +46,14 @@
 								?>
 								<?php endforeach;?>
 							</select>
-							<span class="help-block">Wybierz wirtualną teczkę, z której chcesz usunąć dokument</span>
+							<span class="help-block">Wybierz wirtualną teczkę, z której  chcesz usunąć wybrany element.</span>
 						</div>
 					</div>
 					
 					
 					<br/>
 					<div class="margiv-top-10">
-					<input type="submit" />
-					<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging_id" />
+						<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging_id" />
 						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
 						Usuń opakowanie</a>
 						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">

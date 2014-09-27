@@ -23,7 +23,7 @@ var Remove_item_vb = function () {
 
 	            messages: {
 	            	virtualbriefcase_id: {
-	                    required: "Wybierz teczkę, z której  chcesz usunąć wybrany element."
+	                    required: "Wybierz wirtualną teczkę, z której  chcesz usunąć wybrany element."
 	                },
 				},
 
