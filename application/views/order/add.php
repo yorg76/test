@@ -11,6 +11,14 @@
 </div>
 <div class="portlet-body form">
 		<form action="/order/add" class="form-horizontal" id="submit_form" method="POST">
+			<input type="hidden" name="boxes_reception" value="<?php echo $pricetable->boxes_reception;?>">
+			<input type="hidden" name="boxes_sending" value="<?php echo $pricetable->boxes_sending;?>">
+			<input type="hidden" name="boxes_storage" value="<?php echo $pricetable->boxes_storage;?>">
+			<input type="hidden" name="document_scan" value="<?php echo $pricetable->document_scan;?>">
+			<input type="hidden" name="document_copy" value="<?php echo $pricetable->document_copy;?>">
+			<input type="hidden" name="document_notarial_copy" value="<?php echo $pricetable->document_notarial_copy;?>">
+			
+			
 			<div class="form-wizard">
 				<div class="form-body">
 					<ul class="nav nav-pills nav-justified steps">
@@ -542,6 +550,7 @@
 						</div>
 							
 						<div class="tab-pane" id="tab4">
+							<input type="hidden" name="final_price" value="0.00" />
 							<h3 class="block">Potwierdzenie zamówienia</h3>
 							
 							<h4 class="form-section">Rodzaj zamówienia</h4>
@@ -866,6 +875,24 @@
 								</div>					
 							</div>		
 								
+							<h4 class="form-section">Cena</h4>
+							
+							<div class="form-group">
+								<label class="control-label col-md-3">Cena netto							
+								</label>
+								<div class="col-md-4">
+									<p class="form-control-static" id="final_price_netto">
+									</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3">Cena brutto							
+								</label>
+								<div class="col-md-4">
+									<p class="form-control-static" id="final_price_brutto">
+									</p>
+								</div>
+							</div>									
 						</div>
 					</div>
 				</div>

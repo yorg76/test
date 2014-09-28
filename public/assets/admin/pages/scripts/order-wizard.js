@@ -207,7 +207,30 @@ var OrderWizard = function () {
             });
 
             var displayConfirm = function() {
-            	           	 
+            	var final_price = parseFloat($('[name="final_price"]', form).val());
+            	var order_type=$("select[name=order_type]").val();
+            	
+            	$('[name="final_price"]', form).val(final_price);
+            	
+            	if(order_type == 0 ) {
+            		$('#tab4 #final_price_netto', form).html(final_price +" PLN");
+                	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN");
+            	}else if(order_type == 1 ) {
+            		$('#tab4 #final_price_netto', form).html(final_price +" PLN / miesiąc");
+                	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN / miesiąc");
+            	}else if(order_type == 2 ) { 
+            		$('#tab4 #final_price_netto', form).html(final_price +" PLN");
+                	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN");
+            	}else if(order_type == 3 ) {
+                    $('#tab4 #final_price_netto', form).html(final_price +" PLN");
+                	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN");
+            	}else if(order_type == 4 ) { 
+            		$('#tab4 #final_price_netto', form).html(final_price +" PLN");
+                	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN");
+            	}
+
+            	
+            	
                 $('#tab4 .form-control-static', form).each(function(){
                     var input = $('[name="'+$(this).attr("data-display")+'"]', form);
                     
@@ -216,11 +239,14 @@ var OrderWizard = function () {
                     }
                     
                     if (input.is(":text") || input.is("textarea")) {
-                    	
+                    	var label = $(this);
                     	input.each(function() {
                     		if($(this).val() != "") {
                     			input = $(this);
+                    			label.parents('.form-group').show();
                     			return;
+                    		}else {
+                    			label.parents('.form-group').hide();
                     		}
                     	});
                     	
@@ -251,9 +277,46 @@ var OrderWizard = function () {
 
             var handleTitle = function(tab, navigation, index) {
                 var total = navigation.find('li').length;
+              
+                var price = 0.00;
+                var order_type=$("select[name=order_type]").val();
                 var current = index + 1;
                 // set wizard title
-                $('.step-title', $('#form_wizard_1')).text('Krok ' + (index + 1) + ' z ' + total);
+                if (index > 1) {
+                	
+                	var quantity = 0;
+                	
+                	if(order_type == 0 || order_type == 2 || order_type == 3 || order_type == 4) {
+                		$('select[name=\'boxes_'+order_type+'[]\'] option:selected').each(function() {
+                			quantity++;
+                		});
+                	}
+                		
+                	if(order_type == 0 ) {
+                		var boxes_sending = $('input[name=boxes_sending]').val();
+                		price = boxes_sending * quantity + ' PLN'; 
+                	}else if(order_type == 1 ) {
+                		quantity = $('input[name=box_quantity]').val();
+                		var boxes_reception = $('input[name=boxes_reception]').val();
+                		var boxes_storage = $('input[name=boxes_storage]').val();
+                		price = ((boxes_reception * quantity) + (boxes_storage * quantity))+ ' PLN / miesiąc';                 		
+                	}else if(order_type == 2 ) {
+                		var boxes_disposal = 1;
+                		price = boxes_disposal * quantity + ' PLN'; 
+                	}else if(order_type == 3 ) {
+                		var document_scan = $('input[name=document_scan]').val();
+                        var document_copy = $('input[name=document_copy]').val();
+                        price = ((document_scan * quantity) + (document_copy * quantity))+ ' PLN';
+                	}else if(order_type == 4 ) {
+                		var document_notarial_copy = $('input[name=document_notarial_copy]').val();
+                		price = document_notarial_copy * quantity + ' PLN'; 
+                	}
+                	
+                	$('.step-title', $('#form_wizard_1')).text('Krok ' + (index + 1) + ' z ' + total + ' - Cena: ' + price );
+                } else {
+                	$('.step-title', $('#form_wizard_1')).text('Krok ' + (index + 1) + ' z ' + total);
+                }
+                
                 // set done steps
                 jQuery('li', $('#form_wizard_1')).removeClass("done");
                 var li_list = navigation.find('li');
@@ -270,6 +333,7 @@ var OrderWizard = function () {
                 if (current >= total) {
                     $('#form_wizard_1').find('.button-next').hide();
                     $('#form_wizard_1').find('.button-submit').show();
+                    $('input[name=final_price]').val(price);
                     displayConfirm();
                 } else {
                     $('#form_wizard_1').find('.button-next').show();

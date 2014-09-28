@@ -33,11 +33,11 @@ class Order {
 			$this->id=$this->order->id;
 			$this->status=$this->order->status;
 			$this->type=$this->order->type;
-			$this->pricetable = $this->order->pricetable->where('active','=','1')->find();
+			$this->pricetable = $this->order->pricetable->where('active','=','1');
 		}else {
 			$this->order=ORM::factory('Order');
 			$this->order->status='Nowe';
-			$this->pricetable = $this->order->customer->pricetable->where('active','=','1')->find();
+			$this->pricetable = Auth_ORM::instance()->get_user()->customer->pricetables->where('active','=','1')->find();
 			$this->order->pricetable = $this->pricetable;
 			$this->status='Nowe';
 		}
@@ -402,8 +402,11 @@ class Order {
 	public function registerOrder($params) {
 
 		$log=Kohana_Log::instance();
-		
+
 		if(is_array($params)) {
+			
+			$this->order->final_price = floatval($params['final_price']);
+			
 			$this->order->user_id=Auth_ORM::instance()->get_user()->id;
 			$this->order->status="Nowe";
 			$this->order->type=$this->types[$params['order_type']];

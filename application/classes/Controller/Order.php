@@ -404,6 +404,7 @@ class Controller_Order extends Controller_Welcome {
 		$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 		$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 		
+		$pricetable = $customer->pricetables->where('active','=',1)->find();
 		
 		$this->content->bind('order_types',$order->types);
 		$this->content->bind('order_statuses',$order->statuses);
@@ -416,6 +417,7 @@ class Controller_Order extends Controller_Welcome {
 		$this->content->bind('delivery_addresses',$delivery_addresses);
 		$this->content->bind('pickup_addresses',$pickup_addresses);
 		$this->content->bind('storagecategories',$storagecategories);
+		$this->content->bind('pricetable',$pricetable);
 		
 		if($this->request->method()===HTTP_Request::POST) {
 			$params = $_POST;
