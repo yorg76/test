@@ -533,6 +533,8 @@ public $controller_title = 'Wirtualne teczki';
 			
 			if ($virtualbriefcase->virtualbriefcase->has('virtualbriefcases', $childvirtualbriefcase->virtualbriefcase)) {
 				Message::error(ucfirst(__('Podana wirtualna teczka jest już dodana do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
+			}elseif ($childvirtualbriefcase->virtualbriefcase->has('virtualbriefcases', $virtualbriefcase->virtualbriefcase)) {
+				Message::error(ucfirst(__('Podana wirtualna teczka zawiera już podaną docelową teczkę.')),'/virtualbriefcase/virtualbriefcases');
 			}
 						
 			if($virtualbriefcase->addChildVirtualBriefcase($params)) {
