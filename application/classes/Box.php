@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Box extends ORM {
+class Box{
 
 	public $box;
 	public $id;

@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Invoice extends ORM {
+class Invoice {
 
 	public $invoice;
 	public $number;

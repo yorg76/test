@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class User extends ORM {
+class User {
 	
 	public $user;
 	public $id;

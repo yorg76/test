@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Division extends ORM {
+class Division{
 
 	public $division;
 	public $id;

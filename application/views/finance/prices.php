@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="glyphicon glyphicon-inbox"></i>Faktury
+								<i class="glyphicon glyphicon-inbox"></i>Cenniki
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -14,44 +14,66 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-												
-							<table class="table table-striped table-hover table-bordered" id="invoices_list">
+							<div class="table-toolbar">
+								<div class="btn-group">
+									<button class="btn green" onClick="javascript:window.location='/finance/pricetable_add'">
+									Dodaj <i class="fa fa-plus"></i>
+									</button>
+								</div>
+							</div>
+								
+							<table class="table table-striped table-hover table-bordered" id="prices_list">
 							<thead>
 							<tr>
 								<th>
-									 Numer
+									Numer
 								</th>
 								<th>
-									 Data wystawienia
+									Klient
 								</th>
 								<th>
-									Data sprzedaży
+									Cena jedn. netto
 								</th>
 								<th>
-									 Opcje
+									Cena jedn. brutto
+								</th>
+								<th>
+									Aktywny
 								</th>
 							</tr>
 							</thead>
 							<tbody>
+
+							<?php foreach ($pricetables as $pricetable):?>
 							
 							<tr>
 								<td style="width:10%">
-									 1000
+									<?php echo $pricetable->id;?>
 								</td>
-								<td style="width:20%">
-									 2014-09-09
+								<td>
+									<?php echo $pricetable->customer->name;?>
 								</td>
-								<td style="width:50%">
-									 2014-09-30
+								<td>
+									<p>Odbiór pudeł: <?php echo Pricetable::money($pricetable->boxes_reception);?> pudło.</p>
+									<p>Wysłanie pudła: <?php echo Pricetable::money($pricetable->boxes_sending); ?> pudło/miesiąc.</p>
+									<p>Magazynowanie: <?php echo Pricetable::money($pricetable->boxes_storage); ?> pudło.</p>
+									<p>Skanowanie: <?php echo Pricetable::money($pricetable->document_scan); ?> dokument.</p>
+									<p>Kopia: <?php echo Pricetable::money($pricetable->document_copy); ?> dokument.</p>
+									<p>Kopia notar.: <?php echo Pricetable::money($pricetable->document_notarial_copy); ?> dokument.</p>
 								</td>			
-								
-								<td style="width:20%">
-								<div class="margin-bottom-5">
-											<button class="btn btn-xs green margin-bottom" ><i class="glyphicon glyphicon-info-sign"></i> Info</button>
-											
-									</div>
+								<td>
+									<p>Odbiór pudeł: <?php echo Pricetable::money($pricetable->boxes_reception * VAT);?> pudło.</p>
+									<p>Wysłanie pudła: <?php echo Pricetable::money($pricetable->boxes_sending * VAT); ?> pudło/miesiąc.</p>
+									<p>Magazynowanie: <?php echo Pricetable::money($pricetable->boxes_storage * VAT); ?> pudło.</p>
+									<p>Skanowanie: <?php echo Pricetable::money($pricetable->document_scan * VAT); ?> dokument.</p>
+									<p>Kopia: <?php echo Pricetable::money($pricetable->document_copy * VAT); ?> dokument.</p>
+									<p>Kopia notar.: <?php echo Pricetable::money($pricetable->document_notarial_copy * VAT); ?> dokument.</p>
+								</td>	
+								<td>
+									<?php echo ($pricetable->active == 1 ? 'Tak' : 'Nie');?>
 								</td>
 							</tr>
+							<?php endforeach;?>
 							</tbody>
 							</table>
 						</div>

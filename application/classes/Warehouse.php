@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Warehouse extends ORM {
+class Warehouse {
 
 	public $warehouse;
 	public $id;

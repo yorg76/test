@@ -15,6 +15,18 @@ class Model_ShipmentCompany extends ORM {
 			'order'=> array('model' => 'Order', 'foreign_key' => 'shipmentcompany_id'),
 	);
 	
+
+	public function filters()
+	{
+		return array(
+				'shipping_price' => array(
+						array(function($value) {
+							return str_replace(array(',',' '), array('.',''), $value);
+						}
+					),
+				),
+		);
+	}
 }
 
 

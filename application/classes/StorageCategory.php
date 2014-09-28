@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class StorageCategory extends ORM {
+class StorageCategory{
 
 	public $storagecategory;
 	public $id;

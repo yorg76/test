@@ -47,7 +47,15 @@
 							<span class="help-block"></span>
 						</div>
 					</div>
-
+					<div class="form-group">
+						<label class="control-label">Cena
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<input type="text" placeholder="Cena" class="form-control" name="shipping_price" value="" />
+							<span class="help-block"></span>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="control-label">Komentarz</label>
 						<textarea class="form-control" name="comments">

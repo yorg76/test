@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class BulkPackaging extends ORM {
+class BulkPackaging {
 
 	public $bulkpackaging;
 	public $id;

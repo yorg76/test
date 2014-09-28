@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class DocumentList extends ORM {
+class DocumentList {
 
 	public $documentlist;
 	public $id;

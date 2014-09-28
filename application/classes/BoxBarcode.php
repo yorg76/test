@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class BoxBarcode extends ORM {
+class BoxBarcode{
 
 	public $boxbarcode;
 	public $id;

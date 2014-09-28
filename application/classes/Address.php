@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Address extends ORM {
+class Address{
 	
 	public $address;
 	public $id;

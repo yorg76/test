@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Barcode extends ORM {
+class Barcode {
 
 	public $data;
 

@@ -45,12 +45,6 @@ class Controller_Order extends Controller_Welcome {
 			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal-bs3patch.css');
 			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal.css');
 		}
-
-		if(strtolower ( $this->request->action()) == 'add' || $this->request->action() == 'edit_order') {
-			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal-bs3patch.css');
-			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal.css');
-		}
-		
 		
 		if(strtolower ( $this->request->action()) == 'info') $this->add_css ( ASSETS_ADMIN_PAGES_CSS.'profile.css');
 		
@@ -65,7 +59,6 @@ class Controller_Order extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-alert-dialog-api.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-users.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'components-pickers.js');
-		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/js/bootstrap-datepicker.js');
 		
 		if(strtolower ( $this->request->action()) == 'add' ) {
 			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'bootstrap-wizard/jquery.bootstrap.wizard.min.js');

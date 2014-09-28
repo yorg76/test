@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class Order extends ORM {
+class Order {
 
 	public $order;
 	public $id;
@@ -15,6 +15,8 @@ class Order extends ORM {
 	public $types = array('Zamówienie pudeł i kodów kreskowych','Zamówienie odbioru i magazynowania pudeł','Zamówienie zniszczenie magazynowanych pozycji','Zamówienie skanowania, kopii dokumentów','Zamówienie kopii notarialnej dokumentów');
 
 	public $statuses = array('Nowe','Przyjęte do realizacji','Oczekuje na wysłanie','W doręczeniu','Dostarczone','W trakcie realizacji','W trakcie odbioru','W dostrczeniu na magazyn','Na stanie magazynu','Odebrane','Zrealizowane');
+	
+	public $pricetable;
 	
 	public static function instance($id=NULL) {
 		if($id !== NULL) {
@@ -31,9 +33,12 @@ class Order extends ORM {
 			$this->id=$this->order->id;
 			$this->status=$this->order->status;
 			$this->type=$this->order->type;
+			$this->pricetable = $this->order->pricetable->where('active','=','1')->find();
 		}else {
 			$this->order=ORM::factory('Order');
 			$this->order->status='Nowe';
+			$this->pricetable = $this->order->customer->pricetable->where('active','=','1')->find();
+			$this->order->pricetable = $this->pricetable;
 			$this->status='Nowe';
 		}
 	}

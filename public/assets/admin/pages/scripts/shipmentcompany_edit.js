@@ -24,7 +24,9 @@ var Edit_shipmentcompany = function () {
 	            	telephone: {
 	                    required: true
 	                },
-	                
+	                shipping_price: {
+	                    required: true
+	                },
 	            },
 
 	            messages: {
@@ -36,7 +38,10 @@ var Edit_shipmentcompany = function () {
 	                },
 	            	telephone: {
 	            		required: "Podaj telefon firmy kurierskiej"
-	                },	                
+	                },
+	                shipping_price: {
+	            		required: "Podaj telefon firmy kurierskiej"
+	                },
 	            },
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   

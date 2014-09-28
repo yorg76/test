@@ -166,6 +166,8 @@ define('LIB', '/public/lib/');
 define('UPLOAD', APPPATH.'upload');
 define('PDF', DOCROOT.'/public/pdf/');
 
+define('VAT','1.23');
+
 Cookie::$salt = 'Parrarell Thinking';
 
 /**

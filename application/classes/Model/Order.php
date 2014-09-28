@@ -13,6 +13,7 @@ class Model_Order extends ORM {
 			'warehouse' => array('model'=>'Warehouse','foreign_key' => 'warehouse_id'),
 			'division' =>array('model'=>'Division','foreign_key' => 'division_id'),
 			'shipmentcompany'=> array('model' => 'ShipmentCompany', 'foreign_key' => 'shipmentcompany_id'),
+			'pricetable' => array('model' => 'Pricetable', 'foreign_key' => 'pricetable_id'),
 	);
 	
 	protected $_has_one = array(

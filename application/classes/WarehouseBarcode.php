@@ -5,7 +5,7 @@
  * @version    1.0
  */
 
-class WarehouseBarcode extends ORM {
+class WarehouseBarcode {
 
 	public $warehousebarcode;
 	public $id;

@@ -25,19 +25,22 @@
 							<thead>
 							<tr>
 								<th>
-									 Nazwa
+									Nazwa
 								</th>							
 								<th>
-									 Adres
+									Adres
 								</th>
 								<th>
-									 Telefon
+									Telefon
 								</th>
 								<th>
-									 Komentarze
+									Komentarze
 								</th>
 								<th>
-									 Akcje
+									Cena
+								</th>
+								<th>
+									Akcje
 								</th>
 							</tr>
 							</thead>
@@ -55,7 +58,10 @@
 								</td>
 								<td>
 									 <?php echo trim($shipmentcompany->comments);?>
-								</td>								
+								</td>
+								<td>
+									 <?php echo Pricetable::money($shipmentcompany->shipping_price);?>
+								</td>
 								<td>
 									<div class="margin-bottom-5">
 											<button class="btn btn-xs yellow shipmentcompany-edit margin-bottom" onClick="javascript:window.location='/customer/shipmentcompany_edit/<?php echo $shipmentcompany->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>

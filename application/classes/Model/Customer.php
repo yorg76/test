@@ -13,11 +13,10 @@ class Model_Customer extends ORM {
 			'divisions'=> array('model' => 'Division', 'foreign_key' => 'customer_id'),
 			'warehouses'=> array('model' => 'Warehouse', 'foreign_key' => 'customer_id'),
 			'invoices'=> array('model' => 'Invoice', 'foreign_key' => 'customer_id'),
-			'shipmentcompanies'=> array('model' => 'ShipmentCompany', 'foreign_key' => 'customer_id')
+			'shipmentcompanies'=> array('model' => 'ShipmentCompany', 'foreign_key' => 'customer_id'),
+			'pricetables'=> array('model' => 'Pricetable',	'foreign_key' => 'customer_id')
 	);
-	protected $_has_one = array(
-			'pricetable'=> array('model' => 'Pricetable',	'foreign_key' => 'customer_id')
-	);	
+	
 }
 
 

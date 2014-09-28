@@ -76,18 +76,7 @@ class Controller_Customer extends Controller_Welcome {
 	}
 	   
     public function action_index(){    
-        $modelCustomer = new Model_Customer();
-        
-        $pagination = Pagination::factory(array(
-  		'total_items'    => $modelCustomer->count(),
-  		'items_per_page' => 1,
-        ));
-        $customer = $modelCustomer->getList($pagination);
-        $page_links = $pagination->render();
-        
-        $this->template->content= View::factory('customer/index')
-                                    ->set('customer',$customer)
-                                    ->bind('page_links',$page_links);
+ 
     }    
     
     public function action_users() {
