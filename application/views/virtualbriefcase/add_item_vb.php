@@ -34,7 +34,7 @@
 												<span>Popraw błędy w formularzu</span>
 											</div>
 											<div class="form-group">
-											<span class="help-block"></span>
+											
 												<label class="control-label">Wybór pozycji
 													<span class="required" aria-required="true"> * </span>
 												</label>
@@ -47,12 +47,12 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													
+													<span class="help-block">Wybierz pozycję do dodania.</span>
 												</div>
 												
 											</div>
 											<div class="form-group">
-											<span class="help-block"></span>
+											
 												<label class="control-label">Wybór wirtualnej teczki
 													<span class="required" aria-required="true"> * </span>
 												</label>
@@ -65,7 +65,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													
+													<span class="help-block">Wybierz docelową wirtualną teczkę.</span>
 												</div>
 											</div>				
 											<br/>
@@ -107,7 +107,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block"></span>
+													<span class="help-block">Wybierz dokument do dodania.</span>
 												</div>
 											</div>
 											<div class="form-group">
@@ -123,7 +123,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block"></span>
+													<span class="help-block">Wybierz docelową wirtualną teczkę.</span>
 												</div>
 											</div>				
 											<br/>
@@ -154,7 +154,7 @@
 												<label class="control-label">Wybór listy dokumentów
 													<span class="required" aria-required="true"> * </span>
 												</label>
-												<span class="help-block"></span>
+												
 												<div class="input-icon right">
 													<select class="form-control input-large" name="documentlist_id">
 														<option value="">-- Wybierz listę --</option>
@@ -164,7 +164,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													
+													<span class="help-block">Wybierz listę dokumentów do dodania.</span>
 												</div>
 											</div>
 											<div class="form-group">
@@ -180,7 +180,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block"></span>
+													<span class="help-block">Wybierz docelową wirtualną teczkę.</span>
 												</div>
 											</div>				
 											<br/>
@@ -221,7 +221,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block"></span>
+													<span class="help-block">Wybierz opakowanie zbiorcze do dodania.</span>
 												</div>
 											</div>
 											<div class="form-group">
@@ -237,7 +237,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block"></span>
+													<span class="help-block">Wybierz docelową wirtualną teczkę.</span>
 												</div>
 											</div>				
 											<br/>
@@ -271,22 +271,6 @@
 													<span class="required" aria-required="true"> * </span>
 												</label>
 												<div class="input-icon right">
-													<select class="form-control input-large" name="virtualbriefcase1_id">
-														<option value="">-- Wybierz teczkę --</option>
-														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
-														<?php 
-															echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
-														?>
-														<?php endforeach;?>
-													</select>
-													<span class="help-block"></span>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="control-label">Wybór wirtualnej teczki
-													<span class="required" aria-required="true"> * </span>
-												</label>
-												<div class="input-icon right">
 													<select class="form-control input-large" name="virtualbriefcase2_id">
 														<option value="">-- Wybierz teczkę --</option>
 														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
@@ -295,7 +279,23 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block"></span>
+													<span class="help-block">Wybierz wirtualną teczkę do dodania.</span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label">Wybór wirtualnej teczki
+													<span class="required" aria-required="true"> * </span>
+												</label>
+												<div class="input-icon right">
+													<select class="form-control input-large" name="virtualbriefcase1_id">
+														<option value="">-- Wybierz teczkę --</option>
+														<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
+														<?php 
+															echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->name."</option>";
+														?>
+														<?php endforeach;?>
+													</select>
+													<span class="help-block">Wybierz docelową wirtualną teczkę.</span>
 												</div>
 											</div>				
 											<br/>

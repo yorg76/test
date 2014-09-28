@@ -333,6 +333,10 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase_id=$params['virtualbriefcase_id'];
 			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 			
+			if ($virtualbriefcase->virtualbriefcase->has('boxes', $box->box)) {
+				Message::error(ucfirst(__('Podana pozycja jest już dodana do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
+			}
+			
 			if($virtualbriefcase->addBox($params)) {
 				Message::success(ucfirst(__('Pozycja została dodana do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 				var_dump($_POST);
@@ -379,6 +383,10 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase_id=$params['virtualbriefcase_id'];
 			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 	
+			if ($virtualbriefcase->virtualbriefcase->has('documents', $document->document)) {
+				Message::error(ucfirst(__('Podany dokument jest już dodany do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
+			}
+			
 			if($virtualbriefcase->addDocument($params)) {
 				Message::success(ucfirst(__('Dokument został dodany do wirtualnej teczki')),'/virtualbriefcase/documents');
 				var_dump($_POST);
@@ -426,6 +434,10 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase_id=$params['virtualbriefcase_id'];
 			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 			
+			if ($virtualbriefcase->virtualbriefcase->has('documentlists', $documentlist->documentlist)) {
+				Message::error(ucfirst(__('Podana lista dokumentów jest już dodana do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
+			}
+			
 			if($virtualbriefcase->addDocumentList($params)) {
 				Message::success(ucfirst(__('Lista dokumentów została dodana do wirtualnej teczki')),'/virtualbriefcase/documentlists');
 			}else {
@@ -470,6 +482,10 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase_id = $params['virtualbriefcase_id'];
 			$virtualbriefcase = VirtualBriefcase::instance($virtualbriefcase_id);
 			
+			if ($virtualbriefcase->virtualbriefcase->has('bulkpackagings', $bulkpackaging->bulkpackaging)) {
+				Message::error(ucfirst(__('Podane opakowanie zbiorcze jest już dodane do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
+			}
+			
 			if($virtualbriefcase->addBulkPackaging($params)) {
 				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
 			}else {
@@ -511,54 +527,19 @@ public $controller_title = 'Wirtualne teczki';
 	
 			$params = $_POST;
 			$virtualbriefcase2_id = $params['virtualbriefcase2_id'];
-			//$childvirtualbriefcase = Virtualbriefcase::instance($virtualbriefcase2_id);
-			$childvirtualbriefcase = ORM::factory('Virtualbriefcase',$virtualbriefcase2_id);
+			$childvirtualbriefcase = Virtualbriefcase::instance($virtualbriefcase2_id);
 			$virtualbriefcase1_id = $params['virtualbriefcase1_id'];
-			//$virtualbriefcase = VirtualBriefcase::instance($virtualbriefcase1_id);
-			$virtualbriefcase = ORM::factory('Virtualbriefcase',$virtualbriefcase1_id);
+			$virtualbriefcase = VirtualBriefcase::instance($virtualbriefcase1_id);
 			
-			$customer=Auth::instance()->get_user()->customer;
-			$divisions = $customer->divisions->find_all();
-			$divisions_ids= array();
-			$virtualbriefcases_ids = array();
-			$child_virtualbriefcases_ids = array();
-			
-			foreach ($divisions as $division) {
-				array_push($divisions_ids, $division->id);
-			
-			}
-			
-			$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
-			
-			foreach ($virtualbriefcases as $virtualbriefcase) {
-				array_push($virtualbriefcases_ids, $virtualbriefcase->id);
-			}
-			$child_virtualbriefcases = ORM::factory('VirtualBriefcase')->join('virtualbriefcases_virtualbriefcases')->on('virtualbriefcase.id', '=','virtualbriefcases_virtualbriefcases.virtualbriefcase2_id')->where('virtualbriefcases_virtualbriefcases.virtualbriefcase2_id','IN',$virtualbriefcases_ids)->find_all();
-			
-			foreach ($child_virtualbriefcases as $child_virtualbriefcase) {
-				array_push($child_virtualbriefcases_ids, $child_virtualbriefcase->id);
-			}
-			
-			
-			//if ($virtualbriefcase->loaded() && $childvirtualbriefcase->loaded())
-			//{
-			//	Message::success(ucfirst(__('Wirtualna teczki są załadowane.')),'/virtualbriefcase/virtualbriefcases');
-				
-			//}
-			//else
-			//{
-			//	Message::error(ucfirst(__('Wirtualna teczki nie są załadowane.')),'/virtualbriefcase/virtualbriefcases');
-			//}
-			
-			if ($virtualbriefcase->has('virtualbriefcases', $childvirtualbriefcase)) {
+			if ($virtualbriefcase->virtualbriefcase->has('virtualbriefcases', $childvirtualbriefcase->virtualbriefcase)) {
 				Message::error(ucfirst(__('Podana wirtualna teczka jest już dodana do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
+			}
+						
+			if($virtualbriefcase->addChildVirtualBriefcase($params)) {
+				Message::success(ucfirst(__('Wirtualna teczka została dodana do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
+				var_dump($_POST);
 			}else {
-			
-				if($virtualbriefcase->addChildVirtualBriefcase($params)) {
-					Message::success(ucfirst(__('Wirtualna teczka została dodana do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
-				}else {
-					Message::error(ucfirst(__('Nie udało się dodać wirualnej teczki do do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
-				}
+				Message::error(ucfirst(__('Nie udało się dodać wirualnej teczki do do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 			}
 		}
 	
@@ -583,6 +564,8 @@ public $controller_title = 'Wirtualne teczki';
 				$childvirtualbriefcase = VirtualBriefcase::instance($virtualbriefcase2_id);
 	
 				if($virtualbriefcase->removeChildVirtualBriefcase($params)) {
+					echo $_POST;
+					echo $params;
 					Message::success(ucfirst(__('Wirtualna teczka została usunięta z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 				}else {
 					Message::error(ucfirst(__('Nie udało się usunąć wirtulanej teczki z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');

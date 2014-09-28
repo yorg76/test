@@ -110,8 +110,8 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
@@ -128,8 +128,8 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 		
@@ -148,6 +148,7 @@ class VirtualBriefcase extends ORM {
 			}
 		}catch (Exception $e) {
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
@@ -164,8 +165,8 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
@@ -175,14 +176,14 @@ class VirtualBriefcase extends ORM {
 		$childvirtualbriefcase = ORM::factory('VirtualBriefcase',$params['virtualbriefcase2_id']);
 		try {
 			if($this->virtualbriefcase->add('virtualbriefcases',$childvirtualbriefcase)) {
-				$log->add(Log::DEBUG,"Success: Added VirtualBriefcase with params:".serialize($params)."\n");
-				return true;
+					$log->add(Log::DEBUG,"Success: Added VirtualBriefcase with params:".serialize($params)."\n");
+					return true;
 			} else {
 				$log->add(Log::DEBUG,"Fail: Adding VirtualBriefcase with params:".serialize($params)."\n");
 				return false;
 			}
-		}catch (Exception $e) {
 			
+		}catch (Exception $e) {
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
 			return $e->getMessage();
 		}
@@ -202,8 +203,8 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
@@ -220,8 +221,8 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
@@ -240,8 +241,8 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
@@ -258,8 +259,8 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
@@ -277,8 +278,8 @@ class VirtualBriefcase extends ORM {
 				return false;
 			}
 		}catch (Exception $e) {
-			return $e->getMessage();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
 		}
 		return;
 	}
