@@ -56,7 +56,7 @@
 						</div>
 					</div>
 					<br/>
-					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
+					
 					<div class="margiv-top-10">
 						<a href="/warehouse/bulkpackagings" class="btn green" id="submit">
 						Zapisz zmiany</a>

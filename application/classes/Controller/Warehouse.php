@@ -1047,7 +1047,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			
 			$documentlists = ORM::factory('DocumentList')->where_open()
 				->where('documentlist.box_id','=', $bulkpackaging->box->id)
-				->and_where('documentlist.bulkpackaging_id','=', 0)
+				->and_where('documentlist.bulkpackaging_id','=', NULL)
 				->where_close()->find_all();
 			
 			

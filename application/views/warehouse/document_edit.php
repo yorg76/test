@@ -47,11 +47,12 @@
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz pozycję dla dokumentu --</option>
+								<option value="">-- Wybierz pozycję dla dokumentu --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
-										$id = $document->box->id;
-										if ($box->id == $id) $checked=" selected=\"true\"";
+										//$id = $document->box->id;
+										//if ($box->id == $id) $checked=" selected=\"true\"";
+										if ($document->box->id == $box->id) $checked=" selected=\"true\"";
 											else $checked="";
 										echo "<option value=\"".$box->id."\"".$checked." >".$box->id."</option>";
 								
@@ -76,11 +77,11 @@
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="documentlist_id">
-								<option>-- Nie przypisany --</option>
+								<option value="">-- Nie przypisany --</option>
 								<?php foreach ($documentlists as $documentlist):?>
 									<?php 
-										$id = $document->documentlist->id;
-										if ($documentlist->id == $id) $checked=" selected=\"true\"";
+										
+										if ($document->documentlist->id == $documentlist->id) $checked=" selected=\"true\"";
 											else $checked="";
 										echo "<option value=\"".$documentlist->id."\"".$checked." >".$documentlist->name."</option>";
 								
@@ -95,11 +96,11 @@
 							</label>
 						<div class="input-icon right">
 							<select class="form-control" name="bulkpackaging_id">
-								<option>-- Nie przypisany --</option>
+								<option value="">-- Nie przypisany --</option>
 								<?php foreach ($bulkpackagings as $bulkpackaging):?>
 									<?php 
-										$id = $document->bulkpackaging->id;
-										if ($bulkpackaging->id == $id) $checked=" selected=\"true\"";
+										
+										if ($document->bulkpackaging->id == $bulkpackaging->id) $checked=" selected=\"true\"";
 											else $checked="";
 										echo "<option value=\"".$bulkpackaging->id."\"".$checked." >".$bulkpackaging->name."</option>";
 								

@@ -41,11 +41,11 @@
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz pozycję dla listy dokumentów --</option>
+								<option value="">-- Wybierz pozycję dla listy dokumentów --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
-										$id = $documentlist->box->id; 
-										if ($box->id == $id) $checked=" selected=\"true\"";
+							
+										if ($documentlist->box->id == $box->id) $checked=" selected=\"true\"";
 											else $checked="";
 										echo "<option value=\"".$box->id."\"".$checked." >".$box->id."</option>";
 								
@@ -59,11 +59,11 @@
 							</label>
 						<div class="input-icon right">
 							<select class="form-control" name="bulkpackaging_id">
-								<option>-- Nie przypisany --</option>
+								<option value="">-- Nie przypisany --</option>
 								<?php foreach ($bulkpackagings as $bulkpackaging):?>
 									<?php 
-										$id = $documentlist->bulkpackaging->id;
-										if ($bulkpackaging->id == $id) $checked=" selected=\"true\"";
+										
+										if ($documentlist->bulkpackaging->id == $bulkpackaging->id) $checked=" selected=\"true\"";
 											else $checked="";
 										echo "<option value=\"".$bulkpackaging->id."\"".$checked." >".$bulkpackaging->name."</option>";
 								
@@ -74,7 +74,7 @@
 						</div>
 					</div>
 					<br/>
-					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
+					
 					<div class="margiv-top-10">
 						<a href="/warehouse/documentlists" class="btn green" id="submit">
 						Zapisz zmiany</a>
