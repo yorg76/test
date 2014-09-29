@@ -4,7 +4,7 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Pozycja <?php echo $box->id ?> - Dokumenty
+								<i class="glyphicon glyphicon-inbox"></i>Pozycja <?php echo $box->id ?> - Dokumenty
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -67,7 +67,7 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Pozycja <?php echo $box->id ?> - Listy Dokumentów
+								<i class="glyphicon glyphicon-inbox"></i>Pozycja <?php echo $box->id ?> - Listy Dokumentów
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -129,7 +129,7 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-pencil"></i>Pozycja <?php echo $box->id ?> - Opakowania zbiorcze
+								<i class="glyphicon glyphicon-inbox"></i>Pozycja <?php echo $box->id ?> - Opakowania zbiorcze
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -141,7 +141,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/warehouse/documentlist_add'">
+									<button class="btn green" onClick="javascript:window.location='/warehouse/bulkpackaging_add'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>

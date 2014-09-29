@@ -25,9 +25,11 @@
 					id="bulkpackagings_list">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th>Numer</th>
 							<th>Opakowanie zbiorcze</th>
 							<th>Opis</th>
+							<th>Pozycja</th>
+							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>
 					</thead>
@@ -43,7 +45,13 @@
 
 							<td>
 									 <?php echo $bulkpackaging->description;?>
-								</td>
+							</td>
+							<td style="width: 5%">
+									 <?php echo $bulkpackaging->box->id;?>
+							</td>
+							<td style="width: 10%">
+									 <?php echo $bulkpackaging->box->warehouse->name;?>
+							</td>
 							<td>
 								<div class="margin-bottom-5">
 									<button class="btn btn-xs red division-delete margin-bottom"

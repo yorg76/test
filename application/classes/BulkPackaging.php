@@ -110,45 +110,80 @@ class BulkPackaging {
 		return;
 	}
 	
-	public function removeBulkPackaging() {
+	
+	public function addChildBulkPackaging($params) {
 		$log=Kohana_Log::instance();
+		$childbulkpackaging = ORM::factory('BulkPackaging',$params['bulkpackaging2_id']);
 		try {
-			if($this->virtualbriefcase->remove('bulkpackaging',$this->bulkpackaging)) {
-				$log->add(Log::DEBUG,"Success: Remove BulkPackaging:".$id."\n");
+			if($this->bulkpackaging->add('bulkpackagings',$childbulkpackaging)) {
+				$log->add(Log::DEBUG,"Success: Added bulkpackaging with params:".serialize($params)."\n");
 				return true;
 			} else {
-				$log->add(Log::DEBUG,"Fail: Removing BulkPackaging:".$id."\n");
+				$log->add(Log::DEBUG,"Fail: Adding bulkpackaging with params:".serialize($params)."\n");
 				return false;
 			}
+				
 		}catch (Exception $e) {
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
 			return $e->getMessage();
 		}
 		return;
 	}
-
-
-	public function addDocumentlist() {
-
+	
+	public function removeChildBulkPackaging($params) {
+		$log=Kohana_Log::instance();
+		$childbulkpackaging = ORM::factory('BulkPackaging',$params['bulkpackaging2_id']);
+		try {
+			if($this->bulkpackaging->remove('bulkpackagings',$childbulkpackaging)) {
+				$log->add(Log::DEBUG,"Success: Removed bulkpackaging with params:".serialize($params)."\n");
+				return true;
+			} else {
+				$log->add(Log::DEBUG,"Fail: Removing bulkpackaging with params:".serialize($params)."\n");
+				return false;
+			}
+		}catch (Exception $e) {
+				
+			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+			return $e->getMessage();
+		}
 		return;
 	}
-
-
-	public function addDocument() {
-
+	
+	public function addDocument($params) {
+		$log=Kohana_Log::instance();
+		$this->document = ORM::factory('Document',$params['document_id']);
+		$bulkpackaging = ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
+		$this->document->bulkpackaging_id = $bulkpackaging->id;
+	
+		if($this->document->save()) {
+			$this->id=$this->document->id;
+			$log->add(Log::DEBUG,"Success: Added Document with params:".serialize($params)."\n");
+			return true;
+		}else {
+			$log->add(Log::ERROR,"Error: Document not added with params:".serialize($params)."\n");
+			return false;
+		}
+	
 		return;
 	}
 	
-	public function deleteDocumentlist() {
+	public function addDocumentList($params) {
+		$log=Kohana_Log::instance();
+		$this->documentlist = ORM::factory('DocumentList',$params['documentlist_id']);
+		$bulkpackaging = ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
+		$this->documentlist->bulkpackaging_id = $bulkpackaging->id;
+	
+		if($this->documentlist->save()) {
+			$this->id=$this->documentlist->id;
+			$log->add(Log::DEBUG,"Success: Added DocumentList with params:".serialize($params)."\n");
+			return true;
+		}else {
+			$log->add(Log::ERROR,"Error: DocumentList not added with params:".serialize($params)."\n");
+			return false;
+		}
 	
 		return;
 	}
-	
-	
-	public function deleteDocument() {
-	
-		return;
-	}
-
 
 }
 

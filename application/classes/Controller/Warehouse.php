@@ -36,6 +36,8 @@ class Controller_Warehouse extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'bulkpackagings') $this->add_init("TableBulkPackagings.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'bulkpackaging_add') $this->add_init("BulkPackaging_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'bulkpackaging_edit') $this->add_init("BulkPackaging_edit.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'childbulkpackaging_remove') $this->add_init("Remove_item_vb.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'add_item_bp') $this->add_init("Add_item_bp.init();\t\n");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 	}
@@ -63,6 +65,8 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-warehouses.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
+		
+		if(strtolower ( $this->request->action()) == 'childbulkpackaging_remove') $this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'remove_item_vb.js');
 		
 		if (file_exists (DOCROOT.ASSETS_ADMIN_PAGES_SCRIPTS . strtolower ( $this->request->action()) . '.js' )) {
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.strtolower ( $this->request->action()).'.js');
@@ -576,6 +580,7 @@ class Controller_Warehouse extends Controller_Welcome {
 			foreach ($boxes as $box) {
 				array_push($boxes_ids, $box->id);
 			}
+			//$bulkpackagings = ORM::factory('BulkPackaging')->join('bulkpackagings_bulkpackagings')->on('bulkpackaging.id', '=','bulkpackagings_bulkpackagings.bulkpackaging1_id')->where('bulkpackagings_bulkpackagings.bulkpackaging2_id','=',$bulkpackaging2_id)->find_all();
 			$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
 		
 			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
@@ -929,4 +934,140 @@ class Controller_Warehouse extends Controller_Welcome {
 			$this->content->bind('bulkpackagings', $bulkpackagings);
 		}
 	}
+	
+	public function action_childbulkpackaging_add() {
+	
+		if($this->request->method()===HTTP_Request::POST) {
+	
+			$params = $_POST;
+			$bulkpackaging2_id = $params['bulkpackaging2_id'];
+			$childbulkpackaging = BulkPackaging::instance($bulkpackaging2_id);
+			$bulkpackaging1_id = $params['bulkpackaging1_id'];
+			$bulkpackaging = BulkPackaging::instance($bulkpackaging1_id);
+				
+			if ($bulkpackaging->bulkpackaging->has('bulkpackagings', $childbulkpackaging->bulkpackaging)) {
+				Message::error(ucfirst(__('Podane opakowanie zbiorcze jest już dodane do docelowego opakowania.')),'/warehouse/bulkpackagings');
+			}elseif ($childbulkpackaging->bulkpackaging->has('bulkpackagings', $bulkpackaging->bulkpackaging)) {
+				Message::error(ucfirst(__('Podane opakowanie zbiorcze zawiera już podane docelowe opakowanie.')),'/warehouse/bulkpackagings');
+			}
+	
+			if($bulkpackaging->addChildBulkPackaging($params)) {
+				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do opakowania zbiorczego.')),'/warehouse/bulkpackagings');
+				var_dump($_POST);
+			}else {
+				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do opakowania zbiorczego.')),'/warehouse/bulkpackagings');
+			}
+		}
+	
+	}
+	
+	public function action_childbulkpackaging_remove() {
+		if($this->request->param('id') > 0) {
+			$childbulkpackaging = BulkPackaging::instance($this->request->param('id'));
+			$bulkpackaging2_id = $childbulkpackaging->id;
+				
+			$bulkpackagings = ORM::factory('BulkPackaging')->join('bulkpackagings_bulkpackagings')->on('bulkpackaging.id', '=','bulkpackagings_bulkpackagings.bulkpackaging1_id')->where('bulkpackagings_bulkpackagings.bulkpackaging2_id','=',$bulkpackaging2_id)->find_all();
+	
+			$this->content->bind('bulkpackagings', $bulkpackagings);
+			$this->content->bind('childbulkpackaging', $childbulkpackaging);
+	
+			if($this->request->method()===HTTP_Request::POST) {
+					
+				$params = $_POST;
+				$bulkpackaging1_id = $params['bulkpackaging1_id'];
+				$bulkpackaging = BulkPackaging::instance($bulkpackaging1_id);
+				$bulkpackaging2_id = $params['bulkpackaging2_id'];
+				$childbulkpackaging = BulkPackaging::instance($bulkpackaging2_id);
+	
+				if($bulkpackaging->removeChildBulkPackaging($params)) {
+					Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte. ')),'/warehouse/bulkpackagings');
+				}else {
+					Message::error(ucfirst(__('Nie udało się usunąć opakowania zbiorczego.')),'/warehouse/bulkpackagings');
+				}
+			}
+		}
+	}
+	
+	public function action_document_add_bp() {
+						
+			if($this->request->method()===HTTP_Request::POST) {
+					
+				$params = $_POST;
+				$document_id = $params['document_id'];
+				$document = Document::instance($document_id);
+				$bulkpackaging_id = $params['bulkpackaging_id'];
+				$bulkpackaging = BulkPackaging::instance($bulkpackaging_id);
+	
+				if($bulkpackaging->addDocument($params)) {
+					Message::success(ucfirst(__('Dokument został dodany do opakowania zbiorczego.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
+				}else {
+					Message::error(ucfirst(__('Nie udało się dodać dokumentu do opakowania zbiorczego.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
+						
+				}
+			}
+	}
+	
+	
+	
+	
+	
+	public function action_documentlist_add_bp() {
+
+		if($this->request->method()===HTTP_Request::POST) {
+					
+				$params = $_POST;
+				$documentlist_id = $params['documentlist_id'];
+				$documentlist = DocumentList::instance($documentlist_id);
+				$bulkpackaging_id = $params['bulkpackaging_id'];
+				$bulkpackaging = BulkPackaging::instance($bulkpackaging_id);
+	
+				if($bulkpackaging->addDocumentList($params)) {
+					Message::success(ucfirst(__('Lista dokumentów została dodana do opakowania zbiorczego.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
+				}else {
+					Message::error(ucfirst(__('Nie udało się usunąć dodać listy dokumentów do opakowania zbiorczego.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
+				}
+			}
+		
+	}
+	
+		
+	public function action_add_item_bp() {
+	
+		if($this->request->param('id') > 0) {
+			$bulkpackaging = BulkPackaging::instance($this->request->param('id'));
+			$box_id = $bulkpackaging->box->id;
+			
+			
+			$documents = ORM::factory('Document')->where_open()
+				->where('document.box_id','=', $bulkpackaging->box->id)
+				->and_where('document.bulkpackaging_id','=', NULL)
+				->and_where('document.documentlist_id','=', NULL)
+				->where_close()->find_all();
+			
+			
+			$documentlists = ORM::factory('DocumentList')->where_open()
+				->where('documentlist.box_id','=', $bulkpackaging->box->id)
+				->and_where('documentlist.bulkpackaging_id','=', 0)
+				->where_close()->find_all();
+			
+			
+			$childbulkpackagings = ORM::factory('BulkPackaging')->where_open()
+				->where('bulkpackaging.box_id','=', $bulkpackaging->box->id)
+				->and_where('bulkpackaging.id','!=', $bulkpackaging->id)
+				->where_close()->find_all();
+			
+		
+			$this->content->bind('documents', $documents);
+			$this->content->bind('documentlists', $documentlists);
+			$this->content->bind('childbulkpackagings', $childbulkpackagings);
+			$this->content->bind('bulkpackaging', $bulkpackaging);
+		
+		}
+	
+	
+	
+	
+	
+	}
+	
 }

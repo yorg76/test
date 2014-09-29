@@ -82,7 +82,7 @@
 										</div>
 									</div>
 								</div>
-						
+						</div>
 							
 							<!--end tab-pane-->
 						

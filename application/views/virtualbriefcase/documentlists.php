@@ -24,9 +24,11 @@
 					id="documentlists_list">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th>Numer</th>
 							<th>Lista dokumentów</th>
 							<th>Opis</th>
+							<th>Pozycja</th>
+							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>
 					</thead>
@@ -43,6 +45,12 @@
 							<td>
 									 <?php echo $documentlist->description;?>
 								</td>
+							<td style="width: 5%">
+									 <?php echo $documentlist->box->id;?>
+							</td>
+							<td style="width: 10%">
+									 <?php echo $documentlist->box->warehouse->name;?>
+							</td>
 							<td>
 								<div class="margin-bottom-5">
 									<button class="btn btn-xs red division-delete margin-bottom"

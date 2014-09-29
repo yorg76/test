@@ -2,7 +2,7 @@
 	<div class="col-md-3">
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active"><a data-toggle="tab" href="#tab_1-1"> <i
-					class="fa fa-cog"></i>Usuwanie wirtualnej teczki <?php echo $documentlist->name; ?> z wirtualnej teczki</a>
+					class="fa fa-cog"></i>Usuwanie wirtualnej teczki <?php echo $childvirtualbriefcase->name; ?> z wirtualnej teczki</a>
 				<span class="after"> </span></li>
 
 		</ul>
@@ -50,20 +50,16 @@
 									?>
 								<?php endforeach;?>
 							</select>
-
+							<span class="help-block"></span>
 						</div>
 					</div>
 
 
 					<br />
 					<div class="margiv-top-10">
-						<input type="hidden"
-							value="<?php echo $childvirtualbriefcase->id ?>"
-							name="virtualbriefcase2_id" /> <a
-							href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>"
-							class="btn green" id="submit"> Usuń teczkę</a> <a
-							href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>"
-							class="btn default" id="cancel"> Anuluj</a>
+						<input type="hidden" value="<?php echo $childvirtualbriefcase->id ?>" name="virtualbriefcase2_id" /> 
+						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit"> Usuń teczkę</a> 
+						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel"> Anuluj</a>
 					</div>
 				</div>
 			</div>

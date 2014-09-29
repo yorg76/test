@@ -216,13 +216,13 @@ var Remove_item_vb = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	virtualbriefcase2_id: {
+	            	virtualbriefcase1_id: {
 	                    required: true
 	                },
 	            },
 
 	            messages: {
-	            	virtualbriefcase2_id: {
+	            	virtualbriefcase1_id: {
 	                    required: "Wybierz teczkę, z której  chcesz usunąć wybrany element."
 	                },
 				},
@@ -258,6 +258,56 @@ var Remove_item_vb = function () {
                     $('#remove_childvirtualbriefcase_form').submit();
                 }
                 $("#remove_childvirtualbriefcase_form").removeAttr("novalidate");
+                return false;
+        	});
+        	
+        	$('#remove_childbulkpackaging_form').validate({
+	            errorElement: 'span', //default input error message container
+	            errorClass: 'help-block', // default input error message class
+	            focusInvalid: false, // do not focus the last invalid input
+	            rules: {
+	            	bulkpackaging1_id: {
+	                    required: true
+	                },
+	            },
+
+	            messages: {
+	            	bulkpackaging1_id: {
+	                    required: "Wybierz opakowanie zbiorcze, z którego  chcesz usunąć wybrany element."
+	                },
+				},
+
+	            invalidHandler: function (event, validator) { //display error alert on form submit   
+	                $('.alert-danger',$('#remove_childbulkpackaging_form')).show();
+	                Metronic.scrollTo( $('.alert-danger',$('#remove_childbulkpackaging_form')), -200);
+	                $("#remove_childbulkpackaging_form").removeAttr("novalidate");
+	                
+	            },
+
+	            highlight: function (element) { // hightlight error inputs
+	                $(element)
+	                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+	                $("#remove_childbulkpackaging_form").removeAttr("novalidate");
+	              
+	            },
+
+	            success: function (label) {
+	                label.closest('.form-group').removeClass('has-error');
+	                label.remove();
+	                $("#remove_childbulkpackaging_form").removeAttr("novalidate");
+	            },
+	            
+	            submitHandler: function (form) {
+	                form.submit();
+	            }
+	        });
+        	       	
+        	       	
+        	$("#remove_childbulkpackaging_form #submit").bind('click',function(e){
+                if ($('#remove_childbulkpackaging_form').validate().form()) {
+                    $('#remove_childbulkpackaging_form').submit();
+                }
+                $("#remove_childbulkpackaging_form").removeAttr("novalidate");
                 return false;
         	});       				
         },
