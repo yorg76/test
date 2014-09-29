@@ -98,7 +98,10 @@ class Controller_Finance extends Controller_Welcome {
 	}
 		
 	public function action_invoices() {
-	 
+		$customer = Auth_ORM::instance()->get_user()->customer;
+		$invoices = ORM::factory('Invoice')->where('customer_id', '=', $customer->id)->find_all();
+		
+		$this->content->bind('invoices', $invoices);	 
 	}
 	
 }

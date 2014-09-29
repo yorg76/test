@@ -25,33 +25,48 @@
 									 Data wystawienia
 								</th>
 								<th>
-									Data sprzedaży
+									 Data sprzedaży
 								</th>
 								<th>
-									 Opcje
+									 Dział
+								</th>
+								<th>
+									 Kwota netto
+								</th>
+								<th>
+									 Kwota brutto
+								</th>
+								<th>
+									 PDF
 								</th>
 							</tr>
 							</thead>
 							<tbody>
-							
+							<?php foreach($invoices as $invoice):?>
 							<tr>
-								<td style="width:10%">
-									 1000
+								<td>
+									 <?php echo $invoice->number; ?>
 								</td>
-								<td style="width:20%">
-									 2014-09-09
+								<td>
+									 <?php echo $invoice->invoice_date; ?>
 								</td>
-								<td style="width:50%">
-									 2014-09-30
+								<td>
+									 <?php echo $invoice->sale_date; ?>
 								</td>			
-								
-								<td style="width:20%">
-								<div class="margin-bottom-5">
-											<button class="btn btn-xs green margin-bottom" ><i class="glyphicon glyphicon-info-sign"></i> Info</button>
-											
-									</div>
+								<td>
+									 <?php echo $invoice->division->name; ?>
+								</td>			
+								<td>
+									 <?php echo $invoice->amount; ?>
+								</td>			
+								<td>
+									 <?php echo $invoice->amount * VAT; ?>
+								</td>
+								<td>
+									<a href="<?php echo $invoice->invoice_file; ?>" class="btn btn-xs red margin-bottom" ><i class="fa fa-file-pdf-o"></i> Pobierz plik</a> <br />
 								</td>
 							</tr>
+							<?php endforeach;?>
 							</tbody>
 							</table>
 						</div>

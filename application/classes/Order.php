@@ -57,6 +57,9 @@ class Order {
 			$this->order->status='Dostarczone';
 				
 			if($this->order->update()) {
+				
+				
+					
 				$paramse = array();
 					
 				$paramse['subject']="Twoje zamówienie zmieniło status";
