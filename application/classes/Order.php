@@ -669,8 +669,10 @@ class Order {
 			
 		$message = str_replace("social_rss.png", $social_rss, $message);
 		
-		foreach ($params['attachments'] as $attachment) {
-			$email->attach_file($attachment);
+		if(isset($params['attachments']) && is_array($params['attachments'])) {
+			foreach ($params['attachments'] as $attachment) {
+				$email->attach_file($attachment);
+			}
 		}
 		
 		$email->message($message, 'text/html');
