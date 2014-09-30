@@ -38,9 +38,9 @@
 					</div>
 					<br/>
 					<div class="margiv-top-10">
-						<a href="/admin/storagecategories/" class="btn green" id="submit">
+						<a href="/admin/storagecategories" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/admin/storagecategories/" class="btn default" id="cancel">
+						<a href="/admin/storagecategories" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

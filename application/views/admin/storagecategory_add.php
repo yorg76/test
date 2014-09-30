@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/admin/storagecategory_add/" method="POST" id="add_storagecategory_form">
+		<form role="form" action="/admin/storagecategory_add" method="POST" id="add_storagecategory_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -39,9 +39,9 @@
 					</div>
 					<br/>
 					<div class="margiv-top-10">
-						<a href="/admin/storagecategories/" class="btn green" id="submit">
+						<a href="/admin/storagecategories" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/admin/storagecategories/" class="btn default" id="cancel">
+						<a href="/admin/storagecategories" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	
