@@ -411,20 +411,21 @@
 					
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-					<?php echo ucfirst(__($_controller)); ?> <small><?php echo ucfirst(__($_action)); ?></small>
+					<?php echo ucfirst(__($_controller)); ?> <small></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="/user/dashboard">Home</a>
+							<a href="/user/dashboard"><?php echo ucfirst(Auth_ORM::instance()->get_user()->username); ?></a>
 							<i class="fa fa-angle-right"></i>
 						</li>						
-						<?php foreach($bread as $element):?>
+						
 						<li>
-							<a href="#"><?php echo $element; ?></a>
-							<i class="fa fa-angle-right"></i>
+							<a href="<?php echo "/".$_controller."/".$_action.(Request::current()->param('id')!=NULL ? "/".Request::current()->param('id'):''); ?>"><?php echo ucfirst(__($_action)); ?></a>
+							<?php echo (Request::current()->param('id')!=NULL ? '<i class="fa fa-angle-right"></i>'.Request::current()->param('id'):''); ?>
+							
 						</li>
-						<?php endforeach;?>
+						
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>

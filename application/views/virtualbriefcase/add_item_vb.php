@@ -2,7 +2,7 @@
 					<div class="col-md-12">
 						<div class="tabbable tabbable-custom tabbable-full-width">
 							<ul class="nav nav-tabs">
-								<li class="">
+								<li class="active">
 									<a data-toggle="tab" href="#box">
 									Dodaj pozycję</a>
 								</li>
@@ -82,7 +82,7 @@
 										</div>
 									</div>
 								</div>
-						</div>
+					
 							
 							<!--end tab-pane-->
 						

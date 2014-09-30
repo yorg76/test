@@ -2,6 +2,7 @@
  
 return array
 (
+	'storagecategory_edit' => 'Edycja kategorii magazynowania',		
 	'edit_order' => 'Edycja zamówienia',
     'user'=>'Użytkownik',
 	'dashboard'=>'Panel użytkownika',
@@ -20,7 +21,7 @@ return array
 	'documentlists'=>'Listy dokumentów',
 	'bulkpackagings'=>'Opakowania zbiorcze',
 	'boxes_search'=>'Wyszukaj',
-	'add_item'=>'Dodaj',
+	'add_item'=>'Dodaj do magazynu',
 	'add_item_vb'=>'Dodaj do wirualnej teczki',
 	'add_item_bp'=>'Dodaj do opakowania zbiorczego',
 	'virtualbriefcase'=>'Wirtualne teczki',
@@ -60,6 +61,8 @@ return array
 	'invoices'=>'Faktury',
 	'report'=>'Raporty',
 	'profile'=>'Profil',
-	
+	'user_edit' => 'Edycja danych użytkownia',
+	'division_edit' => 'Edycja działu',
+	'view_order' => 'Szczegóły zamówienia',
 
 );
