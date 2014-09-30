@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form enctype="multipart/form-data" role="form" action="/virtualbriefcase/nested_virtuaualbriefcase_edit/" method="POST" id="edit_nested_virtuaualbriefcase_form">
+		<form enctype="multipart/form-data" role="form" action="/virtualbriefcase/nested_virtualbriefcase_edit/" method="POST" id="edit_nested_virtuaualbriefcase_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
