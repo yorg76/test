@@ -3,11 +3,28 @@ $.extend(true, $.fn.dataTable.defaults, {
     "dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
     //"Dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // datatable layout without  horizobtal scroll
     "language": {
-        "lengthMenu": " _MENU_ records ",
-        "paginate": {
-            "previous": '<i class="fa fa-angle-left"></i>',
-            "next": '<i class="fa fa-angle-right"></i>'
-        }
+	    "sProcessing":   "Przetwarzanie...",
+	    "sLengthMenu":   "Pokaż _MENU_ pozycji",
+	    "sZeroRecords":  "Nie znaleziono pasujących pozycji",
+	    "sInfoThousands":  " ",
+	    "sInfo":         "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
+	    "sInfoEmpty":    "Pozycji 0 z 0 dostępnych",
+	    "sInfoFiltered": "(filtrowanie spośród _MAX_ dostępnych pozycji)",
+	    "sInfoPostFix":  "",
+	    "sSearch":       "Szukaj:",
+	    "sUrl":          "",
+	    "oPaginate": {
+	        "sFirst":    "Pierwsza",
+	        "sPrevious": "Poprzednia",
+	        "sNext":     "Następna",
+	        "sLast":     "Ostatnia"
+	    },
+	    "sEmptyTable":     "Brak danych",
+	    "sLoadingRecords": "Wczytywanie...",
+	    "oAria": {
+	        "sSortAscending":  ": aktywuj, by posortować kolumnę rosnąco",
+	        "sSortDescending": ": aktywuj, by posortować kolumnę malejąco"
+	    }
     }
 });
 
@@ -15,7 +32,7 @@ $.extend(true, $.fn.dataTable.defaults, {
 $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper",
     "sFilterInput": "form-control input-small input-inline",
-    "sLengthSelect": "form-control input-xsmall input-inline"
+    "sLengthSelect": "form-control input-inline"
 });
 
 // In 1.10 we use the pagination renderers to draw the Bootstrap paging,
