@@ -325,9 +325,9 @@ class Controller_Admin extends Controller_Welcome {
 			$params = $_POST;
 				
 			if($storagecategory->addStorageCategory($params)) {
-				Message::success(ucfirst(__('Kategoria magazynowania została utworzona')),'/admin/storagecategories/');
+				Message::success(ucfirst(__('Kategoria magazynowania została utworzona')),'/admin/storagecategories');
 			}else {
-				Message::error(ucfirst(__('Kategoria magazynowania nie została utworzona')),'/admin/storagecategories/');
+				Message::error(ucfirst(__('Kategoria magazynowania nie została utworzona')),'/admin/storagecategories');
 			}
 				
 		}
@@ -343,9 +343,9 @@ class Controller_Admin extends Controller_Welcome {
 				$params=$_POST;
 	
 				if($storagecategory->updateStorageCategory($params)) {
-					Message::success(ucfirst(__('Kategoria magazynowania została zaktualizowana')),'/admin/storagecategories/');
+					Message::success(ucfirst(__('Kategoria magazynowania została zaktualizowana')),'/admin/storagecategories');
 				}else {
-					Message::error(ucfirst(__('Nie udało się zaktualizować kategorii magazynowania')),'/admin/storagecategories/');
+					Message::error(ucfirst(__('Nie udało się zaktualizować kategorii magazynowania')),'/admin/storagecategories');
 				}
 			}
 		}
@@ -358,7 +358,7 @@ class Controller_Admin extends Controller_Welcome {
 			$name = $storagecategory->name;
 	
 			if($storagecategory->deleteStorageCategory()) {
-				Message::success(ucfirst(__('Kategoria magazynowania została usunięty')),'/admin/storagecategories/'.$name);
+				Message::success(ucfirst(__('Kategoria magazynowania została usunięta')),'/admin/storagecategories/'.$name);
 			}else {
 				Message::error(ucfirst(__('Nie udało się usunąć kategorii magazynowania')),'/admin/storagecategories/'.$name);
 			}
