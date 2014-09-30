@@ -40,9 +40,9 @@
 					<br/>
 					<input type="hidden" value="<?php echo $customer->id ?>" name="customer_id" />
 					<div class="margiv-top-10">
-						<a href="/warehouse/warehouses/" class="btn green" id="submit">
+						<a href="/warehouse/warehouses" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/warehouse/warehouses/" class="btn default" id="cancel">
+						<a href="/warehouse/warehouses" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

@@ -245,7 +245,7 @@ class Controller_Customer extends Controller_Welcome {
     		$customer_id = $user->customer->id;
     			
     		if($user->lockUser()) {
-    			Message::success(ucfirst(__('Użytkownik został zablokowany')),'/customer/users/');
+    			Message::success(ucfirst(__('Użytkownik został zablokowany')),'/customer/users');
     		}else {
     			Message::error(ucfirst(__('Nie udało się zablokować użytkownika')),'/customer/users/');
     		}
@@ -261,9 +261,9 @@ class Controller_Customer extends Controller_Welcome {
     		$customer_id = $user->customer->id;
     			
     		if($user->unlockUser()) {
-    			Message::success(ucfirst(__('Użytkownik został odblokowany')),'/customer/users/');
+    			Message::success(ucfirst(__('Użytkownik został odblokowany')),'/customer/users');
     		}else {
-    			Message::error(ucfirst(__('Nie udało się oblokować użytkownika')),'/customer/users/');
+    			Message::error(ucfirst(__('Nie udało się oblokować użytkownika')),'/customer/users');
     		}
     	}else {
     		Message::error(ucfirst(__('Nie podałeś id użytkownika')),'/customer/users');
@@ -314,9 +314,9 @@ class Controller_Customer extends Controller_Welcome {
 			$params['customer_id'] = $customer->id;
 			
 			if($division->addDivision($params)) {
-				Message::success(ucfirst(__('Dział został utworzony')),'/customer/divisions/');
+				Message::success(ucfirst(__('Dział został utworzony')),'/customer/divisions');
 			}else {
-				Message::error(ucfirst(__('Dział nie został utworzony')),'/customer/divisions/');
+				Message::error(ucfirst(__('Dział nie został utworzony')),'/customer/divisions');
 			}
 			
 		}
@@ -336,9 +336,9 @@ class Controller_Customer extends Controller_Welcome {
 				$params['customer_id'] = $customer_id;
 				
 				if($division->updateDivision($params)) {
-					Message::success(ucfirst(__('Dział został zaktualizowany')),'/customer/divisions/');
+					Message::success(ucfirst(__('Dział został zaktualizowany')),'/customer/divisions');
 				}else {
-					Message::error(ucfirst(__('Nie udało się zaktualizować działu')),'/customer/divisions/');
+					Message::error(ucfirst(__('Nie udało się zaktualizować działu')),'/customer/divisions');
 				}
 			}
 		}
@@ -387,23 +387,21 @@ class Controller_Customer extends Controller_Welcome {
 			$user = Auth_ORM::instance()->get_user();
 			$customer = Customer::instance($user->customer->id);
 			
-			var_dump($_POST);
-			
 			if($_POST['address_type'] == 'dostawy') {			
 				if($customer->addDeliveryAddress($_POST)) {
 					
-					Message::success(ucfirst(__('Adres został dodany')),'/customer/edit/');
+					Message::success(ucfirst(__('Adres został dodany')),'/customer/edit/'.$customer->customer->id);
 				}else {
 					
-					Message::error(ucfirst(__('Nie udało się dodać adresu')),'/customer/edit/');
+					Message::error(ucfirst(__('Nie udało się dodać adresu')),'/customer/edit/'.$customer->customer->id);
 				}
 			}elseif($_POST['address_type']=='odbioru') {
 				if($customer->addPickupAddress($_POST)) {
 					
-					Message::success(ucfirst(__('Adres został dodany')),'/customer/edit/');
+					Message::success(ucfirst(__('Adres został dodany')),'/customer/edit/'.$customer->customer->id);
 				}else {
 					
-					Message::error(ucfirst(__('Nie udało się dodać adresu')),'/customer/edit/');
+					Message::error(ucfirst(__('Nie udało się dodać adresu')),'/customer/edit/'.$customer->customer->id);
 				}
 			}
 		}

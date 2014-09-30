@@ -116,9 +116,9 @@
 					<br/>
 					<br/>
 					<div class="margiv-top-10">
-						<a href="/warehouse/boxes/" class="btn green" id="submit">
+						<a href="/warehouse/boxes" class="btn green" id="submit">
 						Zapisz zmiany</a>
-						<a href="/warehouse/boxes/" class="btn default" id="cancel">
+						<a href="/warehouse/boxes" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>
 				</div>	

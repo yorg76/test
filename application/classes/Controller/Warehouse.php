@@ -209,9 +209,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$params['customer_id'] = $customer->id;
 			
 			if($warehouse->addWarehouse($params)) {
-				Message::success(ucfirst(__('Magazyn został utworzony')),'/warehouse/warehouses/');
+				Message::success(ucfirst(__('Magazyn został utworzony')),'/warehouse/warehouses');
 			}else {
-				Message::error(ucfirst(__('Magazyn nie został utworzony')),'/warehouse/warehouses/');
+				Message::error(ucfirst(__('Magazyn nie został utworzony')),'/warehouse/warehouses');
 			}
 			
 		}
@@ -233,9 +233,9 @@ class Controller_Warehouse extends Controller_Welcome {
 				$params['customer_id'] = $customer_id;
 			
 				if($warehouse->updateWarehouse($params)) {
-					Message::success(ucfirst(__('Magazyn został zaktualizowany')),'/warehouse/warehouses/');
+					Message::success(ucfirst(__('Magazyn został zaktualizowany')),'/warehouse/warehouses');
 				}else {
-					Message::error(ucfirst(__('Nie udało się zaktualizować magazynu')),'/warehouse/warehouses/');
+					Message::error(ucfirst(__('Nie udało się zaktualizować magazynu')),'/warehouse/warehouses');
 				}
 			}
 		}
@@ -313,9 +313,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$box_id = $box->id;
 					
 			if($box->deleteBox()) {
-				Message::success(ucfirst(__('Pozycja została usunięta.')),'/warehouse/boxes/');
+				Message::success(ucfirst(__('Pozycja została usunięta.')),'/warehouse/boxes');
 			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć pozycji.')),'/warehouse/boxes/');
+				Message::error(ucfirst(__('Nie udało się usunąć pozycji.')),'/warehouse/boxes');
 			}
 		}
 	}
