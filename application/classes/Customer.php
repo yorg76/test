@@ -57,7 +57,7 @@ class Customer  {
 			$this->divisions = $this->customer->divisions->find();
 			$this->warehouses = $this->customer->warehouses->find();
 			$this->invoices = $this->customer->invoices->find();
-			$this->pricetable = $this->customer->pricetable->find();
+			$this->pricetable = $this->customer->pricetables->where('active','=',1)->find();
 			$this->id = $this->customer->id;
 			$this->name = $this->customer->name;
 			$this->nip = $this->customer->nip;
