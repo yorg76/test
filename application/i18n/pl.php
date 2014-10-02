@@ -53,6 +53,7 @@ return array
 	'add'=>'Dodaj zamówienie',
 	'orders'=>'Lista zamówień',
 	'orders_new'=>'Nowe zamówienia',
+	'orders_search'=>'Szukaj',
 	'orders_inprogress'=>'Zamówienia w trakcie realizacji',
 	'orders_realized'=>'Zamówienia zrealizowane',
 	'search'=>'Szukaj',

@@ -33,8 +33,7 @@
 						<label class="control-label">Opis
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<textarea class="form-control" name="description">
-						</textarea>
+						<textarea class="form-control" name="description" placeholder="Opis magzynu"></textarea>
 						<span class="help-block"></span>
 					</div>
 					<br/>

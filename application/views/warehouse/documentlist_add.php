@@ -47,8 +47,7 @@
 						<label class="control-label">Opis
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<textarea class="form-control" name="description">
-						</textarea>
+						<textarea class="form-control" name="description" placeholder="Opis listy dokumentów"></textarea>
 						<span class="help-block"></span>
 					</div>
 					<br/>

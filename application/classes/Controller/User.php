@@ -126,4 +126,65 @@ class Controller_User extends Controller_Welcome {
 		Request::current()->redirect('user/login');
 	}
 
+
+
+public function action_profile(){
+	
+		$user = Auth::instance()->get_user();
+		$roles = ORM::factory('Role')->where('name','!=','admin')->find_all();
+		$divisions = $user->customer->divisions->find_all();
+		 
+		$user_divisions = $user->divisions->find_all();
+		 
+		$this->content->bind('user', $user);
+		 
+		$this->content->bind('divisions', $divisions);
+		$this->content->bind('user_divisions', $user_divisions);
+		$this->content->bind('roles', $roles);
+
+		if($this->request->method()===HTTP_Request::POST) {
+			 
+			if(is_array($_POST['divisions'])) {
+				foreach($_POST['divisions'] as $div) {
+					if(!$user->has('divisions',$div))	{
+						$user->add('divisions',$div);
+					}
+				}
+				 
+				foreach ($user->divisions->find_all() as $div) {
+					if(!in_array($div->id, $_POST['divisions'])) {
+						$user->remove('divisions',$div->id);
+					}
+				}
+			}
+
+
+			$user->values($_POST);
+
+			foreach ($_POST['roles'] as $role) {
+				if(!$user->has('roles',$role)) {
+					$user->add('roles',$role);
+				}
+			}
+
+			foreach($user->roles->find_all() as $role) {
+				if(!in_array($role->id, $_POST['roles'])) {
+					$user->remove('roles',$role);
+				}
+			}
+
+			$validate = new Validation($_POST);
+			$validate->rule('firstname', 'not_empty')
+			->rule('lastname', 'not_empty')
+			->rule('username', 'not_empty');
+
+			if($validate->check() && $user->update($validate)){
+				Message::success(ucfirst(__('Dane klienta zostały zaktualizowane')),'/customer/users');
+			}else{
+				Message::error(ucfirst(__('Wystąpił błąd')." ".$validate->errors('msg')),'/customer/users');
+			}
+
+		}
+	
+	}
 }

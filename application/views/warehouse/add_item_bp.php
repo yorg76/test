@@ -52,7 +52,7 @@
 														<div class="margiv-top-10">
 															<a href="/warehouse/bulkpackagings" class="btn green" id="submit">
 															Dodaj dokument</a>
-															<a href="/warehouse/add_item_bp" class="btn default" id="cancel">
+															<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>
 													</div>	
@@ -98,7 +98,7 @@
 														<div class="margiv-top-10">
 															<a href="/warehouse/bulkpackagings" class="btn green" id="submit">
 															Dodaj listę</a>
-															<a href="/warehouse/add_item_bp" class="btn default" id="cancel">
+															<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>
 													</div>	
@@ -144,7 +144,7 @@
 														<div class="margiv-top-10">
 															<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn green" id="submit">
 															Dodaj opakowanie</a>
-															<a href="/warehouse/add_item_bp" class="btn default" id="cancel">
+															<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>
 													</div>	
