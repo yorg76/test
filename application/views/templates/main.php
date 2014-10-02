@@ -379,7 +379,7 @@
 					</a>
 					<ul class="sub-menu">
 						<li>
-							<a href="/profile/index">
+							<a href="/profile/profile">
 							<i class="icon-ghost"></i>
 							Edytuj dane</a>
 						</li>

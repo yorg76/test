@@ -179,7 +179,7 @@ public function action_profile(){
 			->rule('username', 'not_empty');
 
 			if($validate->check() && $user->update($validate)){
-				Message::success(ucfirst(__('Dane klienta zostały zaktualizowane')),'/customer/users');
+				Message::success(ucfirst(__('Dane użykownika zostały zaktualizowane')),'/customer/users');
 			}else{
 				Message::error(ucfirst(__('Wystąpił błąd')." ".$validate->errors('msg')),'/customer/users');
 			}
