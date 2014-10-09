@@ -527,7 +527,7 @@ public $controller_title = 'Wirtualne teczki';
 	
 			$params = $_POST;
 			$virtualbriefcase2_id = $params['virtualbriefcase2_id'];
-			$childvirtualbriefcase = Virtualbriefcase::instance($virtualbriefcase2_id);
+			$childvirtualbriefcase = VirtualBriefcase::instance($virtualbriefcase2_id);
 			$virtualbriefcase1_id = $params['virtualbriefcase1_id'];
 			$virtualbriefcase = VirtualBriefcase::instance($virtualbriefcase1_id);
 			
