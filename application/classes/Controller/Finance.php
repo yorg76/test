@@ -104,4 +104,21 @@ class Controller_Finance extends Controller_Welcome {
 		$this->content->bind('invoices', $invoices);	 
 	}
 	
+	public function action_print_invoice() {
+		
+			
+		if($this->request->param('id') > 0) {
+			$order=Order::instance($this->request->param('id'));
+			$customer = Auth_ORM::instance()->get_user()->customer;
+			$invoice = ORM::factory('Invoice');
+			
+			$this->template=View::factory('templates/invoice_template');
+			$html = TRUE;
+			$this->template->bind('html', $html);
+			$this->template->bind('order', $order);
+			$this->template->bind('invoice', $invoice);
+				
+		}
+	}
+	
 }
