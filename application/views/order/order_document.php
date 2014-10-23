@@ -112,7 +112,7 @@
 					<div class="col-xs-4">
 						<div class="well">
 							<center>
-								<?php echo QRBarcode::encode($order->id);?>
+								<?php echo Code128Barcode::encode($order->id);?>
 							</center>
 						</div>
 					</div>
@@ -145,7 +145,7 @@
 							Pozycja: <?php echo $ord->box_number; ?> - <?php echo $ord->box_description; ?>
 						<hr>
 						<div style="text-align:center;">
-							<?php echo QRBarcode::factory($ord->box_number."/".$ord->storagecategory->id."/".$ord->box_date,500)->render();?>
+							<?php echo Code128Barcode::factory($ord->box_number."/".$ord->storagecategory->id."/".$ord->box_date,500)->render();?>
 						</div>
 					<pagebreak />
 					<?php endforeach;?>

@@ -37,7 +37,8 @@ class Controller_Admin extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'storagecategories') $this->add_init("TableStorageCategories.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'storagecategory_add') $this->add_init("StorageCategory_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'storagecategory_edit') $this->add_init("StorageCategory_edit.init();\t\n");
-		
+		if(strtolower ( $this->request->action()) == 'shipmentcompany_add') $this->add_init("Add_shipmentcompany.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'shipmentcompany_edit') $this->add_init("Edit_shipmentcompany.init();\t\n");
 		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 
@@ -90,7 +91,63 @@ class Controller_Admin extends Controller_Welcome {
 	public function action_index() {
 		
 	}
-		
+	public function action_shipmentcompanies() {
+		$shipmentcompanies = Auth::instance()->get_user()->customer->shipmentcompanies->find_all();
+		$customer=Auth::instance()->get_user()->customer;
+		 
+		$this->content->bind('customer', $customer);
+		$this->content->bind('shipmentcompanies', $shipmentcompanies);
+	}
+	
+	public function action_shipmentcompany_add() {
+		$customer=Auth::instance()->get_user()->customer;
+		$shipmentcompany = ORM::factory('ShipmentCompany');
+		 
+		$this->content->bind('customer', $customer);
+		 
+		if($this->request->method()===HTTP_Request::POST) {
+			 
+			$params = $_POST;
+			$params['customer_id'] = $customer->id;
+			$shipmentcompany->values($params);
+	
+			if($shipmentcompany->save()) {
+				Message::success(ucfirst(__('Firma kurierska została dodana')),'/customer/shipmentcompanies');
+			}else {
+				Message::error(ucfirst(__('Firma kurierska nie została dodana')),'/customer/shipmentcompanies');
+			}
+			 
+		}
+	}
+	
+	public function action_shipmentcompany_edit() {
+		if($this->request->param('id') > -1 ) {
+			$customer=Auth::instance()->get_user()->customer;
+	
+			$shipmentcompany = ORM::factory('ShipmentCompany',$this->request->param('id'));
+	
+			$this->content->bind('shipmentcompany', $shipmentcompany);
+			$this->content->bind('customer', $customer);
+			 
+			if($this->request->method()===HTTP_Request::POST) {
+	
+				$params = $_POST;
+				$params['customer_id'] = $customer->id;
+				$shipmentcompany->values($params);
+	
+				if($shipmentcompany->update()) {
+					Message::success(ucfirst(__('Firma kurierska została zaktualizowana')),'/customer/shipmentcompanies');
+				}else {
+					Message::error(ucfirst(__('Firma kurierska nie została zaktualizowana')),'/customer/shipmentcompanies');
+				}
+	
+			}
+		}
+	}
+	
+	public function action_shipmentcompany_delete() {
+	
+	}		
 	public function action_users() {
 		
 		$users = ORM::factory("User")->find_all();

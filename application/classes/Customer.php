@@ -171,14 +171,30 @@ class Customer  {
 
 
 	public function deleteCompany() {
+		$log=Kohana_Log::instance();
+		$db = Database::instance();
+		$db->begin();
+		
 		try {
-			if($this->customer->remove()) {
+			
+			foreach($this->customer->addresses->find_all() as $addr) {
+				$addr->delete();
+			}
+			
+			foreach($this->customer->pricetables->find_all() as $pricetable) {
+				$pricetable->delete();
+			}
+						
+			if($this->customer->delete()) {
 				$this->customer=NULL;
+				$log->add(Log::DEBUG,"Company has been removed\n");
 				return true;
 			} else {
 				return false;
 			}
+			$db->commit();
 		}catch (Exception $e) {
+			$db->rollback();
 			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
 		}
 		return;

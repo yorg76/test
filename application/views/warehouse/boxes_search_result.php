@@ -78,7 +78,7 @@
 									 <?php echo $box->date_reception;?>
 								</td>
 								<td>
-									 <?php echo QRBarcode::encode($box->id);?>
+									 <?php echo Code128Barcode::encode($box->id);?>
 								</td>
 								<td>
 									<div class="margin-bottom-5">

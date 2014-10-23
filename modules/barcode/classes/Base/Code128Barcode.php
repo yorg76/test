@@ -58,7 +58,7 @@ abstract class Base_Code128Barcode extends Kohana_Core implements Barcode_Interf
 	 * @access protected
 	 * @var char
 	 */
-	protected $charset = NULL; // A, B, C
+	public $charsetc = NULL; // A, B, C
 
 	/**
 	 * Initializes this barcode creator.
@@ -66,7 +66,7 @@ abstract class Base_Code128Barcode extends Kohana_Core implements Barcode_Interf
 	 * @access public
 	 * @param $data string                      the data string to be encoded
 	 */
-	public function __construct($data, $charset = 'C') {
+	public function __construct($data, $charset = 'B') {
 		if (!is_string($data)) {
 			throw new Kohana_InvalidArgument_Exception('Message: Unable to encode :data for barcode. Reason: Invalid data string declared.', array(':data' => $data, ':set' => $charset));
 		}
@@ -74,7 +74,7 @@ abstract class Base_Code128Barcode extends Kohana_Core implements Barcode_Interf
 			throw new Kohana_InvalidArgument_Exception("Message: Unable to encode :data for barcode. Reason: Invalid character set declared ':set'.", array(':data' => $data, ':set' => $charset));
 		}
 		$this->data = strtoupper($data);
-		$this->charset = strtoupper($charset);
+		$this->charsetc = strtoupper($charset);
 	}
 
 	/**
@@ -89,8 +89,11 @@ abstract class Base_Code128Barcode extends Kohana_Core implements Barcode_Interf
 			case 'file':
 				$file = (is_null($this->file)) ? '/barcode/code128/' . urlencode($this->data) : $this->file;
 				return $file;
+			case 'charsetc':
+				return $this->charsetc;
 			case 'charset':
-				return $this->charset;
+				return $this->charsetc;
+				
 			default:
 				return NULL;
 		}
@@ -103,24 +106,24 @@ abstract class Base_Code128Barcode extends Kohana_Core implements Barcode_Interf
 	 * @param $file_name                        the file name
 	 */
 	public function output($file_name = NULL) {
-		$value = self::$values[$this->charset]['START' . $this->charset];
+		$value = self::$values[$this->charsetc]['START' . $this->charsetc];
 		$code = self::$patterns[$value];
 		$checksum = $value;
 
-		$value = self::$values[$this->charset]['FNC1'];
+		$value = self::$values[$this->charsetc]['FNC1'];
 		$code .= self::$patterns[$value];
 
 		$length = strlen($this->data);
 
-		switch ($this->charset) {
+		switch ($this->charsetc) {
 			case 'A':
 			case 'B':
 				for ($index = 0; $index < $length; $index++) {
 					$char = $this->data[$index];
-					if (!isset(self::$values[$this->charset][$char])) {
-						throw new Kohana_InvalidArgument_Exception("Message: Invalid character in input string. Reason: Character ':char' cannot be encoded using character set ':set'.", array(':set' => $this->charset, ':char' => $char));
+					if (!isset(self::$values[$this->charsetc][$char])) {
+						throw new Kohana_InvalidArgument_Exception("Message: Invalid character in input string. Reason: Character ':char' cannot be encoded using character set ':set'.", array(':set' => $this->charsetc, ':char' => $char));
 					}
-					$value = self::$values[$this->charset][$char];
+					$value = self::$values[$this->charsetc][$char];
 					$code .= self::$patterns[$value];
 					$checksum += ($index * $value);
 				}
@@ -128,10 +131,10 @@ abstract class Base_Code128Barcode extends Kohana_Core implements Barcode_Interf
 			case 'C':
 				for ($index = 0; $index < $length; $index += 2) {
 					$char = substr($this->data, $index, 2);
-					if (!isset(self::$values[$this->charset][$char])) {
-						throw new Kohana_InvalidArgument_Exception("Message: Invalid character in input string. Reason: Character ':char' cannot be encoded using character set ':set'.", array(':set' => $this->charset, ':char' => $char));
+					if (!isset(self::$values[$this->charsetc][$char])) {
+						throw new Kohana_InvalidArgument_Exception("Message: Invalid character in input string. Reason: Character ':char' cannot be encoded using character set ':set'.", array(':set' => $this->charsetc, ':char' => $char));
 					}
-					$value = self::$values[$this->charset][$char];
+					$value = self::$values[$this->charsetc][$char];
 					$code .= self::$patterns[$value];
 					$checksum += ($index * $value);
 				}
@@ -143,7 +146,7 @@ abstract class Base_Code128Barcode extends Kohana_Core implements Barcode_Interf
 		$code .= self::$patterns[$checksum];
 
 		// END
-		$value = self::$values[$this->charset]['STOP'];
+		$value = self::$values[$this->charsetc]['STOP'];
 		$code .= self::$patterns[$value];
 
 		// Generates the barcode image

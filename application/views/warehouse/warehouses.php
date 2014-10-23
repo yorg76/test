@@ -45,7 +45,7 @@
 									 <?php echo $warehouse->boxes->count_all();?>
 								</td>
 							<td style="text-align: center;">
-									<?php echo QRBarcode::encode($warehouse->id);?>
+									<?php echo Code128Barcode::encode($warehouse->id);?>
 								</td>
 							<td>
 								<div class="margin-bottom-5">

@@ -121,281 +121,50 @@
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				
-				<li class="start <?php if ($_controller=='user') echo "active open";?>">
-					<a href="/user/dashboard">
-					<i class="glyphicon glyphicon-dashboard"></i>
-					<span class="title">Panel</span>
-					<span class="arrow <?php if ($_controller=='user') echo "open";?>"></span>
-					</a>
-				</li>
-				<li class="<?php if ($_controller=='admin') echo "active open";?>">
-					<a href="/admin/index">
-					<i class="icon-user"></i>
-					<span class="title">Administracja</span>
-					<span class="selected"></span>
-					<span class="arrow <?php if ($_controller=='admin') echo "open";?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li class="<?php if ($_action=='customers') echo "active";?>">
-							<a href="/admin/customers">
-							<i class="icon-list"></i>
-							Lista klientów</a>
-						</li>
-						<li class="<?php if ($_action=='users') echo "active";?>">
-							<a href="/admin/users">
-							<i class="icon-list"></i>
-							Lista użytkowników</a>
-						<li class="<?php if ($_action=='user_add') echo "active";?>">
-							<a href="/admin/user_add">
-							<i class="icon-user"></i>
-							Dodaj użytkownika</a>
-						</li>
-						<li class="<?php if ($_action=='storagecategories') echo "active";?>">
-							<a href="/admin/storagecategories">
-							<i class="icon-layers"></i>
-							Kategorie</a>
-						</li>
-					</ul>
-				</li>
-				<li class="<?php if ($_controller=='customer') echo "active open";?>">
-					<a href="/customer/index">
-					<i class="icon-basket"></i>
-					<span class="title">Klient</span>
-					<span class="selected"></span>
-					<span class="arrow <?php if ($_controller=='customer') echo "open";?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li class="<?php if ($_action=='users') echo "active";?>">
-							<a href="/customer/users">
-							<i class="icon-list"></i>
-							Lista użytkowników</a>
-						</li>
-						<li class="<?php if ($_action=='divisions') echo "active";?>">
-							<a href="/customer/divisions">
-							<i class="icon-list"></i>
-							Lista działów</a>
-						</li>
-						
-						<li class="<?php if ($_action=='shipmentcompanies') echo "active";?>">
-							<a href="/customer/shipmentcompanies">
-							<i class="icon-handbag"></i>
-							Firmy kurierskie</a>
-						</li>
-						
-						<li class="<?php if ($_action=='info') echo "active";?>">
-							<a href="/customer/info">
-							<i class="icon-notebook"></i>
-							Informacje o firmie</a>
-						</li>	
-						<li class="<?php if ($_action=='edit') echo "active";?>">
-							<a href="/customer/edit">
-							<i class="icon-globe"></i>
-							Edycja danych firmowych</a>
-						</li>
-					</ul>
-				</li>
-				<li class="<?php if ($_controller=='warehouse') echo "active open";?>">
-					<a href="/warehouse/index">
-					<i class="icon-grid"></i>
-					<span class="title">Magazyn</span>
-					<span class="selected"></span>
-					<span class="arrow <?php if ($_controller=='warehouse') echo "open";?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li class="<?php if ($_action=='warehouse') echo "active";?>">
-							<a href="/warehouse/warehouses">
-							<i class="icon-layers"></i>
-							Magazyny</a>
-						</li>
-						
-						<li class="<?php if ($_action=='boxes') echo "active";?>">
-							<a href="/warehouse/boxes">
-							<i class="glyphicon glyphicon-inbox"></i>
-							Pozycje</a>
-																				
-							<ul class="sub-menu" <?php if ($_action=='boxes' || $_action=='documents' || $_action=='documentlists' || $_action=='bulkpackagings') echo "style=\"display:block;\"" ?> >
-							
-								<li class="<?php if ($_action=='boxes') echo "active";?>">
-									<a href="/warehouse/boxes">
-									<i class="icon-list"></i>
-									Lista pozycji</a>
-								</li>
-								<li class="<?php if ($_action=='documents') echo "active";?>">
-									<a href="/warehouse/documents">
-									<i class="icon-pencil"></i>
-									Dokumenty</a>
-								</li>
-								<li class="<?php if ($_action=='documentlists') echo "active";?>">
-									<a href="/warehouse/documentlists">
-									<i class="glyphicon glyphicon-list-alt"></i>
-									Listy dokumentów</a>
-								</li>	
-								<li class="<?php if ($_action=='bulkpackagings') echo "active";?>">
-									<a href="/warehouse/bulkpackagings">
-									<i class="glyphicon glyphicon-th"></i>
-									Opakowania zbiorcze</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="/warehouse/boxes_search">
-							<i class="icon-magnifier"></i>
-							Wyszukaj...</a>
-						</li>
-						<li>
-							<a href="/warehouse/add_item">
-							<i class="icon-docs"></i>
-							Dodaj do magazynu</a>
-						</li>
-					</ul>
-				</li>
-				<li class="<?php if ($_controller=='virtualbriefcase') echo "active open";?>">
-					<a href="/virtualbriefcase/virtualbriefcases">
-					<i class="icon-briefcase"></i>
-					<span class="title">
-					Wirtualne teczki </span>
-					<span class="arrow <?php if ($_controller=='virtualbriefcase') echo "open";?>">
-					</span>
-					</a>
-					<ul class="sub-menu">
-						<li class="<?php if ($_action=='virtualbriefcases') echo "active";?>">
-							<a href="/virtualbriefcase/virtualbriefcases">
-								<i class="icon-list"></i>
-									Lista wirtualnych teczek
-							</a>
-						</li>
-						<li class="<?php if ($_action=='boxes') echo "active";?>">
-							<a href="/virtualbriefcase/boxes">
-							<i class="glyphicon glyphicon-inbox"></i>
-							Pozycje</a>
-						</li>
-						
-						<li class="<?php if ($_action=='documents') echo "active";?>">
-							<a href="/virtualbriefcase/documents">
-							<i class="icon-pencil"></i>
-							Dokumenty</a>
-						</li>
-						<li class="<?php if ($_action=='documentlists') echo "active";?>">
-							<a href="/virtualbriefcase/documentlists">
-							<i class="glyphicon glyphicon-list-alt"></i>
-							Listy dokumentów</a>
-						</li>	
-						<li class="<?php if ($_action=='bulkpackagings') echo "active";?>">
-							<a href="/virtualbriefcase/bulkpackagings">
-							<i class="glyphicon glyphicon-th"></i>
-							Opakowania zbiorcze</a>
-						</li>
-						<li>
-							<a href="/virtualbriefcase/add_item_vb">
-							<i class="icon-docs"></i>
-							Dodaj do teczki</a>
-						</li>
-						
-					</ul>
-				</li>
-				<li class="<?php if ($_controller=='order') echo "active open";?>">
-					<a href="/order/index">
-					<i class="icon-calculator"></i>
-					<span class="title">Zamówienia</span>
-					<span class="arrow <?php if ($_controller=='orders') echo "open";?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li class="<?php if ($_action=='add') echo "active";?>">
-							<a href="/order/add">
-							<i class="icon-plus"></i>
-							Dodaj
-							</a>
-						</li>
-						<li class="<?php if ($_action=='orders') echo "active";?>">
-							<a href="/order/orders">
-								<i class="icon-list"></i>
-									Lista zamówień
-							</a>
-						</li>						
-						<li class="<?php if ($_action=='orders_new') echo "active";?>">
-							<a href="/order/orders_new">
-							<i class="icon-basket"></i>
-							Nowe</a>
-						</li>
-						<li class="<?php if ($_action=='orders_inprogress') echo "active";?>">
-							<a href="/order/orders_inprogress">
-							<i class="icon-basket-loaded"></i>
-							W trakcie</a>
-						</li>
-						<li class="<?php if ($_action=='orders_realized') echo "active";?>">
-							<a href="/order/orders_realized">
-							<i class="icon-cup"></i>
-							Zrealizowane</a>
-						</li>
-						<li class="<?php if ($_action=='orders_search') echo "active";?>">
-							<a href="/order/orders_search">
-							<i class="icon-direction"></i>
-							Szukaj</a>
-						</li>						
-					</ul>
-				</li>
 
-				
-				<li class="<?php if ($_controller=='finance') echo "active open";?>">
-					<a href="/finance/index">
-					<i class="icon-diamond"></i>
-					<span class="title">Finanse</span>
-					<span class="arrow <?php if ($_controller=='finance') echo "open";?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="/finance/prices">
-							<i class="icon-list"></i>
-							Cenniki</a>
-						</li>
-						<li>
-							<a href="/finance/invoices">
-							<i class="icon-doc"></i>
-							Faktury</a>
-						</li>
-					</ul>
-				</li>
-				<li class="<?php if ($_controller=='report') echo "active open";?>">
-					<a href="/report/index">
-					<i class="icon-puzzle"></i>
-					<span class="title">Raporty</span>
-					<span class="arrow <?php if ($_controller=='report') echo "open";?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="/report/index">
-							<i class="icon-bar-chart"></i>
-							Raport 1</a>
-						</li>
-					</ul>
-				</li>
-		
-				<li class="<?php if ($_controller=='profile') echo "active open";?>">
-					<a href="/profile/index">
-					<i class="icon-user"></i>
-					<span class="title">Profil</span>
-					<span class="arrow <?php if ($_controller=='profile') echo "open";?>"></span>
-					</a>
-					<ul class="sub-menu">
-						<li>
-							<a href="/profile/profile">
-							<i class="icon-ghost"></i>
-							Edytuj dane</a>
-						</li>
-						<li>
-							<a href="/profile/password">
-							<i class="icon-shield"></i>
-							Zmień hasło</a>
-						</li>
-						<li>
-							<a href="/default/logout">
-							<i class="icon-logout"></i>
-							Wyloguj</a>
-						</li>									
-					</ul>
-				</li>
+				<?php foreach ($acls as $acl):?>
+					
+					<?php if($acl->menu==1 &&  $acl->parent==0 && $acl->checkRights()):?>
+					<li class="<?php if ($_controller==$acl->controller) echo "active open";?>">
+						<a href="/<?php echo $acl->controller?>/<?php echo $acl->action?>">
+							<i class="<?php echo $acl->icon?>"></i>
+							<span class="title"><?php echo $acl->description?></span>
+							<span class="arrow <?php if ($_controller==$acl->controller) echo "open";?>"></span>
+						</a>
+							<?php if($acl->has_children() > 0):?>
+								<ul class="sub-menu">
+									<?php foreach($acl->children() as $sub_m):?>
+									<?php if($sub_m->checkRights()):?>
+									<li class="<?php if ($_action==$sub_m->action) echo "active";?>">
+										<a href="/<?php echo $acl->controller; ?>/<?php echo $sub_m->action; ?>">
+										<i class="<?php echo $sub_m->icon; ?>"></i>
+											<?php echo $sub_m->description;?></a>
+										
+										<?php if($sub_m->has_children() > 0):?>
+											<ul class="sub-menu" <?php if ($_action=='boxes' || $_action=='documents' || $_action=='documentlists' || $_action=='bulkpackagings') echo "style=\"display:block;\"" ?> >
+											<?php foreach($sub_m->children() as $sub_m_sub):?>
+												<?php if($sub_m_sub->checkRights()):?>
+												<li class="<?php if ($_action==$sub_m_sub->action) echo "active";?>">
+												
+													<a href="/<?php echo $acl->controller; ?>/<?php echo $sub_m_sub->action; ?>">
+													<i class="<?php echo $sub_m_sub->icon; ?>"></i>
+														<?php echo $sub_m_sub->description;?></a>
+												</li>		
+												<?php endif;?>
+											<?php endforeach;?>
+											</ul>
+										<?php endif;?>
+									</li>
+									<?php endif;?>
+									<?php endforeach;?>
+								</ul>
+							<?php endif;?>
+					</li>
+					<?php endif;?>
+				<?php endforeach;?>
 			</ul>
+			
+			 
 			<!-- END SIDEBAR MENU -->
 		</div>
 	</div>

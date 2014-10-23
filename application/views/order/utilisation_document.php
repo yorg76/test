@@ -119,7 +119,7 @@
 					<div class="col-xs-4">
 						<div class="well">
 							<center>
-								<?php echo QRBarcode::encode($order->id);?>
+								<?php echo Code128Barcode::encode($order->id);?>
 							</center>
 						</div>
 					</div>
@@ -152,7 +152,7 @@
 							Pozycja: <?php echo $ord->id; ?> - <?php echo "Dodać opis pudła"; ?>
 						<hr>
 						<div style="text-align:center;">
-							<?php echo QRBarcode::factory($ord->id."/".$ord->storagecategory->id."/".$ord->date_to,500)->render();?>
+							<?php echo Code128Barcode::factory($ord->id."/".$ord->storagecategory->id."/".$ord->date_to,500)->render();?>
 						</div>
 					<pagebreak />
 					<?php endforeach;?>

@@ -28,6 +28,8 @@ class Controller_Welcome extends Controller_Template {
 			$this->_user=Auth::instance()->get_user();
 			$this->_session=Session::instance();
 			$this->template = View::factory ( 'templates/main' );
+			$acls = ORM::factory('Acl')->order_by('order')->find_all();
+			$this->template->bind ('acls', $acls );
 		}
 		else $this->template = View::factory ( 'templates/login' );
 	}
