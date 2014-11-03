@@ -291,6 +291,10 @@ class Controller_Admin extends Controller_Welcome {
 			
 			if($this->request->method()===HTTP_Request::POST) {
 				
+				if($_POST['password'] == "" || $_POST['password_repeat'] == "") {
+					unset($_POST['password']);
+					unset($_POST['password_repeat']);
+				}
 				
 				$user->values($_POST);	
 

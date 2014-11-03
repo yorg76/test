@@ -54,8 +54,10 @@ class Controller_Default extends Controller_Welcome {
 	
 	
 	public function action_login() {
+		
 		if($this->request->method()===HTTP_Request::POST) {
-				
+//			var_dump($this->request->post('username'),$this->request->post('password'),Auth_ORM::instance()->login($this->request->post('username'), $this->request->post('password')));
+	//		die;
 			if(Auth::instance()->login($this->request->post('username'), $this->request->post('password'),$this->request->post('remember'))) {
 				Message::success(ucfirst(__('Witaj, udało Ci się prawidłowo zalogować do systemu')), '/user/dashboard');
 			}else {

@@ -118,8 +118,8 @@ class User {
 				$user->firstname=$params['firstname'];
 				$user->lastname=$params['lastname'];
 				$user->email=$params['email'];
-				$user->username=$params['username'];
-				$user->password=$params['pass'];
+				//$user->username=$params['username'];
+				$user->password=$params['password'];
 				
 				if(is_array($params['divisions'])) {
 					foreach($params['divisions'] as $div) {
