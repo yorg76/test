@@ -45,6 +45,12 @@ class Customer  {
 			
 			$this->customer = ORM::factory('Customer')->where('id','=',$id)->find();
 			$this->address = $this->customer->addresses->where('address_type','=','firmowy')->find();
+			
+			if($this->address->loaded()==FALSE) {
+				$this->address = ORM::factory('Address');
+				$this->address->address_type='firmowy';
+			}
+			var_dump($this->address->loaded());
 			$this->street = $this->address->street; 
 			$this->number = $this->address->number;
 			$this->flat = $this->address->flat;
@@ -131,7 +137,7 @@ class Customer  {
 	public function updateCompany($params) {
 		
 		$log=Kohana_Log::instance();
-		
+
 		$this->address->street = $params['street']; 
 		$this->address->number = $params['number'];
 		$this->address->flat = $params['flat'];
@@ -139,6 +145,9 @@ class Customer  {
 		$this->address->city=$params['city'];
 		$this->address->postal=$params['postal'];
 		$this->address->telephone=$params['telephone'];
+		$this->address->customer_id=$this->customer->id;
+		if(!$this->address->loaded()) $this->address->save(); 
+		else $this->address->update();
 		$this->www=$params['www'];
 		$this->name = $params['name'];
 		$this->nip = $params['nip'];

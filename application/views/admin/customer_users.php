@@ -14,6 +14,13 @@
 							</div>
 						</div>
 						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="btn-group">
+									<button class="btn green" onClick="javascript:window.location='/admin/customer_add_user/<?php echo $customer->id;?>'">
+									Dodaj <i class="fa fa-plus"></i>
+									</button>
+								</div>
+							</div>						
 							<table class="table table-striped table-hover table-bordered" id="customer_users_list">
 							<thead>
 							<tr>

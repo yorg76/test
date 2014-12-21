@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/customer/shipmentcompany_add/<?php echo $customer->id ?>" method="POST" id="add_shipmentcompany_form">
+		<form role="form" action="/admin/shipmentcompany_add/<?php echo $customer->id ?>" method="POST" id="add_shipmentcompany_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>

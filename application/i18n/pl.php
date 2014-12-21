@@ -2,6 +2,11 @@
  
 return array
 (
+	'division_add' => 'Dodaj dział',
+	'customer_add_user' => 'Dodawnie użytkownika klienta',
+	'shipmentcompanies' => 'Firmy kurierskie',
+	'shipmentcompany_add' => 'Dodawanie nowej firmy kurierskiej',		
+	'shipmentcompany_edit' => 'Edycja firmy kurierskiej',
 	'storagecategory_edit' => 'Edycja kategorii magazynowania',		
 	'edit_order' => 'Edycja zamówienia',
     'user'=>'Użytkownik',

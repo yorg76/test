@@ -29,7 +29,7 @@
 							<th>Kategoria przechowywania</th>
 							<th>Data początku magazynowania</th>
 							<th>Data końca magazynowania</th>
-							<th>Blokady</th>
+							<th>Status</th>
 							<th>Plomby</th>
 							<th>Kod QR</th>
 							<th>Opcje</th>

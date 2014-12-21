@@ -19,7 +19,23 @@
 			<div class="tab-content">
 			
 				<div id="tab_1-1" class="tab-pane active">
-					
+					<?php if(Auth::instance()->logged_in('admin')):?>
+					<div class="form-group">
+						<label class="control-label">Klient
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" name="customer_id">
+								<option>-- Wybierz --</option>
+								<?php foreach ($customers as $customer):?>
+								<?php 
+											echo "<option value=\"".$customer->id."\">".$customer->name."</option>";
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>
+					<?php endif;?>
 					<div class="form-group">
 						<label class="control-label">Nazwa
 							<span class="required" aria-required="true"> * </span>

@@ -32,7 +32,7 @@ class Controller_Admin extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'customer_add_user') $this->add_init("PasswordGenerator.init();\t\nAdd_user.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'user_add') $this->add_init("PasswordGenerator.init();\t\nUser_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'user_edit') $this->add_init("PasswordGenerator.init();\t\nUser_edit.init();\t\n");
-		if(strtolower ( $this->request->action()) == 'customer_edit') $this->add_init("PasswordGenerator.init();\t\nCustomer_edit.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'customer_edit') $this->add_init("PasswordGenerator.init();\t\nCustomer_edit.init();\t\nCustomer_Add_delivery_address.init();\t\nCustomer_Add_pickup_address.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'customer_add') $this->add_init("PasswordGenerator.init();\t\nCustomer_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'storagecategories') $this->add_init("TableStorageCategories.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'storagecategory_add') $this->add_init("StorageCategory_add.init();\t\n");
@@ -112,9 +112,9 @@ class Controller_Admin extends Controller_Welcome {
 			$shipmentcompany->values($params);
 	
 			if($shipmentcompany->save()) {
-				Message::success(ucfirst(__('Firma kurierska została dodana')),'/customer/shipmentcompanies');
+				Message::success(ucfirst(__('Firma kurierska została dodana')),'/amdin/shipmentcompanies');
 			}else {
-				Message::error(ucfirst(__('Firma kurierska nie została dodana')),'/customer/shipmentcompanies');
+				Message::error(ucfirst(__('Firma kurierska nie została dodana')),'/admin/shipmentcompanies');
 			}
 			 
 		}
@@ -136,9 +136,9 @@ class Controller_Admin extends Controller_Welcome {
 				$shipmentcompany->values($params);
 	
 				if($shipmentcompany->update()) {
-					Message::success(ucfirst(__('Firma kurierska została zaktualizowana')),'/customer/shipmentcompanies');
+					Message::success(ucfirst(__('Firma kurierska została zaktualizowana')),'/admin/shipmentcompanies');
 				}else {
-					Message::error(ucfirst(__('Firma kurierska nie została zaktualizowana')),'/customer/shipmentcompanies');
+					Message::error(ucfirst(__('Firma kurierska nie została zaktualizowana')),'/admin/shipmentcompanies');
 				}
 	
 			}
@@ -207,7 +207,7 @@ class Controller_Admin extends Controller_Welcome {
 		if($this->request->param('id') > 0) {
 			
 			$customer = Customer::instance($this->request->param('id'));
-			
+					
 			if($this->request->method()===HTTP_Request::POST) {
 				
 				$params = $this->request->post();
@@ -221,6 +221,43 @@ class Controller_Admin extends Controller_Welcome {
 			
 			$this->content->bind('customer', $customer);
 			
+			$delivery_addresses=$customer->customer->addresses->where('address_type','=','wysyłki')->find_all();	
+					
+			$this->content->bind('delivery_addresses', $delivery_addresses);
+			
+			$pickup_addresses=$customer->customer->addresses->where('address_type','=','odbioru')->find_all();
+			$this->content->bind('pickup_addresses', $pickup_addresses);
+			
+		}else {
+			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
+		}
+	}
+	
+	public function action_customer_add_address() {
+			
+		if($this->request->param('id') > 0) {
+			$id=$this->request->param('id');
+			$customer = Customer::instance($id);
+				
+			if($this->request->method()===HTTP_Request::POST) {
+		
+				$params = $this->request->post();
+				if($params['address_type'] == 'wysyłki') {
+					if($customer->addDeliveryAddress($params)) {
+						Message::success(ucfirst(__('Firma została zaktualizowana')),'/admin/customer_edit/'.$id);
+					}else {
+						Message::error(ucfirst(__('Nie udało się zaktualizować firmy')),'/admin/customer_edit/'.$id);
+					}
+				}elseif($params['address_type'] == 'odbioru') {
+					if($customer->addPickupAddress($params)) {
+						Message::success(ucfirst(__('Firma została zaktualizowana')),'/admin/customer_edit/'.$id);
+					}else {
+						Message::error(ucfirst(__('Nie udało się zaktualizować firmy')),'/admin/customer_edit/'.$id);
+					}
+				}
+			}else {
+				Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
+			}
 		}else {
 			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');
 		}
@@ -252,7 +289,10 @@ class Controller_Admin extends Controller_Welcome {
 			
 			$users = ORM::factory("Customer")->where('id','=',$this->request->param('id'))->find()->users->find_all();	
 			
+			$customer=ORM::factory("Customer")->where('id','=',$this->request->param('id'))->find();
+			
 			$this->content->bind('users', $users);
+			$this->content->bind('customer', $customer);
 			
 		}else {
 			Message::error(ucfirst(__('Nie podałeś id klienta')),'/admin/customers');

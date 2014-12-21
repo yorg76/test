@@ -97,7 +97,8 @@ class Controller_Warehouse extends Controller_Welcome {
 	
 	public function action_warehouses() {
 		$customer=Auth::instance()->get_user()->customer;
-		$warehouses = $customer->warehouses->find_all();
+		if(Auth::instance()->logged_in('admin')) $warehouses = ORM::factory('Warehouse')->find_all(); 
+		else $warehouses = $customer->warehouses->find_all();
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);

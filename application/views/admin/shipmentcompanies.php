@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-edit"></i>Działy
+								<i class="fa fa-edit"></i>Firmy kurierskie
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -16,7 +16,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/customer/shipmentcompany_add/<?php echo $customer->id; ?>'">
+									<button class="btn green" onClick="javascript:window.location='/admin/shipmentcompany_add/<?php echo $customer->id; ?>'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
@@ -64,7 +64,7 @@
 								</td>
 								<td>
 									<div class="margin-bottom-5">
-											<button class="btn btn-xs yellow shipmentcompany-edit margin-bottom" onClick="javascript:window.location='/customer/shipmentcompany_edit/<?php echo $shipmentcompany->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
+											<button class="btn btn-xs yellow shipmentcompany-edit margin-bottom" onClick="javascript:window.location='/admin/shipmentcompany_edit/<?php echo $shipmentcompany->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
 									</div>
 								</td>
 							</tr>

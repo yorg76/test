@@ -27,7 +27,6 @@
 							<th>Nazwa</th>
 							<th>Opis</th>
 							<th>Liczba pozycji</th>
-							<th>Kod QR</th>
 							<th>Opcje</th>
 						</tr>
 					</thead>
@@ -44,9 +43,7 @@
 							<td>
 									 <?php echo $warehouse->boxes->count_all();?>
 								</td>
-							<td style="text-align: center;">
-									<?php echo Code128Barcode::encode($warehouse->id);?>
-								</td>
+
 							<td>
 								<div class="margin-bottom-5">
 									<button class="btn btn-xs green margin-bottom"

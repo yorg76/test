@@ -226,9 +226,15 @@ class Controller_Customer extends Controller_Welcome {
 	
 	public function action_divisions() {
 		$customer=Auth::instance()->get_user()->customer;
-		$divisions = $customer->divisions->find_all();
-		$virtualbriefcases = $customer->divisions->virtualbriefcases->find_all();
 		$user = Auth::instance()->get_user();
+		
+		if(Auth::instance()->logged_in('admin')) {
+			$divisions = ORM::factory('Division')->find_all();
+		}else {
+			$divisions = $customer->divisions->find_all();
+		}
+		$virtualbriefcases = $customer->divisions->virtualbriefcases->find_all();
+		
 		$this->content->bind('customer', $customer);
 		$this->content->bind('divisions', $divisions);
 		$this->content->bind('user', $user);
@@ -249,12 +255,17 @@ class Controller_Customer extends Controller_Welcome {
 	public function action_division_add() {
 		$customer=Auth::instance()->get_user()->customer;
 		$division = Division::instance();			
+		$customers = ORM::factory('Customer')->find_all();
+		
 		$this->content->bind('customer', $customer);
+		$this->content->bind('customers', $customers);
 				
 		if($this->request->method()===HTTP_Request::POST) {
-
 			$params = $_POST;
-			$params['customer_id'] = $customer->id;
+			
+			if($_POST['customer_id'] == NULL || $_POST['customer_id'] == "") {
+				$params['customer_id'] = $customer->id;
+			}
 			
 			if($division->addDivision($params)) {
 				Message::success(ucfirst(__('Dział został utworzony')),'/customer/divisions');

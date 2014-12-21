@@ -145,6 +145,179 @@ var Customer_edit  = function () {
 
 
 
+var Customer_Add_pickup_address  = function () {
+		
+    // public functions
+    return {
+
+        //main function
+        init: function () {
+            //initialize here something.    
+        	
+        	$('#add_pickup_address_form').validate({
+	            errorElement: 'span', //default input error message container
+	            errorClass: 'help-block', // default input error message class
+	            focusInvalid: false, // do not focus the last invalid input
+	            rules: {
+	            	street: {
+	                    required: true,
+	                },
+	                numer: {
+	                    required: true,
+	                    
+	                },
+	                city: {
+	                    required: true,
+	                    
+	                },
+	                postal: {
+	                    required: true,
+	                    
+	                },
+                
+	            },
+
+	            messages: {
+	                street: {
+	                    required: "Podaj ulicę",
+	                },
+	                numer: {
+	                    required: "Podaj numer domu",
+
+	                },
+	                city: {
+	                    required: "Podaj miasto",
+	                },
+	                postal: {
+	                	required: "Podaj kod pocztowy",
+	                },
+	            },
+
+	            invalidHandler: function (event, validator) { //display error alert on form submit   
+	                $('.alert-danger',$('#customer_edit_form')).show();
+	                Metronic.scrollTo( $('.alert-danger',$('#customer_edit_form')), -200);
+	                $("#customer_edit_form").removeAttr("novalidate");
+	                
+	            },
+
+	            highlight: function (element) { // hightlight error inputs
+	                $(element)
+	                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+	                $("#add_pickup_address_form").removeAttr("novalidate");
+	              
+	            },
+
+	            success: function (label) {
+	                label.closest('.form-group').removeClass('has-error');
+	                label.remove();
+	                $("#add_pickup_address_form").removeAttr("novalidate");
+	            },
+	            
+	            submitHandler: function (form) {
+	                form.submit();
+	            }
+	        });
+        	
+     	
+       	
+        	$("#submit_pickup").bind('click',function(e){
+                if ($('#add_pickup_address_form').validate().form()) {
+                    $('#add_pickup_address_form').submit();
+                }
+                $("#add_pickup_address_form").removeAttr("novalidate");
+                return false;
+        	});
+        },
+    };
+
+}();
+
+var Customer_Add_delivery_address  = function () {
+	
+    // public functions
+    return {
+
+        //main function
+        init: function () {
+            //initialize here something.    
+        	
+        	$('#add_delivery_address_form').validate({
+	            errorElement: 'span', //default input error message container
+	            errorClass: 'help-block', // default input error message class
+	            focusInvalid: false, // do not focus the last invalid input
+	            rules: {
+	            	street: {
+	                    required: true,
+	                },
+	                numer: {
+	                    required: true,
+	                    
+	                },
+	                city: {
+	                    required: true,
+	                    
+	                },
+	                postal: {
+	                    required: true,
+	                    
+	                },
+                
+	            },
+
+	            messages: {
+	                street: {
+	                    required: "Podaj ulicę",
+	                },
+	                numer: {
+	                    required: "Podaj numer domu",
+
+	                },
+	                city: {
+	                    required: "Podaj miasto",
+	                },
+	                postal: {
+	                	required: "Podaj kod pocztowy",
+	                },
+	            },
+
+	            invalidHandler: function (event, validator) { //display error alert on form submit   
+	                $('.alert-danger',$('#customer_edit_form')).show();
+	                Metronic.scrollTo( $('.alert-danger',$('#customer_edit_form')), -200);
+	                $("#add_delivery_address_form").removeAttr("novalidate");
+	                
+	            },
+
+	            highlight: function (element) { // hightlight error inputs
+	                $(element)
+	                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+	                $("#add_delivery_address_form").removeAttr("novalidate");
+	              
+	            },
+
+	            success: function (label) {
+	                label.closest('.form-group').removeClass('has-error');
+	                label.remove();
+	                $("#add_delivery_address_form").removeAttr("novalidate");
+	            },
+	            
+	            submitHandler: function (form) {
+	                form.submit();
+	            }
+	        });
+        	
+     	
+       	
+        	$("#submit_delivery").bind('click',function(e){
+                if ($('#add_delivery_address_form').validate().form()) {
+                    $('#add_delivery_address_form').submit();
+                }
+                $("#add_delivery_address_form").removeAttr("novalidate");
+                return false;
+        	});
+        },
+    };
+
+}();
 /***
 Usage
 ***/
