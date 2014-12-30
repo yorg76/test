@@ -27,7 +27,7 @@
 							<th>Numer</th>
 							<th>Teczki</th>
 							<th>Opis</th>
-							<th>Pozycja</th>
+							<th>Pudło</th>
 							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>

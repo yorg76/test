@@ -27,7 +27,7 @@
 							<th>Numer</th>
 							<th>Nazwa</th>
 							<th>Opis</th>
-							<th>Pozycja</th>
+							<th>Pudło</th>
 							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>
@@ -56,10 +56,12 @@
 										onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';">
 										<i class="icon-pencil"></i> Edytuj
 									</button>
+									<!-- 
 									<button class="btn btn-xs red document-delete margin-bottom"
 										id="<?php echo $document->id ;?>">
 										<i class="fa fa-recycle"></i> Usuń
 									</button>
+									-->
 								</div>
 							</td>
 						</tr>

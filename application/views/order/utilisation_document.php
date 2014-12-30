@@ -5,7 +5,7 @@
 					</div>
 
 					<div class="col-xs-8">
-						<p>Dokument zlecenia utlizacji pozycji: <span class="muted"> <?php echo $order->id; ?> / <?php echo date('d-m-Y',strtotime($order->order->create_date)); ?></span>
+						<p>Dokument zlecenia utlizacji pudeł: <span class="muted"> <?php echo $order->id; ?> / <?php echo date('d-m-Y',strtotime($order->order->create_date)); ?></span>
 						</p>
 					</div>
 				</div>
@@ -44,7 +44,7 @@
 								 <strong>Dział: </strong><?php echo $order->order->division->name;?>
 							</li>
 							<li>
-								 <strong>Ilość pozycji: </strong><?php echo $order->order->boxes->count_all();?>
+								 <strong>Ilość pudeł: </strong><?php echo $order->order->boxes->count_all();?>
 							</li>
 							<li>
 								 <strong>Data odbioru: </strong><?php echo $order->order->pickup_date;?>
@@ -149,7 +149,7 @@
 				<pagebreak />
 					<?php foreach ($order->order->boxes->find_all() as $ord):?>
 						<hr>
-							Pozycja: <?php echo $ord->id; ?> - <?php echo "Dodać opis pudła"; ?>
+							Pudło: <?php echo $ord->id; ?> - <?php echo "Dodać opis pudła"; ?>
 						<hr>
 						<div style="text-align:center;">
 							<?php echo Code128Barcode::factory($ord->id."/".$ord->storagecategory->id."/".$ord->date_to,500)->render();?>

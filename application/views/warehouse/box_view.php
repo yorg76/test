@@ -4,7 +4,7 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="glyphicon glyphicon-inbox"></i>Pozycja <?php echo $box->id ?> - Dokumenty
+								<i class="glyphicon glyphicon-inbox"></i>Pudło <?php echo $box->id ?> - Dokumenty
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -67,7 +67,7 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="glyphicon glyphicon-inbox"></i>Pozycja <?php echo $box->id ?> - Listy Dokumentów
+								<i class="glyphicon glyphicon-inbox"></i>Pudło <?php echo $box->id ?> - Listy Dokumentów
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -129,7 +129,7 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="glyphicon glyphicon-inbox"></i>Pozycja <?php echo $box->id ?> - Teczki
+								<i class="glyphicon glyphicon-inbox"></i>Pudło <?php echo $box->id ?> - Teczki
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">

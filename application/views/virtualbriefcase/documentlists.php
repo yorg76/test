@@ -27,7 +27,7 @@
 							<th>Numer</th>
 							<th>Lista dokumentów</th>
 							<th>Opis</th>
-							<th>Pozycja</th>
+							<th>Pudło</th>
 							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>

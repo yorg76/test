@@ -4,7 +4,7 @@
 							<ul class="nav nav-tabs">
 								<li class="active">
 									<a data-toggle="tab" href="#tab_2_2">
-									Dodaj pozycję</a>
+									Dodaj pudło</a>
 								</li>
 								<li>
 									<a data-toggle="tab" href="#tab_1_3">
@@ -40,7 +40,7 @@
 												<label class="control-label">Kategoria przechowywania
 													<span class="required" aria-required="true"> * </span>
 												</label>
-												<span class="help-block">Wybierz kategorię magazynowania pozycji</span>
+												<span class="help-block">Wybierz kategorię magazynowania pudła</span>
 												<div class="input-icon right">
 													<select class="form-control" name="storage_category_id">
 														<option value="">-- Wybierz kategorię --</option>
@@ -103,7 +103,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block">Wybierz magazyn dla pozycji</span>
+													<span class="help-block">Wybierz magazyn dla pudła</span>
 												</div>
 											</div>				
 											<div class="form-group">
@@ -153,12 +153,12 @@
 												
 													<div id="tab_1-1" class="tab-pane active">
 														<div class="form-group">
-															<label class="control-label">Wybór pozycji
+															<label class="control-label">Wybór pudła
 																<span class="required" aria-required="true"> * </span>
 															</label>
 															<div class="input-icon right">
 																<select class="form-control" name="box_id">
-																	<option value="">-- Wybierz pozycję dla dokumentu --</option>
+																	<option value="">-- Wybierz pudło dla dokumentu --</option>
 																	<?php foreach ($boxes as $box):?>
 																	<?php 
 																				echo "<option value=\"".$box->id."\">".$box->id."</option>";
@@ -219,12 +219,12 @@
 												
 													<div id="tab_1-1" class="tab-pane active">
 													<div class="form-group">
-															<label class="control-label">Wybór pozycji
+															<label class="control-label">Wybór pudła
 																<span class="required" aria-required="true"> * </span>
 															</label>
 															<div class="input-icon right">
 																<select class="form-control" name="box_id">
-																	<option value="">-- Wybierz pozycję dla listy dokumentów --</option>
+																	<option value="">-- Wybierz pudło dla listy dokumentów --</option>
 																	<?php foreach ($boxes as $box):?>
 																	<?php 
 																				echo "<option value=\"".$box->id."\">".$box->id."</option>";
@@ -281,12 +281,12 @@
 												
 													<div id="tab_1-1" class="tab-pane active">
 														<div class="form-group">
-															<label class="control-label">Wybór pozycji
+															<label class="control-label">Wybór pudła
 																<span class="required" aria-required="true"> * </span>
 															</label>
 															<div class="input-icon right">
 																<select class="form-control" name="box_id">
-																	<option value="">-- Wybierz pozycję dla opakowania --</option>
+																	<option value="">-- Wybierz pudło dla opakowania --</option>
 																	<?php foreach ($boxes as $box):?>
 																	<?php 
 																				echo "<option value=\"".$box->id."\">".$box->id."</option>";

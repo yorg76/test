@@ -3,7 +3,7 @@
 		<div class="tabbable tabbable-custom tabbable-full-width">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a data-toggle="tab" href="#tab_box"> Wyszukaj pozycję</a>
+					<a data-toggle="tab" href="#tab_box"> Wyszukaj pudła</a>
 				</li>
 				<li>
 					<a data-toggle="tab" href="#tab_document"> Wyszukaj dokument</a>
@@ -12,7 +12,7 @@
 		
 			<div class="tab-content">
 				<div id="tab_box" class="tab-pane">
-					<h4>Dane pozycji</h4>
+					<h4>Dane pudła</h4>
 							<form class="form-inline" role="form" action="/warehouse/boxes_search" method="POST" id="search_box_form">
 								<div class="form-group">
 									<label class="sr-only" for="exampleInputtext2">Numer</label>

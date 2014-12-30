@@ -234,10 +234,10 @@
 							</div>
 						</div>
 
-						<h4 class="form-section">Opis pozycji</h4>
+						<h4 class="form-section">Opis pudła</h4>
 						<div class="margiv-top-10" id="description-container">
 								<?php foreach($order->order->orderdetails->find_all() as $ordd):?>
-								<h5 class="form-section">Opis pozycji <?php echo $ordd->box_number;?></h5>
+								<h5 class="form-section">Opis pudła <?php echo $ordd->box_number;?></h5>
 							<div class="form-group">
 								<label class="control-label col-md-3">Numer paczki<span
 									class="required"> * </span>
@@ -245,7 +245,7 @@
 								<div class="col-md-4">
 									<input type="text" class="form-control" name="box_ids[]"
 										value="<?php echo $ordd->box_number ?>" /> <span
-										class="help-block"> Musisz podać numer pozycji</span>
+										class="help-block"> Musisz podać numer pudła</span>
 								</div>
 							</div>
 
@@ -265,32 +265,32 @@
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-md-3">Opis zawartości pozycji<span
+								<label class="control-label col-md-3">Opis zawartości pudła<span
 									class="required"> * </span>
 								</label>
 								<div class="col-md-4">
 									<input type="text" class="form-control"
 										name="box_descriptions[]"
 										value="<?php echo $ordd->box_description ?>" /> <span
-										class="help-block"> Musisz opisać pozycję</span>
+										class="help-block"> Musisz opisać pudła</span>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-md-3">Data do kiedy pozycja ma
+								<label class="control-label col-md-3">Data do kiedy pudło ma
 									być magazynowana<span class="required"> * </span>
 								</label>
 								<div class="col-md-4">
 									<input type="text" class="form-control" name="box_dates[]"
 										value="<?php echo $ordd->box_date ?>" /> <span
 										class="help-block"> Musisz podać jaki okres pudło ma być
-										składowane pozycję</span>
+										składowane</span>
 								</div>
 							</div>
 								<?php endforeach;?>
 							</div>
 
-						<h4 class="form-section">Dodaj opis pozycji</h4>
+						<h4 class="form-section">Dodaj opis pudła</h4>
 
 						<div class="box_description_template">
 
@@ -300,7 +300,7 @@
 								</label>
 								<div class="col-md-4">
 									<input type="text" class="form-control" name="box_id_template" />
-									<span class="help-block"> Musisz podać numer pozycji</span>
+									<span class="help-block"> Musisz podać numer pudła</span>
 								</div>
 							</div>
 
@@ -320,24 +320,24 @@
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-md-3">Opis zawartości pozycji<span
+								<label class="control-label col-md-3">Opis zawartości pudła<span
 									class="required"> * </span>
 								</label>
 								<div class="col-md-4">
 									<input type="text" class="form-control"
 										name="box_description_template" /> <span class="help-block">
-										Musisz opisać pozycję</span>
+										Musisz opisać pudło</span>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-md-3">Okres przez jaki pozycja
-									ma być magazynowana<span class="required"> * </span>
+								<label class="control-label col-md-3">Okres przez jaki pudło
+									ma być magazynowane<span class="required"> * </span>
 								</label>
 								<div class="col-md-4">
 									<input type="text" class="form-control"
 										name="box_date_template" /> <span class="help-block"> Musisz
-										podać jaki okres pudło ma być składowane pozycję</span>
+										podać jaki okres pudło ma być składowane</span>
 								</div>
 							</div>
 						</div>
@@ -347,7 +347,7 @@
 							<a href="#" class="btn default" id="add_box_cancel"> Anuluj </a>
 						</div>
 							
-						<?php elseif ($order->type == 'Zamówienie zniszczenie magazynowanych pozycji'):?>
+						<?php elseif ($order->type == 'Zamówienie zniszczenie magazynowanych pudeł'):?>
 						<div class="form-group">
 							<label class="control-label col-md-3">Magazyn</label>
 							<div class="col-md-4">

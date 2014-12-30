@@ -20,12 +20,12 @@
 			
 				<div id="tab_1-1" class="tab-pane active">
 					<div class="form-group">
-						<label class="control-label">Wybór pozycji
+						<label class="control-label">Wybór pudła
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz pozycję dla opakowania --</option>
+								<option>-- Wybierz pudło dla opakowania --</option>
 								<?php foreach ($boxes as $box):?>
 								<?php 
 											echo "<option value=\"".$box->id."\">".$box->id."</option>";

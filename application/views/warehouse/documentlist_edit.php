@@ -36,12 +36,12 @@
 					<span class="help-block"></span>
 					</div>
 					<div class="form-group">
-						<label class="control-label">Wybór pozycji
+						<label class="control-label">Wybór pudła
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option value="">-- Wybierz pozycję dla listy dokumentów --</option>
+								<option value="">-- Wybierz pudło dla listy dokumentów --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
 							

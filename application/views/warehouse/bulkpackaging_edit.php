@@ -37,12 +37,12 @@
 					<span class="help-block"></span>
 					</div>
 					<div class="form-group">
-						<label class="control-label">Wybór pozycji
+						<label class="control-label">Wybór pudła
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz pozycję dla opakowania --</option>
+								<option>-- Wybierz pudło dla opakowania --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
 										$id=$bulkpackaging->bulkpackaging->box->id;

@@ -4,7 +4,7 @@
 		<div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="glyphicon glyphicon-inbox"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - Pozycje
+					<i class="glyphicon glyphicon-inbox"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - pudła
 							</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a
@@ -83,7 +83,7 @@
 							<th>Numer</th>
 							<th>Nazwa</th>
 							<th>Opis</th>
-							<th>Pozycja</th>
+							<th>Pudło</th>
 							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>
@@ -145,7 +145,7 @@
 							<th>Numer</th>
 							<th>Nazwa</th>
 							<th>Opis</th>
-							<th>Pozycja</th>
+							<th>Pudło</th>
 							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>
@@ -206,7 +206,7 @@
 							<th>Numer</th>
 							<th>Nazwa</th>
 							<th>Opis</th>
-							<th>Pozycja</th>
+							<th>Pudło</th>
 							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>

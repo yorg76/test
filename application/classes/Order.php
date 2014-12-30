@@ -12,7 +12,7 @@ class Order {
 	public $status;
 	public $type;
 	
-	public $types = array('Zamówienie pudeł i kodów kreskowych','Zamówienie odbioru i magazynowania pudeł','Zamówienie zniszczenie magazynowanych pozycji','Zamówienie skanowania, kopii dokumentów','Zamówienie kopii notarialnej dokumentów');
+	public $types = array('Zamówienie pudeł i kodów kreskowych','Zamówienie odbioru i magazynowania pudeł','Zamówienie zniszczenie magazynowanych pudeł','Zamówienie skanowania, kopii dokumentów','Zamówienie kopii notarialnej dokumentów');
 
 	public $statuses = array('Nowe','Przyjęte do realizacji','Oczekuje na wysłanie','W doręczeniu','Dostarczone','W trakcie realizacji','W trakcie odbioru','W dostrczeniu na magazyn','Na stanie magazynu','Odebrane','Zrealizowane');
 	

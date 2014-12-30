@@ -12,7 +12,7 @@
 								</li>
 								<li>
 									<a data-toggle="tab" href="#tab_1_4">
-									Wyszukaj pozycję</a>
+									Wyszukaj pudło</a>
 								</li>
 								<li>
 									<a data-toggle="tab" href="#tab_1_5">

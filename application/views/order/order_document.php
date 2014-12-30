@@ -44,7 +44,7 @@
 								 <strong>Dział: </strong><?php echo $order->order->division->name;?>
 							</li>
 							<li>
-								 <strong>Ilość pozycji: </strong><?php echo $order->order->quantity;?>
+								 <strong>Ilość pudeł: </strong><?php echo $order->order->quantity;?>
 							</li>
 							<li>
 								 <strong>Data odbioru: </strong><?php echo $order->order->pickup_date;?>
@@ -142,7 +142,7 @@
 				<pagebreak />
 					<?php foreach ($order->order->orderdetails->find_all() as $ord):?>
 						<hr>
-							Pozycja: <?php echo $ord->box_number; ?> - <?php echo $ord->box_description; ?>
+							Pudło: <?php echo $ord->box_number; ?> - <?php echo $ord->box_description; ?>
 						<hr>
 						<div style="text-align:center;">
 							<?php echo Code128Barcode::factory($ord->box_number."/".$ord->storagecategory->id."/".$ord->box_date,500)->render();?>

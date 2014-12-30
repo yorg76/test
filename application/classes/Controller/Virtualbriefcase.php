@@ -334,14 +334,14 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase=VirtualBriefcase::instance($virtualbriefcase_id);
 			
 			if ($virtualbriefcase->virtualbriefcase->has('boxes', $box->box)) {
-				Message::error(ucfirst(__('Podana pozycja jest już dodana do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
+				Message::error(ucfirst(__('Podane pudło jest już dodane do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
 			}
 			
 			if($virtualbriefcase->addBox($params)) {
-				Message::success(ucfirst(__('Pozycja została dodana do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
+				Message::success(ucfirst(__('Pudło zostało dodane do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 				var_dump($_POST);
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać pozycji do do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
+				Message::error(ucfirst(__('Nie udało się dodać pudła do do wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 			}
 		}
 	
@@ -365,7 +365,7 @@ public $controller_title = 'Wirtualne teczki';
 				$virtualbriefcase = VirtualBriefcase::instance($virtualbriefcase_id);
 				
 				if($virtualbriefcase->removeBox($params)) {
-					Message::success(ucfirst(__('Pozycja została usunięta z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
+					Message::success(ucfirst(__('Pudło zostało usunięte z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 					}else {
 					Message::error(ucfirst(__('Nie udało się usunąć dokumentu z wirtualnej teczki')),'/virtualbriefcase/virtualbriefcases');
 				}

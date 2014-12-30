@@ -4,7 +4,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="glyphicon glyphicon-inbox"></i>Pozycje
+					<i class="glyphicon glyphicon-inbox"></i>Pudła
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a
@@ -74,10 +74,12 @@
 										<i class="fa fa-user"></i> Edytuj
 									</button>
 									<br />
+									<!--
 									<button class="btn btn-xs red box-delete margin-bottom"
 										id="<?php echo $box->id ;?>">
 										<i class="fa fa-recycle"></i> Usuń
 									</button>
+									-->
 								</div>
 							</td>
 						</tr>

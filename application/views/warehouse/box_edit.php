@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Edycja pozycji</a>
+				<i class="fa fa-cog"></i>Edycja pudła</a>
 				<span class="after">
 				</span>
 			</li>

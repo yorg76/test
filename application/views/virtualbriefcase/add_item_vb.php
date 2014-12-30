@@ -4,7 +4,7 @@
 							<ul class="nav nav-tabs">
 								<li class="active">
 									<a data-toggle="tab" href="#box">
-									Dodaj pozycję</a>
+									Dodaj pudło</a>
 								</li>
 								<li>
 									<a data-toggle="tab" href="#document">
@@ -35,19 +35,19 @@
 											</div>
 											<div class="form-group">
 											
-												<label class="control-label">Wybór pozycji
+												<label class="control-label">Wybór pudła
 													<span class="required" aria-required="true"> * </span>
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="box_id">
-														<option value="">-- Wybierz pozycję --</option>
+														<option value="">-- Wybierz pudło --</option>
 														<?php foreach ($boxes as $box):?>
 														<?php 
 															echo "<option value=\"".$box->id."\">".$box->id."</option>";
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block">Wybierz pozycję do dodania.</span>
+													<span class="help-block">Wybierz pudło do dodania.</span>
 												</div>
 												
 											</div>

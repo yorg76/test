@@ -153,7 +153,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Ilość pozycji<span class="required">	
+									<label class="control-label col-md-3">Ilość pudeł<span class="required">	
 									* </span>
 									</label>
 									<div class="col-md-4">
@@ -182,7 +182,7 @@
 								</div>
 								
 								
-								<h4 class="form-section">Opis pozycji</h4>
+								<h4 class="form-section">Opis pudła</h4>
 								
 								<div class="box_description_template">	
 								
@@ -193,7 +193,7 @@
 										<div class="col-md-4">
 											<input type="text" class="form-control" name="box_id_template"/>
 											<span class="help-block">
-											Musisz podać numer pozycji</span>
+											Musisz podać numer pudła</span>
 										</div>
 									</div>
 									
@@ -212,24 +212,24 @@
 									</div>							
 										
 									<div class="form-group">
-										<label class="control-label col-md-3">Opis zawartości pozycji<span class="required">	
+										<label class="control-label col-md-3">Opis zawartości pudła<span class="required">	
 										* </span>
 										</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control" name="box_description_template"/>
 											<span class="help-block">
-											Musisz opisać pozycję</span>
+											Musisz opisać pudło</span>
 										</div>
 									</div>
 									
 									<div class="form-group">
-										<label class="control-label col-md-3">Okres przez jaki pozycja ma być magazynowana<span class="required">	
+										<label class="control-label col-md-3">Okres przez jaki pudło ma być magazynowane<span class="required">	
 										* </span>
 										</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control" name="box_date_template"/>
 											<span class="help-block">
-											Musisz podać jaki okres pudło ma być składowane pozycję</span>
+											Musisz podać jaki okres pudło ma być składowane</span>
 										</div>
 									</div>
 								
@@ -244,7 +244,7 @@
 							</div>
 							
 							<div class="order_type_2" style="display: none;" >
-								<h3 class="block">Zamówienie zniszczenie magazynowanych pozycji</h3>
+								<h3 class="block">Zamówienie zniszczenie magazynowanych pudeł</h3>
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Magazyn</label>
@@ -610,7 +610,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Ilość pozycji<span class="required">	
+									<label class="control-label col-md-3">Ilość pudeł<span class="required">	
 									* </span>
 									</label>
 									<div class="col-md-4">

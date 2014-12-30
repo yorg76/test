@@ -258,9 +258,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$box=Box::instance();
 			
 			if($box->addBox($params)) {
-				Message::success(ucfirst(__('Pozycja została dodana do magazynu')),'/warehouse/boxes');
+				Message::success(ucfirst(__('Pudło zostało dodana do magazynu')),'/warehouse/boxes');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać pozycji do magazynu')),'/warehouse/boxes');
+				Message::error(ucfirst(__('Nie udało się dodać pudła do magazynu')),'/warehouse/boxes');
 			}		
 		}
 	}
@@ -284,9 +284,9 @@ class Controller_Warehouse extends Controller_Welcome {
 				$box=Box::instance($this->request->param('id'));
 				
 					if($box->updateBox($params)) {
-						Message::success(ucfirst(__('Dane pozycji zostały zaktualizowane')),'/warehouse/boxes');
+						Message::success(ucfirst(__('Dane pudła zostały zaktualizowane')),'/warehouse/boxes');
 					}else{
-					Message::error(ucfirst(__('Nie udało się zaktualizować pozycji')." ".$validate->errors('msg')),'/warehouse/boxes');
+					Message::error(ucfirst(__('Nie udało się zaktualizować informacji o pudle')." ".$validate->errors('msg')),'/warehouse/boxes');
 				}
 			}
 		}else {
@@ -314,9 +314,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$box_id = $box->id;
 					
 			if($box->deleteBox()) {
-				Message::success(ucfirst(__('Pozycja została usunięta.')),'/warehouse/boxes');
+				Message::success(ucfirst(__('Pudło zostało usunięta.')),'/warehouse/boxes');
 			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć pozycji.')),'/warehouse/boxes');
+				Message::error(ucfirst(__('Nie udało się usunąć pudła.')),'/warehouse/boxes');
 			}
 		}
 	}
@@ -357,9 +357,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$document = Document::instance();
 			
 			if($document->addDocument($params)) {
-				Message::success(ucfirst(__('Dokument został dodany do pozycji.')),'/warehouse/documents');
+				Message::success(ucfirst(__('Dokument został dodany do pudła.')),'/warehouse/documents');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać dokumentu do pozycji.')),'/warehouse/documents');
+				Message::error(ucfirst(__('Nie udało się dodać dokumentu do pudła.')),'/warehouse/documents');
 			}
 		}
 	}
@@ -465,9 +465,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$documentlist = DocumentList::instance();
 			
 			if($documentlist->addDocumentList($params)) {
-				Message::success(ucfirst(__('Lista dokumentów została dodana do pozycji.')),'/warehouse/documentlists');
+				Message::success(ucfirst(__('Lista dokumentów została dodana do pudła.')),'/warehouse/documentlists');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouse/documentlists');
+				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pudła.')),'/warehouse/documentlists');
 			}
 		}
 	}
@@ -555,9 +555,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$bulkpackaging = BulkPackaging::instance();
 			
 			if($bulkpackaging->addBulkPackaging($params)) {
-				Message::success(ucfirst(__('Teczka została dodane do pozycji')),'/warehouse/bulkpackagings');
+				Message::success(ucfirst(__('Teczka została dodana do pudła')),'/warehouse/bulkpackagings');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać teczki do pozycji')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Nie udało się dodać teczki do pudła')),'/warehouse/bulkpackagings');
 			}
 		}
 	}
@@ -639,9 +639,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$box=Box::instance();
 		
 			if($box->addBox($params)) {
-				Message::success(ucfirst(__('Pozycja została dodana do magazynu.')),'/warehouse/boxes');
+				Message::success(ucfirst(__('Pudło zostało dodane do magazynu.')),'/warehouse/boxes');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać pozycji do magazynu.')),'/warehouse/boxes');
+				Message::error(ucfirst(__('Nie udało się dodać pudła do magazynu.')),'/warehouse/boxes');
 			}
 		}
 		
@@ -669,9 +669,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$document = Document::instance();
 				
 			if($document->addDocument($params)) {
-				Message::success(ucfirst(__('Dokument został dodany do pozycji.')),'/warehouse/documents');
+				Message::success(ucfirst(__('Dokument został dodany do pudła.')),'/warehouse/documents');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać dokumentu do pozycji.')),'/warehouse/documents');
+				Message::error(ucfirst(__('Nie udało się dodać dokumentu do pudła.')),'/warehouse/documents');
 			}
 		}
 		
@@ -698,9 +698,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$documentlist = DocumentList::instance();
 				
 			if($documentlist->addDocumentList($params)) {
-				Message::success(ucfirst(__('Lista dokumentów została dodany do pozycji.')),'/warehouses/documentlists');
+				Message::success(ucfirst(__('Lista dokumentów została dodana do pudła.')),'/warehouses/documentlists');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pozycji.')),'/warehouses/documentlists');
+				Message::error(ucfirst(__('Nie udało się dodać listy dokumentów do pudła.')),'/warehouses/documentlists');
 			}
 		}
 		
@@ -728,9 +728,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$bulkpackaging = BulkPackaging::instance();
 				
 			if($bulkpackaging->addBulkPackaging($params)) {
-				Message::success(ucfirst(__('Teczka została dodana do pozycji.')),'/warehouse/bulkpackagings');
+				Message::success(ucfirst(__('Teczka została dodana do pudła.')),'/warehouse/bulkpackagings');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać teczki do pozycji.')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Nie udało się dodać teczki do pudła.')),'/warehouse/bulkpackagings');
 			}
 		}
 		

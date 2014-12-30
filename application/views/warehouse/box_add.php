@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Nowa pozycja</a>
+				<i class="fa fa-cog"></i>Nowe pudło</a>
 				<span class="after">
 				</span>
 			</li>
@@ -91,7 +91,7 @@
 						<label class="control-label">Opis
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<textarea class="form-control" name="description" placeholder="Opis pozycji"></textarea>
+						<textarea class="form-control" name="description" placeholder="Opis pudła"></textarea>
 						<span class="help-block"></span>
 					</div>				
 					<div class="form-group">

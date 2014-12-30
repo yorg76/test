@@ -27,7 +27,7 @@
 							<th>Numer</th>
 							<th>Nazwa</th>
 							<th>Opis</th>
-							<th>Pozycja</th>
+							<th>Pudło</th>
 							<th>Magazyn</th>
 							<th>Opcje</th>
 						</tr>

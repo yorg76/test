@@ -26,7 +26,7 @@
 						<tr>
 							<th>Nazwa</th>
 							<th>Opis</th>
-							<th>Liczba pozycji</th>
+							<th>Liczba pudeł</th>
 							<th>Opcje</th>
 						</tr>
 					</thead>

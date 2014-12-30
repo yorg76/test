@@ -4,7 +4,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="icon-briefcase"></i>Wirtualne teczki - Pozycje
+					<i class="icon-briefcase"></i>Wirtualne teczki - pudła
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a

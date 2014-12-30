@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Usuwanie pozycji <?php echo $box->id; ?> z wirtualnej teczki</a>
+				<i class="fa fa-cog"></i>Usuwanie pudła <?php echo $box->id; ?> z wirtualnej teczki</a>
 				<span class="after">
 				</span>
 			</li>
@@ -58,7 +58,7 @@
 					<div class="margiv-top-10">
 						<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
-						Usuń pozycję</a>
+						Usuń pudło</a>
 						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>

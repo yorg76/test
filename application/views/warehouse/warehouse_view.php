@@ -4,7 +4,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="glyphicon glyphicon-inbox"></i>Magazyn <?php echo $warehouse->name ?> - Pozycje
+					<i class="glyphicon glyphicon-inbox"></i>Magazyn <?php echo $warehouse->name ?> - Pudła
 							</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a

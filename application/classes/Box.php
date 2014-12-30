@@ -65,11 +65,11 @@ class Box{
                 Database::instance()->begin();
                 if($this->box->save()) {
                     $this->id=$this->box->id;
-                    $log->add(Log::DEBUG,"Success: Dodano pozycję z parametrami:".serialize($params)."\n");
+                    $log->add(Log::DEBUG,"Success: Dodano pudło z parametrami:".serialize($params)."\n");
                     Database::instance()->commit();
                     return true;
                 }else {
-                    $log->add(Log::ERROR,'Exception:Wystąpił błąd podczas dodawania pozycji'."\n");
+                    $log->add(Log::ERROR,'Exception: Wystąpił błąd podczas dodawania pudło'."\n");
                 }
                 return false;
             }catch (Exception $e) {
