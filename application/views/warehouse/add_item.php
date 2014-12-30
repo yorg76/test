@@ -16,7 +16,7 @@
 								</li>
 								<li>
 									<a data-toggle="tab" href="#tab_1_5">
-									Dodaj opakowanie zbiorcze</a>
+									Dodaj teczkę</a>
 								</li>
 								<li>
 									<a data-toggle="tab" href="#tab_1_6">

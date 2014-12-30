@@ -129,7 +129,7 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="glyphicon glyphicon-inbox"></i>Pozycja <?php echo $box->id ?> - Opakowania zbiorcze
+								<i class="glyphicon glyphicon-inbox"></i>Pozycja <?php echo $box->id ?> - Teczki
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">

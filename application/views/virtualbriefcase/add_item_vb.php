@@ -16,7 +16,7 @@
 								</li>
 								<li>
 									<a data-toggle="tab" href="#bulkpackaging">
-									Dodaj opakowanie zbiorcze</a>
+									Dodaj teczkę</a>
 								</li>
 								<li>
 									<a data-toggle="tab" href="#virtualbriefcase">
@@ -209,7 +209,7 @@
 												<span>Popraw błędy w formularzu</span>
 											</div>
 											<div class="form-group">
-												<label class="control-label">Wybór opakowania zbiorczego
+												<label class="control-label">Wybór teczki
 													<span class="required" aria-required="true"> * </span>
 												</label>
 												<div class="input-icon right">
@@ -221,7 +221,7 @@
 														?>
 														<?php endforeach;?>
 													</select>
-													<span class="help-block">Wybierz opakowanie zbiorcze do dodania.</span>
+													<span class="help-block">Wybierz teczki do dodania.</span>
 												</div>
 											</div>
 											<div class="form-group">

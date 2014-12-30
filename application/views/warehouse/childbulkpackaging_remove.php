@@ -2,7 +2,7 @@
 	<div class="col-md-3">
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active"><a data-toggle="tab" href="#tab_1-1"> <i
-					class="fa fa-cog"></i>Usuwanie opakowania zbiorczego <?php echo $childbulkpackaging->name; ?></a>
+					class="fa fa-cog"></i>Usuwanie teczki <?php echo $childbulkpackaging->name; ?></a>
 				<span class="after"> </span></li>
 
 		</ul>
@@ -35,7 +35,7 @@
 				</div>
 				<div id="tab_1-1" class="tab-pane active">
 					<div class="form-group">
-						<label class="control-label">Wybór opakowania zbiorczego <span class="required"
+						<label class="control-label">Wybór teczki <span class="required"
 						aria-required="true"> * </span></label>
 						<div class="input-icon right">
 							<select class="form-control" name="bulkpackaging1_id">
@@ -46,7 +46,7 @@
 									?>
 								<?php endforeach;?>
 							</select> 
-							<span class="help-block">Wybierz opakowanie zbiorcze, z
+							<span class="help-block">Wybierz teczkę, z
 								którego chcesz usunąć wybrany element.</span>
 						</div>
 					</div>

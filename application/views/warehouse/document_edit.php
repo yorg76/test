@@ -68,7 +68,7 @@
 							<label class="radio-inline" for="list">
 							<input type="radio" name="radio" id="list" value="list" checked> Listy dokumentów </label>
 							<label class="radio-inline" for="bulk">
-							<input type="radio" name="radio" id="bulk" value="bulk"> Opakowania zbiorczego </label>
+							<input type="radio" name="radio" id="bulk" value="bulk"> Teczki </label>
 						</div>
 						<span class="help-block">Możesz dodać dokument do istniejącej listy lub opakowania</span>
 					</div>
@@ -92,7 +92,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label">Wybór opakowania zbiorczego
+						<label class="control-label">Wybór teczki
 							</label>
 						<div class="input-icon right">
 							<select class="form-control" name="bulkpackaging_id">
@@ -107,7 +107,7 @@
 								?>
 								<?php endforeach;?>
 							</select>
-							<span class="help-block">Wybierz opakowanie zbiorcze, do którgo chcesz dodać dokument</span>
+							<span class="help-block">Wybierz teczkę, do której chcesz dodać dokument</span>
 						</div>
 					</div>
 					

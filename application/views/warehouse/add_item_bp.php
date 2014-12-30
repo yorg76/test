@@ -12,13 +12,13 @@
 								</li>
 								<li>
 									<a data-toggle="tab" href="#tab_1_5">
-									Dodaj opakowanie zbiorcze</a>
+									Dodaj teczkę</a>
 								</li>
 							</ul>
 							
 						<div class="tab-content">
 							<div id="tab_1_3" class="tab-pane active">
-							<h4>Opakowanie zbiorcze: <?php echo $bulkpackaging->name ?></h4>
+							<h4>Teczka: <?php echo $bulkpackaging->name ?></h4>
 								<div class="row">
 									<div class="col-md-8">
 										<div class="booking-search">
@@ -44,7 +44,7 @@
 																	<?php endforeach;?>
 																</select>
 															</div>
-															<span class="help-block">Wybierz dodawany dokument do opakowania zbiorczego.</span>
+															<span class="help-block">Wybierz dodawany dokument do teczki.</span>
 														</div>
 														
 														<br/>
@@ -65,7 +65,7 @@
 						
 							<!--end tab-pane-->
 							<div id="tab_1_4" class="tab-pane">
-							<h4>Opakowanie zbiorcze: <?php echo $bulkpackaging->name ?></h4>
+							<h4>Teczka: <?php echo $bulkpackaging->name ?></h4>
 								<div class="row">	
 									<div class="col-md-8">
 										<div class="booking-search">
@@ -91,7 +91,7 @@
 																	<?php endforeach;?>
 																</select>
 															</div>
-															<span class="help-block">Wybierz dodawaną listę dokumentów do opakowania zbiorczego.</span>
+															<span class="help-block">Wybierz dodawaną listę dokumentów do teczki.</span>
 														</div>	
 														<br/>
 														<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging_id" />
@@ -111,7 +111,7 @@
 							
 							<!--end tab-pane-->
 							<div id="tab_1_5" class="tab-pane">
-							<h4>Opakowanie zbiorcze: <?php echo $bulkpackaging->name ?></h4>
+							<h4>Teczka: <?php echo $bulkpackaging->name ?></h4>
 								<div class="row">
 									<div class="col-md-8">
 										<div class="booking-search">
@@ -124,7 +124,7 @@
 												
 													<div id="tab_1-1" class="tab-pane active">
 														<div class="form-group">
-															<label class="control-label">Wybór opakowania zbiorczego
+															<label class="control-label">Wybór teczki
 																<span class="required" aria-required="true"> * </span>
 															</label>
 															<div class="input-icon right">
@@ -137,7 +137,7 @@
 																	<?php endforeach;?>
 																</select>
 															</div>
-															<span class="help-block">Wybierz opakowanie zbiorcze do dodania.</span>
+															<span class="help-block">Wybierz teczki do dodania.</span>
 														</div>	
 														<br/>
 														<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging1_id" />

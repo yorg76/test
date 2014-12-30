@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Usuwanie opakowania zbiorczego <?php echo $bulkpackaging->name; ?> z wirtualnej teczki</a>
+				<i class="fa fa-cog"></i>Usuwanie teczki <?php echo $bulkpackaging->name; ?> z wirtualnej teczki</a>
 				<span class="after">
 				</span>
 			</li>

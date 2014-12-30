@@ -555,9 +555,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$bulkpackaging = BulkPackaging::instance();
 			
 			if($bulkpackaging->addBulkPackaging($params)) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do Pozycji')),'/warehouse/bulkpackagings');
+				Message::success(ucfirst(__('Teczka została dodane do pozycji')),'/warehouse/bulkpackagings');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do Pozycji')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Nie udało się dodać teczki do pozycji')),'/warehouse/bulkpackagings');
 			}
 		}
 	}
@@ -601,9 +601,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			
 				
 				if($bulkpackaging->editBulkPackaging($params)) {
-					Message::success(ucfirst(__('Opakowanie zbiorcze zostało zaktualizowane.')),'/warehouse/bulkpackagings');
+					Message::success(ucfirst(__('Teczka została zaktualizowane.')),'/warehouse/bulkpackagings');
 				}else {
-					Message::error(ucfirst(__('Nie udało się zaktualizować opakowania zbiorczego.')),'/warehouse/bulkpackagings');
+					Message::error(ucfirst(__('Nie udało się zaktualizować teczki.')),'/warehouse/bulkpackagings');
 				}
 			}
 		}
@@ -616,9 +616,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$name = $bulkpackaging->name;
 		
 			if($bulkpackaging->deleteBulkPackaging()) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte.')),'/warehouse/bulkpackagings/'.$name);
+				Message::success(ucfirst(__('Teczka została usunięte.')),'/warehouse/bulkpackagings/'.$name);
 			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć opakowania zbiorczego.')),'/warehouse/bulkpackagings/'.$name);
+				Message::error(ucfirst(__('Nie udało się usunąć teczki.')),'/warehouse/bulkpackagings/'.$name);
 			}
 		}
 	}
@@ -728,9 +728,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$bulkpackaging = BulkPackaging::instance();
 				
 			if($bulkpackaging->addBulkPackaging($params)) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do pozycji.')),'/warehouse/bulkpackagings');
+				Message::success(ucfirst(__('Teczka została dodana do pozycji.')),'/warehouse/bulkpackagings');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do pozycji.')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Nie udało się dodać teczki do pozycji.')),'/warehouse/bulkpackagings');
 			}
 		}
 		
@@ -947,16 +947,16 @@ class Controller_Warehouse extends Controller_Welcome {
 			$bulkpackaging = BulkPackaging::instance($bulkpackaging1_id);
 				
 			if ($bulkpackaging->bulkpackaging->has('bulkpackagings', $childbulkpackaging->bulkpackaging)) {
-				Message::error(ucfirst(__('Podane opakowanie zbiorcze jest już dodane do docelowego opakowania.')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Podana teczka jest już dodana do docelowego opakowania.')),'/warehouse/bulkpackagings');
 			}elseif ($childbulkpackaging->bulkpackaging->has('bulkpackagings', $bulkpackaging->bulkpackaging)) {
-				Message::error(ucfirst(__('Podane opakowanie zbiorcze zawiera już podane docelowe opakowanie.')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Podana teczka zawiera już podane docelowe opakowanie.')),'/warehouse/bulkpackagings');
 			}
 	
 			if($bulkpackaging->addChildBulkPackaging($params)) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do opakowania zbiorczego.')),'/warehouse/bulkpackagings');
+				Message::success(ucfirst(__('Teczka została dodana do teczki nadrzędnej.')),'/warehouse/bulkpackagings');
 				var_dump($_POST);
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do opakowania zbiorczego.')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Nie udało się dodać teczki do teczki nadrzędnej.')),'/warehouse/bulkpackagings');
 			}
 		}
 	
@@ -981,9 +981,9 @@ class Controller_Warehouse extends Controller_Welcome {
 				$childbulkpackaging = BulkPackaging::instance($bulkpackaging2_id);
 	
 				if($bulkpackaging->removeChildBulkPackaging($params)) {
-					Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte. ')),'/warehouse/bulkpackagings');
+					Message::success(ucfirst(__('Teczka została usunięta. ')),'/warehouse/bulkpackagings');
 				}else {
-					Message::error(ucfirst(__('Nie udało się usunąć opakowania zbiorczego.')),'/warehouse/bulkpackagings');
+					Message::error(ucfirst(__('Nie udało się usunąć teczki.')),'/warehouse/bulkpackagings');
 				}
 			}
 		}
@@ -1000,9 +1000,9 @@ class Controller_Warehouse extends Controller_Welcome {
 				$bulkpackaging = BulkPackaging::instance($bulkpackaging_id);
 	
 				if($bulkpackaging->addDocument($params)) {
-					Message::success(ucfirst(__('Dokument został dodany do opakowania zbiorczego.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
+					Message::success(ucfirst(__('Dokument został dodany do teczki.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
 				}else {
-					Message::error(ucfirst(__('Nie udało się dodać dokumentu do opakowania zbiorczego.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
+					Message::error(ucfirst(__('Nie udało się dodać dokumentu do teczki.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
 						
 				}
 			}
@@ -1023,9 +1023,9 @@ class Controller_Warehouse extends Controller_Welcome {
 				$bulkpackaging = BulkPackaging::instance($bulkpackaging_id);
 	
 				if($bulkpackaging->addDocumentList($params)) {
-					Message::success(ucfirst(__('Lista dokumentów została dodana do opakowania zbiorczego.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
+					Message::success(ucfirst(__('Lista dokumentów została dodana do teczki.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
 				}else {
-					Message::error(ucfirst(__('Nie udało się usunąć dodać listy dokumentów do opakowania zbiorczego.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
+					Message::error(ucfirst(__('Nie udało się usunąć dodać listy dokumentów z teczki.')),'/warehouse/bulkpackaging_view/'.$bulkpackaging_id);
 				}
 			}
 		

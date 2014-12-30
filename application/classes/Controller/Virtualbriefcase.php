@@ -483,13 +483,13 @@ public $controller_title = 'Wirtualne teczki';
 			$virtualbriefcase = VirtualBriefcase::instance($virtualbriefcase_id);
 			
 			if ($virtualbriefcase->virtualbriefcase->has('bulkpackagings', $bulkpackaging->bulkpackaging)) {
-				Message::error(ucfirst(__('Podane opakowanie zbiorcze jest już dodane do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
+				Message::error(ucfirst(__('Podana teczka jest już dodana do docelowej teczki.')),'/virtualbriefcase/virtualbriefcases');
 			}
 			
 			if($virtualbriefcase->addBulkPackaging($params)) {
-				Message::success(ucfirst(__('Opakowanie zbiorcze zostało dodane do wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
+				Message::success(ucfirst(__('Teczka została dodana do wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
 			}else {
-				Message::error(ucfirst(__('Nie udało się dodać opakowania zbiorczego do wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
+				Message::error(ucfirst(__('Nie udało się dodać teczki do wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
 			}
 		}
 	}
@@ -513,9 +513,9 @@ public $controller_title = 'Wirtualne teczki';
 				$bulkpackaging = BulkPackaging::instance($bulkpackaging_id);
 			
 				if($virtualbriefcase->removeBulkPackaging($params)) {
-					Message::success(ucfirst(__('Opakowanie zbiorcze zostało usunięte z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
+					Message::success(ucfirst(__('Teczka została usunięta z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
 				}else {
-					Message::error(ucfirst(__('Nie udało się usunąć Opakowania zbiorczego z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
+					Message::error(ucfirst(__('Nie udało się usunąć teczki z wirtualnej teczki')),'/virtualbriefcase/bulkpackagings');
 				}
 			}
 		}

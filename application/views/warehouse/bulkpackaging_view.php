@@ -4,7 +4,7 @@
 		<div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="glyphicon glyphicon-th"></i>Opakowanie zbiorcze: <?php echo $bulkpackaging->name ?> - Dokumenty
+					<i class="glyphicon glyphicon-th"></i>Teczka: <?php echo $bulkpackaging->name ?> - Dokumenty
 							</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a
@@ -69,7 +69,7 @@
 		<div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="glyphicon glyphicon-th"></i>Opakowanie zbiorcze: <?php echo $bulkpackaging->name ?> - Listy Dokumentów
+					<i class="glyphicon glyphicon-th"></i>Teczka: <?php echo $bulkpackaging->name ?> - Listy Dokumentów
 							</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a
@@ -125,7 +125,7 @@
 		<div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="glyphicon glyphicon-th"></i>Opakowanie zbiorcze: <?php echo $bulkpackaging->name ?> - Opakowania zbiorcze
+					<i class="glyphicon glyphicon-th"></i>Teczka: <?php echo $bulkpackaging->name ?> - Teczka
 							</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a

@@ -4,7 +4,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="glyphicon glyphicon-th"></i>Opakowania zbiorcze
+					<i class="glyphicon glyphicon-th"></i>Teczki
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a

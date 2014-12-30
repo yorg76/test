@@ -190,7 +190,7 @@
 		<div class="portlet box grey">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="glyphicon glyphicon-th"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - Opakowania zbiorcze
+					<i class="glyphicon glyphicon-th"></i>Wirtualna teczka <?php echo $virtualbriefcase->name ?> - Teczki
 							</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a

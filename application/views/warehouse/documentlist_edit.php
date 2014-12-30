@@ -55,7 +55,7 @@
 						</div>
 					</div>	
 					<div class="form-group">
-						<label class="control-label">Wybór opakowania zbiorczego
+						<label class="control-label">Wybór teczki
 							</label>
 						<div class="input-icon right">
 							<select class="form-control" name="bulkpackaging_id">
@@ -70,7 +70,7 @@
 								?>
 								<?php endforeach;?>
 							</select>
-							<span class="help-block">Wybierz opakowanie zbiorcze, do którgo chcesz dodać listę dokumentów</span>
+							<span class="help-block">Wybierz teczki, do którgo chcesz dodać listę dokumentów</span>
 						</div>
 					</div>
 					<br/>

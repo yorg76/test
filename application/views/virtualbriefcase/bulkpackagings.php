@@ -4,8 +4,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="icon-briefcase"></i>Wirtualne teczki - Opakowania
-					zbiorcze
+					<i class="icon-briefcase"></i>Wirtualne teczki - Teczki
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a
@@ -26,7 +25,7 @@
 					<thead>
 						<tr>
 							<th>Numer</th>
-							<th>Opakowanie zbiorcze</th>
+							<th>Teczki</th>
 							<th>Opis</th>
 							<th>Pozycja</th>
 							<th>Magazyn</th>
