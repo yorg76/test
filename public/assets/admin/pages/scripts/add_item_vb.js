@@ -26,7 +26,7 @@ var Add_item_vb = function () {
 
 	            messages: {
 	            	box_id: {
-	                    required: "Wybierz dodawaną pozycję do wirtualnej teczki."
+	                    required: "Wybierz dodawaną pudło dla wirtualnej teczki."
 	                },
 					virtualbriefcase_id: {
 	                    required: "Wybierz docelową wirtualną teczkę."

@@ -41,19 +41,19 @@ var Box_add = function () {
 
 	            messages: {
 	            	storage_category: {
-	                    required: "Wybierz kategorię magazynowania pozycji"
+	                    required: "Wybierz kategorię magazynowania pudła
 	                },
 	                description: {
-	                    required: "Podaj krótki opis magazynowanej pozycji"
+	                    required: "Podaj krótki opis magazynowanego pudła
 	                },
 					date_from: {
-	                    required: "Podaj datę początkową magazynowania pozycji"
+	                    required: "Podaj datę początkową magazynowania pudła
 	                },
 					date_to: {
-	                    required: "Podaj datę końcową magazynowania pozycji"
+	                    required: "Podaj datę końcową magazynowania pudła
 	                },
 					date_reception: {
-	                    required: "Podaj datę odbioru magaznowanej pozycji"
+	                    required: "Podaj datę odbioru magaznowanego pudła
 	                },
 					lock: {
 	                    required: "Wybierz status"

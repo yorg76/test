@@ -34,7 +34,7 @@ var Document_add = function () {
 	                    required: "Podaj krótki opis dokumentu"
 	                },
 					box_id: {
-	                    required: "Wybierz pozycję dla dokumentu"
+	                    required: "Wybierz pudło dla dokumentu"
 	                },
 	            },
 

@@ -42,13 +42,13 @@ var Boxes_search = function () {
 	                    required: "Wybierz magazyn"
 	                },
 					date_from: {
-	                    required: "Podaj datę początkową magazynowania pozycji"
+	                    required: "Podaj datę początkową magazynowania pudła"
 	                },
 					date_to: {
-	                    required: "Podaj datę końcową magazynowania pozycji"
+	                    required: "Podaj datę końcową magazynowania pudła"
 	                },
 					date_reception: {
-	                    required: "Podaj datę odbioru magaznowanej pozycji"
+	                    required: "Podaj datę odbioru magaznowango pudła"
 	                },
 					
 	            },

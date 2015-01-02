@@ -286,7 +286,7 @@ var OrderWizard = function () {
             	
             	$('input[name=box_date]', box).attr('name','box_date['+number+'][date]');
             	
-            	$('#description-container').append('<h4 class="form-section">Opis pozycji numer '+number+'</h4>');
+            	$('#description-container').append('<h4 class="form-section">Opis pudła numer '+number+'</h4>');
             	$('#description-container').append(box.html());
             	
 

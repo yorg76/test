@@ -227,8 +227,8 @@ var TableBoxes = function () {
 
             "language": {
                 "lengthMenu": " _MENU_ wierszy",
-                "infoEmpty": "<span class=\"label label-info\">Brak pozycji.  </span> ",
-                "emptyTable": "<span class=\"label label-info\">Brak pozycji. </span>"
+                "infoEmpty": "<span class=\"label label-info\">Brak pudeł.  </span> ",
+                "emptyTable": "<span class=\"label label-info\">Brak pudeł. </span>"
             },
             "columnDefs": [{ // set default column settings
                 'orderable': true,
