@@ -28,10 +28,10 @@ var Add_item_bp = function () {
 
 	            messages: {
 	            	document_id: {
-	                    required: "Wybierz dodawany dokument do opakowania zbiorczego."
+	                    required: "Wybierz dodawany dokument do teczki."
 	                },
 					bulkpackaging_id: {
-	                    required: "Nie wybrano numeru docelowego opakowania zbiorczego."
+	                    required: "Nie wybrano numeru docelowego teczki."
 	                },
 				},
 
@@ -84,10 +84,10 @@ var Add_item_bp = function () {
 
 	            messages: {
 	            	documentlist_id: {
-	                    required: "Wybierz dodawaną listę dokumentów do opakowania zbiorczego."
+	                    required: "Wybierz dodawaną listę dokumentów do teczki."
 	                },
 					bulkpackaging_id: {
-	                    required: "Nie wybrano numeru docelowego opakowania zbiorczego."
+	                    required: "Nie wybrano numeru docelowego teczki."
 	                },
 				},
 
@@ -140,10 +140,10 @@ var Add_item_bp = function () {
 
 	            messages: {
 	            	bulkpackaging1_id: {
-	                    required: "Nie wybrano numeru docelowego opakowania zbiorczego."
+	                    required: "Nie wybrano numeru docelowego teczki."
 	                },
 					bulkpackaging2_id: {
-	                    required: "Wybierz opakowanie zbiorcze do dodania."
+	                    required: "Wybierz teczkę do dodania."
 	                },
 				},
 

@@ -70,7 +70,7 @@
 							<label class="radio-inline" for="bulk">
 							<input type="radio" name="radio" id="bulk" value="bulk"> Teczki </label>
 						</div>
-						<span class="help-block">Możesz dodać dokument do istniejącej listy lub opakowania</span>
+						<span class="help-block">Możesz dodać dokument do istniejącej listy lub teczki</span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Wybór listy dokumentów

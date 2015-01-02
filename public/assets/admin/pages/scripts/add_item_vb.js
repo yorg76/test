@@ -194,7 +194,7 @@ var Add_item_vb = function () {
 
 	            messages: {
 	            	bulkpackaging_id: {
-	                    required: "Wybierz dodawane opakowanie zbiorcze do wirtualnej teczki."
+	                    required: "Wybierz dodawaną teczkę do wirtualnej teczki."
 	                },
 					virtualbriefcase_id: {
 	                    required: "Wybierz docelową wirtualną teczkę."

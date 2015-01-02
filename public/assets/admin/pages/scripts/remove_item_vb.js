@@ -273,7 +273,7 @@ var Remove_item_vb = function () {
 
 	            messages: {
 	            	bulkpackaging1_id: {
-	                    required: "Wybierz opakowanie zbiorcze, z którego  chcesz usunąć wybrany element."
+	                    required: "Wybierz teczkę, z której  chcesz usunąć wybrany element."
 	                },
 				},
 

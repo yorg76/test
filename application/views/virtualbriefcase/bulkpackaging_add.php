@@ -25,7 +25,7 @@
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz teczkę dla opakowania --</option><!-- TODO MULTISEELECT -->
+								<option>-- Wybierz wirtualną teczkę dla teczki --</option><!-- TODO MULTISEELECT -->
 								<?php foreach ($virtualbriefcases as $virtualbriefcase):?>
 								<?php 
 											echo "<option value=\"".$virtualbriefcase->id."\">".$virtualbriefcase->id."</option>";

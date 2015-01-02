@@ -129,7 +129,7 @@
 															</label>
 															<div class="input-icon right">
 																<select class="form-control" name="bulkpackaging2_id">
-																	<option value="">-- Wybierz opakowanie --</option>
+																	<option value="">-- Wybierz teczkę --</option>
 																	<?php foreach ($childbulkpackagings as $childbulkpackaging):?>
 																	<?php 
 																				echo "<option value=\"".$childbulkpackaging->id."\">".$childbulkpackaging->name."</option>";
@@ -143,7 +143,7 @@
 														<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging1_id" />
 														<div class="margiv-top-10">
 															<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn green" id="submit">
-															Dodaj opakowanie</a>
+															Dodaj teczkę</a>
 															<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn default" id="cancel">
 															Anuluj</a>
 														</div>

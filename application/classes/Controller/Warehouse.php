@@ -947,9 +947,9 @@ class Controller_Warehouse extends Controller_Welcome {
 			$bulkpackaging = BulkPackaging::instance($bulkpackaging1_id);
 				
 			if ($bulkpackaging->bulkpackaging->has('bulkpackagings', $childbulkpackaging->bulkpackaging)) {
-				Message::error(ucfirst(__('Podana teczka jest już dodana do docelowego opakowania.')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Podana teczka jest już dodana do nadrzędnej teczki.')),'/warehouse/bulkpackagings');
 			}elseif ($childbulkpackaging->bulkpackaging->has('bulkpackagings', $bulkpackaging->bulkpackaging)) {
-				Message::error(ucfirst(__('Podana teczka zawiera już podane docelowe opakowanie.')),'/warehouse/bulkpackagings');
+				Message::error(ucfirst(__('Podana teczka zawiera już podane docelowej teczki.')),'/warehouse/bulkpackagings');
 			}
 	
 			if($bulkpackaging->addChildBulkPackaging($params)) {

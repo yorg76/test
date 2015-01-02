@@ -83,7 +83,7 @@ var UIAlertDialogApi = function () {
     		 e.preventDefault();
     		 var id = $(this).attr('id');
     		 
-             bootbox.confirm("Czy napewno chcesz usunąć opakowanie zbiorcze, ta operacja jest nieodwracalna !", function(result) {
+             bootbox.confirm("Czy napewno chcesz usunąć teczkę, ta operacja jest nieodwracalna !", function(result) {
             	 if(result==true) {
             		 javascript:window.location='/warehouse/bulkpackaging_delete/'+id;
             	 }

@@ -55,7 +55,7 @@
 					<div class="margiv-top-10">
 						<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging_id" />
 						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn green" id="submit">
-						Usuń opakowanie</a>
+						Usuń teczkę</a>
 						<a href="/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id; ?>" class="btn default" id="cancel">
 						Anuluj</a>
 					</div>

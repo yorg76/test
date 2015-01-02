@@ -39,7 +39,7 @@
 						aria-required="true"> * </span></label>
 						<div class="input-icon right">
 							<select class="form-control" name="bulkpackaging1_id">
-								<option value="">-- Wybierz opakowanie --</option>
+								<option value="">-- Wybierz teczkę --</option>
 								<?php foreach ($bulkpackagings as $bulkpackaging):?>
 								<?php
 									echo "<option value=\"" . $bulkpackaging->id . "\">" . $bulkpackaging->name . "</option>";
@@ -55,7 +55,7 @@
 					<br />
 					<div class="margiv-top-10">
 						<input type="hidden" value="<?php echo $childbulkpackaging->id ?>" name="bulkpackaging2_id" /> 
-						<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn green" id="submit"> Usuń opakowanie</a>
+						<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn green" id="submit"> Usuń teczkę</a>
 						<a href="/warehouse/bulkpackaging_view/<?php echo $bulkpackaging->id; ?>" class="btn default" id="cancel"> Anuluj</a>
 					</div>
 				</div>

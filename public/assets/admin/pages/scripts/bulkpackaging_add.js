@@ -25,10 +25,10 @@ var BulkPackaging_add = function () {
 
 	            messages: {
 	            	name: {
-	                    required: "Podaj nazwę opakowania zbiorczego"
+	                    required: "Podaj nazwę teczki"
 	                },
 					description: {
-	                    required: "Podaj krótki opis opakowania zbiorczego"
+	                    required: "Podaj krótki opis teczki"
 	                },
 	            },
 

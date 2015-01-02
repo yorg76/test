@@ -214,7 +214,7 @@
 												</label>
 												<div class="input-icon right">
 													<select class="form-control input-large" name="bulkpackaging_id">
-														<option value="">-- Wybierz opakowanie --</option>
+														<option value="">-- Wybierz teczkę --</option>
 														<?php foreach ($bulkpackagings as $bulkpackaging):?>
 														<?php 
 															echo "<option value=\"".$bulkpackaging->id."\">".$bulkpackaging->name."</option>";

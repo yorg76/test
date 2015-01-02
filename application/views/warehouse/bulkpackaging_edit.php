@@ -42,7 +42,7 @@
 						</label>
 						<div class="input-icon right">
 							<select class="form-control" name="box_id">
-								<option>-- Wybierz pudło dla opakowania --</option>
+								<option>-- Wybierz pudło dla teczki --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
 										$id=$bulkpackaging->bulkpackaging->box->id;

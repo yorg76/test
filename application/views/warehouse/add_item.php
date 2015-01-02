@@ -286,7 +286,7 @@
 															</label>
 															<div class="input-icon right">
 																<select class="form-control" name="box_id">
-																	<option value="">-- Wybierz pudło dla opakowania --</option>
+																	<option value="">-- Wybierz pudło dla teczki --</option>
 																	<?php foreach ($boxes as $box):?>
 																	<?php 
 																				echo "<option value=\"".$box->id."\">".$box->id."</option>";
