@@ -46,11 +46,18 @@
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
+							
 							<select class="form-control" name="box_id">
 								<option>-- Wybierz pudło dla dokumentu --</option>
 								<?php foreach ($boxes as $box):?>
 									<?php 
-										echo "<option value=\"".$box->id."\">".$box->id."</option>";
+										if($box->id == $box_id) {
+											$checked = "selected=\"true\""; 
+										}else {
+											$checked = "";
+										}
+										
+										echo "<option value=\"".$box->id."\" ".$checked.">".$box->id."</option>";
 									?>
 								<?php endforeach;?>
 							</select>
@@ -59,7 +66,7 @@
 					</div>
 					
 					<br/>
-					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
+
 					<div class="margiv-top-10">
 						<a href="/warehouse/documents" class="btn green" id="submit">
 						Zapisz zmiany</a>

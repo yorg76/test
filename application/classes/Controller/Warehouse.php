@@ -350,6 +350,10 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->content->bind('documentlists', $documentlists);
 		$this->content->bind('bulkpackagings', $bulkpackagings);
 		
+		if($this->request->param('id') > 0) {
+			$box_id =$this->request->param('id'); 
+			$this->content->bind('box_id', $box_id);
+		}
 		
 		if($this->request->method()===HTTP_Request::POST) {
 				
@@ -459,6 +463,12 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->content->bind('user', $user);
 		$this->content->bind('boxes', $boxes);
 		
+		
+		if($this->request->param('id') > 0) {
+			$box_id =$this->request->param('id');
+			$this->content->bind('box_id', $box_id);
+		}
+		
 		if($this->request->method()===HTTP_Request::POST) {
 		
 			$params = $_POST;
@@ -548,7 +558,12 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->content->bind('warehouses', $warehouses);
 		$this->content->bind('user', $user);
 		$this->content->bind('boxes', $boxes);
-		
+
+		if($this->request->param('id') > 0) {
+			$box_id =$this->request->param('id');
+			$this->content->bind('box_id', $box_id);
+		}
+				
 		if($this->request->method()===HTTP_Request::POST) {
 		
 			$params = $_POST;

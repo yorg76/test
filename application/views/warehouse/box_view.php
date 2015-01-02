@@ -16,7 +16,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/warehouse/document_add'">
+									<button class="btn green" onClick="javascript:window.location='/warehouse/document_add/<?php echo $box->id; ?>'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
@@ -79,7 +79,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/warehouse/documentlist_add'">
+									<button class="btn green" onClick="javascript:window.location='/warehouse/documentlist_add/<?php echo $box->id; ?>'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
@@ -141,7 +141,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/warehouse/bulkpackaging_add'">
+									<button class="btn green" onClick="javascript:window.location='/warehouse/bulkpackaging_add/<?php echo $box->id; ?>'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>

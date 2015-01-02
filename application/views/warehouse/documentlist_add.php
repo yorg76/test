@@ -28,7 +28,12 @@
 								<option>-- Wybierz pudło dla listy dokumentów --</option>
 								<?php foreach ($boxes as $box):?>
 								<?php 
-											echo "<option value=\"".$box->id."\">".$box->id."</option>";
+									if($box->id == $box_id) {
+										$checked = "selected=\"true\"";
+									}else {
+										$checked = "";
+									}
+											echo "<option value=\"".$box->id."\"".$checked." >".$box->id."</option>";
 								?>
 								<?php endforeach;?>
 							</select>
