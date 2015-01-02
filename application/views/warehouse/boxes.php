@@ -30,7 +30,7 @@
 							<th>Data początku magazynowania</th>
 							<th>Data końca magazynowania</th>
 							<th>Status</th>
-							<th>Plomby</th>
+							<th>Plomba</th>
 							<th>Kod QR</th>
 							<th>Opcje</th>
 						</tr>
@@ -54,7 +54,7 @@
 									 <?php echo $box->date_to ;?>
 							</td>
 							<td>
-									 <?php echo $box->lock;?>
+									 <?php echo $box->status;?>
 							</td>
 							<td>
 									 <?php echo $box->seal;?>
