@@ -89,7 +89,6 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label">Opis
-							<span class="required" aria-required="true"> * </span>
 						</label>
 						<textarea class="form-control" name="description" placeholder="Opis pudła"></textarea>
 						<span class="help-block"></span>

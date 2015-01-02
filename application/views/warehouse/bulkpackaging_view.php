@@ -17,7 +17,7 @@
 					<input type="hidden" value="<?php echo $bulkpackaging->id ?>" name="bulkpackaging_id" />
 						<button class="btn green"
 							onClick="javascript:window.location='/warehouse/add_item_bp/<?php echo $bulkpackaging->id ?>'">
-							Dodaj do opakowania <i class="fa fa-plus"></i>
+							Dodaj do teczki <i class="fa fa-plus"></i>
 						</button>
 					</div>
 				</div>
@@ -55,7 +55,7 @@
 								<div class="margin-bottom-5">
 									<button class="btn btn-xs red division-edit margin-bottom"
 										onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';">
-										<i class="fa fa-recycle"></i> Edytuj/Usuń z opakowania
+										<i class="fa fa-recycle"></i> Edytuj/Usuń z teczki
 									</button>
 									
 								</div>
@@ -111,7 +111,7 @@
 								<div class="margin-bottom-5">
 									<button class="btn btn-xs red division-edit margin-bottom"
 										onClick="javascript:window.location='/warehouse/documentlist_edit/<?php echo $documentlist->id ;?>';">
-										<i class="fa fa-recycle"></i> Edytuj/Usuń z opakowania
+										<i class="fa fa-recycle"></i> Edytuj/Usuń z teczki
 									</button>
 									
 								</div>
@@ -169,7 +169,7 @@
 									
 									<button class="btn btn-xs red division-remove margin-bottom"
 										onClick="javascript:window.location='/warehouse/childbulkpackaging_remove/<?php echo $bulkpackaging->id ;?>';">
-										<i class="fa fa-recycle"></i> Usuń z opakowania
+										<i class="fa fa-recycle"></i> Usuń z teczki
 									</button>
 								</div>
 							</td>

@@ -19,10 +19,7 @@ var Box_add = function () {
 	            	storage_category: {
 	                    required: true
 	                },
-	                description: {
-	                    required: true
-	                },
-					date_from: {
+	                date_from: {
 	                    required: true
 	                },
 					date_to: {
@@ -43,10 +40,7 @@ var Box_add = function () {
 	            	storage_category: {
 	                    required: "Wybierz kategorię magazynowania pudła
 	                },
-	                description: {
-	                    required: "Podaj krótki opis magazynowanego pudła
-	                },
-					date_from: {
+	                date_from: {
 	                    required: "Podaj datę początkową magazynowania pudła
 	                },
 					date_to: {

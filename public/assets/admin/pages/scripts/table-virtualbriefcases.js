@@ -733,8 +733,8 @@ var TableBulkPackagings = function () {
 
             "language": {
                 "lengthMenu": " _MENU_ wierszy",
-                "infoEmpty": "<span class=\"label label-info\">Brak opakowań zbiorczych.  </span> ",
-                "emptyTable": "<span class=\"label label-info\">Brak opakowań zbiorczych.  </span><p>"
+                "infoEmpty": "<span class=\"label label-info\">Brak teczek.  </span> ",
+                "emptyTable": "<span class=\"label label-info\">Brak teczek.  </span><p>"
             },
             "columnDefs": [{ // set default column settings
                 'orderable': true,
