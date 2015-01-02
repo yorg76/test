@@ -36,8 +36,23 @@
 						<textarea class="form-control" name="description" placeholder="Opis magzynu"></textarea>
 						<span class="help-block"></span>
 					</div>
-					<br/>
-					<input type="hidden" value="<?php echo $customer->id ?>" name="customer_id" />
+					
+					<div class="form-group">
+						<label class="control-label">Klient
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" name="customer_id">
+								<option>-- Wybierz --</option>
+								<?php foreach ($customers as $customer):?>
+								<?php 
+										echo "<option value=\"".$customer->id."\"".$checked." >".$customer->name."</option>";
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>	
+					<br />
 					<div class="margiv-top-10">
 						<a href="/warehouse/warehouses" class="btn green" id="submit">
 						Zapisz zmiany</a>

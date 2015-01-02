@@ -27,6 +27,7 @@
 							<th>Nazwa</th>
 							<th>Opis</th>
 							<th>Liczba pudeł</th>
+							<th>Klient</th>
 							<th>Opcje</th>
 						</tr>
 					</thead>
@@ -43,6 +44,10 @@
 							<td>
 									 <?php echo $warehouse->boxes->count_all();?>
 								</td>
+								
+								<td>
+									 <?php echo $warehouse->customer->name;?>
+								</td>								
 
 							<td>
 								<div class="margin-bottom-5">

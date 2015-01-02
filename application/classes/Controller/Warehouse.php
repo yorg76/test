@@ -201,13 +201,15 @@ class Controller_Warehouse extends Controller_Welcome {
 	
 	public function action_warehouse_add() {
 		$customer=Auth::instance()->get_user()->customer;
+		$customers=ORM::factory('Customer')->find_all();
 		$warehouse = Warehouse::instance();			
 		$this->content->bind('customer', $customer);
+		$this->content->bind('customers', $customers);
 				
 		if($this->request->method()===HTTP_Request::POST) {
 
 			$params = $_POST;
-			$params['customer_id'] = $customer->id;
+			//$params['customer_id'] = $customer->id;
 			
 			if($warehouse->addWarehouse($params)) {
 				Message::success(ucfirst(__('Magazyn został utworzony')),'/warehouse/warehouses');
@@ -219,19 +221,18 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_warehouse_edit() {
+		$customers=ORM::factory('Customer')->find_all();
+		$this->content->bind('customers', $customers);
 		
 		if($this->request->param('id') > 0) {
-			//$warehouse = ORM::factory('warehouse')->where('id','=',$this->request->param('id'))->find();
 			$warehouse = Warehouse::instance($this->request->param('id'));
 			$user = Auth::instance()->get_user();
-			$customer_id = $user->customer->id;
 			$this->content->bind('user', $user);
 			$this->content->bind('customer', $user->customer);
 			$this->content->bind('warehouse', $warehouse);
 			
 			if($this->request->method()===HTTP_Request::POST) {
 				$params=$_POST;
-				$params['customer_id'] = $customer_id;
 			
 				if($warehouse->updateWarehouse($params)) {
 					Message::success(ucfirst(__('Magazyn został zaktualizowany')),'/warehouse/warehouses');

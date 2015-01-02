@@ -36,8 +36,28 @@
 						<textarea class="form-control" name="description"><?php echo $warehouse->description;?></textarea>
 					<span class="help-block"></span>
 					</div>
+					<div class="form-group">
+						<label class="control-label">Klient
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+
+							<select class="form-control" name="customer_id">
+								<option>-- Wybierz --</option>
+								<?php foreach ($customers as $customer):?>
+								<?php 
+										if ($warehouse->customer->id == $customer->id) $checked=" selected=\"true\"";
+										else $checked="";
+										
+										echo "<option value=\"".$customer->id."\"".$checked." >".$customer->name."</option>";
+
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>
 					<br/>
-					<input type="hidden" value="<?php echo $customer->id ?>" name="customer_id" />
+					
 					<div class="margiv-top-10">
 						<a href="/warehouse/warehouses" class="btn green" id="submit">
 						Zapisz zmiany</a>
