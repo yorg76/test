@@ -119,7 +119,7 @@
 					<div class="col-xs-4">
 						<div class="well">
 							<center>
-								<?php echo Code128Barcode::encode($order->id);?>
+								<img alt="barcode" src="/barcode/get/<?php echo $order->id; ?>" />
 							</center>
 						</div>
 					</div>
@@ -152,7 +152,7 @@
 							Pudło: <?php echo $ord->id; ?> - <?php echo "Dodać opis pudła"; ?>
 						<hr>
 						<div style="text-align:center;">
-							<?php echo Code128Barcode::factory($ord->id."/".$ord->storagecategory->id."/".$ord->date_to,500)->render();?>
+							<img alt="barcode" src="/barcode/get/<?php echo $ord->id; ?>" />
 						</div>
 					<pagebreak />
 					<?php endforeach;?>

@@ -78,7 +78,7 @@
 									 <?php echo $box->date_reception;?>
 								</td>
 								<td>
-									 <?php echo Code128Barcode::encode($box->id);?>
+									 <img alt="barcode" src="/barcode/get/<?php echo $box->id; ?>" />
 								</td>
 								<td>
 									<div class="margin-bottom-5">
