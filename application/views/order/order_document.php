@@ -112,7 +112,7 @@
 					<div class="col-xs-4">
 						<div class="well">
 							<center>
-								<img src="/barcode/<?php echo $order->id; ?>" />
+								<img src="/barcode/get/<?php echo $order->id; ?>" />
 							</center>
 						</div>
 					</div>
@@ -145,7 +145,7 @@
 							Pudło: <?php echo $ord->box_number; ?> - <?php echo $ord->box_description; ?>
 						<hr>
 						<div style="text-align:center;">
-							<img src="/barcode/<?php echo $ord->box_number; ?>" />
+							<img src="/barcode/get/<?php echo $ord->box_number; ?>" />
 						</div>
 					<pagebreak />
 					<?php endforeach;?>

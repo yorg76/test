@@ -499,7 +499,7 @@ class Controller_Order extends Controller_Welcome {
 				
 			$document_template->get_mpdf()->SetDisplayMode('fullpage');
 			$document_template->get_mpdf()->WriteHTML($document_css,1);
-			//$document_template->download($document_filename);
+			$document_template->download($document_filename);
 		}
 	}
 }
