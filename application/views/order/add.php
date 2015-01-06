@@ -11,13 +11,14 @@
 </div>
 <div class="portlet-body form">
 		<form action="/order/add" class="form-horizontal" id="submit_form" method="POST">
+		
 			<input type="hidden" name="boxes_reception" value="<?php echo $pricetable->boxes_reception;?>">
 			<input type="hidden" name="boxes_sending" value="<?php echo $pricetable->boxes_sending;?>">
 			<input type="hidden" name="boxes_storage" value="<?php echo $pricetable->boxes_storage;?>">
 			<input type="hidden" name="document_scan" value="<?php echo $pricetable->document_scan;?>">
 			<input type="hidden" name="document_copy" value="<?php echo $pricetable->document_copy;?>">
 			<input type="hidden" name="document_notarial_copy" value="<?php echo $pricetable->document_notarial_copy;?>">
-			
+			<input type="hidden" name="position_disposal" value="<?php echo $pricetable->position_disposal;?>">
 			
 			<div class="form-wizard">
 				<div class="form-body">
@@ -73,7 +74,7 @@
 							
 							<div class="form-group">
 								<label class="control-label col-md-3">Rodzaj zamówienia</label>
-								<div class="col-md-4">
+								<div class="col-md-6">
 								<select class="form-control" name="order_type">
 										<option value="" > -- Wybierz -- </option>
 									<?php foreach($order_types as $kt=>$ot):?>
@@ -87,19 +88,7 @@
 						<div class="tab-pane" id="tab2">
 						
 							<div class="order_type_0" style="display: none;" >
-								<h3 class="block">Zamówienie pudeł i kodów kreskowych</h3>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<select class="form-control" name="warehouse_0">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($warehouses as $warehouse):?>
-												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
+								<h3 class="block">Zamówienie pustych pudeł i kodów kreskowych</h3>
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
@@ -114,31 +103,34 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
+									<label class="control-label col-md-3">Ilość pudeł<span class="required">	
+									* </span>
+									</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_0[]">
-											<?php foreach($boxes as $box):?>
-												<option value="<?php echo $box->id ?>" ><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
-											<?php endforeach;?>
-										</select>
+										<input type="text" class="form-control" name="box_quantity_0"/>
+										<span class="help-block">
+										Podaj ile będziesz potrzebować pudeł</span>
 									</div>
 								</div>
 								
+								<div class="form-group">
+									<label class="control-label col-md-3">Data odbioru
+										<span class="required" aria-required="true"> * </span>
+									</label>
+										<div class="col-md-4">
+											<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+												<input type="text" class="form-control form-filter input-sm" readonly name="date_reception_0" placeholder="Termin dostarczenia pudeł" size="16">
+												<span class="input-group-btn">
+												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+												</span>
+											</div>
+											<span class="help-block"></span>
+										</div>
+								</div>								
 							</div>
 							
 							<div class="order_type_1" style="display: none;" >
 								<h3 class="block">Zamówienie odbioru i magazynowania pudeł</h3>
-								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<select class="form-control" name="warehouse_1">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($warehouses as $warehouse):?>
-												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
@@ -157,19 +149,19 @@
 									* </span>
 									</label>
 									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_quantity"/>
+										<input type="text" class="form-control" name="box_quantity_1"/>
 										<span class="help-block">
 										Podaj ile będzie pudeł do odebrania </span>
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Data odbioru
+									<label class="control-label col-md-3">Data odbioru pudeł
 										<span class="required" aria-required="true"> * </span>
 									</label>
 										<div class="col-md-4">
 											<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
-												<input type="text" class="form-control form-filter input-sm" readonly name="date_reception" placeholder="Termin odbioru" size="16">
+												<input type="text" class="form-control form-filter input-sm" readonly name="date_reception_1" placeholder="Termin odbioru" size="16">
 												<span class="input-group-btn">
 												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
 												</span>
@@ -182,13 +174,12 @@
 								</div>
 								
 								
-								<h4 class="form-section">Opis pudła</h4>
+								<h4 class="form-section">Opis pudła (opcjonalnie)</h4>
 								
 								<div class="box_description_template">	
 								
 									<div class="form-group">
-										<label class="control-label col-md-3">Numer paczki<span class="required">	
-										* </span>
+										<label class="control-label col-md-3">Numer paczki
 										</label>
 										<div class="col-md-4">
 											<input type="text" class="form-control" name="box_id_template"/>
@@ -247,36 +238,24 @@
 								<h3 class="block">Zamówienie zniszczenie magazynowanych pudeł</h3>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
+									<label class="control-label col-md-3">Numer pudła (kod kreskowy)</label>
 									<div class="col-md-4">
-										<select class="form-control" name="warehouse_2">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($warehouses as $warehouse):?>
-												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
-											<?php endforeach;?>
-										</select>
+										<div class="input-group">
+									
+											<input id="box_code" class="form-control" type="text" name="box_code" placeholder="Kod pudła"/>
+											<span class="input-group-btn">
+												<button id="add_box_to_order" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Dodaj</button>
+											</span>
+										
+											<span class="help-block"></span>
+										</div>
 									</div>
 								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
-									<div class="col-md-4">
-										<select class="form-control" name="division_2">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($divisions as $division):?>
-												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
-								
+																							
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_2[]">
-											<?php foreach($boxes as $box):?>
-												<option value="<?php echo $box->id ?>" ><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
-											<?php endforeach;?>
 										</select>
 									</div>
 								</div>
@@ -474,7 +453,7 @@
 							
 							<div id="delivery_address" style="display:none">
 								<div class="form-group">
-									<label class="control-label col-md-3">Adres odbioru</label>
+									<label class="control-label col-md-3">Adres dostawy</label>
 									<div class="col-md-4">
 										<select class="form-control" name="delivery_address">
 											<option value="" > -- Wybierz -- </option>
@@ -567,39 +546,30 @@
 							<h4 class="form-section">Zawartość</h4>
 							
 							<div class="order_type_0" style="display: none;" >
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse_0"></p>
-									</div>
-								</div>
-								
+															
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="division_0"></p>
 									</div>
 								</div>
-								
 								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
+									<label class="control-label col-md-3">Ilość pudeł</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="boxes_0[]"></p>
+										<p class="form-control-static" data-display="box_quantity_0" > </p>
 									</div>
 								</div>
 								
+								<div class="form-group">
+									<label class="control-label col-md-3">Data odbioru</label>
+										<div class="col-md-4">											
+											<p class="form-control-static" data-display="date_reception_0" > </p>
+										</div>
+								</div>																					
 							</div>
 							
 							<div class="order_type_1" style="display: none;" >
 								<h3 class="block">Zamówienie odbioru i magazynowania pudeł</h3>
-								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse_1">
-										</p>
-									</div>
-								</div>
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Dział</label>
@@ -614,7 +584,7 @@
 									* </span>
 									</label>
 									<div class="col-md-4">
-										<p class="form-control-static" data-display="box_quantity">
+										<p class="form-control-static" data-display="box_quantity_1">
 										</p>
 									</div>
 								</div>
@@ -624,7 +594,7 @@
 										<span class="required" aria-required="true"> * </span>
 									</label>
 										<div class="col-md-4">
-										<p class="form-control-static" data-display="date_reception">
+										<p class="form-control-static" data-display="date_reception_1">
 										</p>
 										</div>
 								</div>
@@ -634,22 +604,6 @@
 							</div>
 							
 							<div class="order_type_2" style="display: none;" >
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse_2">
-										</p>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="division_2">
-										</p>
-									</div>
-								</div>
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>

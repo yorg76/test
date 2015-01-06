@@ -60,7 +60,7 @@
 									<p>Skanowanie: <?php echo Pricetable::money($pricetable->document_scan); ?> dokument.</p>
 									<p>Kopia: <?php echo Pricetable::money($pricetable->document_copy); ?> dokument.</p>
 									<p>Kopia notar.: <?php echo Pricetable::money($pricetable->document_notarial_copy); ?> dokument.</p>
-									<p>Zniczenie pudła: <?php echo Pricetable::money($pricetable->position_disposal); ?> pudło.</p>
+									<p>Zniszczenie pudła: <?php echo Pricetable::money($pricetable->position_disposal); ?> pudło.</p>
 								</td>			
 								<td>
 									<p>Odbiór pudeł: <?php echo Pricetable::money($pricetable->boxes_reception * VAT);?> pudło.</p>
@@ -69,7 +69,7 @@
 									<p>Skanowanie: <?php echo Pricetable::money($pricetable->document_scan * VAT); ?> dokument.</p>
 									<p>Kopia: <?php echo Pricetable::money($pricetable->document_copy * VAT); ?> dokument.</p>
 									<p>Kopia notar.: <?php echo Pricetable::money($pricetable->document_notarial_copy * VAT); ?> dokument.</p>
-									<p>Zniczenie pudła: <?php echo Pricetable::money($pricetable->position_disposal * VAT); ?> pudło.</p>
+									<p>Zniszczenie pudła: <?php echo Pricetable::money($pricetable->position_disposal * VAT); ?> pudło.</p>
 								</td>	
 								<td>
 									<?php echo ($pricetable->active == 1 ? 'Tak' : 'Nie');?>

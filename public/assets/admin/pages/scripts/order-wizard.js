@@ -174,6 +174,40 @@ var OrderWizard = function () {
                     		$("#tab4 #pickup_address").hide();
                     		$("#tab4 #doc").show();
                     		$("#tab4 #skip").hide();
+                    		
+                    		$("#add_box_to_order").click(function(e) {
+                    			e.preventDefault();
+                    			
+                    			$("input[name=box_code]").parents('.form-group').removeClass('has-success').removeClass('has-error');                   			
+                    			
+                    			var code = $("input[name=box_code]").val();
+                    			
+                    			if (!$("select[name='boxes_2[]'] option[value='" + code + "']:selected").length) {
+                    				$.ajax({
+                                		type:'POST',
+                                		url: "/ajax/check_box",
+                                		data: {'id':code },
+                                		dataType:"json",
+                                	}).success(function(data) {
+
+                                		if(data.status=="OK") {
+                                			if (!$("select[name='boxes_2[]'] option[value='" + data.id + "']:selected").length) {
+                                				$("select[name='boxes_2[]']").append($('<option>', { 
+                                					value: code,
+                                					text : code,
+                                					selected: true
+                                				}));
+                                			}
+                                		}else {
+                                			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                		}
+                                	}).error(function() {
+                                		$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                	});
+                    				
+                    			}
+                    			
+                    		});
                     		                    		
                     		$(".nav-pills a").each(function(){
                     			if($(this).attr('href') == '#tab3') {
@@ -293,15 +327,16 @@ var OrderWizard = function () {
                 	}
                 		
                 	if(order_type == 0 ) {
+                		quantity = $('input[name=box_quantity_0]').val();
                 		var boxes_sending = $('input[name=boxes_sending]').val();
                 		price = boxes_sending * quantity + ' PLN'; 
                 	}else if(order_type == 1 ) {
-                		quantity = $('input[name=box_quantity]').val();
+                		quantity = $('input[name=box_quantity_1]').val();
                 		var boxes_reception = $('input[name=boxes_reception]').val();
                 		var boxes_storage = $('input[name=boxes_storage]').val();
                 		price = ((boxes_reception * quantity) + (boxes_storage * quantity))+ ' PLN / miesiąc';                 		
                 	}else if(order_type == 2 ) {
-                		var boxes_disposal = 1;
+                		var boxes_disposal = $('input[name=position_disposal]').val();
                 		price = boxes_disposal * quantity + ' PLN'; 
                 	}else if(order_type == 3 ) {
                 		var document_scan = $('input[name=document_scan]').val();

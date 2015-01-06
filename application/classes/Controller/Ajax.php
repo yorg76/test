@@ -64,6 +64,22 @@ class Controller_Ajax extends Controller_Welcome {
 		}
 	}
 	
+	public function action_check_box() {
+		if($this->request->method()===HTTP_Request::POST) {
+			$user=Auth::instance()->get_user();
+			if($user->id > 0) {
+					$box = ORM::factory('Box')->where('id', '=', $_POST['id'])->find();
+					if($box->warehouse->customer == $user->customer) {
+						echo json_encode(array('status'=>'OK','id'=>$box->id));
+					}else {
+						echo json_encode(array('status'=>'NOTOK'));
+					}	
+			}else {
+					echo json_encode(array('status'=>'NOTOK'));
+			}
+		}
+	}
+	
 	
 	public function action_generate_password() {
 		echo json_encode(array('status'=>'OK',

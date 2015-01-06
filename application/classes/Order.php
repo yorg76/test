@@ -12,7 +12,7 @@ class Order {
 	public $status;
 	public $type;
 	
-	public $types = array('Zamówienie pudeł i kodów kreskowych','Zamówienie odbioru i magazynowania pudeł','Zamówienie zniszczenie magazynowanych pudeł','Zamówienie skanowania, kopii dokumentów','Zamówienie kopii notarialnej dokumentów');
+	public $types = array('Zamówienie pustych pudeł i kodów kreskowych','Zamówienie odbioru i magazynowania pudeł','Zamówienie zniszczenie magazynowanych pudeł','Zamówienie skanowania, kopii dokumentów','Zamówienie kopii notarialnej dokumentów');
 
 	public $statuses = array('Nowe','Przyjęte do realizacji','Oczekuje na wysłanie','W doręczeniu','Dostarczone','W trakcie realizacji','W trakcie odbioru','W dostrczeniu na magazyn','Na stanie magazynu','Odebrane','Zrealizowane');
 	
@@ -416,7 +416,7 @@ class Order {
 			
 			if(isset($params['pickup_address']) && $params['pickup_address'] != '-- Wybierz --' && $params['pickup_address'] != NULL) {
 				$this->order->address_id=$params['pickup_address'];
-			}elseif(isset($params['delivery_address']) && $params['delivery_address'] != '-- Wybierz --' && $params['pickup_address'] != NULL) {
+			}elseif(isset($params['delivery_address']) && $params['delivery_address'] != '-- Wybierz --' && $params['delivery_address'] != NULL) {
 				$this->order->address_id=$params['delivery_address'];
 			}elseif($params['order_type'] == 0 || $params['order_type'] == 1){
 				$address=ORM::factory('Address');
@@ -433,9 +433,6 @@ class Order {
 				
 				$address->save();
 				$this->order->address_id=$address->id;
-				
-				
-				
 			}else {
 				$this->order->address_id=$this->order->user->customer->addresses->where('address_type','=','firmowy')->find()->id;
 			}
@@ -443,17 +440,22 @@ class Order {
 			$this->order->warehouse_id=$params['warehouse'];
 			$this->order->division_id=$params['division'];
 			
-			if($params['box_quantity'] > 0) {
-				$this->order->quantity=$params['box_quantity'];
+			if($params['order_type']==0) {
+				$this->order->quantity=$params['box_quantity_0'];
+			}elseif($params['order_type']==1) {
+				$this->order->quantity=$params['box_quantity_1'];
 			}else {
 				$this->order->quantity=-1;
 			}
-			
-			if($params['date_reception'] != "") {
-				$this->order->pickup_date=$params['date_reception'];
+				
+			if($params['date_reception_0'] != "" && $params['order_type']==0) {
+				$this->order->pickup_date=$params['date_reception_0'];
 			}
 
-			
+			if($params['date_reception_1'] != "" && $params['order_type']==1) {
+				$this->order->pickup_date=$params['date_reception_1'];
+			}
+				
 			
 			try {
 					
@@ -463,7 +465,7 @@ class Order {
 					$paramse = array();
 					$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$params['order_type']."-".$order->order->id.".pdf";
 					
-					if($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4) {
+					if($params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4) {
 						if(isset($params['boxes']) && is_array($params['boxes']) && ($params['order_type'] == 0 || $params['order_type'] == 2)) {
 							foreach ($params['boxes'] as $box) {
 								$bbox=ORM::factory('Box')->where('id', '=', $box)->find();
@@ -514,8 +516,8 @@ class Order {
 								}
 							}	
 						}
-					}elseif($params['order_type'] == 1 && $params['box_quantity'] > 0) {
-						for($i=1; $i <= $params['box_quantity']; $i++) {
+					}elseif($params['order_type'] == 1 && $params['box_quantity_1'] > 0) {
+						for($i=1; $i <= $params['box_quantity_1']; $i++) {
 							$order_detail = ORM::factory('OrderDetail');
 							$order_detail->box_number = $params['box_id'][$i];
 							$order_detail->box_storagecategory = $params['box_storagecategory'][$i]["storagecategory"];

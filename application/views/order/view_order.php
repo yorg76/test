@@ -18,20 +18,7 @@
 				<div id="tab_1-1" class="tab-pane active">
 					<div class="portlet-body form">
 						<h3 class="block"><?php echo $order->type ?></h3>									
-						<?php if($order->type == 'Zamówienie pudeł i kodów kreskowych') :?>
-							<div class="form-group">
-							<label class="control-label col-md-3">Magazyn</label>
-							<div class="col-md-4">
-								<select class="form-control" name="warehouse" disabled="true" >
-										
-										<?php foreach($warehouses as $warehouse):?>
-											<?php $wselected = ($order->order->warehouse->id == $warehouse->id ? "selected" : "");?>
-											<option value="<?php echo $warehouse->id ?>"
-										<?php echo $wselected;?>><?php echo $warehouse->name?></option>
-										<?php endforeach;?>
-									</select>
-							</div>
-						</div>
+						<?php if($order->type == 'Zamówienie pustych pudeł i kodów kreskowych') :?>
 
 						<div class="form-group">
 							<label class="control-label col-md-3">Dział</label>
@@ -45,19 +32,20 @@
 									</select>
 							</div>
 						</div>
-
+						
 						<div class="form-group">
-							<label class="control-label col-md-3">Pudła</label>
+							<label class="control-label col-md-3">Ilość pudeł</label>
 							<div class="col-md-4">
-								<select multiple class="form-control" name="boxes[]" disabled="true" >
-										<?php foreach($boxes as $box):?>
-											<?php $bselected = ($order->order->has('boxes',ORM::factory('Box',$box->id)) ? "selected" : "");?>
-											<option value="<?php echo $box->id ?>"
-										<?php echo $bselected?>><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
-										<?php endforeach;?>
-									</select>
+								<input type="text" class="form-control" name="quantity" value="<?php echo $order->order->quantity;?>" disabled="true" >
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Data dostarczenia</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="pickup_date" value="<?php echo $order->order->pickup_date;?>" disabled="true" >
+							</div>
+						</div>
+												
 						<input type="hidden" name="address_id"
 							value="<?php echo $order->order->address->id ?>">
 						<div class="form-group">
