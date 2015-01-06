@@ -95,8 +95,18 @@
 							<span class="help-block"></span>
 						</div>
 					</div>										
+
+					<div class="form-group">
+						<label class="control-label">Zniszczenie pudła
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<input type="text" placeholder="Cena netto" class="form-control" name="position_disposal" value="" />
+							<span class="help-block"></span>
+						</div>
+					</div>
 					
-					<br/>
+					<br />
 
 					<div class="margiv-top-10">
 						<a href="#" class="btn green" id="submit">

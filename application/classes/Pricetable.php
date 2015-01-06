@@ -15,6 +15,7 @@ class Pricetable {
 	public $document_scan;
 	public $document_copy;
 	public $document_notarial_copy;
+	public $position_disposal;
 	public $discount;
 	
 	public static function money($number, $format = '%!n PLN')
@@ -42,7 +43,8 @@ class Pricetable {
 			$this->boxes_storage = $this->pricetable->boxes_storage;
 			$this->document_scan = $this->pricetable->document_scan;
 			$this->document_copy = $this->pricetable->document_copy;
-			$this->document_notarial_copy = $this->pricetable->document_notarial_copy;  
+			$this->document_notarial_copy = $this->pricetable->document_notarial_copy;
+			$this->position_disposal = $this->pricetable->position_disposal;
 			$this->discount = $this->pricetable->discount;  
 				
 		}else {

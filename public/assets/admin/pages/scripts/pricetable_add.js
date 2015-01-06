@@ -58,6 +58,11 @@ var PriceTable_add = function () {
 	                	float:true,
 	                	minPrice:1,
 	                },
+	                position_disposal:{
+	                	required: true,
+	                	float:true,
+	                	minPrice:1,
+	                },
 	            },
 
 	            messages: {
@@ -93,7 +98,12 @@ var PriceTable_add = function () {
 	                	required: "Podaj cenę",
 	                	float: "Podaj cenę w formacie #,##",
 	                	minPrice: "Cena nie może być zero",
-	                },	                
+	                },	     
+	                position_disposal:{
+	                	required: "Podaj cenę",
+	                	float: "Podaj cenę w formacie #,##",
+	                	minPrice: "Cena nie może być zero",
+	                },	
 	            },
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   
