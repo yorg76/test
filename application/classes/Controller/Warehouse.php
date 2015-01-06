@@ -913,6 +913,10 @@ class Controller_Warehouse extends Controller_Welcome {
 		if($this->request->param('id') > 0) {
 			$box = Box::instance($this->request->param('id'));
 			$box_id = $box->id;
+			
+			$wh = ORM::factory('WarehouseHistory')->where("box_id", "=", $box_id)->find_all();
+			
+			$this->content->bind('wh', $wh);
 			$this->content->bind('box', $box);
 			
 			$documents = ORM::factory('Document')->where('box_id','=', $box_id)->find_all();

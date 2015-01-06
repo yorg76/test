@@ -4,6 +4,72 @@
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">
+								<i class="glyphicon glyphicon-inbox"></i>Pudło <?php echo $box->id ?> - Historia
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="expand">
+								</a>
+								<a href="javascript:;" class="reload">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body" style="display: none;">
+							<table class="table table-striped table-hover table-bordered" id="documents_list">
+							<thead>
+							<tr>
+								<th>
+									 ID
+								</th>
+								<th>
+									 Typ operacji
+								</th>							
+								<th>
+									 Opis
+								</th>
+								<th>
+									 Magazyn
+								</th>
+								<th>
+									 Użytkownik
+								</th>
+								<th>
+									 Data
+								</th>
+							</tr>
+							</thead>
+							<tbody>
+							<?php foreach ($wh as $bh):?>
+							<tr>
+								<td style="width:10%">
+									 <?php echo $bh->id;?>
+								</td>
+								
+								<td style="width:20%">
+									 <?php echo $bh->operation_type;?>
+								</td>
+															
+								<td>
+									 <?php echo $bh->operation_description;?>
+								</td>
+								<td>
+									 <?php echo $bh->warehouse->name;?>
+								</td>
+								<td>
+									 <?php echo $bh->user->username;?>
+								</td>
+								<td>
+									 <?php echo $bh->change_date;?>
+								</td>
+								
+							</tr>
+							<?php endforeach;?>
+							</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="portlet box grey">
+						<div class="portlet-title">
+							<div class="caption">
 								<i class="glyphicon glyphicon-inbox"></i>Pudło <?php echo $box->id ?> - Dokumenty
 							</div>
 							<div class="tools">
@@ -63,7 +129,7 @@
 							</tbody>
 							</table>
 						</div>
-					</div>
+					</div>					
 					<div class="portlet box grey">
 						<div class="portlet-title">
 							<div class="caption">

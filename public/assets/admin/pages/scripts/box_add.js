@@ -38,16 +38,16 @@ var Box_add = function () {
 
 	            messages: {
 	            	storage_category: {
-	                    required: "Wybierz kategorię magazynowania pudła
+	                    required: "Wybierz kategorię magazynowania pudła",
 	                },
 	                date_from: {
-	                    required: "Podaj datę początkową magazynowania pudła
+	                    required: "Podaj datę początkową magazynowania pudła",
 	                },
 					date_to: {
-	                    required: "Podaj datę końcową magazynowania pudła
+	                    required: "Podaj datę końcową magazynowania pudła",
 	                },
 					date_reception: {
-	                    required: "Podaj datę odbioru magaznowanego pudła
+	                    required: "Podaj datę odbioru magaznowanego pudła",
 	                },
 					lock: {
 	                    required: "Wybierz status"

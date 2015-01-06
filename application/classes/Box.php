@@ -64,7 +64,18 @@ class Box{
             try {
                 Database::instance()->begin();
                 if($this->box->save()) {
+                	$this->box->reload();
                     $this->id=$this->box->id;
+                    $this->box->status="Na magazynie";
+                    
+                    $wh = ORM::factory('WarehouseHistory');
+                    $wh->operation_type="Wejście na magazyn";
+                    $wh->operation_description="Dodanie pudła do magazynu";
+                    $wh->box_id=$this->box->id;
+                    $wh->user_id=Auth::instance()->get_user()->id;
+                    $wh->warehouse_id=$params['warehouse_id'];
+                    $wh->save();
+                    
                     $log->add(Log::DEBUG,"Success: Dodano pudło z parametrami:".serialize($params)."\n");
                     Database::instance()->commit();
                     return true;
@@ -105,7 +116,15 @@ class Box{
 	
 		if($this->box->loaded()) {
 			$id=$this->box->id;
-					
+			
+			$wh = ORM::factory('WarehouseHistory');
+			$wh->operation_type="Wyjście z magazynu";
+			$wh->operation_description="Usunięto pudło";
+			$wh->box_id=$this->box->id;
+			$wh->user_id=Auth::instance()->get_user()->id;
+			$wh->warehouse_id=$this->box->warehouse_id;
+			$wh->save();
+			
 			if($this->box->delete()) {
 				$log->add(Log::DEBUG,"Success: Removed box:".$id."\n");
 				return true;
