@@ -80,7 +80,29 @@ class Controller_Ajax extends Controller_Welcome {
 		}
 	}
 	
-	
+	public function action_get_box_content() {
+		if($this->request->method()===HTTP_Request::POST) {
+			$user=Auth::instance()->get_user();
+			if($user->id > 0) {
+				$box = ORM::factory('Box')->where('id', '=', $_POST['id'])->find();
+				$result = array();
+				if($box->warehouse->customer == $user->customer) {
+					if($box->seal > 1) {
+						array_push($result, array("doc_id"=>-1,"doc_name"=>"Całe pudło ".$box->id." - plomba"));
+					}else {
+						foreach ($box->documents->find_all() as $doc) {
+							array_push($result, array("doc_id"=>$doc->id,"doc_name"=>$doc->name));
+						}
+					}
+					echo json_encode(array('status'=>'OK','id'=>$box->id,'result'=>$result));
+				}else {
+					echo json_encode(array('status'=>'NOTOK'));
+				}
+			}else {
+				echo json_encode(array('status'=>'NOTOK'));
+			}
+		}
+	}
 	public function action_generate_password() {
 		echo json_encode(array('status'=>'OK',
 							   'password'=>Text::random()));	

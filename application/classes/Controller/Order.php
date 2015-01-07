@@ -427,6 +427,7 @@ class Controller_Order extends Controller_Welcome {
 			$params['warehouse'] =$params['warehouse_'.$params['order_type']]; 
 			$params['division'] =$params['division_'.$params['order_type']];
 			$params['boxes'] = $params['boxes_'.$params['order_type']];
+			$params['documents'] = $params['contents_'.$params['order_type']];
 		
 			if($order->registerOrder($params)) {
 				Message::success(ucfirst(__('Zamówienie zostało utworzone')),'/order/orders_new');

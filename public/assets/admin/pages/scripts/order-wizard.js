@@ -227,6 +227,193 @@ var OrderWizard = function () {
                     				$('span.desc',$(this)).html('<i class="fa fa-check"></i> Adres </span>');
                     			}
                     		});
+                    		
+                    		$("#add_box_to_order_3").click(function(e) {
+                    			e.preventDefault();
+                    			
+                    			
+                    			$("input[name=box_code_3]").parents('.form-group').removeClass('has-success').removeClass('has-error');                   			
+                    			
+                    			var code = $("input[name=box_code_3]").val();
+                    			
+                    			if (!$("select[name='boxes_3[]'] option[value='" + code + "']").length) {
+                    				$.ajax({
+                                		type:'POST',
+                                		url: "/ajax/check_box",
+                                		data: {'id':code },
+                                		dataType:"json",
+                                	}).success(function(data) {
+
+                                		if(data.status=="OK") {
+                                			if (!$("select[name='boxes_3[]'] option[value='" + data.id + "']").length) {
+                                				$("select[name='boxes_3[]']").append($('<option>', { 
+                                					value: code,
+                                					text : code,
+                                				}));
+                                			}
+                                		}else {
+                                			$("input[name=box_code_3]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                		}
+                                	}).error(function() {
+                                		$("input[name=box_code_3]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                	});
+                    				
+                    			}
+                    			
+                    		});
+                    		
+                    		$("#add_box_to_order_4").click(function(e) {
+                    			e.preventDefault();
+                    			
+                    			
+                    			$("input[name=box_code_4]").parents('.form-group').removeClass('has-success').removeClass('has-error');                   			
+                    			
+                    			var code = $("input[name=box_code_4]").val();
+                    			
+                    			if (!$("select[name='boxes_4[]'] option[value='" + code + "']").length) {
+                    				$.ajax({
+                                		type:'POST',
+                                		url: "/ajax/check_box",
+                                		data: {'id':code },
+                                		dataType:"json",
+                                	}).success(function(data) {
+
+                                		if(data.status=="OK") {
+                                			if (!$("select[name='boxes_4[]'] option[value='" + data.id + "']").length) {
+                                				$("select[name='boxes_4[]']").append($('<option>', { 
+                                					value: code,
+                                					text : code,
+                                				}));
+                                			}
+                                		}else {
+                                			$("input[name=box_code_4]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                		}
+                                	}).error(function() {
+                                		$("input[name=box_code_4]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                	});
+                    				
+                    			}
+                    			
+                    		});
+                    		
+                    		$("select[name='boxes_3[]']").change(function(){
+                    			var id = $(this).val()[0];
+                    			
+                    			if(id > 0) {
+                    				$.ajax({
+                                		type:'POST',
+                                		url: "/ajax/get_box_content",
+                                		data: {'id':id },
+                                		dataType:"json",
+                                	}).success(function(data) {
+
+                                		if(data.status=="OK") {
+                                			$.each(data.result,function(idx, obj)  {
+                                				
+                                				if (!$("select[name='contents_3[]'] option[value='" + obj.doc_id + "']").length) {
+                                					$("select[name='contents_3[]']").append($('<option>', { 
+                                						value: obj.doc_id,
+                                						text : obj.doc_name,
+                                					}));
+                                				}
+                                			});
+                                			
+                                		}else {
+                                			$("input[name='boxes_3[]']").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                		}
+                                	}).error(function() {
+                                		$("input[name='boxes_3[]']").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                	});
+                    			}else {
+                    				$("input[name='boxes_3[]']").parents('.form-group').removeClass('has-success').addClass('has-error');
+                    			}
+                    		});
+
+                    		
+                    		$("select[name='boxes_4[]']").change(function(){
+                    			var id = $(this).val()[0];
+                    			
+                    			if(id > 0) {
+                    				$.ajax({
+                                		type:'POST',
+                                		url: "/ajax/get_box_content",
+                                		data: {'id':id },
+                                		dataType:"json",
+                                	}).success(function(data) {
+
+                                		if(data.status=="OK") {
+                                			$.each(data.result,function(idx, obj)  {
+                                				
+                                				if (!$("select[name='contents_4[]'] option[value='" + obj.doc_id + "']").length) {
+                                					$("select[name='contents_4[]']").append($('<option>', { 
+                                						value: obj.doc_id,
+                                						text : obj.doc_name,
+                                					}));
+                                				}
+                                			});
+                                			
+                                		}else {
+                                			$("input[name='boxes_4[]']").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                		}
+                                	}).error(function() {
+                                		$("input[name='boxes_4[]']").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                	});
+                    			}else {
+                    				$("input[name='boxes_4[]']").parents('.form-group').removeClass('has-success').addClass('has-error');
+                    			}
+                    		});
+                    		
+                    	}
+                    	
+                    	if(order_type == 5 ) {
+                    		
+                    		$("#tab3 #delivery_address").show();
+                    		$("#tab3 #pickup_address").hide();
+                    		$("#tab3 #doc").hide();
+                    		$("#tab3 #skip").hide();
+                    		$("#tab4 #delivery_address").show();
+                    		
+                    		$("#add_box_to_order_5").click(function(e) {
+                    			e.preventDefault();
+                    			
+                    			
+                    			$("input[name=box_code_5]").parents('.form-group').removeClass('has-success').removeClass('has-error');                   			
+                    			
+                    			var code = $("input[name=box_code_5]").val();
+                    			
+                    			if (!$("select[name='boxes_5[]'] option[value='" + code + "']:selected").length) {
+                    				$.ajax({
+                                		type:'POST',
+                                		url: "/ajax/check_box",
+                                		data: {'id':code },
+                                		dataType:"json",
+                                	}).success(function(data) {
+
+                                		if(data.status=="OK") {
+                                			if (!$("select[name='boxes_5[]'] option[value='" + data.id + "']:selected").length) {
+                                				$("select[name='boxes_5[]']").append($('<option>', { 
+                                					value: code,
+                                					text : code,
+                                					selected: true
+                                				}));
+                                			}
+                                		}else {
+                                			$("input[name=box_code_5]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                		}
+                                	}).error(function() {
+                                		$("input[name=box_code_5]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                                	});
+                    				
+                    			}
+                    			
+                    		});
+                    		
+                    		
+                    		$(".nav-pills a").each(function(){
+                    			if($(this).attr('href') == '#tab3') {
+                    				$('span.desc',$(this)).html('<i class="fa fa-check"></i> Adres </span>');
+                    			}
+                    		});
                     	}
                     }
                 },
@@ -259,6 +446,9 @@ var OrderWizard = function () {
                     $('#tab4 #final_price_netto', form).html(final_price +" PLN");
                 	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN");
             	}else if(order_type == 4 ) { 
+            		$('#tab4 #final_price_netto', form).html(final_price +" PLN");
+                	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN");
+            	}else if(order_type == 5 ) { 
             		$('#tab4 #final_price_netto', form).html(final_price +" PLN");
                 	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN");
             	}
@@ -320,12 +510,18 @@ var OrderWizard = function () {
                 	
                 	var quantity = 0;
                 	
-                	if(order_type == 0 || order_type == 2 || order_type == 3 || order_type == 4) {
+                	if(order_type == 2 || order_type == 5) {
                 		$('select[name=\'boxes_'+order_type+'[]\'] option:selected').each(function() {
                 			quantity++;
                 		});
                 	}
-                		
+                	
+                	if(order_type == 3 || order_type == 4 ) {
+                		$('select[name=\'contents_'+order_type+'[]\'] option:selected').each(function() {
+                			quantity++;
+                		});
+                	}
+                	
                 	if(order_type == 0 ) {
                 		quantity = $('input[name=box_quantity_0]').val();
                 		var boxes_sending = $('input[name=boxes_sending]').val();
@@ -345,6 +541,10 @@ var OrderWizard = function () {
                 	}else if(order_type == 4 ) {
                 		var document_notarial_copy = $('input[name=document_notarial_copy]').val();
                 		price = document_notarial_copy * quantity + ' PLN'; 
+                	}else if(order_type == 5 ) {
+                		var boxes_sending = $('input[name=boxes_sending]').val();
+                		$('input[name=box_quantity_5]').val(quantity);
+                		price = boxes_sending * quantity + ' PLN'; 
                 	}
                 	
                 	$('.step-title', $('#form_wizard_1')).text('Krok ' + (index + 1) + ' z ' + total + ' - Cena: ' + price );

@@ -12,9 +12,31 @@ class Order {
 	public $status;
 	public $type;
 	
-	public $types = array('Zamówienie pustych pudeł i kodów kreskowych','Zamówienie odbioru i magazynowania pudeł','Zamówienie zniszczenie magazynowanych pudeł','Zamówienie skanowania, kopii dokumentów','Zamówienie kopii notarialnej dokumentów');
-
-	public $statuses = array('Nowe','Przyjęte do realizacji','Oczekuje na wysłanie','W doręczeniu','Dostarczone','W trakcie realizacji','W trakcie odbioru','W dostrczeniu na magazyn','Na stanie magazynu','Odebrane','Zrealizowane');
+	public $types = array('Zamówienie pustych pudeł i kodów kreskowych',
+						'Zamówienie odbioru i magazynowania pudeł',
+						'Zamówienie zniszczenie magazynowanych pudeł',
+						'Zamówienie skanowania, kopii dokumentów',
+						'Zamówienie kopii notarialnej dokumentów',
+						'Wypożyczenie pudeł');
+	
+	public $types_short = array('Zamówienie pustych pudeł i kodów kreskowych'=>'ZPPiKK',
+							'Zamówienie odbioru i magazynowania pudeł'=>'ZOiMP',
+							'Zamówienie zniszczenie magazynowanych pudeł'=>'ZZMP',
+							'Zamówienie skanowania, kopii dokumentów'=>'ZSKD',
+							'Zamówienie kopii notarialnej dokumentów'=>'ZKND',
+							'Wypożyczenie pudeł'=>'WP');
+	
+	public $statuses = array('Nowe',
+							'Przyjęte do realizacji',
+							'Oczekuje na wysłanie',
+							'W doręczeniu',
+							'Dostarczone',
+							'W trakcie realizacji',
+							'W trakcie odbioru',
+							'W dostrczeniu na magazyn',
+							'Na stanie magazynu',
+							'Odebrane',
+							'Zrealizowane');
 	
 	public $pricetable;
 	
@@ -418,7 +440,7 @@ class Order {
 				$this->order->address_id=$params['pickup_address'];
 			}elseif(isset($params['delivery_address']) && $params['delivery_address'] != '-- Wybierz --' && $params['delivery_address'] != NULL) {
 				$this->order->address_id=$params['delivery_address'];
-			}elseif($params['order_type'] == 0 || $params['order_type'] == 1){
+			}elseif($params['order_type'] == 0 || $params['order_type'] == 1 || $params['order_type'] == 5 ){
 				$address=ORM::factory('Address');
 				$address->city=$params['city'];
 				$address->street=$params['street'];
@@ -444,6 +466,8 @@ class Order {
 				$this->order->quantity=$params['box_quantity_0'];
 			}elseif($params['order_type']==1) {
 				$this->order->quantity=$params['box_quantity_1'];
+			}elseif($params['order_type']==5) {
+				$this->order->quantity=$params['box_quantity_5'];
 			}else {
 				$this->order->quantity=-1;
 			}
@@ -456,6 +480,9 @@ class Order {
 				$this->order->pickup_date=$params['date_reception_1'];
 			}
 				
+			if($params['date_reception_5'] != "" && $params['order_type']==5) {
+				$this->order->pickup_date=$params['date_reception_5'];
+			}
 			
 			try {
 					
@@ -466,7 +493,7 @@ class Order {
 					$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$params['order_type']."-".$order->order->id.".pdf";
 					
 					if($params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4) {
-						if(isset($params['boxes']) && is_array($params['boxes']) && ($params['order_type'] == 0 || $params['order_type'] == 2)) {
+						if(isset($params['boxes']) && is_array($params['boxes']) && ($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4)) {
 							foreach ($params['boxes'] as $box) {
 								$bbox=ORM::factory('Box')->where('id', '=', $box)->find();
 								if($bbox->lock != 1) {
@@ -475,6 +502,15 @@ class Order {
 										$this->order->add('boxes', $box);
 										
 									}
+								}
+							}
+						}
+						
+						if(isset($params['documents']) && is_array($params['documents']) && ($params['order_type'] == 3 || $params['order_type'] == 4)) {
+							foreach ($params['documents'] as $doc) {
+								if($doc > 0) {
+									$ddoc=ORM::factory('Document')->where('id', '=', $doc)->find();
+									$this->order->add('documents', $ddoc);
 								}
 							}
 						}

@@ -263,37 +263,34 @@
 							
 							<div class="order_type_3" style="display: none;" >
 								<h3 class="block">Zamówienie skanowania, kopii dokumentów</h3>
-								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<select class="form-control" name="warehouse_3">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($warehouses as $warehouse):?>
-												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
+									<label class="control-label col-md-3">Numer pudła (kod kreskowy)</label>
 									<div class="col-md-4">
-										<select class="form-control" name="division_3">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($divisions as $division):?>
-												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
-											<?php endforeach;?>
-										</select>
+										<div class="input-group">
+									
+											<input id="box_code_4" class="form-control" type="text" name="box_code_3" placeholder="Kod pudła"/>
+											<span class="input-group-btn">
+												<button id="add_box_to_order_3" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Dodaj</button>
+											</span>
+										
+											<span class="help-block"></span>
+										</div>
 									</div>
 								</div>
-								
+																							
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_3[]">
-											<?php foreach($boxes as $box):?>
-												<option value="<?php echo $box->id ?>" ><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
-											<?php endforeach;?>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-md-3">Zawartość</label>
+									<div class="col-md-4">
+										<select multiple class="form-control" name="contents_3[]">
 										</select>
 									</div>
 								</div>
@@ -302,42 +299,82 @@
 							
 							<div class="order_type_4" style="display: none;" >
 								<h3 class="block">Zamówienie kopii notarialnej dokumentów</h3>
-								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<select class="form-control" name="warehouse_4">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($warehouses as $warehouse):?>
-												<option value="<?php echo $warehouse->id ?>" ><?php echo $warehouse->name?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
+									<label class="control-label col-md-3">Numer pudła (kod kreskowy)</label>
 									<div class="col-md-4">
-										<select class="form-control" name="division_4">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($divisions as $division):?>
-												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
-											<?php endforeach;?>
-										</select>
+										<div class="input-group">
+									
+											<input id="box_code_4" class="form-control" type="text" name="box_code_4" placeholder="Kod pudła"/>
+											<span class="input-group-btn">
+												<button id="add_box_to_order_4" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Dodaj</button>
+											</span>
+										
+											<span class="help-block"></span>
+										</div>
 									</div>
 								</div>
-								
+																							
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_4[]">
-											<?php foreach($boxes as $box):?>
-												<option value="<?php echo $box->id ?>" ><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
-											<?php endforeach;?>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-md-3">Zawartość</label>
+									<div class="col-md-4">
+										<select multiple class="form-control" name="contents_4[]">
 										</select>
 									</div>
 								</div>
 								
+								
 							</div>
+							<div class="order_type_5" style="display: none;" >
+								<h3 class="block">Wypożyczenie pudeł</h3>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Numer pudła (kod kreskowy)</label>
+									<div class="col-md-4">
+										<div class="input-group">
+									
+											<input id="box_code_5" class="form-control" type="text" name="box_code_5" placeholder="Kod pudła"/>
+											<span class="input-group-btn">
+												<button id="add_box_to_order_5" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Dodaj</button>
+											</span>
+										
+											<span class="help-block"></span>
+										</div>
+									</div>
+								</div>
+																							
+								<div class="form-group">
+									<label class="control-label col-md-3">Pudła</label>
+									<div class="col-md-4">
+										<select multiple class="form-control" name="boxes_5[]">
+										</select>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Data dostawy pudeł
+										<span class="required" aria-required="true"> * </span>
+									</label>
+										<div class="col-md-4">
+											<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+												<input type="text" class="form-control form-filter input-sm" readonly name="date_reception_5" placeholder="Termin dostawy" size="16">
+												<span class="input-group-btn">
+												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+												</span>
+											</div>
+											<span class="help-block"></span>
+										</div>
+								</div>
+								
+							</div>							
 						</div>
 
 						<div class="tab-pane" id="tab3">
@@ -617,25 +654,17 @@
 							<div class="order_type_3" style="display: none;" >
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse_3">
-										</p>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="division_3">
-										</p>
-									</div>
-								</div>
-								
-								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="boxes_3[]">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Dokumenty</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="contents_3[]">
 										</p>
 									</div>
 								</div>
@@ -645,22 +674,6 @@
 							<div class="order_type_4" style="display: none;" >
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Magazyn</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="warehouse_4">
-										</p>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="division_4">
-										</p>
-									</div>
-								</div>
-								
-								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="boxes_4[]">
@@ -668,8 +681,38 @@
 									</div>
 								</div>
 								
+								<div class="form-group">
+									<label class="control-label col-md-3">Dokumenty</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="contents_4[]">
+										</p>
+									</div>
+								</div>
 							</div>
 							
+							<div class="order_type_5" style="display: none;" >
+								
+								<input type="hidden" name="box_quantity_5" value="0" />
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Pudła</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="boxes_5[]">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Data dostawy
+										<span class="required" aria-required="true"> * </span>
+									</label>
+										<div class="col-md-4">
+										<p class="form-control-static" data-display="date_reception_5">
+										</p>
+										</div>
+								</div>
+								
+							</div>
 							
 							<h4 class="form-section">Adres / Dokumenty</h4>
 							

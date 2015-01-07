@@ -57,7 +57,7 @@ class Controller_Api extends Controller_Welcome {
 													'quantity'=>$order->quantity,
 													'pickup_date'=>$order->pickup_date,
 													'create_date'=>$order->create_date,
-													'display_name'=> "Zam.:".$order->id." Data:".$order->create_date." Typ:".$order->type));  	
+													'display_name'=> "Zam.:".$order->id." Data:".$order->create_date." Typ:".Order::instance()->types_short[$order->type]));  	
 			}
 		
 			//if(Auth::instance()->login($_POST['user'], $_POST['password'])) {
