@@ -207,18 +207,24 @@ class User {
 			
 				if($user->save()) {
 					$user->add('roles', ORM::factory('role', array('name' => 'login')));
-					$log->add(Log::DEBUG,"Success: Registered user with params:".serialize($params)."\n");
-
-					$paramse = array();
-					$paramse['subject']="Rejestracja nowego użytkownika systemu";
-					$paramse['email_title'] = "Witamy w gronie użytkowników systemu";
-					$paramse['email_info'] = "Poniżej znajdują się dane do logowania do systemu";
-					$paramse['email_content'] = "<p>Użytkownik: ".$user->username." </p><p>Hasło: ".$params['password']."<br />";
-					$paramse['email'] = $user->email;
-					$paramse['firstname'] = $user->firstname;
-					$paramse['lastname']= $user->lastname;
 					
-					$this->sendEmail($paramse);
+					if($user->update()) {
+						$log->add(Log::DEBUG,"Success: Registered user with params:".serialize($params)."\n");
+
+						$paramse = array();
+						$paramse['subject']="Rejestracja nowego użytkownika systemu";
+						$paramse['email_title'] = "Witamy w gronie użytkowników systemu";
+						$paramse['email_info'] = "Poniżej znajdują się dane do logowania do systemu";
+						$paramse['email_content'] = "<p>Użytkownik: ".$user->username." </p><p>Hasło: ".$params['password']."<br />";
+						$paramse['email'] = $user->email;
+						$paramse['firstname'] = $user->firstname;
+						$paramse['lastname']= $user->lastname;
+					
+						$this->sendEmail($paramse);
+					}else {
+						$log->add(Log::ERROR,"Error: User role not added:".serialize($params)."\n");
+						return false;
+					}
 					
 					return true;
 				}else {

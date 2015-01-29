@@ -7,6 +7,13 @@
 
 class Controller_Api extends Controller_Welcome {
 	
+	public $types_short = array('Zamówienie pustych pudeł i kodów kreskowych'=>'ZPPiKK',
+			'Zamówienie odbioru i magazynowania pudeł'=>'ZOiMP',
+			'Zamówienie zniszczenie magazynowanych pudeł'=>'ZZMP',
+			'Zamówienie skanowania, kopii dokumentów'=>'ZSKD',
+			'Zamówienie kopii notarialnej dokumentów'=>'ZKND',
+			'Wypożyczenie pudeł'=>'WP');
+	
 	public function before() {
 		parent::before ();
 		$this->auto_render=FALSE;
@@ -51,13 +58,14 @@ class Controller_Api extends Controller_Welcome {
 			$result['content']=array();
 			
 			foreach ($orders as $order) {
+				
 				array_push($result['content'], array('id'=>$order->id,
 													'type'=>$order->type,
 													'warehouse_id'=>$order->warehouse_id,
 													'quantity'=>$order->quantity,
 													'pickup_date'=>$order->pickup_date,
 													'create_date'=>$order->create_date,
-													'display_name'=> "Zam.:".$order->id." Data:".$order->create_date." Typ:".Order::instance()->types_short[$order->type]));  	
+													'display_name'=>" Typ:".$this->types_short[$order->type]." Zam.:".$order->id." Data:".$order->create_date));  	
 			}
 		
 			//if(Auth::instance()->login($_POST['user'], $_POST['password'])) {
@@ -87,8 +95,15 @@ class Controller_Api extends Controller_Welcome {
 		if($this->request->method()===HTTP_Request::POST) {
 				
 			$result = array();
+			$order=ORM::factory('Order')->where('id', '=', $_POST['order_id'])->find();
+			
+			if ($order->type=='Zamówienie pustych pudeł i kodów kreskowych' || $order->type=='Zamówienie odbioru i magazynowania pudeł') {
+				$result['scan'] = TRUE;
+			}else {
+				$result['scan'] = FALSE;
+			}
 				
-			$order_boxes=ORM::factory('Order')->where('id', '=', $_POST['order_id'])->find()->boxes->find_all();
+			$order_boxes=$order->boxes->find_all();
 			
 			$content = array();
 			$result['content'] = array();
@@ -122,10 +137,19 @@ class Controller_Api extends Controller_Welcome {
 	
 	public function action_confirmOrder() {
 		$result = array();
-		$result['status'] = "OK";
-		$result['content'] = NULL;
-		echo json_encode($result);
-	
+		$order=ORM::factory('Order')->where('id', '=', $_POST['order_id'])->find();
+		//$order->status="Przyjęte do realizacji";
+		
+		if($order->update()) {
+			$result['status'] = "OK";
+			$result['content'] = NULL;
+			echo json_encode($result);
+		}else {
+			$result['status'] = "ERROR";
+			$result['content'] = "Update of the order went badly, im afraid, sir!";
+			echo json_encode($result);
+				
+		}
 	}
 	
 	public function action_index() {
