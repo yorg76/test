@@ -14,10 +14,16 @@
 			<div class="portlet-body">
 				<div class="table-toolbar">
 					<div class="btn-group">
-						<button class="btn green"
-							onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_add'">
-							Dodaj <i class="fa fa-plus"></i>
-						</button>
+					
+						<?php foreach ($acls as $acl):?>
+							<?php if($acl->id==95 && $acl->checkRights()):?>
+								<button class="btn green"
+									onClick="javascript:window.location='<?php echo $acl->controller?>/<?php echo $acl->action?>'">
+									Dodaj <i class="fa fa-plus"></i>
+								</button>
+							<?php endif;?>
+						<?php endforeach;?>
+						
 					</div>
 				</div>
 				<table class="table table-striped table-hover table-bordered"
@@ -49,19 +55,27 @@
 								</td>
 							<td>
 								<div class="margin-bottom-5">
+								<?php foreach ($acls as $acl):?>
+									<?php if($acl->id==99 && $acl->checkRights()):?>
 									<button class="btn btn-xs green margin-bottom"
-										onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_view/<?php echo $virtualbriefcase->id ;?>';">
+										onClick="javascript:window.location='<?php echo $acl->controller?>/<?php echo $acl->action?>/<?php echo $virtualbriefcase->id ;?>';">
 										<i class="glyphicon glyphicon-info-sign"></i> Przegląd
 									</button>
+									<?php endif;?>
+									<?php if($acl->id==97 && $acl->checkRights()):?>
 									<button class="btn btn-xs yellow margin-bottom"
-										onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_edit/<?php echo $virtualbriefcase->id ;?>';">
+										onClick="javascript:window.location='<?php echo $acl->controller?>/<?php echo $acl->action?>/<?php echo $virtualbriefcase->id ;?>';">
 										<i class="icon-layers"></i> Edytuj
 									</button>
+									<?php endif;?>
+									<?php if($acl->id==96 && $acl->checkRights()):?>
 									<button
 										class="btn btn-xs virtualbriefcase-delete red margin-bottom"
 										id="<?php echo $virtualbriefcase->id; ?>">
 										<i class="fa fa-recycle"></i> Usuń
 									</button>
+									<?php endif;?>
+								<?php endforeach;?>
 								</div>
 							</td>
 						</tr>

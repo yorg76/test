@@ -103,6 +103,8 @@ public $controller_title = 'Wirtualne teczki';
 	
 	public function action_virtualbriefcases() {
 		
+		$acls = ORM::factory('Acl')->order_by('order')->find_all();
+		$this->content->bind ('acls', $acls );
 		$customer=Auth::instance()->get_user()->customer;
 		$divisions = $customer->divisions->find_all();
 		$divisions_ids= array();
