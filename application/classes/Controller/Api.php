@@ -138,7 +138,7 @@ class Controller_Api extends Controller_Welcome {
 	public function action_confirmOrder() {
 		$result = array();
 		$order=ORM::factory('Order')->where('id', '=', $_POST['order_id'])->find();
-		//$order->status="Przyjęte do realizacji";
+		$order->status="Przyjęte do realizacji";
 		
 		if($order->update()) {
 			$result['status'] = "OK";
@@ -152,6 +152,22 @@ class Controller_Api extends Controller_Welcome {
 		}
 	}
 	
+	public function action_completeOrder() {
+		$result = array();
+		$order=ORM::factory('Order')->where('id', '=', $_POST['order_id'])->find();
+		$order->status="Oczekuje na wysłanie";
+	
+		if($order->update()) {
+			$result['status'] = "OK";
+			$result['content'] = NULL;
+			echo json_encode($result);
+		}else {
+			$result['status'] = "ERROR";
+			$result['content'] = "Update of the order went badly, im afraid, sir!";
+			echo json_encode($result);
+	
+		}
+	}	
 	public function action_index() {
 		$result = array();
 		$result['status'] = "ERROR";
