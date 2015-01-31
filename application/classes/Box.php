@@ -18,6 +18,7 @@ class Box{
 	public $storagecategory;
 	public $warehouse;
 	public $boxbarcode;
+	public $division;
 
 
 	
@@ -43,6 +44,7 @@ class Box{
 			$this->warehouse_id = $this->box->warehouse->id;
 			//$this->boxbarcode_id = $this->box->boxbarcode->id;
 			$this->storage_category_id = $this->box->storagecategory->id;
+			$this->division_id = $this->box->division->id;
 				
 	
 	
@@ -51,6 +53,7 @@ class Box{
 			$this->warehouse = ORM::factory('Warehouse');
 			$this->boxbarcode =  ORM::factory('BoxBarcode');
 			$this->storagecategory = ORM::factory('StorageCategory', NULL);
+			//$this->division = ORM::factory('Division', NULL);
 			
 		}
 	}
@@ -96,8 +99,10 @@ class Box{
 		$this->box->values($params);
 		$this->warehouse=ORM::factory('Warehouse',$params['warehouse_id']);
 		$this->storagecategory=ORM::factory('StorageCategory',$params['storage_category_id']);
+		$this->division=ORM::factory('Division',$params['division_id']);
 		$this->box->warehouse_id=$this->warehouse->id;
 		$this->box->storage_category_id=$this->storagecategory->id;
+		$this->box->division_id=$this->division->id;
 		
 		if($this->box->update()) {
 			$this->id=$this->box->id;

@@ -10,7 +10,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/warehouse/box_edit/<?php echo $box->id ?>" method="POST" id="add_box_form">
+		<form role="form" action="/warehouse/box_edit/<?php echo $box->id ?>" method="POST" id="edit_box_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -36,6 +36,7 @@
 								?>
 								<?php endforeach;?>
 							</select>
+							<span class="help-block"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -80,7 +81,7 @@
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<select class="form-control" name="warehouse_id">
+						<select class="form-control" name="warehouse_id">
 								<option>-- Wybierz magazyn --</option>
 								<?php foreach ($warehouses as $warehouse):?>
 								<?php 
@@ -92,11 +93,30 @@
 								?>
 								<?php endforeach;?>
 							</select>
+							<span class="help-block"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Dział					
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" name="division_id">
+								<option>-- Wybierz dział --</option>
+								<?php foreach ($divisions as $division):?>
+								<?php 
+										if ($box->division->id == $division->id) $checked=" selected=\"true\"";
+										else $checked="";
+										
+										echo "<option value=\"".$division->id."\"".$checked." >".$division->name."</option>";
+
+								?>
+								<?php endforeach;?>
+							</select>
+							<span class="help-block"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Opis
-							<span class="required" aria-required="true"> * </span>
 						</label>
 						<textarea class="form-control" name="description"><?php echo $document->description; ?></textarea>
 						<span class="help-block"></span>
@@ -105,10 +125,12 @@
 						<label class="control-label">Status blokady
 							<span class="required" aria-required="true"> * </span>
 						</label>
+						
 						<div class="input-icon">
 							<i class="fa fa-lock fa-fw"></i>
 							<input id="lock" class="form-control" type="text" name="lock" value="<?php echo $box->lock;?>">
 						</div>
+						<span class="help-block"></span>
 					</div>
 		
 					<div class="form-group">
@@ -119,6 +141,7 @@
 							<i class="fa fa-lock fa-fw"></i>
 							<input id="seal" class="form-control" type="text" name="seal" value="<?php echo $box->seal;?>">
 						</div>
+						<span class="help-block"></span>
 					</div>
 					<br/>
 					<br/>

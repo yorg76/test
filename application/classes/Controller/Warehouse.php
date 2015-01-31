@@ -106,25 +106,42 @@ class Controller_Warehouse extends Controller_Welcome {
 	}
 	
 	public function action_boxes() {
+		
 		$customer=Auth::instance()->get_user()->customer;
-		$warehouses = $customer->warehouses->find_all();
 		$storagecategory = ORM::factory('StorageCategory');
 		$storagecategories = $storagecategory->find_all();
 		
-		$warehouses_ids= array();
-		$boxes = array();
-		
-		foreach ($warehouses as $warehouse) {
-			array_push($warehouses_ids, $warehouse->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
+			$boxes = array();
+			$boxes = ORM::factory('Box')->find_all();
 		}
-		
-		$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
-		$user = Auth::instance()->get_user();
+		elseif(Auth::instance()->logged_in('manager')){
+			$warehouses = $customer->warehouses->find_all();
+			$warehouses_ids= array();
+			$boxes = array();
+			foreach ($warehouses as $warehouse) {
+				array_push($warehouses_ids, $warehouse->id);
+			}
+			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+		}
+		elseif(Auth::instance()->logged_in('login')) {
+			$user = Auth::instance()->get_user();
+			$divisions = $user->divisions->find_all();
+			$divisions_ids= array();
+			$boxes = array();
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			$boxes = ORM::factory('Box')->where('division_id','IN', $divisions_ids)->find_all();
+		}
+				
 		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
 		$this->content->bind('storagecategories', $storagecategories);
 		$this->content->bind('user', $user);
 		$this->content->bind('boxes', $boxes);
+		$this->content->bind('divisions', $divisions);
 				
 	}
 	
@@ -271,8 +288,10 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->content->bind('storagecategories', $storagecategories);
 		$customer = Auth::instance()->get_user()->customer;
 		$warehouses = $customer->warehouses->find_all();
-		$this->content->bind('customers', $customers);
+		$divisions = $customer->divisions->find_all();
+		$this->content->bind('customer', $customer);
 		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('divisions', $divisions);
 		
 		if($this->request->param('id') > 0) {
 			

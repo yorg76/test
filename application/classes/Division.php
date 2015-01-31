@@ -13,6 +13,7 @@ class Division{
 	public $description;
 	public $customer;
 	public $virtualbriefcases;
+	public $boxes;
 	
 	public static function instance($id=NULL) {
 		if($id>0) {
@@ -31,6 +32,7 @@ class Division{
 			$this->description=$this->division->description;
 			$this->customer = $this->division->customer;
 			$this->virtualbriefcases = $this->division->virtualbriefcases->find();
+			$this->boxes = $this->division->boxes->find();
 			
 	
 				

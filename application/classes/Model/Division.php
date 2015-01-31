@@ -9,7 +9,8 @@ class Model_Division extends ORM {
 
 	protected $_has_many = array(
 			'users'=> array('model' =>  'User', 'through' => 'divisions_users'),
-			'virtualbriefcases'=> array('model' => 'VirtualBriefcase')
+			'virtualbriefcases'=> array('model' => 'VirtualBriefcase'),
+			'boxes'=> array('model' => 'Box')
 			
 	);
 		

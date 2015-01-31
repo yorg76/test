@@ -33,7 +33,9 @@
 								?>
 								<?php endforeach;?>
 							</select>
+							
 						</div>
+						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Data początku magazynowania
@@ -85,7 +87,9 @@
 								?>
 								<?php endforeach;?>
 							</select>
+							
 						</div>
+						<span class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Opis
