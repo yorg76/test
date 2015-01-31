@@ -70,7 +70,7 @@ namespace ArchiDox.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 192.168.3.4.
+        ///   Looks up a localized string similar to b2b.archiwumdepozytowe.pl:8080.
         /// </summary>
         public static string archidoxHOST {
             get {

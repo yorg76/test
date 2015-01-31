@@ -171,7 +171,7 @@ class Controller_Api extends Controller_Welcome {
 		
 		if($order->order->quantity == $order->order->boxes->count_all()) {
 			
-			if($order->deliverOrder()) {
+			if($order->customerdeliveryOrder()) {
 			
 				$result['status'] = "DONE";
 				$result['content'] = null;

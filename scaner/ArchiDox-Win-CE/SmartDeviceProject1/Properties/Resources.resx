@@ -122,7 +122,7 @@
     <comment>Url API do dodwania pudeł do zamówienia</comment>
   </data>
   <data name="archidoxHOST" xml:space="preserve">
-    <value>192.168.3.4</value>
+    <value>b2b.archiwumdepozytowe.pl:8080</value>
     <comment>Adres serwera AchiDox</comment>
   </data>
   <data name="loginURL" xml:space="preserve">

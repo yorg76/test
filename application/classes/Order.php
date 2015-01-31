@@ -246,7 +246,7 @@ class Order {
 			
 	}
 	
-	public function deliverOrder() {
+	public function customerdeliveryOrder() {
 		$log=Kohana_Log::instance();
 	
 		//TODO API firmy kurierskiej
