@@ -1,0 +1,4 @@
+C:\Users\mkowalczyk\Documents\Visual Studio 2008\Projects\SmartDeviceProject1\SmartDeviceProject1\obj\Release\ResolveAssemblyReference.cache
+C:\Users\mkowalczyk\Documents\Visual Studio 2008\Projects\SmartDeviceProject1\SmartDeviceProject1\obj\Release\SmartDeviceProject1.LoginForm.resources
+C:\Users\mkowalczyk\Documents\Visual Studio 2008\Projects\SmartDeviceProject1\SmartDeviceProject1\obj\Release\ArchiDox.Properties.Resources.resources
+C:\Users\mkowalczyk\Documents\Visual Studio 2008\Projects\SmartDeviceProject1\SmartDeviceProject1\obj\Release\ArchiDox for Windows.csproj.GenerateResource.Cache

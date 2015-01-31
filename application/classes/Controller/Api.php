@@ -169,34 +169,47 @@ class Controller_Api extends Controller_Welcome {
 		
 		$order = Order::instance($_POST['order_id']);
 		
-		$box = ORM::factory('Box');
-		
-		$box->id=$_POST['box_id'];
-		$box->date_from=date('Y-m-d');
-		$box->date_reception=date('Y-m-d');
-		$box->status='W trakcie transportu';
-		
-		if($box->save()) {
+		if($order->order->quantity == $order->order->boxes->count_all()) {
 			
-			$order->order->add('boxes',$box->id);
+			if($order->deliverOrder()) {
 			
-			$result['status'] = "OK";
-			
-			$content['id'] = $box->id;
-			$content['date_from'] = $box->date_from;
-			$content['status'] = $box->status;
-			$content['warehouse_id'] = -1;
-			$content['display_name'] = "Pudło:".$box->id ." Mag.: 0 Data:".$box->date_from;
-			
-			$result['content']=$content;
-				
-			echo json_encode($result);
+				$result['status'] = "DONE";
+				$result['content'] = null;
+				echo json_encode($result);
+			}else {
+				$result['status'] = "ERROR";
+				$result['content'] = "Update of the order went badly, im afraid, sir!";
+				echo json_encode($result);
+			}
 		}else {
-			$result['status'] = "ERROR";
-			$result['content'] = "Update of the order went badly, im afraid, sir!";
-			echo json_encode($result);	
-		}
+			$box = ORM::factory('Box');
 		
+			$box->id=$_POST['box_id'];
+			$box->date_from=date('Y-m-d');
+			$box->date_reception=date('Y-m-d');
+			$box->status='W trakcie transportu';
+		
+			if($box->save()) {
+			
+				$order->order->add('boxes',$box->id);
+			
+				$result['status'] = "OK";
+			
+				$content['id'] = $box->id;
+				$content['date_from'] = $box->date_from;
+				$content['status'] = $box->status;
+				$content['warehouse_id'] = -1;
+				$content['display_name'] = "Pudło:".$box->id ." Mag.: 0 Data:".$box->date_from;
+			
+				$result['content']=$content;
+				
+				echo json_encode($result);
+			}else {
+				$result['status'] = "ERROR";
+				$result['content'] = "Update of the order went badly, im afraid, sir!";
+				echo json_encode($result);	
+			}
+		}
 	}
 	
 	public function action_index() {
