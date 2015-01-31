@@ -55,6 +55,61 @@ class Controller_User extends Controller_Welcome {
 	}
 	public function action_dashboard() {
 		
+		
+		$customer=Auth::instance()->get_user()->customer;
+		$storagecategory = ORM::factory('StorageCategory');
+		$storagecategories = $storagecategory->find_all();
+		
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
+			$boxes = array();
+			$boxes = ORM::factory('Box')->count_all();
+		}
+		elseif(Auth::instance()->logged_in('manager')){
+			$warehouses = $customer->warehouses->count_all();
+			$warehouses_ids= array();
+			$boxes = array();
+			foreach ($warehouses as $warehouse) {
+				array_push($warehouses_ids, $warehouse->id);
+			}
+			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->count_all();
+		}
+		elseif(Auth::instance()->logged_in('login')) {
+			$user = Auth::instance()->get_user();
+			$divisions = $user->divisions->find_all();
+			$divisions_ids= array();
+			$boxes = array();
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			$boxes = ORM::factory('Box')->where('division_id','IN', $divisions_ids)->count_all();
+		}
+		
+		$this->content->bind('customer', $customer);
+		$this->content->bind('warehouses', $warehouses);
+		$this->content->bind('storagecategories', $storagecategories);
+		$this->content->bind('user', $user);
+		$this->content->bind('boxes', $boxes);
+		$this->content->bind('divisions', $divisions);
+		
+		//=============================================
+		
+		$user = Auth::instance()->get_user();
+		$customer=$user->customer;
+		$users = $customer->users->find_all();
+		$users_ids=array();
+		
+		foreach ($users as $u) {
+			array_push($users_ids, $u->id);
+		}
+		
+		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->count_all();
+		$this->content->bind('orders', $orders);
+		
+		//==============================================
+		
+		$customers = Auth::instance()->get_user()->customer->count_all();
+		$this->content->bind('customers', $customers);
 	}
 	
 	public function action_calendar() {
