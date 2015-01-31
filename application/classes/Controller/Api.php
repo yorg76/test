@@ -89,9 +89,6 @@ class Controller_Api extends Controller_Welcome {
 		$log=Kohana_Log::instance();
 		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
 		
-		
-		
-		
 		if($this->request->method()===HTTP_Request::POST) {
 				
 			$result = array();
@@ -137,10 +134,9 @@ class Controller_Api extends Controller_Welcome {
 	
 	public function action_confirmOrder() {
 		$result = array();
-		$order=ORM::factory('Order')->where('id', '=', $_POST['order_id'])->find();
-		$order->status="Przyjęte do realizacji";
+		$order = Order::instance($_POST['order_id']);
 		
-		if($order->update()) {
+		if($order->acceptOrder()) {
 			$result['status'] = "OK";
 			$result['content'] = NULL;
 			echo json_encode($result);
@@ -154,10 +150,9 @@ class Controller_Api extends Controller_Welcome {
 	
 	public function action_completeOrder() {
 		$result = array();
-		$order=ORM::factory('Order')->where('id', '=', $_POST['order_id'])->find();
-		$order->status="Oczekuje na wysłanie";
+		$order = Order::instance($_POST['order_id']);
 	
-		if($order->update()) {
+		if($order->completeOrder()) {
 			$result['status'] = "OK";
 			$result['content'] = NULL;
 			echo json_encode($result);
@@ -168,6 +163,42 @@ class Controller_Api extends Controller_Welcome {
 	
 		}
 	}	
+	
+	public function action_addOrderBox() {
+		$result = array();
+		
+		$order = Order::instance($_POST['order_id']);
+		
+		$box = ORM::factory('Box');
+		
+		$box->id=$_POST['box_id'];
+		$box->date_from=date('Y-m-d');
+		$box->date_reception=date('Y-m-d');
+		$box->status='W trakcie transportu';
+		
+		if($box->save()) {
+			
+			$order->order->add('boxes',$box->id);
+			
+			$result['status'] = "OK";
+			
+			$content['id'] = $box->id;
+			$content['date_from'] = $box->date_from;
+			$content['status'] = $box->status;
+			$content['warehouse_id'] = -1;
+			$content['display_name'] = "Pudło:".$box->id ." Mag.: 0 Data:".$box->date_from;
+			
+			$result['content']=$content;
+				
+			echo json_encode($result);
+		}else {
+			$result['status'] = "ERROR";
+			$result['content'] = "Update of the order went badly, im afraid, sir!";
+			echo json_encode($result);	
+		}
+		
+	}
+	
 	public function action_index() {
 		$result = array();
 		$result['status'] = "ERROR";
