@@ -116,7 +116,7 @@ class Order {
 					
 				$user = Auth_ORM::instance()->get_user();
 					
-				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','delivery_maganager')->find_all();
+				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','operator')->find_all();
 	
 				foreach($delivery_managers as $dm) {
 	
@@ -204,7 +204,7 @@ class Order {
 					
 				$user = Auth_ORM::instance()->get_user();
 					
-				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','delivery_maganager')->find_all();
+				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','operator')->find_all();
 	
 				foreach($delivery_managers as $dm) {
 	
@@ -287,7 +287,7 @@ class Order {
 					
 				$user = Auth_ORM::instance()->get_user();
 					
-				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','delivery_maganager')->find_all();
+				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','operator')->find_all();
 	
 				foreach($delivery_managers as $dm) {
 	
@@ -367,7 +367,7 @@ class Order {
 					
 				$user = Auth_ORM::instance()->get_user();
 					
-				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','delivery_maganager')->find_all();
+				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','operator')->find_all();
 				
 				foreach($delivery_managers as $dm) {
 						
