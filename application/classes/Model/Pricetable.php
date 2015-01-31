@@ -52,6 +52,12 @@ class Model_Pricetable extends ORM {
 						}
 							),
 				),
+				'position_disposal' => array(
+						array(function($value) {
+							return str_replace(array(',',' '), array('.',''), $value);
+						}
+							),
+				),
 				
 		);
 	}
