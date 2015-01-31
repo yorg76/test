@@ -48,8 +48,9 @@ class Controller_Ajax extends Controller_Welcome {
 	}
 	
 	public function action_get_user_notifications() {
-		$user= Auth_ORM::instance()->get_user();
-		if($user->loaded()) {
+		$user=Auth_ORM::instance()->get_user();
+		
+		if($user) {
 			$notification=$user->notifications->where('status','=','0')->find();
 		
 			if($notification->loaded()) {
