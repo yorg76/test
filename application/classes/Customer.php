@@ -197,8 +197,10 @@ class Customer  {
 			if($this->customer->delete()) {
 				$this->customer=NULL;
 				$log->add(Log::DEBUG,"Company has been removed\n");
+				$db->commit();
 				return true;
 			} else {
+				$db->commit();
 				return false;
 			}
 			$db->commit();

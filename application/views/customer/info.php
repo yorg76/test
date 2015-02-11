@@ -7,10 +7,7 @@
 								<a href="#tab_1_1" data-toggle="tab">
 								Ogólne </a>
 							</li>
-							<li>
-								<a href="#tab_1_3" data-toggle="tab">
-								Statystyki </a>
-							</li>
+
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1_1">
@@ -20,14 +17,9 @@
 											<li>
 												<img src="<?php echo ASSETS_ADMIN_PAGES_MEDIA ?>profile/profile-img.png" class="img-responsive" alt="">
 											</li>
+
 											<li>
-												<a href="#">
-												Informacje systemowe <span>
-												3 </span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
+												<a href="/helpdesk">
 												Helpdesk </a>
 											</li>
 											<li>
@@ -57,7 +49,7 @@
 											</div>
 											<!--end col-md-8-->
 											<div class="col-md-4">
-												<div class="portlet sale-summary">
+												<div class="portlet sale-summary" style="display:none;">
 													<div class="portlet-title">
 														<div class="caption">
 															 Sales Summary

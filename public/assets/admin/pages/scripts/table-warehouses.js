@@ -221,7 +221,7 @@ var TableBoxes = function () {
                 [5, 15, 20, "Wszystkie"] // change per page values here
             ],
             // set the initial value
-            "pageLength": -1,
+            "pageLength": 15,
 
             "language": {
                 "lengthMenu": " _MENU_ wierszy",

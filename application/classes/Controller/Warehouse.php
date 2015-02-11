@@ -300,6 +300,11 @@ class Controller_Warehouse extends Controller_Welcome {
 			
 			if($this->request->method()===HTTP_Request::POST) {
 				$params = $_POST;
+
+				$params['date_from']=date('Y-m-d',strtotime(str_replace('/','-',$_POST['date_from'])));
+				$params['date_to'] =date('Y-m-d',strtotime(str_replace('/','-',$_POST['date_to'])));
+				$params['date_reception'] =date('Y-m-d',strtotime(str_replace('/','-',$_POST['date_reception'])));
+							
 				//$box->values($_POST);
 				$box=Box::instance($this->request->param('id'));
 				

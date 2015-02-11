@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Czas wygenerowania: 31 Sty 2015, 03:10
+-- Czas wygenerowania: 11 Lut 2015, 09:56
 -- Wersja serwera: 5.1.41
 -- Wersja PHP: 5.4.29
 
@@ -342,19 +342,6 @@ INSERT INTO `acls_roles` (`role_id`, `acl_id`) VALUES
 (1, 27),
 (1, 28),
 (1, 29),
-(1, 30),
-(1, 31),
-(1, 32),
-(1, 33),
-(1, 34),
-(1, 36),
-(1, 37),
-(1, 38),
-(1, 39),
-(1, 40),
-(1, 41),
-(1, 42),
-(1, 43),
 (1, 44),
 (1, 45),
 (1, 46),
@@ -369,60 +356,6 @@ INSERT INTO `acls_roles` (`role_id`, `acl_id`) VALUES
 (1, 75),
 (1, 76),
 (1, 77),
-(1, 78),
-(1, 79),
-(1, 80),
-(1, 81),
-(1, 82),
-(1, 83),
-(1, 84),
-(1, 85),
-(1, 86),
-(1, 87),
-(1, 88),
-(1, 89),
-(1, 90),
-(1, 91),
-(1, 92),
-(1, 93),
-(1, 94),
-(1, 98),
-(1, 99),
-(1, 100),
-(1, 101),
-(1, 102),
-(1, 103),
-(1, 104),
-(1, 105),
-(1, 106),
-(1, 107),
-(1, 108),
-(1, 109),
-(1, 110),
-(1, 111),
-(1, 112),
-(1, 113),
-(1, 114),
-(1, 115),
-(1, 116),
-(1, 117),
-(1, 118),
-(1, 119),
-(1, 120),
-(1, 121),
-(1, 122),
-(1, 123),
-(1, 124),
-(1, 125),
-(1, 126),
-(1, 127),
-(1, 128),
-(1, 130),
-(1, 131),
-(1, 132),
-(1, 133),
-(1, 134),
-(1, 135),
 (3, 22),
 (3, 23),
 (3, 24),
@@ -495,6 +428,9 @@ INSERT INTO `acls_roles` (`role_id`, `acl_id`) VALUES
 (3, 92),
 (3, 93),
 (3, 94),
+(3, 95),
+(3, 96),
+(3, 97),
 (3, 98),
 (3, 99),
 (3, 100),
@@ -526,6 +462,7 @@ INSERT INTO `acls_roles` (`role_id`, `acl_id`) VALUES
 (3, 126),
 (3, 127),
 (3, 128),
+(3, 129),
 (3, 130),
 (3, 131),
 (3, 132),
@@ -569,21 +506,7 @@ INSERT INTO `acls_roles` (`role_id`, `acl_id`) VALUES
 (4, 74),
 (4, 75),
 (4, 76),
-(4, 77),
-(4, 105),
-(4, 106),
-(4, 107),
-(4, 108),
-(4, 112),
-(4, 113),
-(4, 124),
-(4, 125),
-(4, 126),
-(4, 127),
-(4, 128),
-(4, 133),
-(4, 134),
-(4, 135);
+(4, 77);
 
 -- --------------------------------------------------------
 
@@ -613,7 +536,6 @@ CREATE TABLE IF NOT EXISTS `addresses` (
 
 INSERT INTO `addresses` (`id`, `city`, `street`, `number`, `flat`, `postal`, `country`, `telephone`, `address_type`, `customer_id`) VALUES
 (1, 'Default', 'Detault', '1', '1', '00-000', 'Default', '600123123', 'firmowy', 0),
-(2, 'Warszawa', 'Kaliska', '1', '42', '02-316', 'Polska', '664043792', 'firmowy', 1),
 (13, '', '', '', '', '', '', '', 'wysyłki', 0),
 (14, '', '', '', '', '', '', '', 'odbioru', 0),
 (15, '', '', '', '', '', '', '', 'odbioru', 0),
@@ -657,6 +579,8 @@ CREATE TABLE IF NOT EXISTS `boxbarcodes` (
 DROP TABLE IF EXISTS `boxes`;
 CREATE TABLE IF NOT EXISTS `boxes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `barcode` int(11) NOT NULL,
+  `place` varchar(32) DEFAULT NULL,
   `storage_category_id` int(11) DEFAULT NULL,
   `date_from` date DEFAULT NULL,
   `date_to` date DEFAULT NULL,
@@ -664,29 +588,28 @@ CREATE TABLE IF NOT EXISTS `boxes` (
   `description` varchar(255) DEFAULT NULL,
   `lock` varchar(32) DEFAULT NULL,
   `seal` varchar(32) DEFAULT NULL,
-  `status` enum('Na magazynie','W trakcie transportu','Wypożyczone','Przyjęcie na magazyn') DEFAULT 'Na magazynie',
+  `status` enum('Puste','Na magazynie','W trakcie transportu','Wypożyczone','Przyjęcie na magazyn') DEFAULT 'Na magazynie',
   `utilisation_status` int(2) DEFAULT '0',
   `utilisation_document` varchar(255) DEFAULT NULL,
   `warehouse_id` int(11) unsigned DEFAULT NULL,
+  `division_id` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_p_przypisana_do_km` (`storage_category_id`),
   KEY `FK_m_ma_na_stanie` (`warehouse_id`),
-  KEY `status` (`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=123456544 ;
+  KEY `status` (`status`),
+  KEY `division_id` (`division_id`),
+  KEY `barcode` (`barcode`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4568 ;
 
 --
 -- Zrzut danych tabeli `boxes`
 --
 
-INSERT INTO `boxes` (`id`, `storage_category_id`, `date_from`, `date_to`, `date_reception`, `description`, `lock`, `seal`, `status`, `utilisation_status`, `utilisation_document`, `warehouse_id`) VALUES
-(11, 1, '2014-01-01', '2014-01-01', '2014-01-01', NULL, '1', '1', 'Na magazynie', 0, NULL, 13),
-(12, 2, '2014-01-01', '2014-01-01', '2014-01-01', NULL, '1', '1', 'Na magazynie', 0, NULL, 4),
-(13, 3, '2014-01-01', '2014-01-01', '2014-01-01', NULL, '1', '1', 'Na magazynie', 0, NULL, 13),
-(20, 1, '2014-09-08', '2014-09-09', '2014-09-29', NULL, '1', '123', 'Na magazynie', 0, NULL, 2),
-(22, 7, '2015-01-05', '2016-08-31', '2015-01-05', 'Testowe pudło', '1', '1', 'Na magazynie', 0, NULL, 2),
-(123, NULL, '2015-01-31', NULL, '2015-01-31', NULL, NULL, NULL, 'W trakcie transportu', 0, NULL, NULL),
-(333, NULL, '2015-01-31', NULL, '2015-01-31', NULL, NULL, NULL, 'W trakcie transportu', 0, NULL, NULL),
-(1234, NULL, '2015-01-31', NULL, '2015-01-31', NULL, NULL, NULL, 'W trakcie transportu', 0, NULL, NULL);
+INSERT INTO `boxes` (`id`, `barcode`, `place`, `storage_category_id`, `date_from`, `date_to`, `date_reception`, `description`, `lock`, `seal`, `status`, `utilisation_status`, `utilisation_document`, `warehouse_id`, `division_id`) VALUES
+(123, 100001, '1001', 7, '2015-01-31', '2015-02-28', '2015-01-31', '', NULL, '', 'W trakcie transportu', 0, NULL, 3, 3),
+(333, 100002, '1001', NULL, '2015-01-31', NULL, '2015-01-31', NULL, NULL, NULL, 'W trakcie transportu', 0, NULL, NULL, NULL),
+(1234, 100003, '1001', NULL, '2015-01-31', NULL, '2015-01-31', NULL, NULL, NULL, 'W trakcie transportu', 0, NULL, NULL, NULL),
+(4567, 100004, '1001', NULL, '2015-01-31', NULL, '2015-01-31', NULL, NULL, NULL, 'W trakcie transportu', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -752,16 +675,14 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `create_date` (`create_date`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Zrzut danych tabeli `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `nip`, `regon`, `code`, `comments`, `www`, `create_date`) VALUES
-(0, '_Default', '123-123-12-12', '123456', 'DEFAULT', 'Domyślna firma - nie usuwać', 'https://www.bsdterminal.pl', '2014-01-01 00:00:00'),
-(1, 'BSDterminal', '951-197-60-37', '123456', 'BSD', 'Test', '', '0000-00-00 00:00:00'),
-(9, 'PHAR', '123-120-13-77', '', 'PHAR', '', 'http://www.phar.pl', '0000-00-00 00:00:00');
+(0, '_Default', '123-123-12-12', '123456', 'DEFAULT', 'Domyślna firma - nie usuwać', 'https://www.bsdterminal.pl', '2014-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -777,7 +698,7 @@ CREATE TABLE IF NOT EXISTS `divisions` (
   `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_nalezy_do` (`customer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Zrzut danych tabeli `divisions`
@@ -786,10 +707,7 @@ CREATE TABLE IF NOT EXISTS `divisions` (
 INSERT INTO `divisions` (`id`, `name`, `description`, `customer_id`) VALUES
 (1, 'DA 1', 'Dział testowy Admina 1', 0),
 (2, 'DA 2', 'Dział testowy Admina 2', 0),
-(3, 'DA 3', 'Dział testowy Admina 3			', 0),
-(4, 'DM 1', 'Dział do testów Mańka 1', 9),
-(5, 'DM 2', 'Dział do testów Mańka 2		', 9),
-(6, 'DM 3', 'Dział do testów Mańka 3', 9);
+(3, 'DA 3', 'Dział testowy Admina 3			', 0);
 
 -- --------------------------------------------------------
 
@@ -939,7 +857,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_notifications` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=130 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=134 ;
 
 --
 -- Zrzut danych tabeli `notifications`
@@ -1004,7 +922,11 @@ INSERT INTO `notifications` (`id`, `user_id`, `message`, `status`) VALUES
 (126, 1, 'Zamówienie 18 zmieniło status<br /><br />', 1),
 (127, 1, 'Zamówienie 19 zmieniło status<br /><br />', 1),
 (128, 1, 'Zamówienie 20 zmieniło status<br /><br />', 1),
-(129, 1, 'Zamówienie 21 zmieniło status<br /><br />', 1);
+(129, 1, 'Zamówienie 21 zmieniło status<br /><br />', 1),
+(130, 1, 'Zamówienie 25 zmieniło status<br /><br />', 1),
+(131, 3, 'Nowe zamówienie w systemie<br /><br /><p>Link do akceptacji: <a href="https://localhost/order/accept/99">Kliknij aby zaakceptować zamówienie</a></p>', 0),
+(132, 3, 'Nowe zamówienie w systemie<br /><br /><p>Link do akceptacji: <a href="https://localhost/order/accept/100">Kliknij aby zaakceptować zamówienie</a></p>', 0),
+(133, 3, 'Nowe zamówienie w systemie<br /><br /><p>Link do akceptacji: <a href="https://localhost/order/accept/101">Kliknij aby zaakceptować zamówienie</a></p>', 0);
 
 -- --------------------------------------------------------
 
@@ -1021,7 +943,7 @@ CREATE TABLE IF NOT EXISTS `orderdetails` (
   `box_date` date NOT NULL,
   `order_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=108 ;
 
 --
 -- Zrzut danych tabeli `orderdetails`
@@ -1112,7 +1034,29 @@ INSERT INTO `orderdetails` (`id`, `box_number`, `box_storagecategory`, `box_desc
 (82, 0, 0, '', '1970-01-01', 97),
 (83, 0, 0, '', '1970-01-01', 97),
 (84, 0, 0, '', '1970-01-01', 97),
-(85, 0, 0, '', '1970-01-01', 97);
+(85, 0, 0, '', '1970-01-01', 97),
+(86, 0, 0, '', '1970-01-01', 99),
+(87, 0, 0, '', '1970-01-01', 99),
+(88, 0, 0, '', '1970-01-01', 99),
+(89, 0, 0, '', '1970-01-01', 99),
+(90, 0, 0, '', '1970-01-01', 99),
+(91, 0, 0, '', '1970-01-01', 99),
+(92, 0, 0, '', '1970-01-01', 99),
+(93, 0, 0, '', '1970-01-01', 99),
+(94, 0, 0, '', '1970-01-01', 99),
+(95, 0, 0, '', '1970-01-01', 99),
+(96, 0, 0, '', '1970-01-01', 99),
+(97, 0, 0, '', '1970-01-01', 99),
+(98, 0, 0, '', '1970-01-01', 101),
+(99, 0, 0, '', '1970-01-01', 101),
+(100, 0, 0, '', '1970-01-01', 101),
+(101, 0, 0, '', '1970-01-01', 101),
+(102, 0, 0, '', '1970-01-01', 101),
+(103, 0, 0, '', '1970-01-01', 101),
+(104, 0, 0, '', '1970-01-01', 101),
+(105, 0, 0, '', '1970-01-01', 101),
+(106, 0, 0, '', '1970-01-01', 101),
+(107, 0, 0, '', '1970-01-01', 101);
 
 -- --------------------------------------------------------
 
@@ -1138,6 +1082,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `shipping_number` varchar(64) DEFAULT NULL,
   `pricetable_id` int(11) unsigned NOT NULL,
   `final_price` float DEFAULT NULL,
+  `sealed_boxes` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_z_zlozone` (`user_id`),
   KEY `FK_z_adres` (`address_id`),
@@ -1146,79 +1091,18 @@ CREATE TABLE IF NOT EXISTS `orders` (
   KEY `quantity_idx` (`quantity`),
   KEY `order_document` (`order_document`),
   KEY `utlisation_document` (`utilisation_document`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=84 ;
 
 --
 -- Zrzut danych tabeli `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `status`, `type`, `address_id`, `warehouse_id`, `division_id`, `quantity`, `pickup_date`, `create_date`, `order_document`, `utilisation_document`, `shipmentcompany_id`, `shipping_number`, `pricetable_id`, `final_price`) VALUES
-(4, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 12, '2014-09-12', '2014-09-12 07:40:15', NULL, NULL, NULL, NULL, 0, NULL),
-(5, 1, 'Zrealizowane', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 12, '2014-09-12', '2014-09-12 07:52:46', NULL, NULL, NULL, NULL, 0, NULL),
-(7, 1, 'Przyjęte do realizacji', '', 1, 2, 1, -1, '0000-00-00', '2014-09-12 11:47:33', NULL, NULL, NULL, NULL, 0, NULL),
-(8, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 14, 2, 1, 2, '2014-09-30', '2014-09-13 01:36:01', NULL, NULL, NULL, NULL, 0, NULL),
-(9, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 15, 2, 1, 2, '2014-09-30', '2014-09-13 01:36:27', NULL, NULL, NULL, NULL, 0, NULL),
-(10, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 16, 2, 1, 2, '2014-09-30', '2014-09-13 01:37:19', NULL, NULL, NULL, NULL, 0, NULL),
-(11, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 2, '2014-09-22', '2014-09-13 01:39:52', NULL, NULL, NULL, NULL, 0, NULL),
-(12, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 2, '2014-10-09', '2014-09-13 01:41:41', NULL, NULL, NULL, NULL, 0, NULL),
-(13, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 2, '2014-09-30', '2014-09-13 01:44:29', NULL, NULL, NULL, NULL, 0, NULL),
-(14, 1, 'Przyjęte do realizacji', '', 17, 2, 1, -1, '0000-00-00', '2014-09-13 02:18:51', NULL, NULL, NULL, NULL, 0, NULL),
-(15, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 2, '2014-09-30', '2014-09-13 02:21:07', NULL, NULL, NULL, NULL, 0, NULL),
-(16, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 2, '2014-09-30', '2014-09-13 02:23:25', NULL, NULL, NULL, NULL, 0, NULL),
-(17, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 2, '2014-10-11', '2014-09-13 13:20:26', NULL, NULL, NULL, NULL, 0, NULL),
-(18, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 1, '2014-09-30', '2014-09-13 14:35:22', NULL, NULL, NULL, NULL, 0, NULL),
-(19, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 1, '2014-09-24', '2014-09-13 14:36:50', NULL, NULL, NULL, NULL, 0, NULL),
-(20, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 11, '2014-10-11', '2014-09-13 14:40:12', NULL, NULL, NULL, NULL, 0, NULL),
-(21, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 1, 2, 1, 11, '2014-10-11', '2014-09-13 14:42:09', NULL, NULL, NULL, NULL, 0, NULL),
-(22, 1, 'Nowe', '', 1, 2, 1, -1, '0000-00-00', '2014-09-13 14:47:17', NULL, NULL, NULL, NULL, 0, NULL),
-(23, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 1, '2014-10-08', '2014-09-13 14:50:10', NULL, NULL, NULL, NULL, 0, NULL),
-(25, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 1, '2014-10-08', '2014-09-13 14:55:19', NULL, NULL, NULL, NULL, 0, NULL),
-(29, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 1, '2014-09-23', '2014-09-13 20:22:24', NULL, NULL, NULL, NULL, 0, NULL),
-(30, 1, 'Przyjęte do realizacji', 'Zamówienie skanowania, kopii dokumentów', 1, 2, 1, -1, '0000-00-00', '2014-09-13 23:10:11', NULL, NULL, NULL, NULL, 0, NULL),
-(31, 1, 'Dostarczone', '', 1, 2, 1, -1, '0000-00-00', '2014-09-13 23:18:09', NULL, NULL, 2, '45678987654', 0, NULL),
-(32, 1, 'Dostarczone', 'Zamówienie skanowania, kopii dokumentów', 1, 2, 1, -1, '0000-00-00', '2014-09-13 23:19:06', NULL, NULL, 2, '234567890', 0, NULL),
-(33, 1, 'Dostarczone', 'Zamówienie kopii notarialnej dokumentów', 1, 3, 2, -1, '0000-00-00', '2014-09-13 23:21:17', NULL, NULL, 1, '098765432', 0, NULL),
-(34, 1, 'Dostarczone', '', 20, 2, 1, -1, '0000-00-00', '2014-09-13 23:25:54', NULL, NULL, 2, '123', 0, NULL),
-(35, 1, 'Przyjęte do realizacji', '', 1, 2, 1, -1, '0000-00-00', '2014-09-15 00:54:29', NULL, NULL, NULL, NULL, 0, NULL),
-(40, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 2, 1, '2014-09-29', '2014-09-21 22:01:10', NULL, NULL, NULL, NULL, 0, NULL),
-(41, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 2, 1, '2014-09-29', '2014-09-21 23:36:13', NULL, NULL, NULL, NULL, 0, NULL),
-(42, 1, 'Oczekuje na wysłanie', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 2, 1, '2014-09-29', '2014-09-21 23:36:57', NULL, NULL, NULL, NULL, 0, NULL),
-(43, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 2, '2014-09-30', '2014-09-22 00:09:31', NULL, NULL, NULL, NULL, 0, NULL),
-(44, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 3, 2, '2014-09-30', '2014-09-23 01:54:27', NULL, NULL, NULL, NULL, 0, NULL),
-(45, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 3, 2, '2014-09-30', '2014-09-23 01:55:03', NULL, NULL, NULL, NULL, 0, NULL),
-(46, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 3, 2, '2014-09-30', '2014-09-23 01:56:00', NULL, NULL, NULL, NULL, 0, NULL),
-(47, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 3, 2, '2014-09-30', '2014-09-23 01:56:49', NULL, NULL, NULL, NULL, 0, NULL),
-(48, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 3, 2, '2014-09-30', '2014-09-23 01:57:01', NULL, NULL, NULL, NULL, 0, NULL),
-(49, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 3, 2, '2014-09-30', '2014-09-23 01:58:00', NULL, NULL, NULL, NULL, 0, NULL),
-(50, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 3, 2, '2014-09-30', '2014-09-23 02:01:40', NULL, NULL, NULL, NULL, 0, NULL),
-(51, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 2, '2014-09-30', '2014-09-24 06:29:24', NULL, NULL, NULL, NULL, 0, NULL),
-(52, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 2, '2014-09-30', '2014-09-24 06:34:51', NULL, NULL, NULL, NULL, 0, NULL),
-(53, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 2, '2014-09-30', '2014-09-24 06:39:42', '1411533606-1-1-.pdf', NULL, NULL, NULL, 0, NULL),
-(54, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 2, '2014-09-30', '2014-09-24 06:40:55', '1411533679-1-1-.pdf', NULL, NULL, NULL, 0, NULL),
-(67, 1, 'Przyjęte do realizacji', '', 1, 2, 1, -1, '0000-00-00', '2014-09-24 07:43:50', NULL, '1411537454-1-2-.pdf', NULL, NULL, 0, NULL),
-(68, 1, 'Oczekuje na wysłanie', '', 1, 2, 1, -1, '0000-00-00', '2014-09-28 21:46:58', NULL, '1411933642-1-2-.pdf', NULL, NULL, 3, NULL),
-(69, 1, 'Nowe', '', 1, 2, 1, -1, '0000-00-00', '2014-09-28 21:48:46', NULL, '1411933750-1-2-.pdf', NULL, NULL, 3, NULL),
-(70, 1, 'Nowe', '', 1, 2, 1, -1, '0000-00-00', '2014-09-28 21:53:08', NULL, '1411934012-1-2-.pdf', NULL, NULL, 3, NULL),
-(75, 1, 'Oczekuje na wysłanie', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 10, '2014-09-30', '2014-09-28 22:06:41', '1411934825-1-1-.pdf', NULL, NULL, NULL, 3, 240),
-(76, 1, 'Nowe', '', 22, 2, 1, -1, '0000-00-00', '2014-10-09 17:41:09', NULL, NULL, NULL, NULL, 3, 0),
-(77, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 2, '2014-10-31', '2014-10-09 17:54:35', '1412870099-1-1-.pdf', NULL, NULL, NULL, 3, 48),
-(78, 1, 'Przyjęte do realizacji', 'Zamówienie odbioru i magazynowania pudeł', 18, 2, 1, 1, '2015-01-26', '2015-01-04 23:25:47', '1420410371-1-1-.pdf', NULL, NULL, NULL, 3, 24),
-(80, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 24, NULL, 1, -1, '0000-00-00', '2015-01-06 22:10:58', NULL, NULL, NULL, NULL, 3, 144),
-(81, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 25, NULL, 1, -1, '0000-00-00', '2015-01-06 22:23:37', NULL, NULL, NULL, NULL, 3, 144),
-(82, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 1, NULL, 1, -1, '0000-00-00', '2015-01-06 22:28:19', NULL, NULL, NULL, NULL, 3, 144),
-(83, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 1, NULL, 1, -1, '2015-01-30', '2015-01-06 22:41:34', NULL, NULL, NULL, NULL, 3, 144),
-(84, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 1, NULL, 1, -1, '2015-01-29', '2015-01-06 22:46:01', NULL, NULL, NULL, NULL, 3, 144),
-(85, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 1, NULL, 1, 12, '2015-01-29', '2015-01-06 22:48:51', NULL, NULL, NULL, NULL, 3, 144),
-(86, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, NULL, 2, 12, '2015-01-28', '2015-01-06 23:06:30', '1420582014-1-1-.pdf', NULL, NULL, NULL, 3, 288),
-(89, 1, 'Nowe', 'Zamówienie zniszczenie magazynowanych pudeł', 1, NULL, NULL, -1, '0000-00-00', '2015-01-07 00:45:18', NULL, '1420587942-1-2-.pdf', NULL, NULL, 3, 0),
-(90, 1, 'Nowe', 'Wypożyczenie pudeł', 1, NULL, NULL, -1, '0000-00-00', '2015-01-07 12:41:16', NULL, NULL, NULL, NULL, 3, 24),
-(91, 1, 'Nowe', 'Wypożyczenie pudeł', 1, NULL, NULL, 2, '2015-01-07', '2015-01-07 13:19:19', NULL, NULL, NULL, NULL, 3, 24),
-(92, 1, 'Nowe', 'Zamówienie skanowania, kopii dokumentów', 1, NULL, NULL, -1, '0000-00-00', '2015-01-07 18:27:18', NULL, NULL, NULL, NULL, 3, 72),
-(93, 1, 'Nowe', 'Zamówienie skanowania, kopii dokumentów', 1, NULL, NULL, -1, '0000-00-00', '2015-01-07 18:36:17', NULL, NULL, NULL, NULL, 3, 72),
-(94, 1, 'Nowe', 'Zamówienie kopii notarialnej dokumentów', 1, NULL, NULL, -1, '0000-00-00', '2015-01-07 18:39:42', NULL, NULL, NULL, NULL, 3, 36),
-(95, 1, 'Nowe', 'Zamówienie skanowania, kopii dokumentów', 1, NULL, NULL, -1, '0000-00-00', '2015-01-07 18:50:15', NULL, NULL, NULL, NULL, 3, 24),
-(96, 1, 'Nowe', 'Zamówienie kopii notarialnej dokumentów', 1, NULL, NULL, -1, '0000-00-00', '2015-01-07 18:53:22', NULL, NULL, NULL, NULL, 3, 12),
-(97, 1, 'Nowe', 'Zamówienie odbioru i magazynowania pudeł', 18, NULL, 1, 10, '2015-01-31', '2015-01-31 02:21:57', '1422667341-1-1-.pdf', NULL, NULL, NULL, 3, 240);
+INSERT INTO `orders` (`id`, `user_id`, `status`, `type`, `address_id`, `warehouse_id`, `division_id`, `quantity`, `pickup_date`, `create_date`, `order_document`, `utilisation_document`, `shipmentcompany_id`, `shipping_number`, `pricetable_id`, `final_price`, `sealed_boxes`) VALUES
+(33, 1, 'Dostarczone', 'Zamówienie kopii notarialnej dokumentów', 1, 3, 2, -1, '0000-00-00', '2014-09-13 23:21:17', NULL, NULL, 1, '098765432', 0, NULL, 0),
+(80, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 24, NULL, 1, -1, '0000-00-00', '2015-01-06 22:10:58', NULL, NULL, NULL, NULL, 3, 144, 0),
+(81, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 25, NULL, 1, -1, '0000-00-00', '2015-01-06 22:23:37', NULL, NULL, NULL, NULL, 3, 144, 0),
+(82, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 1, NULL, 1, -1, '0000-00-00', '2015-01-06 22:28:19', NULL, NULL, NULL, NULL, 3, 144, 0),
+(83, 1, 'Nowe', 'Zamówienie pustych pudeł i kodów kreskowych', 1, NULL, 1, -1, '2015-01-30', '2015-01-06 22:41:34', NULL, NULL, NULL, NULL, 3, 144, 0);
 
 -- --------------------------------------------------------
 
@@ -1238,18 +1122,6 @@ CREATE TABLE IF NOT EXISTS `orders_boxes` (
 -- Zrzut danych tabeli `orders_boxes`
 --
 
-INSERT INTO `orders_boxes` (`order_id`, `box_id`) VALUES
-(7, 13),
-(14, 11),
-(34, 11),
-(34, 13),
-(34, 20),
-(67, 11),
-(68, 13),
-(68, 20),
-(19, 123),
-(20, 333),
-(21, 1234);
 
 -- --------------------------------------------------------
 
@@ -1269,13 +1141,6 @@ CREATE TABLE IF NOT EXISTS `orders_documents` (
 -- Zrzut danych tabeli `orders_documents`
 --
 
-INSERT INTO `orders_documents` (`order_id`, `document_id`) VALUES
-(93, 1),
-(93, 6),
-(93, 7),
-(94, 1),
-(94, 6),
-(94, 7);
 
 -- --------------------------------------------------------
 
@@ -1299,7 +1164,7 @@ CREATE TABLE IF NOT EXISTS `pricetables` (
   PRIMARY KEY (`id`),
   KEY `ma_przypisany` (`customer_id`),
   KEY `active` (`active`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Zrzut danych tabeli `pricetables`
@@ -1307,10 +1172,7 @@ CREATE TABLE IF NOT EXISTS `pricetables` (
 
 INSERT INTO `pricetables` (`id`, `boxes_reception`, `boxes_sending`, `boxes_storage`, `document_scan`, `document_copy`, `document_notarial_copy`, `position_disposal`, `discount`, `active`, `customer_id`) VALUES
 (1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0),
-(2, 23, 23, 23, 23, 23, 23, 0, 10, 0, 1),
-(3, 12, 12, 12, 12, 12, 12, 0, NULL, 1, 0),
-(4, 12, 1222, 12, 1, 12, 33, 0, NULL, 1, 1),
-(5, 10, 10, 10, 10, 10, 10, 10, NULL, 1, 9);
+(3, 12, 12, 12, 12, 12, 12, 0, NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1359,8 +1221,6 @@ INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
 (1, 1),
 (2, 1),
 (3, 1),
-(4, 1),
-(5, 1),
 (1, 2),
 (2, 3),
 (3, 4);
@@ -1442,7 +1302,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `uniq_email` (`email`),
   KEY `fk_customer_id` (`customer_id`),
   KEY `status` (`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Zrzut danych tabeli `users`
@@ -1451,9 +1311,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_login`, `firstname`, `lastname`, `status`, `customer_id`) VALUES
 (1, 'maciekk@bsdterminal.pl', 'admin', 'b18c10839e5f8bbc7b780e135c980bcf3e0086ea411fca2e65027a8a9f2f1efa', 38, 1422561727, '', '', 'Aktywny', 0),
 (2, 'manager@bsdterminal.pl', 'manager', '7f4f6fe32b07da194b9ebb5f435c21bbbb3df5575815c27fda6b3624dcd1b77d', 24, 1420761762, 'Manager', 'Manadżerowski', 'Aktywny', 0),
-(3, 'operator@bsdterminal.pl', 'operator', '7f4f6fe32b07da194b9ebb5f435c21bbbb3df5575815c27fda6b3624dcd1b77d', 38, 1422669991, 'Operator', 'Operatorski', 'Aktywny', 0),
-(4, 'pitupitu@bsdterminal.pl', 'tester', '78471f2db4b72234d0cba47dd5b7e134c2bde2c577fa0b7f010136f3b5eddd8f', 0, NULL, 'Tester', 'Testowy', 'Aktywny', 1),
-(5, 'dupa@bsdterminal.pl', 'lipton', '249fb960ced561dd50e29e5fb2c2532085a3a77e3f05c417fee6061cbf4c7cf8', 0, NULL, 'Lipton', 'Lipowy', 'Aktywny', 1);
+(3, 'operator@bsdterminal.pl', 'operator', '7f4f6fe32b07da194b9ebb5f435c21bbbb3df5575815c27fda6b3624dcd1b77d', 39, 1422672658, 'Operator', 'Operatorski', 'Aktywny', 0);
 
 -- --------------------------------------------------------
 
@@ -1494,7 +1352,7 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases` (
   `division_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_wt_przypisana_do` (`division_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Zrzut danych tabeli `virtualbriefcases`
@@ -1502,11 +1360,7 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases` (
 
 INSERT INTO `virtualbriefcases` (`id`, `name`, `description`, `division_id`) VALUES
 (2, 'TA 22', 'Teczka Admina 2', 2),
-(5, 'TM 1', 'Teczka Mańka 1			', 4),
-(6, 'TM 2', 'Teczka Mańka 2', 5),
-(7, 'TM 3', 'Teczka Mańka 3', 6),
-(10, 'Wirtualna Teczka 100', 'Test', 2),
-(11, 'Wirtualna Teczka 102', 'Luuuuuuuj			', 2);
+(10, 'Wirtualna Teczka 1001', 'Test 1', 2);
 
 -- --------------------------------------------------------
 
@@ -1587,8 +1441,6 @@ CREATE TABLE IF NOT EXISTS `virtualbriefcases_documents` (
 -- Zrzut danych tabeli `virtualbriefcases_documents`
 --
 
-INSERT INTO `virtualbriefcases_documents` (`virtualbriefcase_id`, `document_id`) VALUES
-(2, 3);
 
 -- --------------------------------------------------------
 
@@ -1673,19 +1525,14 @@ CREATE TABLE IF NOT EXISTS `warehouses` (
   `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_zarzadza` (`customer_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Zrzut danych tabeli `warehouses`
 --
 
 INSERT INTO `warehouses` (`id`, `name`, `description`, `customer_id`) VALUES
-(2, 'MA 3', 'Magazyn Admina 3				', 0),
-(3, 'MA 1', 'Magazyn Admina 1			', 1),
-(4, 'MM 1', 'Magazyn 1 Mańka', 9),
-(5, 'MM 2', 'Magazyn 2  Mańka', 9),
-(6, 'MM 3', 'Magazyn 3 Mańka					', 9),
-(13, 'MA 2', 'Magazyn Admina 2', 0);
+(3, 'MA 1', 'Magazyn Admina 1			', 0);
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -1707,7 +1554,7 @@ ALTER TABLE `boxbarcodes`
 -- Ograniczenia dla tabeli `boxes`
 --
 ALTER TABLE `boxes`
-  ADD CONSTRAINT `FK_m_ma_na_stanie` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`),
+  ADD CONSTRAINT `boxes_ibfk_1` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_p_przypisana_do_km` FOREIGN KEY (`storage_category_id`) REFERENCES `storagecategories` (`id`);
 
 --
@@ -1721,7 +1568,7 @@ ALTER TABLE `bulkpackagings_bulkpackagings`
 -- Ograniczenia dla tabeli `divisions`
 --
 ALTER TABLE `divisions`
-  ADD CONSTRAINT `FK_nalezy_do` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
+  ADD CONSTRAINT `divisions_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `divisions_users`
@@ -1756,10 +1603,9 @@ ALTER TABLE `notifications`
 -- Ograniczenia dla tabeli `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `FK_z_adres` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`),
-  ADD CONSTRAINT `FK_z_zlozone` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`),
-  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`division_id`) REFERENCES `divisions` (`id`);
+  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouses` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_6` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `orders_ibfk_7` FOREIGN KEY (`division_id`) REFERENCES `divisions` (`id`);
 
 --
 -- Ograniczenia dla tabeli `orders_boxes`
@@ -1779,7 +1625,7 @@ ALTER TABLE `orders_documents`
 -- Ograniczenia dla tabeli `pricetables`
 --
 ALTER TABLE `pricetables`
-  ADD CONSTRAINT `ma_przypisany` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
+  ADD CONSTRAINT `pricetables_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `roles_users`
@@ -1792,7 +1638,7 @@ ALTER TABLE `roles_users`
 -- Ograniczenia dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `FK_rejestruje_pracuje_w` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `user_tokens`
@@ -1804,7 +1650,7 @@ ALTER TABLE `user_tokens`
 -- Ograniczenia dla tabeli `virtualbriefcases`
 --
 ALTER TABLE `virtualbriefcases`
-  ADD CONSTRAINT `FK_wt_przypisana_do` FOREIGN KEY (`division_id`) REFERENCES `divisions` (`id`);
+  ADD CONSTRAINT `virtualbriefcases_ibfk_1` FOREIGN KEY (`division_id`) REFERENCES `divisions` (`id`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `virtualbriefcases_boxes`

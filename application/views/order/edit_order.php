@@ -17,8 +17,11 @@
 
 				<div id="tab_1-1" class="tab-pane active">
 					<div class="portlet-body form">
-						<h3 class="block"><?php echo $order->type ?></h3>									
-						<?php if($order->type == 'Zamówienie pudeł i kodów kreskowych') :?>
+						<h3 class="block"><?php echo $order->type ?></h3>	
+						
+														
+						<?php if($order->type == 'Zamówienie pustych pudeł i kodów kreskowych') :?>
+						
 							<div class="form-group">
 							<label class="control-label col-md-3">Magazyn</label>
 							<div class="col-md-4">
@@ -34,7 +37,8 @@
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-md-3">Dział</label>
+							<label class="control-label col-md-3">Dział<span
+								class="required" aria-required="true"> * </span></label>
 							<div class="col-md-4">
 								<select class="form-control" name="division">
 										<?php foreach($divisions as $division):?>
@@ -148,7 +152,8 @@
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-md-3">Dział</label>
+							<label class="control-label col-md-3">Dział<span
+								class="required" aria-required="true"> * </span></label>
 							<div class="col-md-4">
 								<select class="form-control" name="division">
 										<?php foreach($divisions as $division):?>
@@ -236,7 +241,9 @@
 
 						<h4 class="form-section">Opis pudła</h4>
 						<div class="margiv-top-10" id="description-container">
-								<?php foreach($order->order->orderdetails->find_all() as $ordd):?>
+								<?php foreach($order->order->orderdetails->find_all() as $ordd):
+								break;
+								?>
 								<h5 class="form-section">Opis pudła <?php echo $ordd->box_number;?></h5>
 							<div class="form-group">
 								<label class="control-label col-md-3">Numer paczki<span
@@ -363,7 +370,8 @@
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-md-3">Dział</label>
+							<label class="control-label col-md-3">Dział<span
+								class="required" aria-required="true"> * </span></label>
 							<div class="col-md-4">
 								<select class="form-control" name="division">
 										<?php foreach($divisions as $division):?>
@@ -514,7 +522,8 @@
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-md-3">Dział</label>
+							<label class="control-label col-md-3">Dział<span
+								class="required" aria-required="true"> * </span></label>
 							<div class="col-md-4">
 								<select class="form-control" name="division">
 										<?php foreach($divisions as $division):?>

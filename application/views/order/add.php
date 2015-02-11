@@ -91,7 +91,8 @@
 								<h3 class="block">Zamówienie pustych pudeł i kodów kreskowych</h3>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
+									<label class="control-label col-md-3">Dział<span class="required">	
+									* </span></label>
 									<div class="col-md-4">
 										<select class="form-control" name="division_0">
 												<option value="" > -- Wybierz -- </option>
@@ -133,7 +134,8 @@
 								<h3 class="block">Zamówienie odbioru i magazynowania pudeł</h3>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
+									<label class="control-label col-md-3">Dział<span class="required">	
+									* </span></label>
 									<div class="col-md-4">
 										<select class="form-control" name="division_1">
 												<option value="" > -- Wybierz -- </option>
@@ -141,6 +143,14 @@
 												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
 											<?php endforeach;?>
 										</select>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-md-3 control-label">Czy pudła mają plomby ?<span class="required">	
+									* </span></label>
+									<div class="col-md-4">
+										<input type="checkbox" value="sealed_boxes">
 									</div>
 								</div>
 								
@@ -469,14 +479,7 @@
 										<span class="help-block"></span>
 									</div>
 								</div>															
-								<div class="form-group">
-									<label class="control-label col-md-3">Kraj							
-									</label>
-									<div class="col-md-4">
-										<input  type="text" placeholder="" class="form-control" name="country"  />
-										<span class="help-block"></span>
-									</div>
-								</div>					
+			
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Telefon							
@@ -545,14 +548,7 @@
 										<span class="help-block"></span>
 									</div>
 								</div>															
-								<div class="form-group">
-									<label class="control-label col-md-3">Kraj							
-									</label>
-									<div class="col-md-4">
-										<input  type="text" placeholder="" class="form-control" name="country"  />
-										<span class="help-block"></span>
-									</div>
-								</div>					
+					
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Telefon							
@@ -585,7 +581,8 @@
 							<div class="order_type_0" style="display: none;" >
 															
 								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
+									<label class="control-label col-md-3">Dział<span class="required">	
+									* </span></label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="division_0"></p>
 									</div>
@@ -609,7 +606,8 @@
 								<h3 class="block">Zamówienie odbioru i magazynowania pudeł</h3>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Dział</label>
+									<label class="control-label col-md-3">Dział<span class="required">	
+									* </span></label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="division_1">
 										</p>
@@ -781,15 +779,7 @@
 										</p>
 									</div>
 								</div>															
-								<div class="form-group">
-									<label class="control-label col-md-3">Kraj							
-									</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="caountry">
-										</p>
-									</div>
-								</div>					
-								
+
 								<div class="form-group">
 									<label class="control-label col-md-3">Telefon							
 									</label>
@@ -853,15 +843,7 @@
 										</p>
 									</div>
 								</div>															
-								<div class="form-group">
-									<label class="control-label col-md-3">Kraj							
-									</label>
-									<div class="col-md-4">
-										<p class="form-control-static" data-display="country">
-										</p>
-									</div>
-								</div>					
-								
+
 								<div class="form-group">
 									<label class="control-label col-md-3">Telefon							
 									</label>

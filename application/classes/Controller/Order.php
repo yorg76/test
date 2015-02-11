@@ -198,7 +198,7 @@ class Controller_Order extends Controller_Welcome {
 				array_push($warehouses_ids, $warehouse->id);
 			}
 		
-			$boxes = ORM::factory('Box')->where('warehouse_id','IN',$warehouses_ids)->find_all();
+			$boxes = array();
 		
 			$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 			$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
@@ -222,9 +222,9 @@ class Controller_Order extends Controller_Welcome {
 				$params = $_POST;
 				
 				if($order->updateOrder($params)) {
-					Message::success(ucfirst(__('Zamówienie zostało przygotowane do wysłania')),'/order/orders_inprogress');
+					Message::success(ucfirst(__('Zamówienie zostało zapisane')),'/order/orders');
 				}else {
-					Message::error(ucfirst(__('Wystąpił problem podczas wysyłania zamówienia')),'/order/orders_inprogress');
+					Message::error(ucfirst(__('Wystąpił problem podczas wysyłania zamówienia')),'/order/edit_order/'.$this->request->param('id'));
 				}
 					
 			}

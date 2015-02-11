@@ -25,13 +25,15 @@
 					<thead>
 						<tr>
 							<th>Numer</th>
+							<th>Kod pudła</th>
+							<th>Regał</th>
 							<th>Magazyn</th>
 							<th>Kategoria przechowywania</th>
 							<th>Data początku magazynowania</th>
 							<th>Data końca magazynowania</th>
 							<th>Status</th>
 							<th>Plomba</th>
-							<th>Kod QR</th>
+							
 							<th>Opcje</th>
 						</tr>
 					</thead>
@@ -40,6 +42,14 @@
 							<tr>
 							<td>
 									 <?php echo $box->id;?>
+							</td>
+							<td>
+									 <img alt="barcode" src="/barcode/get/<?php echo $box->barcode; ?>" />
+							</td>
+							<td>
+									 <?php if($box->place != ''): ?>
+									 <img alt="barcode" src="/barcode/get/<?php echo $box->place; ?>" />
+									 <?php endif;?>
 							</td>
 							<td>
 									 <?php echo $box->warehouse->name;?>
@@ -59,9 +69,7 @@
 							<td>
 									 <?php echo $box->seal;?>
 							</td>
-							<td>
-									 <img alt="barcode" src="/barcode/get/<?php echo $box->id; ?>" />
-							</td>
+
 							<td>
 								<div class="margin-bottom-5">
 									<button class="btn btn-xs green margin-bottom"

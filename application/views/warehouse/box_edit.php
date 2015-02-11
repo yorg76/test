@@ -39,6 +39,17 @@
 							<span class="help-block"></span>
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label class="control-label">Regał
+						</label>
+						<div class="input-icon">
+							<i class="fa fa-lock fa-fw"></i>
+							<input id="seal" class="form-control" type="text" name="place" value="<?php echo $box->place;?>">
+						</div>
+						<span class="help-block"></span>
+					</div>
+					
 					<div class="form-group">
 						<label class="control-label">Data początku magazynowania
 							<span class="required" aria-required="true"> * </span>
@@ -122,20 +133,7 @@
 						<span class="help-block"></span>
 					</div>				
 					<div class="form-group">
-						<label class="control-label">Status blokady
-							<span class="required" aria-required="true"> * </span>
-						</label>
-						
-						<div class="input-icon">
-							<i class="fa fa-lock fa-fw"></i>
-							<input id="lock" class="form-control" type="text" name="lock" value="<?php echo $box->lock;?>">
-						</div>
-						<span class="help-block"></span>
-					</div>
-		
-					<div class="form-group">
-						<label class="control-label">Status plomby
-							<span class="required" aria-required="true"> * </span>
+						<label class="control-label">Kod plomby
 						</label>
 						<div class="input-icon">
 							<i class="fa fa-lock fa-fw"></i>

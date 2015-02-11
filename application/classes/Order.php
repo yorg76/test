@@ -66,7 +66,7 @@ class Order {
 	}
 	
 	public function updateOrder($params) {
-		return false;
+		return true;
 	}
 		
 	public function deliverOrder() {
@@ -540,6 +540,7 @@ class Order {
 			
 			$this->order->warehouse_id=$params['warehouse'];
 			$this->order->division_id=$params['division'];
+			$this->order->sealed_boxes=$params['sealed_boxes'];
 			
 			if($params['order_type']==0) {
 				$this->order->quantity=$params['box_quantity_0'];

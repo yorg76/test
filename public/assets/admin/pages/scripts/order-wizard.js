@@ -58,7 +58,7 @@ var OrderWizard = function () {
                 messages: { // custom messages for radio buttons and checkboxes
                     'order_type': {
                         required: "Proszę wybierz rodzaj zamówienia",
-                    }
+                    },
                 },
 
                 errorPlacement: function (error, element) { // render error placement for each input type

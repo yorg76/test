@@ -184,7 +184,7 @@ class Controller_Api extends Controller_Welcome {
 		}else {
 			$box = ORM::factory('Box');
 		
-			$box->id=$_POST['box_id'];
+			$box->barcode=$_POST['box_id'];
 			$box->date_from=date('Y-m-d');
 			$box->date_reception=date('Y-m-d');
 			$box->status='W trakcie transportu';
@@ -199,7 +199,7 @@ class Controller_Api extends Controller_Welcome {
 				$content['date_from'] = $box->date_from;
 				$content['status'] = $box->status;
 				$content['warehouse_id'] = -1;
-				$content['display_name'] = "Pudło:".$box->id ." Mag.: 0 Data:".$box->date_from;
+				$content['display_name'] = "Pudło:".$box->barcode ." Mag.: 0 Data:".$box->date_from;
 			
 				$result['content']=$content;
 				
