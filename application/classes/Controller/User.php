@@ -53,6 +53,277 @@ class Controller_User extends Controller_Welcome {
 	public function action_index() {
 		
 	}
+	
+	public function action_import1() {
+		
+		die;
+		
+		$row = 1;
+		
+		$content = "";
+		
+		if (($handle = fopen(DOCROOT."/sql/importy/klienci.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+				
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Customer:".$data[2]."\n";
+					$params = array();
+					
+					$customer = Customer::instance();
+					$customer->id = str_replace('\N', NULL, $data[0]);
+					$customer->customer->code =str_replace('\N', NULL,  $data[1]);
+					$customer->name =str_replace('\N', NULL,  $data[2]);
+					$customer->nip =str_replace('\N', NULL,  $data[12]);
+					$customer->comments = "Klient importowany";
+					$customer->create_date = date('Y-m-d');
+					
+					$params['street'] =str_replace('\N', NULL,  explode(' ',$data[5])[0]);
+					$params['number'] =str_replace('\N', NULL,  explode(' ',$data[5])[1]);
+					$params['city'] =str_replace('\N', NULL,  $data[7]);
+					$params['postal'] =str_replace('\N', NULL,  $data[8]);
+					$params['telephone']  =str_replace('\N', NULL,  $data[9]);
+					
+					$params['name'] =str_replace('\N', NULL,  $data[2]);
+					$params['nip'] =str_replace('\N', NULL,  $data[12]);
+					$params['comments'] = "Klient importowany";
+					
+					$customer->customer->id=str_replace('\N', NULL, $data[0]);
+					
+					if($customer->addCompany($params)) {
+						$content .= "<p> Customer added </p>";
+					}
+					
+					
+				}
+				
+				$row++;
+			}
+			fclose($handle);
+		}
+		
+		$this->template->bind('content', $content);
+	}
+	
+	public function action_import2() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/magazyny.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+					
+					$warehouse = ORM::factory('Warehouse');
+					
+					$warehouse->id = $data[0];
+					$warehouse->name = $data[1];
+					$warehouse->description = $data[2];
+					$warehouse->customer_id = 0;
+					
+					if($warehouse->save()) {
+						$content .= "<p> Warehouse added </p>";
+					}
+						
+						
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+	
+	public function action_import3() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/pudla.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+						
+					$box= ORM::factory("Box");
+					
+					//0 - opakowanie nowe 10 - opakowanie przyjete do magazynu 20 - opakowanie wydane z magazynu 90 - skasowane
+					
+					$box->id = $data[0];
+					$box->barcode = $data[2];
+					$box->description = str_replace("\N", NULL,$data[3]);
+					
+					if($data[4] = 0) {
+						$box->status = "Nowe";
+						
+					}elseif($data[4] = 10) {
+						$box->status = "Na magazynie";
+						
+					}elseif($data[4] = 20) {
+						$box->status = "Wypożyczone";
+						
+					}elseif($data[4] = 90) {
+						$box->status = "Usunięte";
+					}else {
+						$box->status = NULL;
+					}
+					
+					$box->date_to = $data[9];
+					
+					if($box->save()) {
+						$content .= "<p> Warehouse added </p>";
+					}
+	
+	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+	
+	public function action_import4() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/pudla_magazyny.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+	
+					$box= ORM::factory("Box",$data[1]);
+					$box->warehouse_id = $data[2];
+						
+					if($box->update()) {
+						$content .= "<p> Warehouse added </p>";
+					}
+	
+	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+	
+	public function action_import5() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/opisy_pudla.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+	
+					$box= ORM::factory("Box",$data[1]);
+					$box->description = $data[3];
+	
+					if($box->update()) {
+						$content .= "<p> Warehouse added </p>";
+					}
+	
+	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+	
+	public function action_import6() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/documenty.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+	
+					$doc = ORM::factory('Document');
+					$doc->id = $data[0];
+					$doc->name = $data[1];
+	
+					if($doc->save()) {
+						$content .= "<p> Warehouse added </p>";
+					}
+	
+	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}		
+
+	public function action_import7() {
+		
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/dokumenty_opak.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+	
+					$doc = ORM::factory('Document',$data[1]);
+					
+					if($doc->loaded()) {
+						$doc->box_id = $data[4];
+					
+						if($doc->update()) {
+							$content .= "<p> Doc added </p>";
+						}
+					}else {
+						
+					}
+	
+	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+	
+	
 	public function action_dashboard() {
 		
 		

@@ -11,7 +11,98 @@ class Controller_Ajax extends Controller_Welcome {
 		parent::before ();
 		$this->auto_render=FALSE;
 	}
+	
+	public function action_boxes_list() {
+		
+		$customer=Auth::instance()->get_user()->customer;
+		$storagecategory = ORM::factory('StorageCategory');
+		$storagecategories = $storagecategory->find_all();
 
+		$boxes = NULL;
+		$boxes_count = 0;
+		
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
+			$boxes = ORM::factory('Box');
+			$boxes_count = ORM::factory('Box')->count_all();
+		}
+		elseif(Auth::instance()->logged_in('manager')){
+			$warehouses = $customer->warehouses->find_all();
+			$warehouses_ids= array();
+			$boxes = array();
+			foreach ($warehouses as $warehouse) {
+				array_push($warehouses_ids, $warehouse->id);
+			}
+			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids);
+			$boxes_count = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->count_all();
+		}
+		elseif(Auth::instance()->logged_in('login')) {
+			$user = Auth::instance()->get_user();
+			$divisions = $user->divisions->find_all();
+			$divisions_ids= array();
+			$boxes = array();
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			$boxes = ORM::factory('Box')->where('division_id','IN', $divisions_ids);
+			$boxes_count = ORM::factory('Box')->where('division_id','IN', $divisions_ids)->count_all();
+		}	
+		/*
+		 * Paging
+		*/
+		
+		$iTotalRecords = $boxes_count;
+		$iDisplayLength = intval($_REQUEST['length']);
+		$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+		$iDisplayStart = intval($_REQUEST['start']);
+		$sEcho = intval($_REQUEST['draw']);
+		
+		$records = array();
+		$records["data"] = array();
+		
+		$end = $iDisplayStart + $iDisplayLength;
+		$end = $end > $iTotalRecords ? $iTotalRecords : $end;	
+	
+		$boxes = $boxes->limit($iDisplayLength)->offset($iDisplayStart)->find_all();
+		
+		foreach ($boxes as $box) {			
+			$id = $box->id;
+		
+			$actions = "<div class=\"margin-bottom-5\">".
+				"<button class=\"btn btn-xs green margin-bottom\" onClick=\"javascript:window.location='/warehouse/box_view/".$box->id."'\">".
+				"<i class=\"glyphicon glyphicon-info-sign\"></i> Przegląd	</button><br />".
+				"<button class=\"btn btn-xs yellow margin-bottom\"	onClick=\"javascript:window.location='/warehouse/box_edit/".$box->id."'\">".
+				"<i class=\"fa fa-user\"></i> Edytuj	</button><br />".
+				"<!-- <button class=\"btn btn-xs red box-delete margin-bottom\" id=\"".$box->id."\">	<i class=\"fa fa-recycle\"></i> Usuń </button> -->".
+				"</div>";
+			
+			$records["data"][] = array(
+						$box->id,
+						"<img alt=\"barcode\" src=\"/barcode/get/".$box->barcode."\"/>",
+						($box->place != '' ? "<img alt=\"barcode\" src=\"/barcode/get/".$box->place."\"/>":''),
+						$box->warehouse->name,
+						$box->storagecategory->name,
+						$box->date_from,
+						$box->date_to,
+						$box->status,
+						$box->seal,
+						$actions
+			);
+		}
+		
+		if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {
+			$records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+			$records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+		}
+		
+		$records["draw"] = $sEcho;
+		$records["recordsTotal"] = $iTotalRecords;
+		$records["recordsFiltered"] = $iTotalRecords;
+		
+		echo json_encode($records);
+	
+	}
+	
 	public function action_index() {
 		
 	}

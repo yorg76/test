@@ -38,7 +38,7 @@
 						</tr>
 					</thead>
 					<tbody>
-							<?php foreach ($boxes as $box):?>
+							<?php /*foreach ($boxes as $box):?>
 							<tr>
 							<td>
 									 <?php echo $box->id;?>
@@ -91,7 +91,7 @@
 								</div>
 							</td>
 						</tr>
-							<?php endforeach;?>
+							<?php endforeach; */?>
 					</tbody>
 				</table>
 			</div>

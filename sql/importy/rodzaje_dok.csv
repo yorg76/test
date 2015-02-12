@@ -1,0 +1,8 @@
+"Klucz","KodDokumentu","NazwaDok","MagazynyZrodlowe","MagazynDocelowy","OpakowanieDomyslne","MnoznikMagZrodl","MnoznikMagDocel","Logika","FlagaDok","NrWersji","IdSesji"
+"4","4","Wydanie do klienta","{2}","4","\N","-1","1","L1W","0","2","\N"
+"2","2","Przyjecie do archiwum","{1}","2","\N","-1","1","L1P","0","1","\N"
+"3","3","Wydanie do przegladania","{2}","3","\N","-1","1","\N","0","1","\N"
+"5","5","Pozostawienie u klienta","{4}","5","\N","-1","1","\N","0","1","\N"
+"6","6","Przesunięcie do brakowania","{2}","6","\N","-1","1","\N","1","1","\N"
+"7","7","Brakowania","{6}","7","\N","-1","1","\N","1","1","\N"
+"1","1","Utworzenie opakowania","\N","1","\N","0","1","\N","1","1","\N"
