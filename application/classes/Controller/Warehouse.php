@@ -20,6 +20,7 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->template->message = Message::factory();
 		
 		if(strtolower ( $this->request->action()) == 'warehouses') $this->add_init("TableWarehouses.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'places') $this->add_init("TablePlaces.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'warehouse_add') $this->add_init("Warehouse_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'warehouse_edit') $this->add_init("Warehouse_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'boxes') $this->add_init("TableBoxes.init();\t\n");
@@ -46,8 +47,7 @@ class Controller_Warehouse extends Controller_Welcome {
 		
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'select2/select2.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
-		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/css/datepicker.css');
-		
+		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-datepicker/css/datepicker.css');		
 		if(strtolower ( $this->request->action()) == 'info') $this->add_css ( ASSETS_ADMIN_PAGES_CSS.'profile.css');
 		
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery-validation/js/jquery.validate.js');
@@ -80,8 +80,9 @@ class Controller_Warehouse extends Controller_Welcome {
 
 			
 			$this->content = View::factory ( $this->_req );
-				
+							
 			if (file_exists ( CSS . $this->_req . '.css' )) {
+				
 				$this->add_css ( CSS . $this->_req . '.css' );
 			}
 				
@@ -93,6 +94,92 @@ class Controller_Warehouse extends Controller_Welcome {
 		
 	public function action_index() {
 		
+	}
+	
+	public function action_box_barcode_print() {
+		
+		if($this->request->method()===HTTP_Request::POST) {
+			$this->template = View::factory('templates/barcodes');
+			
+			$ids=array();
+			
+			for($f=0; $f < $_POST['count'];$f++) {
+				$box=Box::instance();
+				$box->createBox();
+				array_push($ids, $box->id);
+			
+			}
+			
+			$boxes= ORM::factory('Box')->where('id', 'IN', $ids)->find_all();
+		
+			$this->template->bind('boxes', $boxes);
+		}else {
+			
+		}
+	}
+	
+	public function action_places() {
+		$customer=Auth::instance()->get_user()->customer;
+		if(Auth::instance()->logged_in('admin')) $places = ORM::factory('Place')->find_all();
+		else $places = array();
+		$user = Auth::instance()->get_user();
+		$this->content->bind('customer', $customer);
+		$this->content->bind('places', $places);
+		$this->content->bind('user', $user);
+	}
+
+	public function action_place_add() {
+	
+		$place = ORM::factory('Place');
+		
+		if($this->request->method()===HTTP_Request::POST) {
+	
+			$params = $_POST;
+			//$params['customer_id'] = $customer->id;
+				
+			if($place->values($params) && $place->save()) {
+				Message::success(ucfirst(__('Regał został utworzony')),'/warehouse/places');
+			}else {
+				Message::error(ucfirst(__('Regał nie został utworzony')),'/warehouse/places');
+			}
+				
+		}
+	}
+	
+	public function action_place_edit() {
+		
+		if($this->request->param('id') > 0) {
+			
+			
+			$place= ORM::factory('Place',$this->request->param('id'));
+			
+			$user = Auth::instance()->get_user();
+			$this->content->bind('user', $user);
+			$this->content->bind('place', $place);
+				
+			if($this->request->method()===HTTP_Request::POST) {
+				$params=$_POST;
+					
+				if($place->values($params) && $place->update()) {
+					Message::success(ucfirst(__('Magazyn został zaktualizowany')),'/warehouse/places');
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować magazynu')),'/warehouse/places');
+				}
+			}
+		}
+	}
+	
+	public function action_place_view() {
+		if($this->request->param('id') > 0) {
+			$place = ORM::factory('Place',$this->request->param('id'));
+			
+			$this->content->bind('place', $place);
+				
+			$boxes = $place->boxes->find_all();
+			
+			$this->content->bind('boxes', $boxes);
+		}
+	
 	}
 	
 	public function action_warehouses() {

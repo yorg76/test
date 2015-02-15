@@ -139,8 +139,64 @@ class Controller_User extends Controller_Welcome {
 	
 		$this->template->bind('content', $content);
 	}
+
+	
 	
 	public function action_import3() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/baza_opak.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+
+					if($data[5] == "23" || $data[5]=="24") {
+						$box= ORM::factory("Box");
+					
+						//0 - opakowanie nowe 10 - opakowanie przyjete do magazynu 20 - opakowanie wydane z magazynu 90 - skasowane
+					
+						$box->id = $data[0];
+						$box->barcode = $data[2];
+						$box->place = str_replace("\N", NULL,$data[1]);
+						$box->description = str_replace("\N", NULL,$data[3]);
+					
+						if($data[4] = 0) {
+							$box->status = "Nowe";
+							
+						}elseif($data[4] = 10) {
+							$box->status = "Na magazynie";
+							
+						}elseif($data[4] = 20) {
+							$box->status = "Wypożyczone";
+						
+						}elseif($data[4] = 90) {
+							$box->status = "Usunięte";
+						}else {
+							$box->status = NULL;
+						}
+					
+						if($box->save()) {
+						$content .= "<p> Warehouse added </p>";
+						}
+					}
+	
+	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+
+	public function action_import3_1() {
 		die;
 		$row = 1;
 	
@@ -152,37 +208,141 @@ class Controller_User extends Controller_Welcome {
 	
 				if($row > 1) {
 					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+	
+					if($data[5] == "23" || $data[5]=="24") {
+						$box= ORM::factory("Box",$data[0]);
+							
+						//0 - opakowanie nowe 10 - opakowanie przyjete do magazynu 20 - opakowanie wydane z magazynu 90 - skasowane
+							
+						$box->barcode = $data[2];
+						$box->place = str_replace("\N", NULL,$data[1]);
+						$box->description = str_replace("\N", NULL,$data[3]);
+							
+						if($data[4] = 0) {
+							$box->status = "Nowe";
+								
+						}elseif($data[4] = 10) {
+							$box->status = "Na magazynie";
+								
+						}elseif($data[4] = 20) {
+							$box->status = "Wypożyczone";
+	
+						}elseif($data[4] = 90) {
+							$box->status = "Usunięte";
+						}else {
+							$box->status = NULL;
+						}
+							
+						$box->date_to = str_replace("\N", NULL,$data[9]);
 						
-					$box= ORM::factory("Box");
-					
-					//0 - opakowanie nowe 10 - opakowanie przyjete do magazynu 20 - opakowanie wydane z magazynu 90 - skasowane
-					
-					$box->id = $data[0];
-					$box->barcode = $data[2];
-					$box->description = str_replace("\N", NULL,$data[3]);
-					
-					if($data[4] = 0) {
-						$box->status = "Nowe";
-						
-					}elseif($data[4] = 10) {
-						$box->status = "Na magazynie";
-						
-					}elseif($data[4] = 20) {
-						$box->status = "Wypożyczone";
-						
-					}elseif($data[4] = 90) {
-						$box->status = "Usunięte";
-					}else {
-						$box->status = NULL;
-					}
-					
-					$box->date_to = $data[9];
-					
-					if($box->save()) {
-						$content .= "<p> Warehouse added </p>";
+						if($box->update()) {
+							$content .= "<p> Box updated </p>";
+						}
 					}
 	
 	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+	
+	public function action_import3_2() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/baza_opak.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+	
+					if($data[5] == "18") {
+						$place= ORM::factory("Place");
+							
+						//0 - opakowanie nowe 10 - opakowanie przyjete do magazynu 20 - opakowanie wydane z magazynu 90 - skasowane
+						$place->id = $data[0];
+						$place->barcode = $data[2];
+						$place->description = $data[3];
+						
+						
+							
+						if($data[4] = 10) {
+							$place->status = "Używane";
+	
+						}elseif($data[4] = 90) {
+							$place->status = "Usunięte";
+						}else {
+							$place->status = NULL;
+						}
+	
+						if($place->save()) {
+							$content .= "<p> Place added </p>";
+						}
+					}
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+
+	public function action_import3_3() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/baza_opak.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+	
+					if($data[5] == "23" || $data[5] == "24") {
+						
+						$box = ORM::factory('Box',$data[0]);
+						
+						if(str_replace("\N", NULL,$data[1]) != NULL  ) {
+							
+							$place= ORM::factory("Place",$data[1]);
+							
+							if($place->loaded()) {
+								$place->capacity++;
+								if($place->update()) {
+									$content .= "<p> Place added </p>";
+								}
+							}else {
+								$box->place_id=NULL;
+								if($box->update()) {
+										$content .= "<p> Box updated</p>\n";
+									$bulkp = ORM::factory('BulkPackaging');
+									$bulkp->id=$data[1];
+									$bulkp->name="Opakownie zbiorcze";
+									$bulkp->description="Opakownie zbiorcze";
+									$bulkp->box_id=$box->id;
+									try {
+										if($bulkp->save()) {
+											$content .= "<p> Saved bulkpacking</p>\n";
+										}
+									}catch(Exception $e) {
+											$content .= "<p> Bulkpacking not saved</p>\n";
+									}
+								}
+							}
+						}
+					}
 				}
 	
 				$row++;
@@ -209,7 +369,7 @@ class Controller_User extends Controller_Welcome {
 					$box= ORM::factory("Box",$data[1]);
 					$box->warehouse_id = $data[2];
 						
-					if($box->update()) {
+					if($box->loaded() && $box->update()) {
 						$content .= "<p> Warehouse added </p>";
 					}
 	
@@ -288,7 +448,7 @@ class Controller_User extends Controller_Welcome {
 	}		
 
 	public function action_import7() {
-		
+		die;
 		$row = 1;
 	
 		$content = "";
@@ -304,9 +464,12 @@ class Controller_User extends Controller_Welcome {
 					
 					if($doc->loaded()) {
 						$doc->box_id = $data[4];
-					
-						if($doc->update()) {
-							$content .= "<p> Doc added </p>";
+						try {
+							if($doc->update()) {
+								$content .= "<p> Doc added </p>";
+							}
+						}catch (Exception $e) {
+							$content .= "<p>".$e->getMessage()."</p>";
 						}
 					}else {
 						
@@ -323,6 +486,40 @@ class Controller_User extends Controller_Welcome {
 		$this->template->bind('content', $content);
 	}
 	
+	public function action_import8() {
+die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/kategorie.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Warehouse:".$data[1]."\n";
+						
+					$warehouse = ORM::factory('StorageCategory');
+						
+					$warehouse->id = $data[0];
+					$warehouse->name = $data[1];
+					$warehouse->description = $data[2];
+					$warehouse->period = $data[3];
+						
+					if($warehouse->save()) {
+						$content .= "<p> Warehouse added </p>";
+					}
+	
+	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
 	
 	public function action_dashboard() {
 		

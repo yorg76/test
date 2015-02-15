@@ -93,6 +93,47 @@ class Box{
         }
     }
 
+    public function createBox() {
+    	$log=Kohana_Log::instance();
+    
+    	$params = array();
+    
+    	if(is_array($params)) {
+    		try {
+    			Database::instance()->begin();
+    			$warehouse = ORM::factory('Warehouse')->where('name','=','NW')->find();
+    			
+    			$this->box->status="Puste";
+    			$this->box->warehouse_id=$warehouse->id;
+    			
+    			if($this->box->save()) {
+    				$this->box->reload();
+    				$this->id=$this->box->id;
+    				$this->box->barcode=$this->box->id;
+    				$this->box->update();
+    				
+    				$wh = ORM::factory('WarehouseHistory');
+    				$wh->operation_type="Utworzenie pustego pudła";
+    				$wh->operation_description="Dodanie pudła do magazynu";
+    				$wh->box_id=$this->box->id;
+    				$wh->user_id=Auth::instance()->get_user()->id;
+    				$wh->warehouse_id=$params['warehouse_id'];
+    				$wh->save();
+    
+    				$log->add(Log::DEBUG,"Success: Dodano pudło z parametrami:".serialize($params)."\n");
+    				Database::instance()->commit();
+    				return true;
+    			}else {
+    				$log->add(Log::ERROR,'Exception: Wystąpił błąd podczas dodawania pudło'."\n");
+    			}
+    			return false;
+    		}catch (Exception $e) {
+    			$log->add(Log::ERROR,'Exception:'.$e->getMessage()."\n");
+    			return false;
+    		}
+    	}
+    }
+    
 
 	public function updateBox($params) {
 		$log=Kohana_Log::instance();

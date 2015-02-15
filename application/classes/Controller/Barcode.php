@@ -8,6 +8,14 @@ class Controller_Barcode extends Controller_Welcome {
 
 
 
+	public function action_get_label()
+	{
+		if(intval($this->request->param('id')) > 0) {
+			Barcode::generate_barcode($this->request->param('id'), $factor = 1, $backgroundColor = '#FFFFFF', $barHeight = 180, $fontSize = 32);
+		}
+	}
+	
+
 	public function action_get()
 	{
 		if(intval($this->request->param('id')) > 0) {

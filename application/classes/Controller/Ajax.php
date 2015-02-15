@@ -12,6 +12,68 @@ class Controller_Ajax extends Controller_Welcome {
 		$this->auto_render=FALSE;
 	}
 	
+	public function action_places_list() {
+	
+		$places = NULL;
+		$places_count = 0;
+	
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
+			$places = ORM::factory('Place');
+			$places_count = ORM::factory('Place')->count_all();
+		}
+		/*
+		 * Paging
+		*/
+	
+		$iTotalRecords = $places_count;
+		$iDisplayLength = intval($_REQUEST['length']);
+		$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+		$iDisplayStart = intval($_REQUEST['start']);
+		$sEcho = intval($_REQUEST['draw']);
+	
+		$records = array();
+		$records["data"] = array();
+	
+		$end = $iDisplayStart + $iDisplayLength;
+		$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+	
+		$places = $places->limit($iDisplayLength)->offset($iDisplayStart)->find_all();
+	
+		foreach ($places as $place) {
+			$id = $place->id;
+	
+			$actions = "<div class=\"margin-bottom-5\">".
+					"<button class=\"btn btn-xs green margin-bottom\" onClick=\"javascript:window.location='/warehouse/place_view/".$place->id."'\">".
+					"<i class=\"glyphicon glyphicon-info-sign\"></i> Przegląd	</button><br />".
+					"<button class=\"btn btn-xs yellow margin-bottom\"	onClick=\"javascript:window.location='/warehouse/place_edit/".$place->id."'\">".
+					"<i class=\"fa fa-user\"></i> Edytuj	</button><br />".
+					"<!-- <button class=\"btn btn-xs red place-delete margin-bottom\" id=\"".$place->id."\">	<i class=\"fa fa-recycle\"></i> Usuń </button> -->".
+					"</div>";
+				
+			$records["data"][] = array(
+					$place->id,
+					"<img alt=\"barcode\" src=\"/barcode/get/".$place->barcode."\"/>",
+					$place->description,
+					$place->status,
+					$place->boxes->count_all(),
+					$place->capacity,
+					$actions
+			);
+		}
+	
+		if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {
+			$records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+			$records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+		}
+	
+		$records["draw"] = $sEcho;
+		$records["recordsTotal"] = $iTotalRecords;
+		$records["recordsFiltered"] = $iTotalRecords;
+	
+		echo json_encode($records);
+	
+	}
+	
 	public function action_boxes_list() {
 		
 		$customer=Auth::instance()->get_user()->customer;
@@ -79,7 +141,7 @@ class Controller_Ajax extends Controller_Welcome {
 			$records["data"][] = array(
 						$box->id,
 						"<img alt=\"barcode\" src=\"/barcode/get/".$box->barcode."\"/>",
-						($box->place != '' ? "<img alt=\"barcode\" src=\"/barcode/get/".$box->place."\"/>":''),
+						($box->place_id != '' ? "<img alt=\"barcode\" src=\"/barcode/get/".$box->place->barcode."\"/>":''),
 						$box->warehouse->name,
 						$box->storagecategory->name,
 						$box->date_from,
