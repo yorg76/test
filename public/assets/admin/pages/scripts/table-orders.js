@@ -415,6 +415,12 @@ var TableOrdersInprogress = function () {
 		window.location.href='/order/deliver/'+id;
 	});
 	
+	$("button[id*=order_recept_]").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('id').replace('order_recept_','');
+		window.location.href='/order/recept/'+id;
+	});
+	
     var handleTable = function () {
 
         function restoreRow(oTable, nRow) {

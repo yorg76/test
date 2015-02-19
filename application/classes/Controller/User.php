@@ -533,7 +533,7 @@ die;
 			$boxes = ORM::factory('Box')->count_all();
 		}
 		elseif(Auth::instance()->logged_in('manager')){
-			$warehouses = $customer->warehouses->count_all();
+			$warehouses = $customer->warehouses->find_all();
 			$warehouses_ids= array();
 			$boxes = array();
 			foreach ($warehouses as $warehouse) {

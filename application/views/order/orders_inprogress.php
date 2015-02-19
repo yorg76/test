@@ -4,7 +4,7 @@
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-shopping-cart"></i>Zmówienia w trakcie realizacji
+								<i class="icon-shopping-cart"></i>Zamówienia w trakcie realizacji
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
@@ -59,9 +59,12 @@
 								<td>
 									<div class="margin-bottom-5">
 												<button class="btn btn-xs purple order-details margin-bottom" id="order_details_<?php echo $order->id?>" ><i class="glyphicon glyphicon-info-sign"></i> Szczegóły</button> <br />
+<?php if(Auth_ORM::instance()->logged_in('admin') || Auth_ORM::instance()->logged_in('manager')): ?>												
 												<?php if($order->status=='Przyjęte do realizacji'):?><button class="btn btn-xs blue margin-bottom" id="order_complete_<?php echo $order->id?>"><i class="glyphicon glyphicon-qrcode"></i> Skompletowane</button> <br /> <?php endif;?>
-												<?php if($order->status=='Oczekuje na wysłanie'):?><button class="btn btn-xs yellow margin-bottom" id="order_send_<?php echo $order->id?>"><i class="glyphicon glyphicon-plane"></i> Wyślij</button> <br /> <?php endif;?>
+												<?php if($order->type != 'Zamówienie odbioru i magazynowania pudeł' && $order->status=='Oczekuje na wysłanie'):?><button class="btn btn-xs yellow margin-bottom" id="order_send_<?php echo $order->id?>"><i class="glyphicon glyphicon-plane"></i> Wyślij</button> <br /> <?php endif;?>
+												<?php if($order->type == 'Zamówienie odbioru i magazynowania pudeł' && $order->status=='Oczekuje na wysłanie'):?><button class="btn btn-xs yellow margin-bottom" id="order_recept_<?php echo $order->id?>"><i class="glyphicon glyphicon-save"></i> Przyjmij</button> <br /> <?php endif;?>
 												<?php if($order->status=='W doręczeniu'):?><button class="btn btn-xs green margin-bottom" id="order_deliver_<?php echo $order->id?>"><i class="glyphicon glyphicon-thumbs-up"></i> Doręczone</button> <br /> <?php endif;?>
+<?php endif;?>
 									</div>
 								</td>
 							</tr>

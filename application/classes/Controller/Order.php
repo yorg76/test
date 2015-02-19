@@ -26,7 +26,8 @@ class Controller_Order extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'orders') $this->add_init("TableOrders.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'send') $this->add_init("SendOrder.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'edit_order') $this->add_init("Edit_order.init();\t\n");
-				
+		if(strtolower ( $this->request->action()) == 'recept') $this->add_init("ReceptOrder.init();\t\n");
+		
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 		
 	}
@@ -77,6 +78,9 @@ class Controller_Order extends Controller_Welcome {
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ui-extended-modals.js');
 		}
 		
+		if(strtolower ( $this->request->action()) == 'recept') {
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order_recept.js');
+		}
 		
 		if(strtolower ( $this->request->action()) == 'send') {
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order_send.js');
@@ -115,12 +119,35 @@ class Controller_Order extends Controller_Welcome {
 		
 		$user = Auth::instance()->get_user();
 		$customer=$user->customer;
-		$users = $customer->users->find_all();
-		$users_ids=array();
 		
-		foreach ($users as $u) {
-			array_push($users_ids, $u->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
+			$users = ORM::factory('User')->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}elseif(!Auth::instance()->logged_in('admin') && Auth::instance()->logged_in('operator')) {
+			$users = $customer->users->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}else {
+			$divisions = $user->divisions->find_all();
+			$users_ids=array();
+			
+			foreach ($divisions as $division) {
+				$users = $division->users->find_all();
+			
+				foreach ($users as $u) {
+					array_push($users_ids, $u->id);
+				}
+			}
 		}
+		
+		$users_ids=array_unique($users_ids);
 		
 		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->find_all();
 		
@@ -234,16 +261,38 @@ class Controller_Order extends Controller_Welcome {
 	public function action_orders() {
 		$user = Auth::instance()->get_user();
 		$customer=$user->customer;
-		$users = $customer->users->find_all();
-		$users_ids=array();
 		
-		foreach ($users as $u) {
-			array_push($users_ids, $u->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
+			$users = ORM::factory('User')->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}elseif(!Auth::instance()->logged_in('admin') && Auth::instance()->logged_in('operator')) {
+			$users = $customer->users->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}else {
+			$divisions = $user->divisions->find_all();
+			$users_ids=array();
+			
+			foreach ($divisions as $division) {
+				$users = $division->users->find_all();
+			
+				foreach ($users as $u) {
+					array_push($users_ids, $u->id);
+				}
+			}
 		}
 		
+		$users_ids=array_unique($users_ids);
+				
 		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->find_all();
 		
-		//var_dump($orders);
 		
 		$this->content->bind('orders', $orders);
 	}
@@ -251,12 +300,35 @@ class Controller_Order extends Controller_Welcome {
 	public function action_orders_new() {
 		$user = Auth::instance()->get_user();
 		$customer=$user->customer;
-		$users = $customer->users->find_all();
-		$users_ids=array();
 		
-		foreach ($users as $u) {
-			array_push($users_ids, $u->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
+			$users = ORM::factory('User')->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}elseif(!Auth::instance()->logged_in('admin') && Auth::instance()->logged_in('operator')) {
+			$users = $customer->users->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}else {
+			$divisions = $user->divisions->find_all();
+			$users_ids=array();
+			
+			foreach ($divisions as $division) {
+				$users = $division->users->find_all();
+			
+				foreach ($users as $u) {
+					array_push($users_ids, $u->id);
+				}
+			}
 		}
+		
+		$users_ids=array_unique($users_ids);
 		
 		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Nowe')->order_by('id','DESC')->find_all();
 		
@@ -268,12 +340,35 @@ class Controller_Order extends Controller_Welcome {
 	public function action_orders_inprogress() {
 		$user = Auth::instance()->get_user();
 		$customer=$user->customer;
-		$users = $customer->users->find_all();
-		$users_ids=array();
 		
-		foreach ($users as $u) {
-			array_push($users_ids, $u->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
+			$users = ORM::factory('User')->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}elseif(!Auth::instance()->logged_in('admin') && Auth::instance()->logged_in('operator')) {
+			$users = $customer->users->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}else {
+			$divisions = $user->divisions->find_all();
+			$users_ids=array();
+			
+			foreach ($divisions as $division) {
+				$users = $division->users->find_all();
+			
+				foreach ($users as $u) {
+					array_push($users_ids, $u->id);
+				}
+			}
 		}
+		
+		$users_ids=array_unique($users_ids);
 		
 		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '!=', 'Nowe')->and_where('status', '!=', 'Dostarczone')->and_where('status', '!=', 'Zrealizowane')->find_all();		
 		//var_dump($orders);
@@ -284,14 +379,37 @@ class Controller_Order extends Controller_Welcome {
 	public function action_orders_realized() {
 		$user = Auth::instance()->get_user();
 		$customer=$user->customer;
-		$users = $customer->users->find_all();
-		$users_ids=array();
 		
-		foreach ($users as $u) {
-			array_push($users_ids, $u->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
+			$users = ORM::factory('User')->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}elseif(!Auth::instance()->logged_in('admin') && Auth::instance()->logged_in('operator')) {
+			$users = $customer->users->find_all();
+			$users_ids=array();
+		
+			foreach ($users as $u) {
+				array_push($users_ids, $u->id);
+			}
+		}else {
+			$divisions = $user->divisions->find_all();
+			$users_ids=array();
+			
+			foreach ($divisions as $division) {
+				$users = $division->users->find_all();
+			
+				foreach ($users as $u) {
+					array_push($users_ids, $u->id);
+				}
+			}
 		}
 		
-				$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Dostarczone')->or_where('status', '=', 'Zrealizowane')->find_all();		
+		$users_ids=array_unique($users_ids);
+		
+		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->and_where('status', '=', 'Dostarczone')->or_where('status', '=', 'Zrealizowane')->find_all();		
 		//var_dump($orders);
 		
 		$this->content->bind('orders', $orders);
@@ -312,6 +430,26 @@ class Controller_Order extends Controller_Welcome {
 		}	
 	}
 
+
+	public function action_recept() {
+		if($this->request->param('id') > 0) {
+			$order = Order::instance($this->request->param('id'));
+		
+			if($order->status=="Oczekuje na wysłanie") {
+				if($this->request->method()===HTTP_Request::POST) {
+					
+					if($order->receptOrder()) {
+						Message::success(ucfirst(__('Zamówienie zostało przyjęte na magazyn')),'/order/orders_inprogress');
+					}else {
+						Message::error(ucfirst(__('Wystąpił problem podczas przyjęcia zamówienia')),'/order/orders_inprogress');
+					}
+				}
+			}else {
+				Message::error(ucfirst(__('Zamówienia w tym statusie nie można przyjąć')),'/order/orders_inprogress');
+			}
+		}
+	}
+	
 	public function action_complete() {
 		if($this->request->param('id') > 0) {
 			$order = Order::instance($this->request->param('id'));
