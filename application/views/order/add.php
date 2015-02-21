@@ -267,7 +267,7 @@
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_2[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box-id;?>"><?php echo $box->barcode?></option>
+											<option value="<?php echo $box->id;?>"><?php echo $box->barcode?></option>
 											<?php endforeach;?>
 										</select>
 									</div>
@@ -297,7 +297,7 @@
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_3[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box-id;?>"><?php echo $box->barcode?></option>
+											<option value="<?php echo $box->id;?>"><?php echo $box->barcode?></option>
 											<?php endforeach;?>										
 										</select>
 									</div>
@@ -336,7 +336,7 @@
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_4[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box-id;?>"><?php echo $box->barcode?></option>
+											<option value="<?php echo $box->id;?>"><?php echo $box->barcode?></option>
 											<?php endforeach;?>
 										
 										</select>
@@ -376,7 +376,7 @@
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_5[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box-id;?>"><?php echo $box->barcode?></option>
+											<option value="<?php echo $box->id;?>"><?php echo $box->barcode?></option>
 											<?php endforeach;?>
 										</select>
 									</div>
