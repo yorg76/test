@@ -374,9 +374,9 @@ class Controller_Admin extends Controller_Welcome {
 			
 			
 			if($user->deleteUser()) {
-				Message::success(ucfirst(__('Użytkownik został usunięty')),'/admin/customer_users/'.$customer_id);
+				Message::success(ucfirst(__('Użytkownik został usunięty')),'/admin/users/'.$customer_id);
 			}else {
-				Message::error(ucfirst(__('Nie udało się usunąć użytkownika')),'/admin/customer_users/'.$customer_id);
+				Message::error(ucfirst(__('Nie udało się usunąć użytkownika')),'/admin/users/'.$customer_id);
 			}
 		}
 	}	

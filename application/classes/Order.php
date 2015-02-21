@@ -795,7 +795,7 @@ class Order {
 		
 		$email->message($message, 'text/html');
 		$email->to($params['email'],$params['firstname']." ".$params['lastname']);
-		$email->from(Kohana::$config->load('email')->as_array()['default']['options']['fromemail'],"System magazynowy");
+		$email->from(Kohana::$config->load('email')->as_array()['options']['fromemail'],"System magazynowy");
 			
 		try {
 			if($email->send()) $log->add(Log::DEBUG,"Success: User email sent\n");
