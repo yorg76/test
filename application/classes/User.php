@@ -173,7 +173,13 @@ class User {
 		$message = str_replace("social_googleplus.png", $social_googleplus, $message);
 		$message = str_replace("social_linkedin.png", $social_linkedin, $message);
 		$message = str_replace("social_rss.png", $social_rss, $message);
-			
+
+		if(isset($params['attachments']) && is_array($params['attachments'])) {
+			foreach ($params['attachments'] as $attachment) {
+				$email->attach_file($attachment);
+			}
+		}
+		
 		$email->message($message, 'text/html');
 		$email->to($params['email'],$params['firstname']." ".$params['lastname']);
 		$email->from(Kohana::$config->load('email')->as_array()['default']['options']['fromemail'],"System magazynowy");
@@ -210,8 +216,14 @@ class User {
 					
 					if($user->update()) {
 						$log->add(Log::DEBUG,"Success: Registered user with params:".serialize($params)."\n");
-
 						$paramse = array();
+						
+						if(EasyRSA::PKI_initieted()) {
+							EasyRSA::setClientCertFile($user->username, $params['password'], $customer->name, $user->email);
+							$paramse['attachments'] = EasyRSA::getClientCertFile($user->username);
+						}
+						
+						
 						$paramse['subject']="Rejestracja nowego użytkownika systemu";
 						$paramse['email_title'] = "Witamy w gronie użytkowników systemu";
 						$paramse['email_info'] = "Poniżej znajdują się dane do logowania do systemu";
@@ -221,6 +233,8 @@ class User {
 						$paramse['lastname']= $user->lastname;
 					
 						$this->sendEmail($paramse);
+					
+						
 					}else {
 						$log->add(Log::ERROR,"Error: User role not added:".serialize($params)."\n");
 						return false;
