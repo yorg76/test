@@ -81,7 +81,6 @@
 						</label>
 						<div class="input-icon right">
 							<select multiple class="form-control" name="divisions[]">
-								<option>-- Wybierz --</option>
 								<?php foreach ($divisions as $division):?>
 								<?php 
 										if ($user->has('divisions', $division->id)) $checked=" selected=\"true\"";
