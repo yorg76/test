@@ -84,7 +84,7 @@
 								<option>-- Wybierz --</option>
 								<?php foreach ($divisions as $division):?>
 								<?php 
-										if ($user->division->id == $division->id) $checked=" selected=\"true\"";
+										if ($user->has('divisions', $division->id)) $checked=" selected=\"true\"";
 										else $checked="";
 										
 										echo "<option value=\"".$division->id."\"".$checked." >".$division->name."</option>";
