@@ -316,7 +316,7 @@
 										<?php foreach($boxes as $box):?>
 											<?php $bselected = ($order->order->has('boxes',ORM::factory('Box',$box->id)) ? "selected" : "");?>
 											<option value="<?php echo $box->id ?>"
-										<?php echo $bselected?>><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
+										<?php echo $bselected?>><?php echo $box->id ."-".$box->place->description."-".$box->warehouse->name?></option>
 										<?php endforeach;?>
 									</select>
 							</div>
@@ -457,7 +457,7 @@
 										<?php foreach($boxes as $box):?>
 											<?php $bselected = ($order->order->has('boxes',ORM::factory('Box',$box->id)) ? "selected" : "");?>
 											<option value="<?php echo $box->id ?>"
-										<?php echo $bselected?>><?php echo $box->id ."-".$box->storagecategory->name."-".$box->warehouse->name?></option>
+										<?php echo $bselected?>><?php echo $box->id ."-".$box->place->description."-".$box->warehouse->name?></option>
 										<?php endforeach;?>
 									</select>
 							</div>
