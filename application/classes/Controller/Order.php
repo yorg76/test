@@ -160,7 +160,7 @@ class Controller_Order extends Controller_Welcome {
 	public function action_view_order() {
 		if($this->request->param('id') > 0) {
 			$user = Auth::instance()->get_user();
-			$order=Order::instance();
+			$order = Order::instance($this->request->param('id'));
 			$customer=$user->customer;
 			$divisions = $customer->divisions->find_all();
 			$divisions_ids= array();
@@ -181,15 +181,19 @@ class Controller_Order extends Controller_Welcome {
 			}
 			
 			if(Auth_ORM::instance()->logged_in('admin') || Auth_ORM::instance()->logged_in('manager')) {
-				$boxes = ORM::factory('Box')->where('warehouse_id','IN',$warehouses_ids)->find_all();
+				//$boxes = ORM::factory('Box')->where('warehouse_id','IN',$warehouses_ids)->find_all();
+				$boxes = $order->order->boxes->find_all();
+				//var_dump($boxes);
+				
 			}else {
-				$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->find_all();
+				//$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->find_all();
+				$boxes = $order->order->boxes->find_all();
 			}
 	
 			$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 			$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 	
-			$order = Order::instance($this->request->param('id'));
+			
 				
 			$this->content->bind('order_types',$order->types);
 			$this->content->bind('order_statuses',$order->statuses);
