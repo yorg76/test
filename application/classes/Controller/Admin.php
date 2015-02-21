@@ -303,7 +303,8 @@ class Controller_Admin extends Controller_Welcome {
 	public function action_user_add() {
 		
 		$customers = ORM::factory("Customer")->find_all();
-		
+		$divisions = ORM::factory('Division')->find_all();
+		$this->content->bind('divisions', $divisions);
 		$this->content->bind('customers', $customers);			
 		
 		if($this->request->method()===HTTP_Request::POST) {
@@ -324,9 +325,11 @@ class Controller_Admin extends Controller_Welcome {
 		
 		if($this->request->param('id') > 0) {
 			$user = ORM::factory('User',$this->request->param('id'));
-			$roles = ORM::factory('Role')->find_all(); 
+			$roles = ORM::factory('Role')->find_all();
+			$divisions = ORM::factory('Division')->find_all();
 			
 			$this->content->bind('user', $user);
+			$this->content->bind('divisions', $divisions);
 			$this->content->bind('roles', $roles);
 			
 			if($this->request->method()===HTTP_Request::POST) {

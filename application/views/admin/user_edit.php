@@ -76,6 +76,25 @@
 						</div>
 					</div>		
 					<div class="form-group">
+						<label class="control-label">Dział
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" name="division_id">
+								<option>-- Wybierz --</option>
+								<?php foreach ($divisions as $division):?>
+								<?php 
+										if ($user->division->id == $division->id) $checked=" selected=\"true\"";
+										else $checked="";
+										
+										echo "<option value=\"".$division->id."\"".$checked." >".$division->name."</option>";
+
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>						
+					<div class="form-group">
 						<label class="control-label">Rola
 							<span class="required" aria-required="true"> * </span>
 						</label>
