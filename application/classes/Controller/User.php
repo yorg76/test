@@ -585,6 +585,44 @@ die;
 		$this->template->bind('content', $content);
 	}
 	
+	public function action_import11() {
+	
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/klienci.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Grupa:".$data[12]."\n";
+	
+					$pricetable = Pricetable::instance();
+					$params=array();
+					$params['boxes_reception'] = 1;
+					$params['boxes_sending'] = 1;
+					$params['boxes_storage'] = 1;
+					$params['document_scan'] = 1;
+					$params['document_copy'] = 1;
+					$params['document_notarial_copy']= 1; 
+					$params['position_disposal']= 1;
+					$params['discount']= 1;
+					$params['customer_id']= $data[0];
+					
+					$pricetable->addPricetable($params);
+					
+					if($pricetable->addPricetable($params)) {
+						$content .= "<p> Box updated</p>";
+					}
+				}
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
 	
 	public function action_dashboard() {
 		

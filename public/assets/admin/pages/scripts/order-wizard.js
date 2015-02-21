@@ -182,7 +182,7 @@ var OrderWizard = function () {
                     			
                     			var code = $("input[name=box_code]").val();
                     			
-                    			if (!$("select[name='boxes_2[]'] option[value='" + code + "']:selected").length) {
+                    			if (!$("select[name*='boxes_'] option[value='" + code + "']:selected").length) {
                     				$.ajax({
                                 		type:'POST',
                                 		url: "/ajax/check_box",
@@ -191,14 +191,14 @@ var OrderWizard = function () {
                                 	}).success(function(data) {
 
                                 		if(data.status=="OK") {
-                                			if (!$("select[name='boxes_2[]'] option[value='" + data.id + "']:selected").length) {
-                                				$("select[name='boxes_2[]']").append($('<option>', { 
+                                			if (!$("select[name*='boxes_'] option[value='" + data.id + "']:selected").length) {
+                                				$("select[name*='boxes_']").append($('<option>', { 
                                 					value: id,
                                 					text : code,
                                 					selected: true
                                 				}));
                                 			}else {
-                                				$("select[name='boxes_2[]'] option[value='" + data.id + "']").attr('selected',true);
+                                				$("select[name*='boxes_'] option[value='" + data.id + "']").attr('selected',true);
                                 			}
                                 		}else {
                                 			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
