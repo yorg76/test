@@ -180,7 +180,7 @@ class Controller_Order extends Controller_Welcome {
 				array_push($warehouses_ids, $warehouse->id);
 			}
 	
-			$boxes = ORM::factory('Box')->where('warehouse_id','IN',$warehouses_ids)->find_all();
+			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->find_all();
 	
 			$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 			$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();

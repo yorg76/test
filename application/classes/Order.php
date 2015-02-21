@@ -575,7 +575,7 @@ class Order {
 					if($params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4) {
 						if(isset($params['boxes']) && is_array($params['boxes']) && ($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4)) {
 							foreach ($params['boxes'] as $box) {
-								$bbox=ORM::factory('Box')->where('id', '=', $box)->find();
+								$bbox=ORM::factory('Box')->where('barcode', '=', $box)->find();
 								if($bbox->lock != 1) {
 									$bbox->lock='1';
 									if($bbox->update()) {
