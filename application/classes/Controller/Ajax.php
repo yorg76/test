@@ -223,11 +223,11 @@ class Controller_Ajax extends Controller_Welcome {
 			$user=Auth::instance()->get_user();
 			if($user->id > 0) {
 				$box = ORM::factory('Box')->where('barcode', '=', $_POST['barcode'])->find();
-				if($box->division->customer == $user->customer) {
+				if($box->loaded()) {
 					echo json_encode(array('status'=>'OK','id'=>$box->id));
 				}else {
 					echo json_encode(array('status'=>'NOTOK'));
-				}
+				}	
 			}else {
 				echo json_encode(array('status'=>'NOTOK'));
 			}
