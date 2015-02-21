@@ -178,27 +178,25 @@ var OrderWizard = function () {
                     		$("#add_box_to_order").click(function(e) {
                     			e.preventDefault();
                     			
+                    			
                     			$("input[name=box_code]").parents('.form-group').removeClass('has-success').removeClass('has-error');                   			
                     			
                     			var code = $("input[name=box_code]").val();
                     			
-                    			if (!$("select[id='boxes_list'] option[value='" + code + "']:selected").length) {
+                    			if (!$("select[name='boxes_2[]'] option[value='" + code + "']").length) {
                     				$.ajax({
                                 		type:'POST',
                                 		url: "/ajax/check_box",
-                                		data: {'barcode':code },
+                                		data: {'id':code },
                                 		dataType:"json",
                                 	}).success(function(data) {
 
                                 		if(data.status=="OK") {
-                                			if (!$("select[id='boxes_list'] option[value='" + data.id + "']:selected").length) {
-                                				$("select[id='boxes_list']").append($('<option>', { 
-                                					value: id,
+                                			if (!$("select[name='boxes_2[]'] option[value='" + data.id + "']").length) {
+                                				$("select[name='boxes_2[]']").append($('<option>', { 
+                                					value: code,
                                 					text : code,
-                                					selected: true
                                 				}));
-                                			}else {
-                                				$("select[id='boxes_list'] option[value='" + data.id + "']").attr('selected',true);
                                 			}
                                 		}else {
                                 			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
@@ -207,6 +205,8 @@ var OrderWizard = function () {
                                 		$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
                                 	});
                     				
+                    			}else {
+                    				$("select[name='boxes_2[]'] option[value='" + code + "']").attr('selected',true);
                     			}
                     			
                     		});
@@ -260,6 +260,8 @@ var OrderWizard = function () {
                                 		$("input[name=box_code_3]").parents('.form-group').removeClass('has-success').addClass('has-error');
                                 	});
                     				
+                    			}else {
+                    				$("select[name='boxes_3[]'] option[value='" + code + "']").attr('selected',true);
                     			}
                     			
                     		});
@@ -294,6 +296,8 @@ var OrderWizard = function () {
                                 		$("input[name=box_code_4]").parents('.form-group').removeClass('has-success').addClass('has-error');
                                 	});
                     				
+                    			}else {
+                    				$("select[name='boxes_4[]'] option[value='" + code + "']").attr('selected',true);
                     			}
                     			
                     		});
@@ -406,6 +410,8 @@ var OrderWizard = function () {
                                 		$("input[name=box_code_5]").parents('.form-group').removeClass('has-success').addClass('has-error');
                                 	});
                     				
+                    			}else {
+                    				$("select[name='boxes_5[]'] option[value='" + code + "']").attr('selected',true);
                     			}
                     			
                     		});
