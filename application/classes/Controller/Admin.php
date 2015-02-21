@@ -352,6 +352,18 @@ class Controller_Admin extends Controller_Welcome {
 						$user->remove('roles',$role);
 					} 
 				}
+
+				foreach ($_POST['divisions'] as $division) {
+					if(!$user->has('divisions',$division)) {
+						$user->add('divisions',$division);
+					}
+				}
+				
+				foreach($user->divisions->find_all() as $division) {
+					if(!in_array($division->id, $_POST['divisions'])) {
+						$user->remove('divisions',$division);
+					}
+				}
 				
 				$validate = new Validation($_POST);
 				$validate->rule('firstname', 'not_empty')

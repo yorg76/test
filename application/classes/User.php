@@ -205,13 +205,20 @@ class User {
 		$user->username=$params['username'];
 		$user->password=$params['password'];
 		$user->customer_id=$params['customer_id'];
-		
+
 		
 		if(is_array($params)) {
 			
 			try {
 			
 				if($user->save()) {
+
+					foreach ($params['divisions'] as $division) {
+						if(!$user->has('divisions',$division)) {
+							$user->add('divisions',$division);
+						}
+					}
+					
 					$user->add('roles', ORM::factory('role', array('name' => 'login')));
 					
 					if($user->update()) {

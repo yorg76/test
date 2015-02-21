@@ -77,13 +77,11 @@
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon right">
-							<select class="form-control" name="division_id">
+							<select multiple class="form-control" name="divisions[]">
 								<option>-- Wybierz --</option>
 								<?php foreach ($divisions as $division):?>
 								<?php 
-									
 										echo "<option value=\"".$division->id."\"".$checked." >".$division->name."</option>";
-
 								?>
 								<?php endforeach;?>
 							</select>
