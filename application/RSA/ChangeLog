@@ -1,0 +1,12 @@
+Easy-RSA 3 ChangeLog
+
+3.0.0-rc1 (2013/12/01)
+
+    * The 3.x release is a nearly complete re-write of the 2.x codebase
+
+    * Initial 3.x series code by Josh Cepek <josh.cepek@usa.net> -- continuing
+    maintenance by the OpenVPN community development team and associated
+    contributors
+
+    * Add ECDSA (elliptic curve) support, thanks to Steffan Karger
+    <steffan@karger.me>
