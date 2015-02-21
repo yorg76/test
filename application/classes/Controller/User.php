@@ -615,7 +615,12 @@ die;
 				array_push($divisions_ids, $division->id);
 					
 			}
-			$boxes = ORM::factory('Box')->where('division_id','IN', $divisions_ids)->count_all();
+			
+			if(count($divisions_ids) > 0) {
+				$boxes = ORM::factory('Box')->where('division_id','IN', $divisions_ids)->count_all();
+			}else {
+				$boxes = 0;
+			}
 		}
 		
 		$this->content->bind('customer', $customer);
