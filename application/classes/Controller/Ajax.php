@@ -222,7 +222,7 @@ class Controller_Ajax extends Controller_Welcome {
 		if($this->request->method()===HTTP_Request::POST) {
 			$user=Auth::instance()->get_user();
 			if($user->id > 0) {
-				$box = ORM::factory('Box')->where('barcode', '=', $_POST['barcode'])->find();
+				$box = ORM::factory('Box')->where('barcode', '=', $_POST['id'])->find();
 				if($box->loaded()) {
 					echo json_encode(array('status'=>'OK','id'=>$box->id));
 				}else {
