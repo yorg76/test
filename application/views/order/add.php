@@ -265,7 +265,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_2[]">
+										<select multiple class="form-control" name="boxes_2[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
 											<option value="<?php echo $box-id;?>"><?php echo $box->barcode?></option>
 											<?php endforeach;?>
@@ -295,7 +295,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_3[]">
+										<select multiple class="form-control" name="boxes_3[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
 											<option value="<?php echo $box-id;?>"><?php echo $box->barcode?></option>
 											<?php endforeach;?>										
@@ -334,7 +334,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_4[]">
+										<select multiple class="form-control" name="boxes_4[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
 											<option value="<?php echo $box-id;?>"><?php echo $box->barcode?></option>
 											<?php endforeach;?>
@@ -374,7 +374,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Pudła</label>
 									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_5[]">
+										<select multiple class="form-control" name="boxes_5[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
 											<option value="<?php echo $box-id;?>"><?php echo $box->barcode?></option>
 											<?php endforeach;?>
