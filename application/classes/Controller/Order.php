@@ -179,8 +179,12 @@ class Controller_Order extends Controller_Welcome {
 			foreach ($warehouses as $warehouse) {
 				array_push($warehouses_ids, $warehouse->id);
 			}
-	
-			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->find_all();
+			
+			if(Auth_ORM::instance()->logged_in('admin') || Auth_ORM::instance()->logged_in('manager')) {
+				$boxes = ORM::factory('Box')->where('division_id','IN',$warehouses_ids)->find_all();
+			}else {
+				$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->find_all();
+			}
 	
 			$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 			$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
