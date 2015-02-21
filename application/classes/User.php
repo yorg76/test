@@ -219,7 +219,7 @@ class User {
 						$paramse = array();
 						
 						if(EasyRSA::PKI_initieted()) {
-							EasyRSA::setClientCertFile($user->username, $params['password'], $customer->name, $user->email);
+							EasyRSA::setClientCertFile($user->username, $params['password'], $customer->name, $user->email,TRUE);
 							$paramse['attachments'] = EasyRSA::getClientCertFile($user->username);
 						}
 						
