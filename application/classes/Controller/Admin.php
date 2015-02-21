@@ -326,7 +326,7 @@ class Controller_Admin extends Controller_Welcome {
 		if($this->request->param('id') > 0) {
 			$user = ORM::factory('User',$this->request->param('id'));
 			$roles = ORM::factory('Role')->find_all();
-			$divisions = ORM::factory('Division')->find_all();
+			$divisions = ORM::factory('Division')->where('customer_id','=',$user->customer_id)->find_all();
 			
 			$this->content->bind('user', $user);
 			$this->content->bind('divisions', $divisions);
