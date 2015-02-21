@@ -31,8 +31,13 @@
 									 Opis
 								</th>
 								<th>
-									 Wirtualne teczki
+									 Pudła
 								</th>
+								<?php if(Auth_ORM::instance()->logged_in('admin')):?>
+								<th>
+									Klient
+								</th>
+								<?php endif;?>
 								<th>
 									 Opcje
 								</th>
@@ -48,10 +53,17 @@
 									 <?php echo $division->description;?>
 								</td>
 								<td>
-									 <?php echo $division->virtualbriefcases->count_all();?>
+									 <?php echo $division->boxes->count_all();?>
 								</td>
+								<?php if(Auth_ORM::instance()->logged_in('admin')):?>
 								<td>
-									<div class="margin-bottom-5">
+									 <?php echo $division->customer->name;?>
+								</td>
+								<?php endif;?>
+								
+								<td>
+
+								<div class="margin-bottom-5">
 											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/customer/division_view/<?php echo $division->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button>
 											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/customer/division_edit/<?php echo $division->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
 											<button class="btn btn-xs red division-delete margin-bottom" id="<?php echo $user->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>

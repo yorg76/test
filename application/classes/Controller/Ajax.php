@@ -222,8 +222,8 @@ class Controller_Ajax extends Controller_Welcome {
 		if($this->request->method()===HTTP_Request::POST) {
 			$user=Auth::instance()->get_user();
 			if($user->id > 0) {
-				$box = ORM::factory('Box')->where('id', '=', $_POST['id'])->find();
-				if($box->warehouse->customer == $user->customer) {
+				$box = ORM::factory('Box')->where('barcode', '=', $_POST['barcode'])->find();
+				if($box->division->customer == $user->customer) {
 					echo json_encode(array('status'=>'OK','id'=>$box->id));
 				}else {
 					echo json_encode(array('status'=>'NOTOK'));

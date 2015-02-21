@@ -113,6 +113,14 @@ class Customer  {
 				
 				if($this->address->save() ) {
 						$log->add(Log::DEBUG,"Success: Updated company with params:".serialize($params)."\n");
+						$division = Division::instance();
+						$params = array();
+						
+						$params['name'] = "Dział ogólny";
+						$params['description'] = "Dział ogólny";
+						$params['customer_id'] = $this->customer->id;
+						$division->addDivision($params);
+						
 						Database::instance()->commit();				
 						return true;
 				} else {

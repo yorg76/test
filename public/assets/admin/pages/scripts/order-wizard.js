@@ -186,17 +186,19 @@ var OrderWizard = function () {
                     				$.ajax({
                                 		type:'POST',
                                 		url: "/ajax/check_box",
-                                		data: {'id':code },
+                                		data: {'barcode':code },
                                 		dataType:"json",
                                 	}).success(function(data) {
 
                                 		if(data.status=="OK") {
                                 			if (!$("select[name='boxes_2[]'] option[value='" + data.id + "']:selected").length) {
                                 				$("select[name='boxes_2[]']").append($('<option>', { 
-                                					value: code,
+                                					value: id,
                                 					text : code,
                                 					selected: true
                                 				}));
+                                			}else {
+                                				$("select[name='boxes_2[]'] option[value='" + data.id + "']").attr('selected',true);
                                 			}
                                 		}else {
                                 			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');

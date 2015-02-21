@@ -521,6 +521,71 @@ die;
 		$this->template->bind('content', $content);
 	}
 	
+	public function action_import9() {
+		die;
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/grupydok.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Grupa:".$data[1]."\n";
+	
+					$division = ORM::factory('Division');
+	
+					$division ->id = $data[0];
+					$division ->name = $data[1];
+					$division ->description = $data[1];
+					$division ->customer_id = $data[2];
+	
+					if($division->save()) {
+						$content .= "<p> Division added </p>";
+					}
+	
+	
+				}
+	
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+
+	public function action_import10() {
+		
+		$row = 1;
+	
+		$content = "";
+	
+		if (($handle = fopen(DOCROOT."/sql/importy/pudla.csv", "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$num = count($data);
+	
+				if($row > 1) {
+					$content .= "<p> $num fields in line $row: <br /></p> Grupa:".$data[12]."\n";
+	
+					$box = ORM::factory('Box',$data[0]);
+					
+					$box->division_id=$data[12];
+					
+					if($box->loaded() && $box->update()) {
+						$content .= "<p> Box updated</p>";
+					}
+				}
+				$row++;
+			}
+			fclose($handle);
+		}
+	
+		$this->template->bind('content', $content);
+	}
+	
+	
 	public function action_dashboard() {
 		
 		
