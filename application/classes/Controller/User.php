@@ -16,6 +16,7 @@ class Controller_User extends Controller_Welcome {
 		$this->template->message = Message::factory();
 
 		if(strtolower ( $this->request->action()) == 'calendar') $this->add_init(" Calendar.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'dashboard') $this->add_init(" Calendar.init();\t\n");
 		
 	}
 	
@@ -27,8 +28,18 @@ class Controller_User extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'ecommerce-index.js');
 		
 		if(strtolower ( $this->request->action()) == 'calendar') {
-			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar/fullcalendar.css');
-			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar/fullcalendar.min.js');
+			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar.css');
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/lib/moment.min.js');
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar.min.js');
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/lang-all.js');
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'calendar.js');
+		}
+		
+		if(strtolower ( $this->request->action()) == 'dashboard') {
+			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar.css');
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/lib/moment.min.js');
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar.min.js');
+			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/lang-all.js');
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'calendar.js');
 		}
 		
@@ -686,6 +697,16 @@ die;
 		
 		$customers = Auth::instance()->get_user()->customer->count_all();
 		$this->content->bind('customers', $customers);
+		
+		$orders_per_month = $user->orders->where(DB::expr("MONTH(create_date)"),'=',date('m'))->find_all();
+		$orders_sum = 0;
+		
+		foreach ($orders_per_month as $order) {
+			$orders_sum += $order->final_price;	
+		}
+		
+		$this->content->bind('orders_sum',$orders_sum);
+		
 	}
 	
 	public function action_calendar() {

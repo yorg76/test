@@ -44,6 +44,7 @@
 						</a>
 					</div>
 				</div>
+				<?php if(Auth_ORM::instance()->logged_in('admin') || Auth_ORM::instance()->logged_in('manager') ):?>
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 					<div class="dashboard-stat green-haze">
 						<div class="visual">
@@ -60,6 +61,44 @@
 						<a class="more" href="/admin/customers">
 						Więcej... <i class="m-icon-swapright m-icon-white"></i>
 						</a>
+					</div>
+				</div>
+				<?php else:?>
+				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+					<div class="dashboard-stat green-haze">
+						<div class="visual">
+							<i class="fa fa-credit-card fa-icon-medium"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								 <?php echo Pricetable::money($orders_sum); ?>
+							</div>
+							<div class="desc">
+								Płatności
+							</div>
+						</div>
+						<a class="more" href="/finance/invoices">
+						Więcej... <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+				<?php endif;?>
+				<div class="col-md-12">
+					<div class="portlet box green-meadow calendar">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i>Kalendarz
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<div id="calendar" class="has-toolbar">
+									</div>
+								</div>
+							</div>
+							<!-- END CALENDAR PORTLET-->
+						</div>
 					</div>
 				</div>
 			</div>

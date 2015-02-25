@@ -12,6 +12,56 @@ class Controller_Ajax extends Controller_Welcome {
 		$this->auto_render=FALSE;
 	}
 	
+	public function action_get_events() {
+		
+		$user=Auth::instance()->get_user();
+		
+		$orders = array();
+		
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
+			
+			$orders = ORM::factory('Order');
+			
+			if($_GET['start']) {
+				$orders = $orders->where('create_date', '>=', $_GET['start']);
+			}
+			
+			if($_GET['end']) {
+				$orders = $orders->and_where('create_date', '<=', $_GET['end']);
+			}
+			
+			$orders = $orders->find_all();
+			
+			
+			
+		}else {
+			$orders = $user->orders;
+				
+			if($_GET['start']) {
+				$orders = $orders->where('create_date', '>=', $_GET['start']);
+			}
+				
+			if($_GET['end']) {
+				$orders = $orders->and_where('create_date', '<=', $_GET['end']);
+			}
+				
+			$orders = $orders->find_all();
+			
+		}
+		
+		$events = array();
+		
+		foreach ($orders as $order) {
+			$e = array();
+			$e['title'] = $order->type;
+			$e['start'] = $order->create_date;
+			$e['url'] = URL::site('order/view_order').'/'.$order->id;
+			array_push($events, $e);
+		}
+		
+		echo json_encode($events);
+	}
+	
 	public function action_places_list() {
 	
 		$places = NULL;

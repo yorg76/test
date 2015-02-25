@@ -272,6 +272,26 @@
 										</select>
 									</div>
 								</div>
+								
+								<div class="form-group">
+										<label for="boxes_file" class="control-label col-md-3">Pobierz XLS z pudłami</label>
+										<div class="col-md-4">
+											<span class="input-group-btn">
+												<a id="get_boxes_file" class="btn btn-success" href="/order/get_boxes_file" target="_new"><i class="fa fa-arrow-left fa-fw"/></i> Pobierz plik</a>
+											</span>
+										</div>
+								</div>
+								<div class="form-group">
+										<label for="boxes_file" class="control-label col-md-3">Dodaj XLS z pudłami</label>
+										<div class="col-md-4">
+											<input type="file" id="boxes_file">
+											<p class="help-block">
+												 Plik dodany tutaj powinien zawierać w pierwszej kolumnie, pierwszego arkusza, kody kreskowe pudeł przeznaczonych do zniszczenia.
+											</p>
+										</div>
+								</div>
+								
+								
 							</div>
 							
 							<div class="order_type_3" style="display: none;" >
