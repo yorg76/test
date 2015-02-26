@@ -167,6 +167,15 @@ var TableWarehouses = function () {
 
 var TableBoxes = function () {
 	var id=0;
+	
+    var initPickers = function () {
+        //init date pickers
+        $('.date-picker').datepicker({
+            rtl: Metronic.isRTL(),
+            autoclose: true
+        });
+    }
+    
     var handleTable = function () {
 
         var table = new Datatable({
@@ -201,7 +210,7 @@ var TableBoxes = function () {
                 //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
                 
                 "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-
+                "searchable": true, 
                 "lengthMenu": [
                     [10, 20, 50, 100, 150, -1],
                     [10, 20, 50, 100, 150, "Wszystkie"] // change per page values here
@@ -223,6 +232,7 @@ var TableBoxes = function () {
 
         //main function to initiate the module
         init: function () {
+        	initPickers();
             handleTable();
         }
 

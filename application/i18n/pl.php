@@ -2,6 +2,8 @@
  
 return array
 (
+	'places' => 'Regały',
+	'invoice_add' => 'Wystaw fakturę',
 	'division_add' => 'Dodaj dział',
 	'customer_add_user' => 'Dodawnie użytkownika klienta',
 	'shipmentcompanies' => 'Firmy kurierskie',

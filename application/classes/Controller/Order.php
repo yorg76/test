@@ -117,55 +117,7 @@ class Controller_Order extends Controller_Welcome {
 		
 	}
 	
-	public function action_get_boxes_file() {
-		$this->auto_render=FALSE;
-		$spreadsheet = Spreadsheet::factory ( array (
-				'author' => 'Opakowania na magazynie',
-				'title' => 'Report',
-				'subject' => __ ( 'Raport magazynów' ),
-				'description' => '',
-				'path' => APPPATH . 'cache/',
-				'name' => 'pudla-' . md5 ( time () ) 
-		) );
-		
-		$data ['boxes'] = array (
-				'columns' => array (
-						UTF8::strtoupper ( __ ( 'Kod pudła' ) ) 
-				),
-				'rows'=>array(),
-		);
-		
-		$user = Auth::instance()->get_user();
-		$order=Order::instance();
-		$customer=$user->customer;
-		$divisions = $customer->divisions->find_all();
-		$divisions_ids= array();
-		$virtualbriefcases = array();
-		$warehouses = $customer->warehouses->find_all();
-		$warehouses_ids = array();
-		$storagecategories = ORM::factory('StorageCategory')->find_all();
-		
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
-				
-		}
-		
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
-		
-		foreach ($warehouses as $warehouse) {
-			array_push($warehouses_ids, $warehouse->id);
-		}
-		
-		$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->find_all();
-		
-		foreach ($boxes as $box) {
-			array_push ( $data ['boxes'] ['rows'], array ($box->barcode));
-		}
-		
-		$spreadsheet->set_data ( $data, TRUE );
-		$spreadsheet->send ();
 	
-    }
 
 	public function action_orders_search() {
 		

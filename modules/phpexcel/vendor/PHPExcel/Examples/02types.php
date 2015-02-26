@@ -2,7 +2,7 @@
 /**
  * PHPExcel
  *
- * Copyright (C) 2006 - 2012 PHPExcel
+ * Copyright (C) 2006 - 2014 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  * @category   PHPExcel
  * @package    PHPExcel
- * @copyright  Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    ##VERSION##, ##DATE##
+ * @version    1.8.0, 2014-03-02
  */
 
 /** Error reporting */
@@ -34,7 +34,7 @@ date_default_timezone_set('Europe/London');
 define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 
 /** Include PHPExcel */
-require_once '../Classes/PHPExcel.php';
+require_once dirname(__FILE__) . '/../Classes/PHPExcel.php';
 
 
 // Create new PHPExcel object
@@ -108,6 +108,29 @@ $objPHPExcel->getActiveSheet()->getStyle('C11')->getNumberFormat()->setFormatCod
 
 $objPHPExcel->getActiveSheet()->setCellValue('A12', 'NULL')
                               ->setCellValue('C12', NULL);
+
+$objRichText = new PHPExcel_RichText();
+$objRichText->createText('你好 ');
+
+$objPayable = $objRichText->createTextRun('你 好 吗？');
+$objPayable->getFont()->setBold(true);
+$objPayable->getFont()->setItalic(true);
+$objPayable->getFont()->setColor( new PHPExcel_Style_Color( PHPExcel_Style_Color::COLOR_DARKGREEN ) );
+
+$objRichText->createText(', unless specified otherwise on the invoice.');
+
+$objPHPExcel->getActiveSheet()->setCellValue('A13', 'Rich Text')
+                              ->setCellValue('C13', $objRichText);
+
+
+$objRichText2 = new PHPExcel_RichText();
+$objRichText2->createText("black text\n");
+
+$objRed = $objRichText2->createTextRun("red text");
+$objRed->getFont()->setColor( new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_RED  ) );
+
+$objPHPExcel->getActiveSheet()->getCell("C14")->setValue($objRichText2);
+$objPHPExcel->getActiveSheet()->getStyle("C14")->getAlignment()->setWrapText(true);
 
 
 $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);

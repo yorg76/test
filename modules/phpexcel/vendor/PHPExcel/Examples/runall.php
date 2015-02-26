@@ -2,7 +2,7 @@
 /**
  * PHPExcel
  *
- * Copyright (C) 2006 - 2012 PHPExcel
+ * Copyright (C) 2006 - 2014 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  * @category   PHPExcel
  * @package    PHPExcel
- * @copyright  Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    ##VERSION##, ##DATE##
+ * @version    1.8.0, 2014-03-02
  */
 
 /** Error reporting */
@@ -35,6 +35,7 @@ if (PHP_SAPI != 'cli') {
 // List of tests
 $aTests = array(
 	  '01simple.php'
+	, '01simplePCLZip.php'
 	, '02types.php'
 	, '02types-xls.php'
 	, '03formulas.php'
@@ -42,16 +43,21 @@ $aTests = array(
 	, '05featuredemo.php'
 	, '06largescale.php'
 	, '06largescale-with-cellcaching.php'
+	, '06largescale-with-cellcaching-sqlite.php'
+	, '06largescale-with-cellcaching-sqlite3.php'
 	, '06largescale-xls.php'
 	, '07reader.php'
+	, '07readerPCLZip.php'
 	, '08conditionalformatting.php'
 	, '08conditionalformatting2.php'
 	, '09pagebreaks.php'
 	, '10autofilter.php'
 	, '10autofilter-selection-1.php'
 	, '10autofilter-selection-2.php'
+	, '10autofilter-selection-display.php'
 	, '11documentsecurity.php'
 	, '11documentsecurity-xls.php'
+	, '12cellProtection.php'
 	, '13calculation.php'
 	, '14excel5.php'
 	, '15datavalidation.php'
@@ -82,12 +88,18 @@ $aTests = array(
 	, '33chartcreate-line.php'
 	, '33chartcreate-pie.php'
 	, '33chartcreate-radar.php'
+	, '33chartcreate-stock.php'
+	, '33chartcreate-multiple-charts.php'
+	, '33chartcreate-composite.php'
 	, '34chartupdate.php'
 	, '35chartrender.php'
 	, '36chartreadwriteHTML.php'
+	, '36chartreadwritePDF.php'
 	, '37page_layout_view.php'
+	, '38cloneWorksheet.php'
 	, '40duplicateStyle.php'
 	, 'OOCalcReader.php'
+	, 'OOCalcReaderPCLZip.php'
 	, 'SylkReader.php'
 	, 'Excel2003XMLReader.php'
 	, 'XMLReader.php'

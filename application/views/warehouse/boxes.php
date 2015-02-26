@@ -28,13 +28,67 @@
 							<th>Kod pudła</th>
 							<th>Regał</th>
 							<th>Magazyn</th>
-							<th>Kategoria przechowywania</th>
+							<th>Klient</th>
 							<th>Data początku magazynowania</th>
 							<th>Data końca magazynowania</th>
 							<th>Status</th>
 							<th>Plomba</th>
-							
 							<th>Opcje</th>
+						</tr>
+						
+						<tr role="row" class="filter">
+							<td>
+								<input type="text" class="form-control form-filter input-sm" name="id">
+							</td>
+							<td>
+								<input type="text" class="form-control form-filter input-sm" name="barcode">
+							</td>
+							<td>
+								<input type="text" class="form-control form-filter input-sm" name="place_id">
+							</td>
+							<td>
+								<input type="text" class="form-control form-filter input-sm" name="warehouse_name">
+							</td>
+							<td>
+								<input type="text" class="form-control form-filter input-sm" name="customer">
+							</td>
+							
+							<td>
+								<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+									<input type="text" class="form-control form-filter input-sm" readonly name="date_from" placeholder="Od">
+									<span class="input-group-btn">
+									<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+									</span>
+								</div>
+							</td>
+							<td>
+								<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+									<input type="text" class="form-control form-filter input-sm" readonly name="date_to" placeholder="Do">
+									<span class="input-group-btn">
+									<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+									</span>
+								</div>
+							</td>
+							<td>
+								<select name="status" class="form-control form-filter input-sm">
+									<option value="">Select...</option>
+									<option value="Puste">Puste</option>
+									<option value="Na magazynie">Na magazynie</option>
+									<option value="W trakcie transportu">W trakcie transportu</option>
+									<option value="Wypożyczone">Wypożyczone</option>
+									<option value="Przyjęcie na magazyn" >Przyjęcie na magazyn</option>
+									<option value="Usunięte">Usunięte</option>
+								</select>
+							</td>
+							<td>
+								<input type="text" class="form-control form-filter input-sm" name="storage_catgory">
+							</td>
+							<td>
+								<div class="margin-bottom-5">
+									<button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Szukaj</button>
+								</div>
+									<button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Wyczyść</button>
+							</td>
 						</tr>
 					</thead>
 					<tbody>

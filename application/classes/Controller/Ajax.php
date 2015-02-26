@@ -12,6 +12,65 @@ class Controller_Ajax extends Controller_Welcome {
 		$this->auto_render=FALSE;
 	}
 	
+	public function action_get_boxes_file() {
+
+		$user = Auth::instance()->get_user();
+		$order=Order::instance();
+		$customer=$user->customer;
+		$divisions = $customer->divisions->find_all();
+		$divisions_ids= array();
+		$virtualbriefcases = array();
+		$warehouses = $customer->warehouses->find_all();
+		$warehouses_ids = array();
+		$storagecategories = ORM::factory('StorageCategory')->find_all();
+	
+		foreach ($divisions as $division) {
+			array_push($divisions_ids, $division->id);
+	
+		}
+	
+		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+	
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+
+	
+		$spreadsheet = Spreadsheet::factory ( array (
+				'author' => 'Opakowania na magazynie',
+				'title' => 'Raport',
+				'subject' => __ ( 'Raport pudel' ),
+				'description' => '',
+				'path' => APPPATH . 'cache'.DIRECTORY_SEPARATOR,
+				'name' => 'pudla',
+				'format' => 'CSV'
+		) );
+	
+		$spreadsheet->set_active_worksheet(0);
+	
+		$as = $spreadsheet->get_active_worksheet();
+		
+		
+		$data = array (
+				'columns' => array (UTF8::strtoupper("Kod pudła")),
+				'rows'=>array(),
+		);
+	
+	
+		$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->find_all();
+	
+		foreach ($boxes as $box) {
+			array_push ( $data['rows'], array ((int) $box->barcode));
+		}
+		
+		$data['formats']=array(0=>'@');
+		
+		$spreadsheet->set_data( $data, FALSE );
+		
+		$spreadsheet->send();
+	
+	}
+	
 	public function action_get_events() {
 		
 		$user=Auth::instance()->get_user();
@@ -162,6 +221,17 @@ class Controller_Ajax extends Controller_Welcome {
 		/*
 		 * Paging
 		*/
+		$columns = array(
+			'id',
+			'barcode',
+			'place_id',
+			'warehouse_id',
+			'division_id',
+			'date_from',
+			'date_to',
+			'status',
+			'seal');
+		
 		
 		$iTotalRecords = $boxes_count;
 		$iDisplayLength = intval($_REQUEST['length']);
@@ -174,8 +244,40 @@ class Controller_Ajax extends Controller_Welcome {
 		
 		$end = $iDisplayStart + $iDisplayLength;
 		$end = $end > $iTotalRecords ? $iTotalRecords : $end;	
-	
-		$boxes = $boxes->limit($iDisplayLength)->offset($iDisplayStart)->find_all();
+		
+		if($_POST['action'] == 'filter' ) {
+			
+			$boxes = $boxes->where('id','>','0');
+			
+			if($_POST['id'] != NULL) $boxes = $boxes->and_where('id','=',$_POST['id']);
+			if($_POST['barcode'] != NULL) $boxes = $boxes->and_where('barcode','=',$_POST['barcode']);
+			if($_POST['place_id'] != NULL) $boxes = $boxes->and_where('place_id','=',$_POST['place_id']);
+			if($_POST['warehouse_name'] != NULL) $boxes = $boxes->and_where('warehouse_id','=',ORM::factory('Warehouse')->where('name','LIKE','%'.$_POST['warehouse_name'].'%')->find()->id);
+			if($_POST['customer'] != NULL) {
+				$customers = ORM::factory('Customer')->where('name','LIKE','%'.$_POST['customer'].'%')->find_all();
+				$divisions_ids_filter = array();
+				
+				foreach ($customers as $customer) {
+					foreach ($customer->divisions->find_all() as $division) {
+						array_push($divisions_ids_filter , $division->id);
+					}
+				}
+				
+				$boxes = $boxes->and_where('division_id','IN',$divisions_ids_filter);
+			}
+			
+			if($_POST['date_from'] != NULL) $boxes = $boxes->and_where('date_from','=',$_POST['date_from']);
+			if($_POST['date_to'] != NULL) $boxes = $boxes->and_where('date_to','=',$_POST['date_to']);
+			if($_POST['status'] != NULL) $boxes = $boxes->and_where('status','=',$_POST['status']);
+		}
+		
+		if($_POST['order'][0]['column'] != NULL) {
+			$boxes = $boxes->order_by($columns[$_POST['order'][0]['column']], $_POST['order'][0]['dir']);
+		}
+		
+		$boxes = $boxes->limit($iDisplayLength)->offset($iDisplayStart);
+		$boxes = $boxes->find_all();
+		
 		
 		foreach ($boxes as $box) {			
 			$id = $box->id;
@@ -193,7 +295,7 @@ class Controller_Ajax extends Controller_Welcome {
 						"<img alt=\"barcode\" src=\"/barcode/get/".$box->barcode."\"/>",
 						($box->place_id != '' ? "<img alt=\"barcode\" src=\"/barcode/get/".$box->place->barcode."\"/>":''),
 						$box->warehouse->name,
-						$box->storagecategory->name,
+						$box->division->customer->name,
 						$box->date_from,
 						$box->date_to,
 						$box->status,

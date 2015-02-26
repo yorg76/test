@@ -277,7 +277,7 @@
 										<label for="boxes_file" class="control-label col-md-3">Pobierz XLS z pudłami</label>
 										<div class="col-md-4">
 											<span class="input-group-btn">
-												<a id="get_boxes_file" class="btn btn-success" href="/order/get_boxes_file" target="_new"><i class="fa fa-arrow-left fa-fw"/></i> Pobierz plik</a>
+												<a id="get_boxes_file" class="btn btn-success" href="/ajax/get_boxes_file" target="_new"><i class="fa fa-arrow-left fa-fw"/></i> Pobierz plik</a>
 											</span>
 										</div>
 								</div>

@@ -55,8 +55,8 @@
 								</td>
 								<td>
 									<p>Odbiór pudeł: <?php echo Pricetable::money($pricetable->boxes_reception);?> pudło.</p>
-									<p>Wysłanie pudła: <?php echo Pricetable::money($pricetable->boxes_sending); ?> pudło/miesiąc.</p>
-									<p>Magazynowanie: <?php echo Pricetable::money($pricetable->boxes_storage); ?> pudło.</p>
+									<p>Wysłanie pudła: <?php echo Pricetable::money($pricetable->boxes_sending); ?> pudło.</p>
+									<p>Magazynowanie: <?php echo Pricetable::money($pricetable->boxes_storage); ?> pudło/miesiąc.</p>
 									<p>Skanowanie: <?php echo Pricetable::money($pricetable->document_scan); ?> dokument.</p>
 									<p>Kopia: <?php echo Pricetable::money($pricetable->document_copy); ?> dokument.</p>
 									<p>Kopia notar.: <?php echo Pricetable::money($pricetable->document_notarial_copy); ?> dokument.</p>

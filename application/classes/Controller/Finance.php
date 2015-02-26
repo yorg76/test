@@ -66,6 +66,22 @@ class Controller_Finance extends Controller_Welcome {
 		
 	}
 	
+	public function action_invoice_add() {
+		
+		$customers = ORM::factory('Customer')->find_all();
+		$this->content->bind('customers', $customers);
+		
+		if($this->request->param('id') > 0) {
+			if($this->request->method()===HTTP_Request::POST) {
+				if(0) {
+					Message::success(ucfirst(__('Magazyn został utworzony')),'/finance/prices');
+				}else {
+					Message::error(ucfirst(__('Magazyn nie został utworzony')),'/finance/prices');
+				}
+			}
+		}
+	}
+	
 	public function action_pricetable_add() {
 		
 		$customers = ORM::factory('Customer')->find_all();

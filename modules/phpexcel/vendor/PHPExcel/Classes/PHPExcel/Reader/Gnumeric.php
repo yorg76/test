@@ -2,7 +2,7 @@
 /**
  * PHPExcel
  *
- * Copyright (c) 2006 - 2012 PHPExcel
+ * Copyright (c) 2006 - 2014 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  * @category   PHPExcel
  * @package    PHPExcel_Reader
- * @copyright  Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    ##VERSION##, ##DATE##
+ * @version    1.8.0, 2014-03-02
  */
 
 
@@ -40,7 +40,7 @@ if (!defined('PHPEXCEL_ROOT')) {
  *
  * @category	PHPExcel
  * @package		PHPExcel_Reader
- * @copyright	Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright	Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
  */
 class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 {
@@ -73,7 +73,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
 	/**
 	 * Can the current PHPExcel_Reader_IReader read the file?
 	 *
-	 * @param 	string 		$pFileName
+	 * @param 	string 		$pFilename
 	 * @return 	boolean
 	 * @throws PHPExcel_Reader_Exception
 	 */
@@ -103,6 +103,40 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
 
 
 	/**
+	 * Reads names of the worksheets from a file, without parsing the whole file to a PHPExcel object
+	 *
+	 * @param 	string 		$pFilename
+	 * @throws 	PHPExcel_Reader_Exception
+	 */
+	public function listWorksheetNames($pFilename)
+	{
+		// Check if file exists
+		if (!file_exists($pFilename)) {
+			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
+		}
+
+		$xml = new XMLReader();
+		$xml->open(
+			'compress.zlib://'.realpath($pFilename), null, PHPExcel_Settings::getLibXmlLoaderOptions()
+		);
+		$xml->setParserProperty(2,true);
+
+		$worksheetNames = array();
+		while ($xml->read()) {
+			if ($xml->name == 'gnm:SheetName' && $xml->nodeType == XMLReader::ELEMENT) {
+			    $xml->read();	//	Move onto the value node
+				$worksheetNames[] = (string) $xml->value;
+			} elseif ($xml->name == 'gnm:Sheets') {
+				//	break out of the loop once we've got our sheet names rather than parse the entire file
+				break;
+			}
+		}
+
+		return $worksheetNames;
+	}
+
+
+	/**
 	 * Return worksheet info (Name, Last Column Letter, Last Column Index, Total Rows, Total Columns)
 	 *
 	 * @param   string     $pFilename
@@ -115,37 +149,40 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
 			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
 		}
 
-		$gFileData = $this->_gzfileGetContents($pFilename);
-
-		$xml = simplexml_load_string($gFileData);
-		$namespacesMeta = $xml->getNamespaces(true);
-
-		$gnmXML = $xml->children($namespacesMeta['gnm']);
+		$xml = new XMLReader();
+		$xml->open(
+			'compress.zlib://'.realpath($pFilename), null, PHPExcel_Settings::getLibXmlLoaderOptions()
+		);
+		$xml->setParserProperty(2,true);
 
 		$worksheetInfo = array();
+		while ($xml->read()) {
+			if ($xml->name == 'gnm:Sheet' && $xml->nodeType == XMLReader::ELEMENT) {
+				$tmpInfo = array(
+					'worksheetName' => '',
+					'lastColumnLetter' => 'A',
+					'lastColumnIndex' => 0,
+					'totalRows' => 0,
+					'totalColumns' => 0,
+				);
 
-		foreach ($gnmXML->Sheets->Sheet as $sheet) {
-			$tmpInfo = array();
-			$tmpInfo['worksheetName'] = (string) $sheet->Name;
-			$tmpInfo['lastColumnLetter'] = 'A';
-			$tmpInfo['lastColumnIndex'] = 0;
-			$tmpInfo['totalRows'] = 0;
-			$tmpInfo['totalColumns'] = 0;
-
-			foreach ($sheet->Cells->Cell as $cell) {
-				$cellAttributes = $cell->attributes();
-
-				$rowIndex = (int) $cellAttributes->Row + 1;
-				$columnIndex = (int) $cellAttributes->Col;
-
-				$tmpInfo['totalRows'] = max($tmpInfo['totalRows'], $rowIndex);
-				$tmpInfo['lastColumnIndex'] = max($tmpInfo['lastColumnIndex'], $columnIndex);
+				while ($xml->read()) {
+					if ($xml->name == 'gnm:Name' && $xml->nodeType == XMLReader::ELEMENT) {
+					    $xml->read();	//	Move onto the value node
+						$tmpInfo['worksheetName'] = (string) $xml->value;
+					} elseif ($xml->name == 'gnm:MaxCol' && $xml->nodeType == XMLReader::ELEMENT) {
+					    $xml->read();	//	Move onto the value node
+						$tmpInfo['lastColumnIndex'] = (int) $xml->value;
+						$tmpInfo['totalColumns'] = (int) $xml->value + 1;
+					} elseif ($xml->name == 'gnm:MaxRow' && $xml->nodeType == XMLReader::ELEMENT) {
+					    $xml->read();	//	Move onto the value node
+						$tmpInfo['totalRows'] = (int) $xml->value + 1;
+						break;
+					}
+				}
+				$tmpInfo['lastColumnLetter'] = PHPExcel_Cell::stringFromColumnIndex($tmpInfo['lastColumnIndex']);
+				$worksheetInfo[] = $tmpInfo;
 			}
-
-			$tmpInfo['lastColumnLetter'] = PHPExcel_Cell::stringFromColumnIndex($tmpInfo['lastColumnIndex']);
-			$tmpInfo['totalColumns'] = $tmpInfo['lastColumnIndex'] + 1;
-
-			$worksheetInfo[] = $tmpInfo;
 		}
 
 		return $worksheetInfo;
@@ -183,36 +220,6 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
 
 
 	/**
-	 * Reads names of the worksheets from a file, without parsing the whole file to a PHPExcel object
-	 *
-	 * @param 	string 		$pFilename
-	 * @throws 	PHPExcel_Reader_Exception
-	 */
-	public function listWorksheetNames($pFilename)
-	{
-		// Check if file exists
-		if (!file_exists($pFilename)) {
-			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
-		}
-
-		$gFileData = $this->_gzfileGetContents($pFilename);
-
-		$xml = simplexml_load_string($gFileData);
-		$namespacesMeta = $xml->getNamespaces(true);
-
-		$gnmXML = $xml->children($namespacesMeta['gnm']);
-
-		$worksheetNames = array();
-
-		foreach($gnmXML->Sheets->Sheet as $sheet) {
-			$worksheetNames[] = (string) $sheet->Name;
-		}
-
-		return $worksheetNames;
-	}
-
-
-	/**
 	 * Loads PHPExcel from file into PHPExcel instance
 	 *
 	 * @param 	string 		$pFilename
@@ -236,7 +243,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
 //		echo htmlentities($gFileData,ENT_QUOTES,'UTF-8');
 //		echo '</pre><hr />';
 //
-		$xml = simplexml_load_string($gFileData);
+		$xml = simplexml_load_string($gFileData, 'SimpleXMLElement', PHPExcel_Settings::getLibXmlLoaderOptions());
 		$namespacesMeta = $xml->getNamespaces(true);
 
 //		var_dump($namespacesMeta);
@@ -504,7 +511,7 @@ class PHPExcel_Reader_Gnumeric extends PHPExcel_Reader_Abstract implements PHPEx
 
 					//	We still set the number format mask for date/time values, even if _readDataOnly is true
 					if ((!$this->_readDataOnly) ||
-						(PHPExcel_Shared_Date::isDateTimeFormatCode($styleArray['numberformat']['code']))) {
+						(PHPExcel_Shared_Date::isDateTimeFormatCode((string) $styleAttributes['Format']))) {
 						$styleArray = array();
 						$styleArray['numberformat']['code'] = (string) $styleAttributes['Format'];
 						//	If _readDataOnly is false, we set all formatting information
