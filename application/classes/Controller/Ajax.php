@@ -194,7 +194,7 @@ class Controller_Ajax extends Controller_Welcome {
 		
 		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 			$boxes = ORM::factory('Box');
-			$boxes_count = ORM::factory('Box')->count_all();
+			$boxes_count = ORM::factory('Box');
 		}
 		elseif(Auth::instance()->logged_in('manager')){
 			$warehouses = $customer->warehouses->find_all();
@@ -204,7 +204,7 @@ class Controller_Ajax extends Controller_Welcome {
 				array_push($warehouses_ids, $warehouse->id);
 			}
 			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids);
-			$boxes_count = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->count_all();
+			$boxes_count = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids);
 		}
 		elseif(Auth::instance()->logged_in('login')) {
 			$user = Auth::instance()->get_user();
@@ -216,7 +216,7 @@ class Controller_Ajax extends Controller_Welcome {
 					
 			}
 			$boxes = ORM::factory('Box')->where('division_id','IN', $divisions_ids);
-			$boxes_count = ORM::factory('Box')->where('division_id','IN', $divisions_ids)->count_all();
+			$boxes_count = ORM::factory('Box')->where('division_id','IN', $divisions_ids);
 		}	
 		/*
 		 * Paging
@@ -232,27 +232,31 @@ class Controller_Ajax extends Controller_Welcome {
 			'status',
 			'seal');
 		
-		
-		$iTotalRecords = $boxes_count;
-		$iDisplayLength = intval($_REQUEST['length']);
-		$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
-		$iDisplayStart = intval($_REQUEST['start']);
-		$sEcho = intval($_REQUEST['draw']);
-		
-		$records = array();
-		$records["data"] = array();
-		
-		$end = $iDisplayStart + $iDisplayLength;
-		$end = $end > $iTotalRecords ? $iTotalRecords : $end;	
+			
 		
 		if($_POST['action'] == 'filter' ) {
 			
 			$boxes = $boxes->where('id','>','0');
 			
-			if($_POST['id'] != NULL) $boxes = $boxes->and_where('id','=',$_POST['id']);
-			if($_POST['barcode'] != NULL) $boxes = $boxes->and_where('barcode','=',$_POST['barcode']);
-			if($_POST['place_id'] != NULL) $boxes = $boxes->and_where('place_id','=',$_POST['place_id']);
-			if($_POST['warehouse_name'] != NULL) $boxes = $boxes->and_where('warehouse_id','=',ORM::factory('Warehouse')->where('name','LIKE','%'.$_POST['warehouse_name'].'%')->find()->id);
+			if($_POST['id'] != NULL) {
+				$boxes = $boxes->and_where('id','=',$_POST['id']);
+				$boxes_count = $boxes_count->and_where('id','=',$_POST['id']);
+			}
+			
+			if($_POST['barcode'] != NULL) {
+				$boxes = $boxes->and_where('barcode','=',$_POST['barcode']);
+				$boxes_count = $boxes_count->and_where('barcode','=',$_POST['barcode']);
+			}
+			
+			if($_POST['place_id'] != NULL) {
+				$boxes = $boxes->and_where('place_id','=',$_POST['place_id']);
+				$boxes_count = $boxes_count->and_where('place_id','=',$_POST['place_id']);
+			}
+			if($_POST['warehouse_name'] != NULL) {
+				$boxes = $boxes->and_where('warehouse_id','=',ORM::factory('Warehouse')->where('name','LIKE','%'.$_POST['warehouse_name'].'%')->find()->id);
+				$boxes_count = $boxes_count->and_where('warehouse_id','=',ORM::factory('Warehouse')->where('name','LIKE','%'.$_POST['warehouse_name'].'%')->find()->id);
+			}
+			
 			if($_POST['customer'] != NULL) {
 				$customers = ORM::factory('Customer')->where('name','LIKE','%'.$_POST['customer'].'%')->find_all();
 				$divisions_ids_filter = array();
@@ -264,18 +268,47 @@ class Controller_Ajax extends Controller_Welcome {
 				}
 				
 				$boxes = $boxes->and_where('division_id','IN',$divisions_ids_filter);
+				$boxes_count = $boxes_count->and_where('division_id','IN',$divisions_ids_filter);
 			}
 			
-			if($_POST['date_from'] != NULL) $boxes = $boxes->and_where('date_from','=',$_POST['date_from']);
-			if($_POST['date_to'] != NULL) $boxes = $boxes->and_where('date_to','=',$_POST['date_to']);
-			if($_POST['status'] != NULL) $boxes = $boxes->and_where('status','=',$_POST['status']);
+			if($_POST['date_from'] != NULL) {
+				$boxes = $boxes->and_where('date_from','=',$_POST['date_from']);
+				$boxes_count = $boxes_count->and_where('date_from','=',$_POST['date_from']);
+			}
+			
+			if($_POST['date_to'] != NULL) {
+				$boxes = $boxes->and_where('date_to','=',$_POST['date_to']);
+				$boxes_count = $boxes_count->and_where('date_to','=',$_POST['date_to']);
+			}
+			
+			if($_POST['status'] != NULL) {
+				$boxes = $boxes->and_where('status','=',$_POST['status']);
+				$boxes_count = $boxes_count->and_where('status','=',$_POST['status']);
+			}
 		}
 		
 		if($_POST['order'][0]['column'] != NULL) {
 			$boxes = $boxes->order_by($columns[$_POST['order'][0]['column']], $_POST['order'][0]['dir']);
+			
 		}
 		
+
+		$boxes_count = $boxes_count->count_all();
+		
+		$iTotalRecords = $boxes_count;
+		$iDisplayLength = intval($_REQUEST['length']);
+		$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+		$iDisplayStart = intval($_REQUEST['start']);
+		$sEcho = intval($_REQUEST['draw']);
+		
+		$records = array();
+		$records["data"] = array();
+		
+		$end = $iDisplayStart + $iDisplayLength;
+		$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+		
 		$boxes = $boxes->limit($iDisplayLength)->offset($iDisplayStart);
+		
 		$boxes = $boxes->find_all();
 		
 		
