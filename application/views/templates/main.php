@@ -126,7 +126,7 @@
 					
 					<?php if($acl->menu==1 &&  $acl->parent==0 && $acl->checkRights()):?>
 					<li class="<?php if ($_controller==$acl->controller) echo "active open";?>">
-						<a href="<?php echo URL::base ( 'http' ).$acl->controller?>/<?php echo $acl->action?>">
+						<a href="<?php echo $base.$acl->controller?>/<?php echo $acl->action?>">
 							<i class="<?php echo $acl->icon?>"></i>
 							<span class="title"><?php echo $acl->description?></span>
 							<span class="arrow <?php if ($_controller==$acl->controller) echo "open";?>"></span>
@@ -136,7 +136,7 @@
 									<?php foreach($acl->children() as $sub_m):?>
 									<?php if($sub_m->checkRights()):?>
 									<li class="<?php if ($_action==$sub_m->action) echo "active";?>">
-										<a href="<?php echo URL::base ( 'http' ).$acl->controller; ?>/<?php echo $sub_m->action; ?>">
+										<a href="<?php echo $base.$acl->controller; ?>/<?php echo $sub_m->action; ?>">
 										<i class="<?php echo $sub_m->icon; ?>"></i>
 											<?php echo $sub_m->description;?></a>
 										
@@ -146,7 +146,7 @@
 												<?php if($sub_m_sub->checkRights()):?>
 												<li class="<?php if ($_action==$sub_m_sub->action) echo "active";?>">
 												
-													<a href="<?php echo URL::base ( 'http' ).$acl->controller; ?>/<?php echo $sub_m_sub->action; ?>">
+													<a href="<?php echo $base.$acl->controller; ?>/<?php echo $sub_m_sub->action; ?>">
 													<i class="<?php echo $sub_m_sub->icon; ?>"></i>
 														<?php echo $sub_m_sub->description;?></a>
 												</li>		

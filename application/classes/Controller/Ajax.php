@@ -42,7 +42,7 @@ class Controller_Ajax extends Controller_Welcome {
 				'subject' => __ ( 'Raport pudel' ),
 				'description' => '',
 				'path' => APPPATH . 'cache'.DIRECTORY_SEPARATOR,
-				'name' => 'pudla',
+				'name' => 'pudla',	
 				'format' => 'CSV'
 		) );
 	

@@ -30,8 +30,30 @@ class Controller_Welcome extends Controller_Template {
 			$this->template = View::factory ( 'templates/main' );
 			$acls = ORM::factory('Acl')->order_by('order')->find_all();
 			$this->template->bind ('acls', $acls );
+			
+			if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
+				$base = URL::base('http');
+				$this->template->bind ('base', $base );
+			}
+			else {
+				$base = URL::base('https');
+				$this->template->bind ('base',$base );
+			}
+				
 		}
-		else $this->template = View::factory ( 'templates/login' );
+		else {
+			if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
+				$base = URL::base('http');
+				$this->template->bind ('base', $base );
+			}
+			else {
+				$base = URL::base('https');
+				$this->template->bind ('base',$base );
+			}
+				
+			
+			$this->template = View::factory ( 'templates/login' );
+		}
 	}
 	
 	public function before() {
@@ -39,7 +61,9 @@ class Controller_Welcome extends Controller_Template {
 		parent::before ();
 		$this->load_template ();
 	
-		$this->add_css ("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all");
+        if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') $this->add_css ("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all");
+        else $this->add_css ("https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all");
+ 
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'font-awesome/css/font-awesome.min.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'simple-line-icons/simple-line-icons.min.css');
 		$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap/css/bootstrap.min.css');
@@ -108,10 +132,11 @@ class Controller_Welcome extends Controller_Template {
 	}
 	
 	public function header() {
-		$this->base = URL::base ( 'http' );
-		
-		$_header [] = '<title>' . $this->title . '</title>';
-		$_header [] = '<meta name="description" content="' . $this->description . '">';
+		if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') $this->base = URL::base ( 'http' );
+        else $this->base = URL::base ( 'https' );
+
+        $_header [] = '<title>' . __(strtolower($this->request->action())) . '</title>';
+ 		$_header [] = '<meta name="description" content="' . $this->description . '">';
 		$_header [] = '<meta name="keywords" content="' . $this->keywords . '">';
 		$_header [] = '<meta name="author" content="' . $this->author . '">';
 		$_header [] = '<meta charset="UTF-8">';
@@ -127,7 +152,8 @@ class Controller_Welcome extends Controller_Template {
 	
 	public function footer() {
 		
-		$this->base = URL::base ( 'http' );
+		if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') $this->base = URL::base ( 'http' );
+		else $this->base = URL::base ( 'https' );
 		
 		$_footer [] = join ( $this->_lib );
 		$_footer [] = join ( "\n\t", array_map ( 'HTML::style', $this->_fcss ) );
