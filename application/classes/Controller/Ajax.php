@@ -119,6 +119,7 @@ class Controller_Ajax extends Controller_Welcome {
 		}
 		
 		echo json_encode($events);
+		die;
 	}
 	
 	public function action_places_list() {
@@ -180,6 +181,7 @@ class Controller_Ajax extends Controller_Welcome {
 		$records["recordsFiltered"] = $iTotalRecords;
 	
 		echo json_encode($records);
+		die;
 	
 	}
 	
@@ -325,8 +327,8 @@ class Controller_Ajax extends Controller_Welcome {
 			
 			$records["data"][] = array(
 						$box->id,
-						"<img alt=\"barcode\" src=\"/barcode/get/".$box->barcode."\"/>",
-						($box->place_id != '' ? "<img alt=\"barcode\" src=\"/barcode/get/".$box->place->barcode."\"/>":''),
+						'<img alt="barcode" src="/barcode/get/'.$box->barcode.'"/>',
+						($box->place_id != '' ? '<img alt="barcode" src="/barcode/get/'.$box->place->barcode.'"/>':''),
 						$box->warehouse->name,
 						$box->division->customer->name,
 						$box->date_from,
@@ -347,7 +349,7 @@ class Controller_Ajax extends Controller_Welcome {
 		$records["recordsFiltered"] = $iTotalRecords;
 		
 		echo json_encode($records);
-	
+		die;
 	}
 	
 	public function action_index() {
@@ -365,7 +367,12 @@ class Controller_Ajax extends Controller_Welcome {
 			$document_template->write_to_disk(PDF.$document_filename);
 							
 			echo json_encode(array('status'=>'OK','body'=>URL::base().'public/pdf/'.$document_filename));
-		}else echo json_encode(array('status'=>'OK','body'=>'<br><br>Dokument<br><br>'));
+			die;
+		}else  {
+			echo json_encode(array('status'=>'OK','body'=>'<br><br>Dokument<br><br>'));
+			die;
+		}
+		
 	
 	}
 	
@@ -381,7 +388,12 @@ class Controller_Ajax extends Controller_Welcome {
 			$document = $document_template->render();
 			
 			echo json_encode(array('status'=>'OK','body'=>base64_encode($document)));
-		}else echo json_encode(array('status'=>'OK','body'=>'<br><br>Dokument<br><br>'));
+			die;
+			
+		}else {
+			echo json_encode(array('status'=>'OK','body'=>'<br><br>Dokument<br><br>'));
+			die;
+		}
 
 	}
 	
@@ -396,9 +408,11 @@ class Controller_Ajax extends Controller_Welcome {
 				if($notification->update()) {
 					echo json_encode(array('status'=>'OK',
 							   'message'=>$notification->message));
+					die;
 				}
 			}else {
 				echo json_encode(array('status'=>'EMPTY'));
+				die;
 			}
 		}
 	}
@@ -412,9 +426,11 @@ class Controller_Ajax extends Controller_Welcome {
 					echo json_encode(array('status'=>'OK','id'=>$box->id));
 				}else {
 					echo json_encode(array('status'=>'NOTOK'));
+					die;
 				}	
 			}else {
 				echo json_encode(array('status'=>'NOTOK'));
+				die;
 			}
 		}
 	}
@@ -426,11 +442,14 @@ class Controller_Ajax extends Controller_Welcome {
 					$box = ORM::factory('Box')->where('barcode', '=', $_POST['barcode'])->find();
 					if($box->loaded()) {
 						echo json_encode(array('status'=>'OK','id'=>$box->id));
+						die;
 					}else {
 						echo json_encode(array('status'=>'NOTOK'));
+						die;
 					}	
 			}else {
 					echo json_encode(array('status'=>'NOTOK'));
+					die;
 			}
 		}
 	}
@@ -450,30 +469,45 @@ class Controller_Ajax extends Controller_Welcome {
 						}
 					}
 					echo json_encode(array('status'=>'OK','id'=>$box->id,'result'=>$result));
+					die;
 				}else {
 					echo json_encode(array('status'=>'NOTOK'));
+					die;
 				}
 			}else {
 				echo json_encode(array('status'=>'NOTOK'));
+				die;
 			}
 		}
 	}
 	public function action_generate_password() {
 		echo json_encode(array('status'=>'OK',
-							   'password'=>Text::random()));	
+							   'password'=>Text::random()));
+		die;	
 	}
 	
 	public function action_check_user_availability() {
 		
 		$user=(ORM::factory('User')->where('username','=',$this->request->post('username'))->find());
 				
-		if($user->loaded()===TRUE) echo json_encode(array('status'=>'NOTOK'));
-		else echo json_encode(array('status'=>'OK'));
+		if($user->loaded()===TRUE) {
+				echo json_encode(array('status'=>'NOTOK'));
+				die;
+		}else {
+			echo json_encode(array('status'=>'OK'));
+			die;
+		}
 	}
 	
 	public function action_check_email_availability() {
 		$user=(ORM::factory('User')->where('email','=',$this->request->post('email'))->find());
-		if($user->loaded()===TRUE) echo json_encode(array('status'=>'NOTOK'));
-		else echo json_encode(array('status'=>'OK'));
+		if($user->loaded()===TRUE) {
+			echo json_encode(array('status'=>'NOTOK'));
+			die;
+		}
+		else {
+			echo json_encode(array('status'=>'OK'));
+			die;
+		}
 	}
 }

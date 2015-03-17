@@ -17,6 +17,7 @@ class Model_Customer extends ORM {
 			'pricetables'=> array('model' => 'Pricetable',	'foreign_key' => 'customer_id')
 	);
 	
+
 }
 
 

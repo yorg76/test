@@ -71,13 +71,58 @@ class Controller_Finance extends Controller_Welcome {
 		$customers = ORM::factory('Customer')->find_all();
 		$this->content->bind('customers', $customers);
 		
+		$id =  $this->request->param('id');
+		
 		if($this->request->param('id') > 0) {
-			if($this->request->method()===HTTP_Request::POST) {
-				if(0) {
-					Message::success(ucfirst(__('Magazyn został utworzony')),'/finance/prices');
-				}else {
-					Message::error(ucfirst(__('Magazyn nie został utworzony')),'/finance/prices');
-				}
+			$customer = Customer::instance($id);
+			$invoice = $customer->generateMonthlyInvoice();
+			
+			$customer_divisions= $customer->customer->divisions->find_all();
+			$divisions_ids = array();
+			$sum = 0;
+				
+			foreach ($customer_divisions as $div ) {
+				array_push($divisions_ids, $div->id);
+			}
+				
+				
+				
+			if(count($divisions_ids) > 0) {
+				$boxes_in_wh=ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('status','=','Na magazynie')->and_where('utilisation_status', '=', 0)->count_all();
+			
+			}else {
+				$boxes_in_wh=0;
+			}
+			
+			if($customer->customer->loaded()) {
+				
+							
+				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
+				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
+				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
+				$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
+				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
+				$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+				$this->template = View_MPDF::factory('templates/monthly_invoice_template');
+				$this->template->get_mpdf()->SetDisplayMode('fullpage');
+				$this->template->get_mpdf()->WriteHTML($document_css,1);
+				
+				$html = FALSE;
+				
+				$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$customer->customer->id."-".$invoice->id.".pdf";
+				
+				$this->template->bind_global('html', $html);
+				$this->template->bind_global('invoice', $invoice);
+				$this->template->bind_global('box_quantity', $boxes_in_wh);
+				$this->template->bind_global('customer', $customer);
+
+				$this->template->download($document_filename);
+				
+				Message::success(ucfirst(__('Faktura została utworzona')),'/finance/invoice_add');
+				
+			}else {
+				Message::error(ucfirst(__('Faktura nie została utworzona')),'/finance/invoice_add');
 			}
 		}
 	}
@@ -98,9 +143,9 @@ class Controller_Finance extends Controller_Welcome {
 			$pricetable->pricetable->values($params);
 			
 			if($pricetable->addPricetable($params)) {
-				Message::success(ucfirst(__('Magazyn został utworzony')),'/finance/prices');
+				Message::success(ucfirst(__('Cennik został utworzony')),'/finance/prices');
 			}else {
-				Message::error(ucfirst(__('Magazyn nie został utworzony')),'/finance/prices');
+				Message::error(ucfirst(__('Cennik nie został utworzony')),'/finance/prices');
 			}
 				
 		}

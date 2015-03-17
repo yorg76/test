@@ -11,6 +11,8 @@ class Model_Invoice extends ORM {
 			'order'=> array('model' => 'Order', 'foreign_key' => 'order_id'),
 			'customer'=> array('model' => 'Customer', 'foreign_key' => 'customer_id')
 	);
+	
+
 }
 
 

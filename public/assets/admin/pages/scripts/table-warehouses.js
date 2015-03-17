@@ -199,7 +199,6 @@ var TableBoxes = function () {
                 // execute some code after table records loaded
             },
             onError: function (grid) {
-                // execute some code on network or other general error  
             },
             
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 

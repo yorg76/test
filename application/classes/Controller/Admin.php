@@ -112,7 +112,7 @@ class Controller_Admin extends Controller_Welcome {
 			$shipmentcompany->values($params);
 	
 			if($shipmentcompany->save()) {
-				Message::success(ucfirst(__('Firma kurierska została dodana')),'/amdin/shipmentcompanies');
+				Message::success(ucfirst(__('Firma kurierska została dodana')),'/admin/shipmentcompanies');
 			}else {
 				Message::error(ucfirst(__('Firma kurierska nie została dodana')),'/admin/shipmentcompanies');
 			}

@@ -35,7 +35,7 @@ $stand_area_id = 11;
 
 				<strong class="big_text">Faktura VAT</strong> 
 				<br />
-				<strong class="medium_text"><?php echo $invoice->nr?></strong>
+				<strong class="medium_text"><?php echo $invoice->number?></strong>
 
 			</th>
 
@@ -44,8 +44,8 @@ $stand_area_id = 11;
 				<strong class="medium_text"></strong>
 				<br />	<br />
 
-				Wystawiono dnia: <?php echo date("d/m/Y"); ?>, Warszawa	<br />			
-				Data sprzedaży: <?php echo date("d/m/Y", strtotime($invoice->create_date)); ?>, Warszawa <br />
+				Wystawiono dnia: <?php echo date("d/m/Y", strtotime($invoice->invoice_date)); ?>, Warszawa	<br />			
+				Data sprzedaży: <?php echo date("d/m/Y", strtotime($invoice->sale_date)); ?>, Warszawa <br />
 
 
 			</td>
@@ -59,9 +59,9 @@ $stand_area_id = 11;
 
 				<strong>Sprzedający:</strong><br />
 
-				Medical Advisors sp. z.o.o<br>
-				05-532 Baniocha, ul. Łubińska 14<br>
-				NIP: 123-121-08-67<br>
+				Archiwumdepozytowe sp. z.o.o<br>
+				20-207 Lublin, ul. Turystyczna 9<br>
+				NIP: <?php echo NIP;?><br>
 
 			</td>
 
@@ -70,7 +70,7 @@ $stand_area_id = 11;
 
 				<strong>Nabywca:</strong><br />
 				<?php echo $invoice->customer->name ?><br />
-				<?php echo $invoice->customer->address ?><br />
+				<?php echo $invoice->customer->address() ?><br />
 				NIP: <?php echo $invoice->customer->nip ?><br />
 				<br>
 
@@ -211,11 +211,11 @@ $stand_area_id = 11;
 				<strong class="medium_text">Do zapłacenia: <?php echo Pricetable::money($sum_brutto); ?>  </strong> <br />
 				<br />
 				<br />
-				Forma płatności: Przelew (<?php echo $invoice->payment_day ?> dni)  <br />
-				Termin płatności: <?php echo date("d/m/Y", strtotime($invoice->deadline)); ?> 	<br />
+				Forma płatności: Przelew (14 dni)  <br />
+				Termin płatności: <?php echo date("d/m/Y", strtotime($invoice->payment_date)); ?> 	<br />
 				<br />
 
-				<p style="width:300px;"> Nazwa banku: <?php echo $invoice->customer->bank ?> </p><br />
+				<p style="width:300px;"> Nazwa banku: ........................ </p><br />
 
 			</td>
 
@@ -252,7 +252,7 @@ $stand_area_id = 11;
 	
 		<tr>
 			<td style="width:50%;" class="text_center">
-				Medical Advisors sp. z o.o.
+				Archiwumdepozytowe sp. z o.o.
 						</td>
 
 		</tr>

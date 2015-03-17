@@ -50,8 +50,7 @@ class Customer  {
 				$this->address = ORM::factory('Address');
 				$this->address->address_type='firmowy';
 			}
-			var_dump($this->address->loaded());
-			$this->street = $this->address->street; 
+						$this->street = $this->address->street; 
 			$this->number = $this->address->number;
 			$this->flat = $this->address->flat;
 			$this->country=$this->address->country;
@@ -78,6 +77,61 @@ class Customer  {
 			$this->address = ORM::factory('Address');
 			$this->pricetable = ORM::factory('Pricetable');
 			
+		}
+	}
+	
+	
+	public function address() {
+			
+		return $this->address->street." ".$this->address->number." ".$this->address->flat."\n".$this->address->city.", ".$this->address->postal;
+	}
+	
+	
+	public function generateMonthlyInvoice() {
+		
+		$invoice = Invoice::instance();
+		
+		$invoice->invoice->customer_id=$this->id;
+		
+		$customer_divisions= $this->customer->divisions->find_all();
+		$divisions_ids = array();
+		$sum = 0;
+			
+		foreach ($customer_divisions as $div ) {
+			array_push($divisions_ids, $div->id);
+		}
+			
+			
+			
+		if(count($divisions_ids) > 0) {
+			$boxes_in_wh=ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('status','=','Na magazynie')->and_where('utilisation_status', '=', 0)->count_all();
+		
+		}else {
+			$boxes_in_wh=0;
+		}
+			
+		$sum = $boxes_in_wh * $this->customer->pricetables->where('active','=',1)->find()->boxes_storage;
+		
+		$invoice->invoice->pricetable_id = $this->customer->pricetables->where('active','=',1)->find()->id;
+		$invoice->invoice->amount = $sum;
+		
+		$invoice->invoice->invoice_date = date('Y-m-d');
+		$invoice->invoice->sale_date = date('Y-m-d');
+		$invoice->invoice->payment_date =date('Y-m-d', strtotime("+14 days"));
+		
+		
+		$monthly_invoice = $this->customer->invoices->where(DB::expr('MONTH(invoice_date)'), '=', date('m'))->and_where('order_id', '=', NULL)->find();
+		
+		if($monthly_invoice->loaded()) {
+			
+			return $monthly_invoice;
+			
+		}elseif($invoice->invoice->save()) {
+			$invoice->invoice->number = "ARCH/".date('Y-m-d')."/".$invoice->invoice->id;
+			$invoice->invoice->update();
+			return $invoice;
+		}else {
+			return false;
 		}
 	}
 	

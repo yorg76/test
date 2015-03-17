@@ -639,7 +639,7 @@ class Controller_Order extends Controller_Welcome {
 			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
 			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
 			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
-				
+			
 			$document_template = View_MPDF::factory('order/utilisation_document');
 	
 			$document_template->bind_global('customer', $customer);

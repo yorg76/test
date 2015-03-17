@@ -15,7 +15,7 @@
 						</div>
 						<div class="portlet-body">
 								
-							<table class="table table-striped table-hover table-bordered" id="prices_list">
+							<table class="table table-striped table-hover table-bordered" id="invoice_add">
 							<thead>
 							<tr>
 								<th width="35%">
@@ -104,9 +104,9 @@
 								</td>	
 								<td>
 									<div class="margin-bottom-5">
-										<button class="btn btn-xs green margin-bottom">
+										<a class="btn btn-xs green margin-bottom" href="/finance/invoice_add/<?php echo $customer->id;?>" target="_blank">
 											<i class="glyphicon glyphicon-info-sign"></i> FVAT m-czna
-										</button>
+										</a>
 									</div>
 								</td>
 							</tr>

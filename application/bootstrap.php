@@ -168,6 +168,8 @@ define('UPLOAD', APPPATH.'upload');
 define('PDF', DOCROOT.'/public/pdf/');
 
 define('VAT','1.23');
+define('NIP','946-229-85-47');
+define('BANK','mBank, 09876545678987654356789');
 
 Cookie::$salt = 'Parrarell Thinking';
 
