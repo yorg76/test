@@ -2,6 +2,18 @@
  
 return array
 (
+	'January' => 'Styczeń',
+	'February' => 'Luty',
+	'March' => 'Marzec',
+	'April' => 'Kwiecień',
+	'May' => 'Maj',
+	'June' => 'Czerwiec',
+	'July' => 'Lipiec',
+	'August' => 'Sierpień',
+	'September' => 'Wrzesień',
+	'October' => 'Październik',
+	'November' => 'Listopad',
+	'December' => 'Grudzień',
 	'places' => 'Regały',
 	'invoice_add' => 'Wystaw fakturę',
 	'division_add' => 'Dodaj dział',

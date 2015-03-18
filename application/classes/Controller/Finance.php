@@ -119,7 +119,7 @@ class Controller_Finance extends Controller_Welcome {
 
 				$this->template->download($document_filename);
 				
-				Message::success(ucfirst(__('Faktura została utworzona')),'/finance/invoice_add');
+				//Message::success(ucfirst(__('Faktura została utworzona')),'/finance/invoice_add');
 				
 			}else {
 				Message::error(ucfirst(__('Faktura nie została utworzona')),'/finance/invoice_add');
