@@ -2,7 +2,7 @@
 /**
  * PHPExcel
  *
- * Copyright (c) 2006 - 2014 PHPExcel
+ * Copyright (c) 2006 - 2012 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  * @category   PHPExcel
  * @package    PHPExcel_Reader
- * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright  Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    1.8.0, 2014-03-02
+ * @version    ##VERSION##, ##DATE##
  */
 
 
@@ -31,7 +31,7 @@
  *
  * @category	PHPExcel
  * @package	PHPExcel_Reader
- * @copyright	Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright	Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  */
 abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 {
@@ -67,8 +67,6 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 	 */
 	protected $_readFilter = NULL;
 
-	protected $_fileHandle = NULL;
-
 
 	/**
 	 * Read data only?
@@ -80,6 +78,7 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 	public function getReadDataOnly() {
 		return $this->_readDataOnly;
 	}
+
 
 	/**
 	 * Set read data only
@@ -95,6 +94,7 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 		return $this;
 	}
 
+
 	/**
 	 * Read charts in workbook?
 	 *		If this is true, then the Reader will include any charts that exist in the workbook.
@@ -106,6 +106,7 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 	public function getIncludeCharts() {
 		return $this->_includeCharts;
 	}
+
 
 	/**
 	 * Set read charts in workbook
@@ -122,6 +123,7 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 		return $this;
 	}
 
+
 	/**
 	 * Get which sheets to load
 	 * Returns either an array of worksheet names (the list of worksheets that should be loaded), or a null
@@ -133,6 +135,7 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 	{
 		return $this->_loadSheetsOnly;
 	}
+
 
 	/**
 	 * Set which sheets to load
@@ -150,6 +153,7 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 		return $this;
 	}
 
+
 	/**
 	 * Set all sheets to load
 	 *		Tells the Reader to load all worksheets from the workbook.
@@ -162,6 +166,7 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 		return $this;
 	}
 
+
 	/**
 	 * Read filter
 	 *
@@ -170,6 +175,7 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 	public function getReadFilter() {
 		return $this->_readFilter;
 	}
+
 
 	/**
 	 * Set read filter
@@ -182,46 +188,5 @@ abstract class PHPExcel_Reader_Abstract implements PHPExcel_Reader_IReader
 		return $this;
 	}
 
-	/**
-	 * Open file for reading
-	 *
-	 * @param string $pFilename
-	 * @throws	PHPExcel_Reader_Exception
-	 * @return resource
-	 */
-	protected function _openFile($pFilename)
-	{
-		// Check if file exists
-		if (!file_exists($pFilename) || !is_readable($pFilename)) {
-			throw new PHPExcel_Reader_Exception("Could not open " . $pFilename . " for reading! File does not exist.");
-		}
-
-		// Open file
-		$this->_fileHandle = fopen($pFilename, 'r');
-		if ($this->_fileHandle === FALSE) {
-			throw new PHPExcel_Reader_Exception("Could not open file " . $pFilename . " for reading.");
-		}
-	}
-
-	/**
-	 * Can the current PHPExcel_Reader_IReader read the file?
-	 *
-	 * @param 	string 		$pFilename
-	 * @return boolean
-	 * @throws PHPExcel_Reader_Exception
-	 */
-	public function canRead($pFilename)
-	{
-		// Check if file exists
-		try {
-			$this->_openFile($pFilename);
-		} catch (Exception $e) {
-			return FALSE;
-		}
-
-		$readable = $this->_isValidFormat();
-		fclose ($this->_fileHandle);
-		return $readable;
-	}
 
 }

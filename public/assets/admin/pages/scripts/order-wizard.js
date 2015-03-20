@@ -1,9 +1,20 @@
+
+
 var OrderWizard = function () {
 
 
     return {
+    	
+    	
+    	
         //main function to initiate the module
         init: function () {
+        	
+        	String.prototype.pad = function(size) {
+        	      var s = String(this);
+        	      while (s.length < (size || 2)) {s = "0" + s;}
+        	      return s;
+        	}
         	
         	Array.prototype.unique = function() {
         	    var unique = [];
@@ -181,35 +192,32 @@ var OrderWizard = function () {
                     			
                     			$("input[name=box_code]").parents('.form-group').removeClass('has-success').removeClass('has-error');                   			
                     			
-                    			var code = $("input[name=box_code]").val();
-                    			
-                    			if (!$("select[name='boxes_2[]'] option[value='" + code + "']:selected").length) {
-                    				$.ajax({
-                                		type:'POST',
-                                		url: "/ajax/check_box",
-                                		data: {'id':code },
-                                		dataType:"json",
-                                	}).success(function(data) {
-
-                                		if(data.status=="OK") {
-                                			if (!$("select[name='boxes_2[]'] option[value='" + data.id + "']:selected").length) {
-                                				$("select[name='boxes_2[]']").append($('<option>', { 
-                                					value: code,
-                                					text : code,
-                                					selected:true
-                                				}));
-                                			}else {
-                                				$("select[name='boxes_2[]'] option[value='"+ data.id + "']").attr('selected',true);
-                                			}
-                                		}else {
-                                			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
-                                		}
-                                	}).error(function() {
-                                		$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
-                                	});
-                    				
-                    			}
-                    			
+                    			var code = $("input[name=box_code]").val().pad(12);
+                    		
+                				$.ajax({
+                            		type:'POST',
+                            		url: "/ajax/check_box",
+                            		data: {'id':code },
+                            		dataType:"json",
+                            	}).success(function(data) {
+                            		
+                            		if(data.status=="OK") {
+                            			
+                            			if ($("select[name='boxes_2[]'] option[value='" + data.id + "']").length==0) {
+                            				$("select[name='boxes_2[]']").append($('<option>', { 
+                            					value: code,
+                            					text : code,
+                            					selected:true
+                            				}));
+                            			}else {
+                            				$("select[name='boxes_2[]'] option[value='"+ data.id + "']").attr('selected',true);
+                            			}
+                            		}else {
+                            			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                            		}
+                            	}).error(function() {
+                            		$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                            	});	
                     		});
                     		                    		
                     		$(".nav-pills a").each(function(){
@@ -237,35 +245,33 @@ var OrderWizard = function () {
                     			
                     			$("input[name=box_code_3]").parents('.form-group').removeClass('has-success').removeClass('has-error');                   			
                     			
-                    			var code = $("input[name=box_code_3]").val();
+                    			var code = $("input[name=box_code_3]").val().pad(12);
                     			
-                    			if (!$("select[name='boxes_3[]'] option[value='" + code + "']:selected").length) {
-                    				$.ajax({
-                                		type:'POST',
-                                		url: "/ajax/check_box",
-                                		data: {'id':code },
-                                		dataType:"json",
-                                	}).success(function(data) {
+                				$.ajax({
+                            		type:'POST',
+                            		url: "/ajax/check_box",
+                            		data: {'id':code },
+                            		dataType:"json",
+                            	}).success(function(data) {
 
-                                		if(data.status=="OK") {
-                                			if (!$("select[name='boxes_3[]'] option[value='" + data.id + "']:selected").length) {
-                                				$("select[name='boxes_3[]']").append($('<option>', { 
-                                					value: code,
-                                					text : code,
-                                					selected:true
-                                				}));
-                                			}else {
-                                				$("select[name='boxes_3[]'] option[value='"+ data.id + "']").attr('selected',true);
-                                			}
-                                		}else {
-                                			$("input[name=box_code_3]").parents('.form-group').removeClass('has-success').addClass('has-error');
-                                		}
-                                	}).error(function() {
-                                		$("input[name=box_code_3]").parents('.form-group').removeClass('has-success').addClass('has-error');
-                                	});
-                    				
-                    			}
-                    			
+                            		if(data.status=="OK") {
+                            			
+                            			if ($("select[name='boxes_3[]'] option[value='" + data.id + "']").length==0) {
+                            				$("select[name='boxes_3[]']").append($('<option>', { 
+                            					value: code,
+                            					text : code,
+                            					selected:true
+                            				}));
+                            			}else {
+                            				$("select[name='boxes_3[]'] option[value='"+ data.id + "']").attr('selected',true);
+                            			}
+                            			
+                            		}else {
+                            			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                            		}
+                            	}).error(function() {
+                            		$("input[name=box_code_3]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                            	});
                     		});
                     		
                     		$("#add_box_to_order_4").click(function(e) {
@@ -276,35 +282,31 @@ var OrderWizard = function () {
                     			
                     			var code = $("input[name=box_code_4]").val();
                     			
-                    			if (!$("select[name='boxes_4[]'] option[value='" + code + "']:selected").length) {
-                    				$.ajax({
-                                		type:'POST',
-                                		url: "/ajax/check_box",
-                                		data: {'id':code },
-                                		dataType:"json",
-                                	}).success(function(data) {
+                			
+                				$.ajax({
+                            		type:'POST',
+                            		url: "/ajax/check_box",
+                            		data: {'id':code },
+                            		dataType:"json",
+                            	}).success(function(data) {
 
-                                		if(data.status=="OK") {
-                                			if (!$("select[name='boxes_4[]'] option[value='" + data.id + "']:selected").length) {
-                                				$("select[name='boxes_4[]']").append($('<option>', { 
-                                					value: code,
-                                					text : code,
-                                					selected:true
-                                				}));
-                                			}else {
-                                				$("select[name='boxes_4[]'] option[value='"+ data.id + "']").attr('selected',true);
-                                			}
-                                		}else {
-                                			$("input[name=box_code_4]").parents('.form-group').removeClass('has-success').addClass('has-error');
-                                		}
-                                	}).error(function() {
-                                		$("input[name=box_code_4]").parents('.form-group').removeClass('has-success').addClass('has-error');
-                                	});
-                    				
-                    			}else {
-                    				$("select[name='boxes_4[]'] option[value='" + code + "']").attr('selected',true);
-                    			}
-                    			
+                            		if(data.status=="OK") {
+                            			
+                            			if ($("select[name='boxes_4[]'] option[value='" + data.id + "']").length==0) {
+                            				$("select[name='boxes_4[]']").append($('<option>', { 
+                            					value: code,
+                            					text : code,
+                            					selected:true
+                            				}));
+                            			}else {
+                            				$("select[name='boxes_4[]'] option[value='"+ data.id + "']").attr('selected',true);
+                            			}
+                            		}else {
+                            			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                            		}
+                            	}).error(function() {
+                            		$("input[name=box_code_4]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                            	});                    			
                     		});
                     		
                     		$("select[name='boxes_3[]']").change(function(){
@@ -391,33 +393,31 @@ var OrderWizard = function () {
                     			$("input[name=box_code_5]").parents('.form-group').removeClass('has-success').removeClass('has-error');                   			
                     			
                     			var code = $("input[name=box_code_5]").val();
-                    			
-                    			if (!$("select[name='boxes_5[]'] option[value='" + code + "']:selected").length) {
-                    				$.ajax({
-                                		type:'POST',
-                                		url: "/ajax/check_box",
-                                		data: {'id':code },
-                                		dataType:"json",
-                                	}).success(function(data) {
+                			
+                				$.ajax({
+                            		type:'POST',
+                            		url: "/ajax/check_box",
+                            		data: {'id':code },
+                            		dataType:"json",
+                            	}).success(function(data) {
 
-                                		if(data.status=="OK") {
-                                			if (!$("select[name='boxes_5[]'] option[value='" + data.id + "']:selected").length) {
-                                				$("select[name='boxes_5[]']").append($('<option>', { 
-                                					value: code,
-                                					text : code,
-                                					selected:true
-                                				}));
-                                			}else {
-                                				$("select[name='boxes_5[]'] option[value='"+ data.id + "']").attr('selected',true);
-                                			}
-                                		}else {
-                                			$("input[name=box_code_5]").parents('.form-group').removeClass('has-success').addClass('has-error');
-                                		}
-                                	}).error(function() {
-                                		$("input[name=box_code_5]").parents('.form-group').removeClass('has-success').addClass('has-error');
-                                	});
-                    				
-                    			}
+                            		if(data.status=="OK") {
+                            			
+                            			if ($("select[name='boxes_5[]'] option[value='" + data.id + "']").length==0) {
+                            				$("select[name='boxes_5[]']").append($('<option>', { 
+                            					value: code,
+                            					text : code,
+                            					selected:true
+                            				}));
+                            			}else {
+                            				$("select[name='boxes_5[]'] option[value='"+ data.id + "']").attr('selected',true);
+                            			}
+                            		}else {
+                            			$("input[name=box_code]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                            		}
+                            	}).error(function() {
+                            		$("input[name=box_code_5]").parents('.form-group').removeClass('has-success').addClass('has-error');
+                            	});
                     		});
                     		
                     		

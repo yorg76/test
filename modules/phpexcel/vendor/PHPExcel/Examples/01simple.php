@@ -2,7 +2,7 @@
 /**
  * PHPExcel
  *
- * Copyright (C) 2006 - 2014 PHPExcel
+ * Copyright (C) 2006 - 2012 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  * @category   PHPExcel
  * @package    PHPExcel
- * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright  Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    1.8.0, 2014-03-02
+ * @version    ##VERSION##, ##DATE##
  */
 
 /** Error reporting */
@@ -34,7 +34,7 @@ date_default_timezone_set('Europe/London');
 define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 
 /** Include PHPExcel */
-require_once dirname(__FILE__) . '/../Classes/PHPExcel.php';
+require_once '../Classes/PHPExcel.php';
 
 
 // Create new PHPExcel object
@@ -64,12 +64,6 @@ $objPHPExcel->setActiveSheetIndex(0)
 $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A4', 'Miscellaneous glyphs')
             ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
-
-
-$objPHPExcel->getActiveSheet()->setCellValue('A8',"Hello\nWorld");
-$objPHPExcel->getActiveSheet()->getRowDimension(8)->setRowHeight(-1);
-$objPHPExcel->getActiveSheet()->getStyle('A8')->getAlignment()->setWrapText(true);
-
 
 // Rename worksheet
 echo date('H:i:s') , " Rename worksheet" , EOL;

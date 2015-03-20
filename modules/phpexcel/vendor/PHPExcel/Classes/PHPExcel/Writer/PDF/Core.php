@@ -2,7 +2,7 @@
 /**
  *  PHPExcel
  *
- *  Copyright (c) 2006 - 2014 PHPExcel
+ *  Copyright (c) 2006 - 2012 PHPExcel
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  *  @category    PHPExcel
  *  @package     PHPExcel_Writer_PDF
- *  @copyright   Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ *  @copyright   Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  *  @license     http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
- *  @version     1.8.0, 2014-03-02
+ *  @version     ##VERSION##, ##DATE##
  */
 
 
@@ -31,7 +31,7 @@
  *
  *  @category    PHPExcel
  *  @package     PHPExcel_Writer_PDF
- *  @copyright   Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ *  @copyright   Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  */
 abstract class PHPExcel_Writer_PDF_Core extends PHPExcel_Writer_HTML
 {
@@ -261,7 +261,7 @@ abstract class PHPExcel_Writer_PDF_Core extends PHPExcel_Writer_HTML
     /**
      *  Set Paper Size
      *
-     *  @param  string  $pValue Paper size
+     *  @param int $pValue
      *  @return PHPExcel_Writer_PDF
      */
     public function setPaperSize($pValue = PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER)
@@ -283,7 +283,7 @@ abstract class PHPExcel_Writer_PDF_Core extends PHPExcel_Writer_HTML
     /**
      *  Set Orientation
      *
-     *  @param string $pValue  Page orientation
+     *  @param string $pValue
      *  @return PHPExcel_Writer_PDF
      */
     public function setOrientation($pValue = PHPExcel_Worksheet_PageSetup::ORIENTATION_DEFAULT)
@@ -306,7 +306,7 @@ abstract class PHPExcel_Writer_PDF_Core extends PHPExcel_Writer_HTML
      *  Set temporary storage directory
      *
      *  @param     string        $pValue        Temporary storage directory
-     *  @throws    PHPExcel_Writer_Exception    when directory does not exist
+     *  @throws    PHPExcel_Writer_Exception    Exception when directory does not exist
      *  @return    PHPExcel_Writer_PDF
      */
     public function setTempDir($pValue = '')
@@ -322,7 +322,7 @@ abstract class PHPExcel_Writer_PDF_Core extends PHPExcel_Writer_HTML
     /**
      *  Save PHPExcel to PDF file, pre-save
      *
-     *  @param     string     $pFilename   Name of the file to save as
+     *  @param     string         $pFileName
      *  @throws    PHPExcel_Writer_Exception
      */
     protected function prepareForSave($pFilename = NULL)

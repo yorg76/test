@@ -2,7 +2,7 @@
 /**
  * PHPExcel
  *
- * Copyright (c) 2006 - 2014 PHPExcel
+ * Copyright (c) 2006 - 2012 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  * @category   PHPExcel
  * @package	PHPExcel_Writer_CSV
- * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright  Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license	http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version	1.8.0, 2014-03-02
+ * @version	##VERSION##, ##DATE##
  */
 
 
@@ -31,7 +31,7 @@
  *
  * @category   PHPExcel
  * @package	PHPExcel_Writer_CSV
- * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright  Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  */
 class PHPExcel_Writer_CSV extends PHPExcel_Writer_Abstract implements PHPExcel_Writer_IWriter {
 	/**
@@ -102,8 +102,8 @@ class PHPExcel_Writer_CSV extends PHPExcel_Writer_Abstract implements PHPExcel_W
 		// Fetch sheet
 		$sheet = $this->_phpExcel->getSheet($this->_sheetIndex);
 
-		$saveDebugLog = PHPExcel_Calculation::getInstance($this->_phpExcel)->getDebugLog()->getWriteDebugLog();
-		PHPExcel_Calculation::getInstance($this->_phpExcel)->getDebugLog()->setWriteDebugLog(FALSE);
+		$saveDebugLog = PHPExcel_Calculation::getInstance()->writeDebugLog;
+		PHPExcel_Calculation::getInstance()->writeDebugLog = false;
 		$saveArrayReturnType = PHPExcel_Calculation::getArrayReturnType();
 		PHPExcel_Calculation::setArrayReturnType(PHPExcel_Calculation::RETURN_ARRAY_AS_VALUE);
 
@@ -114,19 +114,18 @@ class PHPExcel_Writer_CSV extends PHPExcel_Writer_Abstract implements PHPExcel_W
 		}
 
 		if ($this->_excelCompatibility) {
-			fwrite($fileHandle, "\xEF\xBB\xBF");	//	Enforce UTF-8 BOM Header
-			$this->setEnclosure('"');				//	Set enclosure to "
-			$this->setDelimiter(";");			    //	Set delimiter to a semi-colon
-            $this->setLineEnding("\r\n");
-			fwrite($fileHandle, 'sep=' . $this->getDelimiter() . $this->_lineEnding);
+			// Write the UTF-16LE BOM code
+			fwrite($fileHandle, "\xFF\xFE");	//	Excel uses UTF-16LE encoding
+			$this->setEnclosure();				//	Default enclosure is "
+			$this->setDelimiter("\t");			//	Excel delimiter is a TAB
 		} elseif ($this->_useBOM) {
-			// Write the UTF-8 BOM code if required
+			// Write the UTF-8 BOM code
 			fwrite($fileHandle, "\xEF\xBB\xBF");
 		}
 
 		//	Identify the range that we need to extract from the worksheet
-		$maxCol = $sheet->getHighestDataColumn();
-		$maxRow = $sheet->getHighestDataRow();
+		$maxCol = $sheet->getHighestColumn();
+		$maxRow = $sheet->getHighestRow();
 
 		// Write rows to file
 		for($row = 1; $row <= $maxRow; ++$row) {
@@ -140,7 +139,7 @@ class PHPExcel_Writer_CSV extends PHPExcel_Writer_Abstract implements PHPExcel_W
 		fclose($fileHandle);
 
 		PHPExcel_Calculation::setArrayReturnType($saveArrayReturnType);
-		PHPExcel_Calculation::getInstance($this->_phpExcel)->getDebugLog()->setWriteDebugLog($saveDebugLog);
+		PHPExcel_Calculation::getInstance()->writeDebugLog = $saveDebugLog;
 	}
 
 	/**
@@ -301,7 +300,11 @@ class PHPExcel_Writer_CSV extends PHPExcel_Writer_Abstract implements PHPExcel_W
 			$line .= $this->_lineEnding;
 
 			// Write to file
-            fwrite($pFileHandle, $line);
+			if ($this->_excelCompatibility) {
+				fwrite($pFileHandle, mb_convert_encoding($line,"UTF-16LE","UTF-8"));
+			} else {
+				fwrite($pFileHandle, $line);
+			}
 		} else {
 			throw new PHPExcel_Writer_Exception("Invalid data row passed to CSV writer.");
 		}

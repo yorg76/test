@@ -2,7 +2,7 @@
 /**
  * PHPExcel
  *
- * Copyright (c) 2006 - 2014 PHPExcel
+ * Copyright (c) 2006 - 2012 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  * @category	PHPExcel
  * @package		PHPExcel_Chart
- * @copyright	Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright	Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license		http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version		1.8.0, 2014-03-02
+ * @version		##VERSION##, ##DATE##
  */
 
 
@@ -31,7 +31,7 @@
  *
  * @category	PHPExcel
  * @package		PHPExcel_Chart
- * @copyright	Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright	Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  */
 class PHPExcel_Chart_DataSeriesValues
 {
@@ -279,7 +279,7 @@ class PHPExcel_Chart_DataSeriesValues
 
 	public function refresh(PHPExcel_Worksheet $worksheet, $flatten = TRUE) {
         if ($this->_dataSource !== NULL) {
-        	$calcEngine = PHPExcel_Calculation::getInstance($worksheet->getParent());
+        	$calcEngine = PHPExcel_Calculation::getInstance();
 			$newDataValues = PHPExcel_Calculation::_unwrapResult(
 			    $calcEngine->_calculateFormulaValue(
 			        '='.$this->_dataSource,

@@ -549,7 +549,11 @@ class Controller_Order extends Controller_Welcome {
 			array_push($warehouses_ids, $warehouse->id);
 		}
 		
-		$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->find_all();
+		if(Auth::instance()->logged_in('admin')) {
+			$boxes = ORM::factory('Box')->where('lock', '=', 0)->find_all();
+		}else {
+			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->find_all();
+		}
 		
 		$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 		$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();

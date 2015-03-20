@@ -43,7 +43,7 @@ class Controller_Helpdesk extends Controller_Welcome {
 	public function action_index() {
 //		$this->template->content=sha1('HujWamWDupe');
 		setcookie('autologin', '0ec5299485c97055725121c07187cb7a268b10d5', time()+60*60*20,'/help','b2b.archiwumdepozytowe.pl');
-		//$this->redirect('http://b2b.archiwumdepozytowe.pl:8080/help');
+		$this->redirect('http://b2b.archiwumdepozytowe.pl:8080/help/projects/archidox');
 	}
 	
 	

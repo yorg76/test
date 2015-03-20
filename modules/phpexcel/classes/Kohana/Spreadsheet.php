@@ -354,8 +354,9 @@ class Kohana_Spreadsheet {
      */
     public function send() {
         $response = Response::factory();
+        
         $response->send_file(
-                $this->save(), $this->options['name'] . '.' . $this->exts[$this->options['format']], // filename
+                $this->save(), $this->options['name'] . '.' . $this->exts[$this->options['format']], 
                 array(
             'mime_type' => $this->mimes[$this->options['format']]
         ));

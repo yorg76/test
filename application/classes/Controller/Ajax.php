@@ -23,7 +23,7 @@ class Controller_Ajax extends Controller_Welcome {
 		$warehouses = $customer->warehouses->find_all();
 		$warehouses_ids = array();
 		$storagecategories = ORM::factory('StorageCategory')->find_all();
-	
+			
 		foreach ($divisions as $division) {
 			array_push($divisions_ids, $division->id);
 	
@@ -34,41 +34,39 @@ class Controller_Ajax extends Controller_Welcome {
 		foreach ($warehouses as $warehouse) {
 			array_push($warehouses_ids, $warehouse->id);
 		}
+		$spreadsheet = Spreadsheet::factory( array(
+												'path'=>APPPATH."cache".DIRECTORY_SEPARATOR,
+												'name'=>'pudla_'.date('Y-m-d'),
+												'format'=>'CSV',
+		));
 
-	
-		$spreadsheet = Spreadsheet::factory ( array (
-				'author' => 'Opakowania na magazynie',
-				'title' => 'Raport',
-				'subject' => __ ( 'Raport pudel' ),
-				'description' => '',
-				'path' => APPPATH . 'cache'.DIRECTORY_SEPARATOR,
-				'name' => 'pudla',	
-				'format' => 'CSV'
-		) );
-	
 		$spreadsheet->set_active_worksheet(0);
 	
 		$as = $spreadsheet->get_active_worksheet();
 		
-		
+				
 		$data = array (
 				'columns' => array (UTF8::strtoupper("Kod pudła")),
 				'rows'=>array(),
 		);
-	
-	
-		$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->find_all();
-	
-		foreach ($boxes as $box) {
-			array_push ( $data['rows'], array ((int) $box->barcode));
+		
+		if(Auth::instance()->logged_in('admin')) {
+			$boxes = ORM::factory('Box')->where('lock', '=', 0)->find_all();
+		}else {
+			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->find_all();
 		}
 		
-		$data['formats']=array(0=>'@');
+	
+		foreach ($boxes as $box) {
+			array_push ( $data['rows'], array (sprintf('%012d',$box->barcode)));
+		}
+				
+		//$data['formats']=array(0=>'############');
 		
 		$spreadsheet->set_data( $data, FALSE );
-		
 		$spreadsheet->send();
-	
+		die;
+
 	}
 	
 	public function action_get_events() {
@@ -418,12 +416,13 @@ class Controller_Ajax extends Controller_Welcome {
 	}
 	
 	public function action_check_box() {
-		if($this->request->method()===HTTP_Request::POST) {
+		//if($this->request->method()===HTTP_Request::POST) {
 			$user=Auth::instance()->get_user();
 			if($user->id > 0) {
-				$box = ORM::factory('Box')->where('barcode', '=', $_POST['id'])->find();
+				$box = ORM::factory('Box')->where('barcode', '=', (int) $_POST['id'])->find();
 				if($box->loaded()) {
 					echo json_encode(array('status'=>'OK','id'=>$box->id));
+					die;
 				}else {
 					echo json_encode(array('status'=>'NOTOK'));
 					die;
@@ -432,7 +431,7 @@ class Controller_Ajax extends Controller_Welcome {
 				echo json_encode(array('status'=>'NOTOK'));
 				die;
 			}
-		}
+		//}
 	}
 	
 	public function action_check_box_barcode() {

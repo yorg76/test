@@ -267,14 +267,14 @@
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_2[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box->id;?>"><?php echo $box->barcode?></option>
+											<option value="<?php echo $box->id;?>"><?php echo sprintf('%012d',$box->barcode);?></option>
 											<?php endforeach;?>
 										</select>
 									</div>
 								</div>
 								
 								<div class="form-group">
-										<label for="boxes_file" class="control-label col-md-3">Pobierz XLS z pudłami</label>
+										<label for="boxes_file" class="control-label col-md-3">Pobierz CSV z pudłami</label>
 										<div class="col-md-4">
 											<span class="input-group-btn">
 												<a id="get_boxes_file" class="btn btn-success" href="/ajax/get_boxes_file" target="_new"><i class="fa fa-arrow-left fa-fw"/></i> Pobierz plik</a>
@@ -282,11 +282,11 @@
 										</div>
 								</div>
 								<div class="form-group">
-										<label for="boxes_file" class="control-label col-md-3">Dodaj XLS z pudłami</label>
+										<label for="boxes_file" class="control-label col-md-3">Dodaj CSV z pudłami</label>
 										<div class="col-md-4">
 											<input type="file" id="boxes_file">
 											<p class="help-block">
-												 Plik dodany tutaj powinien zawierać w pierwszej kolumnie, pierwszego arkusza, kody kreskowe pudeł przeznaczonych do zniszczenia.
+												 Plik dodany tutaj powinien zawierać w pierwszej kolumnie, numery kodów kreskowycg pudeł przeznaczonych do zniszczenia.
 											</p>
 										</div>
 								</div>
@@ -317,7 +317,7 @@
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_3[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box->id;?>"><?php echo $box->barcode?></option>
+											<option value="<?php echo $box->id;?>"><?php echo sprintf('%012d',$box->barcode);?></option>
 											<?php endforeach;?>										
 										</select>
 									</div>
@@ -356,7 +356,7 @@
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_4[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box->id;?>"><?php echo $box->barcode?></option>
+											<option value="<?php echo $box->id;?>"><?php echo sprintf('%012d',$box->barcode);?></option>
 											<?php endforeach;?>
 										
 										</select>
@@ -396,10 +396,27 @@
 									<div class="col-md-4">
 										<select multiple class="form-control" name="boxes_5[]" id="boxes_list">
 											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box->id;?>"><?php echo $box->barcode?></option>
+											<option value="<?php echo $box->id;?>"><?php echo sprintf('%012d',$box->barcode);?></option>
 											<?php endforeach;?>
 										</select>
 									</div>
+								</div>
+								<div class="form-group">
+										<label for="boxes_file" class="control-label col-md-3">Pobierz CSV z pudłami</label>
+										<div class="col-md-4">
+											<span class="input-group-btn">
+												<a id="get_boxes_file" class="btn btn-success" href="/ajax/get_boxes_file" target="_new"><i class="fa fa-arrow-left fa-fw"/></i> Pobierz plik</a>
+											</span>
+										</div>
+								</div>
+								<div class="form-group">
+										<label for="boxes_file" class="control-label col-md-3">Dodaj CSV z pudłami</label>
+										<div class="col-md-4">
+											<input type="file" id="boxes_file">
+											<p class="help-block">
+												 Plik dodany tutaj powinien zawierać w pierwszej kolumnie, numery kodów kreskowycg pudeł przeznaczonych do wypożyczenia.
+											</p>
+										</div>
 								</div>
 								
 								<div class="form-group">

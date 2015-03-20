@@ -2,7 +2,7 @@
 /**
  * PHPExcel
  *
- * Copyright (C) 2006 - 2014 PHPExcel
+ * Copyright (C) 2006 - 2012 PHPExcel
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
  *
  * @category   PHPExcel
  * @package    PHPExcel
- * @copyright  Copyright (c) 2006 - 2014 PHPExcel (http://www.codeplex.com/PHPExcel)
+ * @copyright  Copyright (c) 2006 - 2012 PHPExcel (http://www.codeplex.com/PHPExcel)
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
- * @version    1.8.0, 2014-03-02
+ * @version    ##VERSION##, ##DATE##
  */
 
 /** Error reporting */
@@ -35,12 +35,10 @@ define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 date_default_timezone_set('Europe/London');
 
 /** Include PHPExcel */
-require_once dirname(__FILE__) . '/../Classes/PHPExcel.php';
+require_once '../Classes/PHPExcel.php';
 
 $cacheMethod = PHPExcel_CachedObjectStorageFactory::cache_in_memory_gzip;
-if (!PHPExcel_Settings::setCacheStorageMethod($cacheMethod)) {
-	die($cacheMethod . " caching method is not available" . EOL);
-}
+PHPExcel_Settings::setCacheStorageMethod($cacheMethod);
 echo date('H:i:s') , " Enable Cell Caching using " , $cacheMethod , " method" , EOL;
 
 
