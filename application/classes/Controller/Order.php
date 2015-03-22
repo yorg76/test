@@ -185,12 +185,10 @@ class Controller_Order extends Controller_Welcome {
 			}
 			
 			if(Auth_ORM::instance()->logged_in('admin') || Auth_ORM::instance()->logged_in('manager')) {
-				//$boxes = ORM::factory('Box')->where('warehouse_id','IN',$warehouses_ids)->find_all();
 				$boxes = $order->order->boxes->find_all();
-				//var_dump($boxes);
+			
 				
 			}else {
-				//$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->find_all();
 				$boxes = $order->order->boxes->find_all();
 			}
 	
