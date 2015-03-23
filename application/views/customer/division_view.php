@@ -17,7 +17,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_add'">
+									<button class="btn green" onClick="javascript:window.location='/warehouse/box_add'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>
