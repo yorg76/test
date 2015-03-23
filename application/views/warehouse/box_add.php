@@ -103,9 +103,9 @@
 						</label>
 						<div class="checkbox-list">
 											<label class="checkbox-inline">
-											<input type="checkbox" id="lock" value="1"> Tak </label>
+											<input type="checkbox" name="lock" id="lock" value="1"> Tak </label>
 											<label class="checkbox-inline">
-											<input type="checkbox" id="lock" value="0"> Nie </label>
+											<input type="checkbox" name="lock" id="lock" value="0"> Nie </label>
 						</div>
 					</div>
 		

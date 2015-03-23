@@ -131,7 +131,20 @@
 						</label>
 						<textarea class="form-control" name="description"><?php echo $document->description; ?></textarea>
 						<span class="help-block"></span>
-					</div>				
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label">Blokada 
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="checkbox-list">
+											<label class="checkbox-inline">
+											<input type="checkbox" id="lock" name="lock" value="1" <?php echo ($box->lock == 1 ? "checked='true'":"");?> > Tak </label>
+											<label class="checkbox-inline">
+											<input type="checkbox" id="lock" name="lock" value="0" <?php echo ($box->lock == 0 ? "checked='true'":"");?> > Nie </label>
+						</div>
+					</div>
+		
 					<div class="form-group">
 						<label class="control-label">Kod plomby
 						</label>
