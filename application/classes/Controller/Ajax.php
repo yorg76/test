@@ -51,9 +51,9 @@ class Controller_Ajax extends Controller_Welcome {
 		);
 		
 		if(Auth::instance()->logged_in('admin')) {
-			$boxes = ORM::factory('Box')->where('lock', '=', 0)->find_all();
+			$boxes = ORM::factory('Box')->where('lock', '=', 0)->and_where('status','=','Na magazynie')->find_all();
 		}else {
-			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->find_all();
+			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('status','=','Na magazynie')->and_where('lock', '=', 0)->find_all();
 		}
 		
 	
@@ -124,11 +124,25 @@ class Controller_Ajax extends Controller_Welcome {
 	
 		$places = NULL;
 		$places_count = 0;
+		
+		$columns = array(
+				'id',
+				'barcode',
+				'description',
+				'status',);
 	
 		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 			$places = ORM::factory('Place');
 			$places_count = ORM::factory('Place')->count_all();
 		}
+
+		
+		if($_POST['order'][0]['column'] != NULL) {
+			$places = $places->order_by($columns[$_POST['order'][0]['column']], $_POST['order'][0]['dir']);
+		
+		}
+		
+		
 		/*
 		 * Paging
 		*/
@@ -144,7 +158,7 @@ class Controller_Ajax extends Controller_Welcome {
 	
 		$end = $iDisplayStart + $iDisplayLength;
 		$end = $end > $iTotalRecords ? $iTotalRecords : $end;
-	
+		
 		$places = $places->limit($iDisplayLength)->offset($iDisplayStart)->find_all();
 	
 		foreach ($places as $place) {
@@ -192,11 +206,11 @@ class Controller_Ajax extends Controller_Welcome {
 		$boxes = NULL;
 		$boxes_count = 0;
 		
-		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
 			$boxes = ORM::factory('Box');
 			$boxes_count = ORM::factory('Box');
 		}
-		elseif(Auth::instance()->logged_in('manager')){
+		elseif(Auth::instance()->logged_in('operator')){
 			$warehouses = $customer->warehouses->find_all();
 			$warehouses_ids= array();
 			$boxes = array();
@@ -231,8 +245,6 @@ class Controller_Ajax extends Controller_Welcome {
 			'date_to',
 			'status',
 			'seal');
-		
-			
 		
 		if($_POST['action'] == 'filter' ) {
 			
@@ -350,6 +362,139 @@ class Controller_Ajax extends Controller_Welcome {
 		die;
 	}
 	
+	
+public function action_division_boxes_list() {
+		
+		$customer=Auth::instance()->get_user()->customer;
+		$storagecategory = ORM::factory('StorageCategory');
+		$storagecategories = $storagecategory->find_all();
+
+		$boxes = NULL;
+		$boxes_count = 0;
+		
+		if($this->request->param('id') > 0) {
+			
+			$divisions_id = $this->request->param('id');
+			
+			
+			$boxes = ORM::factory('Box')->where('division_id','=',$divisions_id);
+			$boxes_count = ORM::factory('Box')->where('division_id','=',$divisions_id);
+			
+	
+			/*
+			 * Paging
+			*/
+			$columns = array(
+				'id',
+				'barcode',
+				'place_id',
+				'warehouse_id',
+				'division_id',
+				'date_from',
+				'date_to',
+				'status',
+				'seal');
+			
+				
+			
+			if($_POST['action'] == 'filter' ) {
+				
+				
+				if($_POST['id'] != NULL) {
+					$boxes = $boxes->and_where('id','=',$_POST['id']);
+					$boxes_count = $boxes_count->and_where('id','=',$_POST['id']);
+				}
+				
+				if($_POST['barcode'] != NULL) {
+					$boxes = $boxes->and_where('barcode','=',$_POST['barcode']);
+					$boxes_count = $boxes_count->and_where('barcode','=',$_POST['barcode']);
+				}
+				
+				if($_POST['place_id'] != NULL) {
+					$boxes = $boxes->and_where('place_id','=',$_POST['place_id']);
+					$boxes_count = $boxes_count->and_where('place_id','=',$_POST['place_id']);
+				}
+				
+				if($_POST['date_from'] != NULL) {
+					$boxes = $boxes->and_where('date_from','=',$_POST['date_from']);
+					$boxes_count = $boxes_count->and_where('date_from','=',$_POST['date_from']);
+				}
+				
+				if($_POST['date_to'] != NULL) {
+					$boxes = $boxes->and_where('date_to','=',$_POST['date_to']);
+					$boxes_count = $boxes_count->and_where('date_to','=',$_POST['date_to']);
+				}
+				
+				if($_POST['status'] != NULL) {
+					$boxes = $boxes->and_where('status','=',$_POST['status']);
+					$boxes_count = $boxes_count->and_where('status','=',$_POST['status']);
+				}
+			}
+			
+			if($_POST['order'][0]['column'] != NULL) {
+				$boxes = $boxes->order_by($columns[$_POST['order'][0]['column']], $_POST['order'][0]['dir']);
+				
+			}
+			
+	
+			$boxes_count = $boxes_count->count_all();
+			
+			$iTotalRecords = $boxes_count;
+			$iDisplayLength = intval($_REQUEST['length']);
+			$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+			$iDisplayStart = intval($_REQUEST['start']);
+			$sEcho = intval($_REQUEST['draw']);
+			
+			$records = array();
+			$records["data"] = array();
+			
+			$end = $iDisplayStart + $iDisplayLength;
+			$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+			
+			$boxes = $boxes->limit($iDisplayLength)->offset($iDisplayStart);
+			
+			$boxes = $boxes->find_all();
+			
+			
+			foreach ($boxes as $box) {			
+				$id = $box->id;
+			
+				$actions = "<div class=\"margin-bottom-5\">".
+					"<button class=\"btn btn-xs green margin-bottom\" onClick=\"javascript:window.location='/warehouse/box_view/".$box->id."'\">".
+					"<i class=\"glyphicon glyphicon-info-sign\"></i> Przegląd	</button><br />".
+					"<button class=\"btn btn-xs yellow margin-bottom\"	onClick=\"javascript:window.location='/warehouse/box_edit/".$box->id."'\">".
+					"<i class=\"fa fa-user\"></i> Edytuj	</button><br />".
+					"<!-- <button class=\"btn btn-xs red box-delete margin-bottom\" id=\"".$box->id."\">	<i class=\"fa fa-recycle\"></i> Usuń </button> -->".
+					"</div>";
+				
+				$records["data"][] = array(
+							$box->id,
+							'<img alt="barcode" src="/barcode/get/'.$box->barcode.'"/>',
+							($box->place_id != '' ? '<img alt="barcode" src="/barcode/get/'.$box->place->barcode.'"/>':''),
+							$box->date_from,
+							$box->date_to,
+							$box->status,
+							$box->seal,
+							$actions
+				);
+			}
+			
+			if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {
+				$records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+				$records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+			}
+			
+			$records["draw"] = $sEcho;
+			$records["recordsTotal"] = $iTotalRecords;
+			$records["recordsFiltered"] = $iTotalRecords;
+			
+			echo json_encode($records);
+			die;
+		}
+	}
+	
+	
+	
 	public function action_index() {
 		
 	}
@@ -416,10 +561,10 @@ class Controller_Ajax extends Controller_Welcome {
 	}
 	
 	public function action_check_box() {
-		//if($this->request->method()===HTTP_Request::POST) {
+		if($this->request->method()===HTTP_Request::POST) {
 			$user=Auth::instance()->get_user();
 			if($user->id > 0) {
-				$box = ORM::factory('Box')->where('barcode', '=', (int) $_POST['id'])->find();
+				$box = ORM::factory('Box')->where('barcode', '=', (int) $_POST['id'])->and_where('status','=','Na magazynie')->find();
 				if($box->loaded()) {
 					echo json_encode(array('status'=>'OK','id'=>$box->id));
 					die;
@@ -431,7 +576,7 @@ class Controller_Ajax extends Controller_Welcome {
 				echo json_encode(array('status'=>'NOTOK'));
 				die;
 			}
-		//}
+		}
 	}
 	
 	public function action_check_box_barcode() {

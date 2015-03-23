@@ -548,9 +548,9 @@ class Controller_Order extends Controller_Welcome {
 		}
 		
 		if(Auth::instance()->logged_in('admin')) {
-			$boxes = ORM::factory('Box')->where('lock', '=', 0)->find_all();
+			$boxes = ORM::factory('Box')->where('lock', '=', 0)->and_where('status','=','Na magazynie')->find_all();
 		}else {
-			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->find_all();
+			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->and_where('status','=','Na magazynie')->find_all();
 		}
 		
 		$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();

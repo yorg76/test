@@ -543,6 +543,70 @@ class Controller_Warehouse extends Controller_Welcome {
 		}
 	}
 	
+	public function action_document_view() {
+		if($this->request->param('id') > 0) {
+				
+			$document = Document::instance($this->request->param('id'));
+			$user = Auth::instance()->get_user();
+			$customer = $user->customer;
+			$warehouses = $customer->warehouses->find_all();
+				
+			$warehouses_ids= array();
+			$boxes = array();
+				
+			foreach ($warehouses as $warehouse) {
+				array_push($warehouses_ids, $warehouse->id);
+			}
+				
+			$boxes = ORM::factory('Box')->where('warehouse_id','IN', $warehouses_ids)->find_all();
+			$boxes_ids = array();
+				
+			foreach ($boxes as $box) {
+				array_push($boxes_ids, $box->id);
+			}
+			$documentlists = ORM::factory('DocumentList')->where('box_id','IN', $boxes_ids)->find_all();
+			$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
+				
+			$this->content->bind('customer', $customer);
+			$this->content->bind('warehouses', $warehouses);
+			$this->content->bind('user', $user);
+			$this->content->bind('boxes', $boxes);
+			$this->content->bind('document', $document);
+			$this->content->bind('documentlists', $documentlists);
+			$this->content->bind('bulkpackagings', $bulkpackagings);
+				
+			if($this->request->method()===HTTP_Request::POST) {
+					
+				$params = $_POST;
+	
+				if(isset($_FILES['plik']['size']) && $_FILES['plik']['size'] > 0) {
+					$filename = isset($_FILES["plik"]) ? $_FILES["plik"] : '';
+	
+					$path_parts = pathinfo($_FILES["plik"]["name"]);
+					$extension = $path_parts['extension'];
+	
+					if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
+						Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documents');
+					}
+	
+					if ($file = Upload::save($filename, "scan-".$customer->id."-".$document->id."-".time().".".$extension, UPLOAD)) {
+						$params['file'] = $file;
+					}else {
+						Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documents');
+					}
+				}
+	
+				if($document->editDocument($params)) {
+						
+					Message::success(ucfirst(__('Dokument został zaktualizowany.')),'/warehouse/documents');
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documents');
+				}
+			}
+		}
+	}
+		
+	
 	public function action_document_delete() {
 		if($this->request->param('id') > 0) {
 			$document = Document::instance($this->request->param('id'));
@@ -974,25 +1038,29 @@ class Controller_Warehouse extends Controller_Welcome {
 			if($this->request->method()===HTTP_Request::POST) {
 					
 				$params=$_POST;
-				$warehouse_id = $params['warehouse_id'];
-				$date_from = $params['date_from'];
-				$date_to = $params['date_to'];
-				$date_reception = $params['date_reception'];
-				$storage_category_id = $params['storage_category_id'];
+				if($POST['warehouse_id']) $warehouse_id = $params['warehouse_id'];
+				if($POST['date_from']) $date_from = $params['date_from'];
+				if($POST['date_to']) $date_to = $params['date_to'];
+				if($POST['date_reception']) $date_reception = $params['date_reception'];
+				if($POST['storage_category_id']) $storage_category_id = $params['storage_category_id'];
+				if($POST['description']) $description = $params['description'];
+				if($POST['barcode']) $barcode = $params['barcode'];
 				
 				foreach ($warehouses as $warehouse) {
 					array_push($warehouses_ids, $warehouse->id);
 				}
 				
-				$boxes = ORM::factory('Box')->where_open()->where('box.warehouse_id', '=', $warehouse_id)
-				->and_where('box.storage_category_id', '=', $storage_category_id)
-				->where_close()
-				->where_open()
-				->where('box.date_from', '=', $date_from)
-				->where('box.date_to', '=', $date_to)
-				->where('box.date_reception', '=', $date_reception)
-				->where('box.description', 'LIKE', "%$description%")
-				->where_close()->find_all();
+				$boxes = ORM::factory('Box');
+				
+				
+				if($POST['warehouse_id']) $boxes = $boxes->and_where('box.warehouse_id', '=', $warehouse_id);
+				if($POST['storage_category_id']) $boxes = $boxes->and_where('box.storage_category_id', '=', $storage_category_id);
+				if($POST['date_from']) $boxes = $boxes->and_where('box.date_from', '=', $date_from);
+				if($POST['date_to']) $boxes = $boxes->and_where('box.date_to', '=', $date_to);
+				if($POST['date_reception']) $boxes = $boxes->and_where('box.date_reception', '=', $date_reception);
+				if($POST['description']) $boxes = $boxes->and_where('box.description', 'LIKE', "%".$description."%");
+				if($POST['barcode']) $boxes = $boxes->and_where('box.barcode', '=', $barcode);
+				$boxes = $boxes->limit(100)->find_all();
 
 				$count = $boxes->count();
 				$this->content->bind('boxes', $boxes);

@@ -20,6 +20,7 @@ class Controller_Customer extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'user_edit') $this->add_init("PasswordGenerator.init();\t\nUser_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'division_add') $this->add_init("PasswordGenerator.init();\t\nAdd_division.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'division_edit') $this->add_init("PasswordGenerator.init();\t\nEdit_division.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'division_view') $this->add_init("PasswordGenerator.init();\t\nTableBoxes.init();\t\nTableVirtualBriefCases.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'info') $this->add_init("MapsGoogle.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'edit') $this->add_init("Customer_edit.init();\t\nCustomer_Add_delivery_address.init();\t\nCustomer_Add_pickup_address.init();\t\n");
 
@@ -249,6 +250,10 @@ class Controller_Customer extends Controller_Welcome {
 		
 			$virtualbriefcases = ORM::factory('Virtualbriefcase')->where('division_id','=', $division_id)->find_all();
 			$this->content->bind('virtualbriefcases', $virtualbriefcases);
+			
+			$boxes = ORM::factory('Box')->where('division_id','=', $division_id)->find_all();
+			$this->content->bind('boxes', $boxes);
+				
 		}
 	}
 	

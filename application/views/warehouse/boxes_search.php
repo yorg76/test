@@ -18,8 +18,7 @@
 							<span>Popraw błędy w formularzu</span>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Magazyn <span class="required"
-								aria-required="true"> * </span>
+							<label class="control-label">Magazyn
 							</label>
 							<div class="input-icon right">
 								<select class="form-control input-large" name="warehouse_id">
@@ -33,8 +32,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Kategoria przechowywania <span
-								class="required" aria-required="true"> * </span>
+							<label class="control-label">Kategoria przechowywania 
 							</label>
 							<div class="input-icon right">
 								<select class="form-control input-large" name="storage_category_id">
@@ -48,8 +46,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Data początku magazynowania <span
-								class="required" aria-required="true"> * </span>
+							<label class="control-label">Data początku magazynowania 
 							</label>
 							<div
 								class="input-group input-medium date date-picker margin-bottom-5"
@@ -65,8 +62,7 @@
 							<span class="help-block"></span>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Data końca magazynowania <span
-								class="required" aria-required="true"> * </span>
+							<label class="control-label">Data końca magazynowania 
 							</label>
 							<div
 								class="input-group input-medium date date-picker margin-bottom-5"
@@ -82,8 +78,7 @@
 							<span class="help-block"></span>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Data odbioru <span class="required"
-								aria-required="true"> * </span>
+							<label class="control-label">Data odbioru 
 							</label>
 							<div
 								class="input-group input-medium date date-picker margin-bottom-5"
@@ -98,7 +93,11 @@
 							</div>
 							<span class="help-block"></span>
 						</div>
-
+						<div class="form-group">
+							<label class="control-label">Kod kreskowy
+							</label> <input type="text" class="form-control input-large"
+								id="barcode" placeholder="Opis" name="barcode"> <span class="help-block"></span>
+						</div>
 
 						<div class="form-group">
 							<label class="control-label">Opis

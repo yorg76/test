@@ -46,7 +46,7 @@
 									Data odbioru
 								</th>
 								<th>
-									Kod QR
+									Kod kreskowy
 								</th>
 								<th>
 									 Opcje

@@ -45,7 +45,7 @@
 									 <?php echo $document->description;?>
 							</td>
 							<td>
-									 <?php echo $document->box->id;?>
+									 <?php echo sprintf('%012d',$document->box->barcode);?>
 							</td>
 							<td>
 									 <?php echo $document->box->warehouse->name;?>
@@ -55,6 +55,11 @@
 									<button class="btn btn-xs yellow margin-bottom"
 										onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';">
 										<i class="icon-pencil"></i> Edytuj
+									</button>
+									
+									<button class="btn btn-xs green margin-bottom"
+										onClick="javascript:window.location='/warehouse/document_view/<?php echo $document->id ;?>';">
+										<i class="icon-list"></i> Szczegóły
 									</button>
 									<!-- 
 									<button class="btn btn-xs red document-delete margin-bottom"

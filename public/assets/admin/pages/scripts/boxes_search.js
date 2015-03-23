@@ -16,21 +16,6 @@ var Boxes_search = function () {
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	            	storage_category_id: {
-	                    required: true
-	                },
-	                warehouse_id: {
-	                    required: true
-	                },
-					date_from: {
-	                    required: true
-	                },
-					date_to: {
-	                    required: true
-	                },
-					date_reception: {
-	                    required: true
-	                },
 					
 	            },
 

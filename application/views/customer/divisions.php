@@ -66,7 +66,7 @@
 								<div class="margin-bottom-5">
 											<button class="btn btn-xs green margin-bottom" onClick="javascript:window.location='/customer/division_view/<?php echo $division->id ;?>';"><i class="glyphicon glyphicon-info-sign"></i> Przegląd</button>
 											<button class="btn btn-xs yellow division-edit margin-bottom" onClick="javascript:window.location='/customer/division_edit/<?php echo $division->id ;?>';"><i class="fa fa-user"></i> Edytuj</button>
-											<button class="btn btn-xs red division-delete margin-bottom" id="<?php echo $user->id ;?>"><i class="fa fa-recycle"></i> Usuń</button>
+
 									</div>
 								</td>
 							</tr>
