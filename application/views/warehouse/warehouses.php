@@ -4,7 +4,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="icon-layers"></i>Magazyny
+					<i class="icon-layers"></i>Status pudeł 
 				</div>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"> </a> <a
