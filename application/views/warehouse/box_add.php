@@ -98,17 +98,19 @@
 						<span class="help-block"></span>
 					</div>				
 					<div class="form-group">
-						<label class="control-label">Status blokady
+						<label class="control-label">Blokada 
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<div class="input-icon">
-							<i class="fa fa-lock fa-fw"></i>
-							<input id="lock" class="form-control" type="text" name="lock" placeholder="">
+						<div class="checkbox-list">
+											<label class="checkbox-inline">
+											<input type="checkbox" id="lock" value="1"> Tak </label>
+											<label class="checkbox-inline">
+											<input type="checkbox" id="lock" value="0"> Nie </label>
 						</div>
 					</div>
 		
 					<div class="form-group">
-						<label class="control-label">Status plomby
+						<label class="control-label">Kod plomby
 							<span class="required" aria-required="true"> * </span>
 						</label>
 						<div class="input-icon">
