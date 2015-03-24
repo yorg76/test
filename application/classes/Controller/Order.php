@@ -95,7 +95,7 @@ class Controller_Order extends Controller_Welcome {
 		
 		$this->class='page-header-fixed page-quick-sidebar-over-content';
 
-		if (Kohana::find_file ( 'views', $this->_req."_admin" )) {
+		if (Kohana::find_file ( 'views', $this->_req."_admin" ) && (Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager'))) {
 			$this->content = View::factory ( $this->_req."_admin" );
 			
 			if (file_exists ( CSS . $this->_req . '.css' )) {
