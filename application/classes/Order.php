@@ -572,10 +572,10 @@ class Order {
 					$paramse = array();
 					$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$params['order_type']."-".$order->order->id.".pdf";
 					
-					if($params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4) {
-						if(isset($params['boxes']) && is_array($params['boxes']) && ($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4)) {
+					if($params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4 || $params['order_type'] == 5) {
+						if(isset($params['boxes']) && is_array($params['boxes']) && ($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4 || $params['order_type'] == 5)) {
 							foreach ($params['boxes'] as $box) {
-								$bbox=ORM::factory('Box')->where('barcode', '=', $box)->find();
+								$bbox=ORM::factory('Box')->where('id', '=', $box)->find();
 								if($bbox->lock != 1) {
 									$bbox->lock='1';
 									if($bbox->update()) {
