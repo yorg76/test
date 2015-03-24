@@ -101,8 +101,7 @@ class Controller_Welcome extends Controller_Template {
 		$this->_req = strtolower ( $this->request->controller () . '/' . $this->request->action () );
 		
 		
-		if (method_exists ( $this, 'load_content' )) {
-
+		if (method_exists ( $this, 'load_content' )) {			
 			$this->load_content();
 		}
 		

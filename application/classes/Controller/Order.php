@@ -94,9 +94,20 @@ class Controller_Order extends Controller_Welcome {
 		}
 		
 		$this->class='page-header-fixed page-quick-sidebar-over-content';
-	
-		
-		if (Kohana::find_file ( 'views', $this->_req )) {
+
+		if (Kohana::find_file ( 'views', $this->_req."_admin" )) {
+			$this->content = View::factory ( $this->_req."_admin" );
+			
+			if (file_exists ( CSS . $this->_req . '.css' )) {
+				$this->add_css ( CSS . $this->_req . '.css' );
+			}
+			
+			if (file_exists ( JS . $this->_req . '.js' )) {
+				$this->add_js ( JS . $this->_req . '.js' );
+			}
+				
+			
+		}elseif (Kohana::find_file ( 'views', $this->_req )) {
 
 			
 			$this->content = View::factory ( $this->_req );

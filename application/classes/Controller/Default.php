@@ -19,7 +19,7 @@ class Controller_Default extends Controller_Welcome {
  * Dopisać komenatrze i kod resetu hasła
 */
 	protected function load_content() {
-
+	
 
 		$this->add_css ( ASSETS_ADMIN_PAGES_CSS.'login-soft.css');
 		
@@ -32,8 +32,18 @@ class Controller_Default extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'login-soft.js');
 		
 		$this->class='login';
-		
-		if (Kohana::find_file ( 'views', $this->_req )) {
+				
+		if (Kohana::find_file ( 'views', $this->_req."_admin" )) {
+			$this->content = View::factory ( $this->_req."_admin" );
+				
+			if (file_exists ( CSS . $this->_req . '.css' )) {
+				$this->add_css ( CSS . $this->_req . '.css' );
+			}
+				
+			if (file_exists ( JS . $this->_req . '.js' )) {
+				$this->add_js ( JS . $this->_req . '.js' );
+			}
+		}elseif (Kohana::find_file ( 'views', $this->_req )) {
 			$this->content = View::factory ( $this->_req );
 			
 			if (file_exists ( CSS . $this->_req . '.css' )) {
