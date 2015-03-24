@@ -39,7 +39,7 @@ class Controller_Warehouse extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'bulkpackaging_edit') $this->add_init("BulkPackaging_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'childbulkpackaging_remove') $this->add_init("Remove_item_vb.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'add_item_bp') $this->add_init("Add_item_bp.init();\t\n");
-		
+		if(strtolower ( $this->request->action()) == 'box_barcode_print') $this->add_init("//deployQZ();\t\n");
 		$this->add_init("UIAlertDialogApi.init();\t\n");
 	}
 	
@@ -65,6 +65,12 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-warehouses.js');
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');
+		
+		if(strtolower ( $this->request->action()) == 'box_barcode_print') {
+			$this->add_fjs ( ASSETS_QZPRINT .'js/deployJava.js');
+			$this->add_fjs ( ASSETS_QZPRINT .'js/jquery.plugin.html2canvas.js');
+			$this->add_fjs ( ASSETS_QZPRINT .'js/html2canvas.js');
+		}
 		
 		if(strtolower ( $this->request->action()) == 'childbulkpackaging_remove') $this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'remove_item_vb.js');
 		

@@ -14,6 +14,7 @@ return array
 	'October' => 'Październik',
 	'November' => 'Listopad',
 	'December' => 'Grudzień',
+	'box_barcode_print' => 'Drukowanie kodów kreskowych',
 	'places' => 'Regały',
 	'invoice_add' => 'Wystaw fakturę',
 	'division_add' => 'Dodaj dział',

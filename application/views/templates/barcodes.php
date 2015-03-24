@@ -11,14 +11,14 @@
 		@page{margin:0px auto;}
 		
 	    body {
-	        width: 2.35in;
-	        height: 1.25in;
+	        width: 100mm;
+	        height: 40mm;
 	        margin: .0in .2175in;
 	        }
 	    .label{
 	        /* Avery 5160 labels -- CSS and HTML by MM at Boulder Information Services */
-	        width: 2.85in; /* plus .6 inches from padding */
-	        height: 1.75in; /* plus .125 inches from padding */
+	        width: 100mm; /* plus .6 inches from padding */
+	        height: 40mm; /* plus .125 inches from padding */
 	        padding: .125in .3in 0;
 	        margin-top:.125in;
 	        margin-right: .125in; /* the gutter */
@@ -36,8 +36,8 @@
 	        }
 	        
 	    img {
-	    	width: 2.85in; /* plus .6 inches from padding */
-	        height: 1.75in;
+	    	width: 100mm; /* plus .6 inches from padding */
+	        height: 40mm;
 	        padding-bottom: 10px;
 	    }
     }
@@ -47,6 +47,7 @@
 <body>
 
 <?php foreach($boxes as $box):?>
+<input type="hidden" class="barcode" value="<?php echo $box->id;?>" />
 <div class="label"><img src="/barcode/get_label/<?php echo $box->id;?>" /></div>
 <div class="page-break"></div>
 <?php endforeach;?>

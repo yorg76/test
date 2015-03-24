@@ -17,7 +17,7 @@ class Barcode {
 	
 		$rendererOptions = array('imageType' => 'gif');
 	
-		$image = Zend\Barcode\Barcode::factory('upc-a', 'image', $barcodeOptions, $rendererOptions)->render();
+		$image = Zend\Barcode\Barcode::factory('code128', 'image', $barcodeOptions, $rendererOptions)->render();
 	
 		return $image;
 	}

@@ -160,6 +160,8 @@ define('ASSETS_ADMIN_PAGES_IMG', '/public/assets/admin/pages/img/');
 define('ASSETS_ADMIN_PAGES_MEDIA', '/public/assets/admin/pages/media/');
 define('ASSETS_ADMIN_PAGES_SCRIPTS', '/public/assets/admin/pages/scripts/');
 
+define('ASSETS_QZPRINT','/public/assets/qz-print/');
+
 define('JS','/public/js/');
 define('CSS','/public/css/');
 define('IMG', '/public/images/');
