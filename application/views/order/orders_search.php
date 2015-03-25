@@ -2,13 +2,13 @@
 	<div class="col-md-12">
 			<div class="row search-form-default">
 				<div class="col-md-12">
-					<form class="form-inline" action="#">
+					<form class="form-inline" action="/order/orders_search">
 						<div class="input-group">
 							<div class="input-cont">
-								<input type="text" placeholder="Szukaj..." class="form-control">
+								<input type="text" name="query" value="<?php if($query) echo $query; ?>" placeholder="Szukaj..." class="form-control">
 							</div>
 							<span class="input-group-btn">
-							<button type="button" class="btn green">
+							<button type="button" class="btn green" onClick="javascript:submit();">
 							Szukaj &nbsp; <i class="m-icon-swapright m-icon-white"></i>
 							</button>
 							</span>
@@ -16,6 +16,9 @@
 					</form>
 				</div>
 			</div>
+			
+			<?php if($pagination) echo $pagination->render(); ?>
+			
 			<div class="table-responsive">
 				<table class="table table-striped table-hover table-bordered" id="orders_list">
 				<thead>
@@ -62,6 +65,7 @@
 				</tbody>
 				</table>
 			</div>
+			<?php if($pagination) echo $pagination->render(); ?>
 		<!--end tab-pane-->	
 	</div>
 </div>

@@ -11,6 +11,11 @@ class Model_Address extends ORM {
 			'customer'=> array('model' => 'Customer', 'foreign_key' => 'customer_id'),
 			'order'=> array('model' => 'Order', 'foreign_key' => 'order_id')
 	);
+	
+	public function address() {
+			
+		return $this->street." ".$this->number.($this->flat !="" ? "/".$this->flat : " ")."<br />\n".$this->city.", ".$this->postal;
+	}
 }
 
 

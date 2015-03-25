@@ -52,13 +52,21 @@ class Controller_Search extends Controller_Welcome {
 		
 		$user=Auth::instance()->get_user();
 		
-		if($this->request->method()===HTTP_Request::POST) {
-			$query = $_POST['query'];
-			
+		
+		$query = $_REQUEST['query'];
+		
+		
+		if($query) {
 			$results['query']=$query;
 			$results['count']=0;
 			
 			$results['count'] +=  ORM::factory('Box')->where('id', 'LIKE',"%".$query."%")->or_where('barcode', 'LIKE', "%".$query."%")->or_where('place_id', 'LIKE', "%".$query."%")->or_where('description', 'LIKE', "%".$query."%")->count_all();
+			$results['count'] +=  ORM::factory('Order')->where('id', 'LIKE',"%".$query."%")->or_where('shipping_number', 'LIKE', "%".$query."%")->count_all();
+			$results['count'] +=  ORM::factory('Warehouse')->where('id', 'LIKE',"%".$query."%")->or_where('description', 'LIKE', "%".$query."%")->or_where('name', 'LIKE', "%".$query."%")->count_all();
+			$results['count'] +=  ORM::factory('Document')->where('id', 'LIKE',"%".$query."%")->or_where('description', 'LIKE', "%".$query."%")->or_where('name', 'LIKE', "%".$query."%")->count_all();
+				
+			
+			$pagination = Pagination::factory(['items_per_page'=> $per_page, 'total_items'=>$results['count']]);
 			
 			$boxes = ORM::factory('Box')->where('id', 'LIKE', $query)->or_where('barcode', 'LIKE', "%".$query."%")->or_where('place_id', 'LIKE', "%".$query."%")->or_where('description', 'LIKE', "%".$query."%");
 			
@@ -66,24 +74,20 @@ class Controller_Search extends Controller_Welcome {
 				$boxes = $boxes->and_where('id','IN',DB::expr('(SELECT id FROM boxes WHERE division_id IN (SELECT division_id FROM divisions_users WHERE user_id='.$user->id."))"));
 			}
 						
-			$boxes = $boxes->limit($per_page)->find_all();
-			
-			$results['count'] +=  ORM::factory('Order')->where('id', 'LIKE',"%".$query."%")->or_where('shipping_number', 'LIKE', "%".$query."%")->count_all();
-			
+			$boxes = $boxes->limit($per_page)->offset($pagination->offset)->find_all();	
+				
 			$orders = ORM::factory('Order')->where('id', 'LIKE',"%".$query."%")->or_where('shipping_number', 'LIKE', "%".$query."%");
 				
 			if(!Auth::instance()->logged_in('admin') || !Auth::instance()->logged_in('manager')) {
 				$orders = $orders->and_where('user_id','=',$user->id);
 			}
 			
-			$orders = $orders->limit($per_page)->find_all();
+			$orders = $orders->limit($per_page)->offset($pagination->offset)->find_all();
 			
-			$results['count'] +=  ORM::factory('Warehouse')->where('id', 'LIKE',"%".$query."%")->or_where('description', 'LIKE', "%".$query."%")->or_where('name', 'LIKE', "%".$query."%")->count_all();
-				
 			$warehouses = ORM::factory('Warehouse')->where('id', 'LIKE',"%".$query."%")->or_where('description', 'LIKE', "%".$query."%")->or_where('name', 'LIKE', "%".$query."%");
-			$warehouses =$warehouses->limit($per_page)->find_all();
-
-			$results['count'] +=  ORM::factory('Document')->where('id', 'LIKE',"%".$query."%")->or_where('description', 'LIKE', "%".$query."%")->or_where('name', 'LIKE', "%".$query."%")->count_all();
+			$warehouses =$warehouses->limit($per_page)->offset($pagination->offset)->find_all();
+	
+			
 			
 			
 			$documents = ORM::factory('Document')->where('id', 'LIKE',"%".$query."%")->or_where('description', 'LIKE', "%".$query."%")->or_where('name', 'LIKE', "%".$query."%");
@@ -92,14 +96,15 @@ class Controller_Search extends Controller_Welcome {
 				$documents = $documents->and_where('box_id','IN',DB::expr('(SELECT id FROM boxes WHERE division_id IN (SELECT division_id FROM divisions_users WHERE user_id='.$user->id."))"));
 			}
 			
-			$documents = $documents ->limit($per_page)->find_all();
+			$documents = $documents ->limit($per_page)->offset($pagination->offset)->find_all();
 				
+			
 			
 			
 			foreach ($boxes as $box) {
 				array_push($results['data'], array('type'=>'Pudło','url'=>'/warehouse/box_view/'.$box->id,'id'=>$box->id, 'barcode'=>$box->barcode, 'place'=>$box->place->barcode,'division'=>$box->division->name,'date_to'=>$box->date_to));			
 			}	
-
+	
 			foreach ($orders as $order) {
 				array_push($results['data'], array('type'=>'Zamówienie','url'=>'/order/view_order/'.$order->id,'id'=>$order->id));
 			}
@@ -114,11 +119,13 @@ class Controller_Search extends Controller_Welcome {
 				}
 			}
 			
-			$this->content->bind('results', $results);
-			$this->content->bind('query', $query);
 			
-			
-		}
+		
+		}			
+		$this->content->bind('pagination', $pagination);
+		$this->content->bind('results', $results);
+		$this->content->bind('query', $query);
+		
 	}
 
 }

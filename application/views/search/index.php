@@ -1,3 +1,6 @@
+	
+	<?php if($pagination) echo $pagination->render(); ?>
+	
 	<div class="row search-form-default">
 		<div class="col-md-12">
 			<form action="/search" method="POST" >
@@ -71,37 +74,6 @@
 		<?php endif;?>
 	</div>
 	<?php endforeach;?>
-<!-- 	
-	<div class="margin-top-20">
-		<ul class="pagination">
-			<li>
-				<a href="#">
-				Prev </a>
-			</li>
-			<li>
-				<a href="#">
-				1 </a>
-			</li>
-			<li>
-				<a href="#">
-				2 </a>
-			</li>
-			<li class="active">
-				<a href="#">
-				3 </a>
-			</li>
-			<li>
-				<a href="#">
-				4 </a>
-			</li>
-			<li>
-				<a href="#">
-				5 </a>
-			</li>
-			<li>
-				<a href="#">
-				Next </a>
-			</li>
-		</ul>
-	</div>
- -->
+	
+	<?php if($pagination) echo $pagination->render(); ?>
+ 

@@ -37,7 +37,7 @@
 									Status
 								</th>
 								<th>
-									Adres
+									Adres dostawy / odbioru
 								</th>								
 								<th>
 									Opcje
@@ -66,8 +66,8 @@
 									 <?php echo $order->status;?>
 								</td>			
 								<td>
-									 <?php echo $order->address->street;?> <?php echo $order->address->number;?> / <?php echo $order->address->flat;?> <?php echo $order->address->city;?>, <?php echo $order->address->postal;?>
-								</td>											
+									<?php echo $order->address->address();?>
+								</td>										
 								<td>
 								<div class="margin-bottom-5">
 											<button class="btn btn-xs purple order-details margin-bottom" id="order_details_<?php echo $order->id?>" ><i class="glyphicon glyphicon-info-sign"></i> Szczegóły</button> <br />

@@ -2,6 +2,10 @@
  
 return array
 (
+	'First' => 'Pierwsza',
+	'Last' => 'Ostatnia',
+	'Next' => 'Następna',
+	'Previous' => 'Poprzednia',
 	'January' => 'Styczeń',
 	'February' => 'Luty',
 	'March' => 'Marzec',

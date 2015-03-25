@@ -37,10 +37,10 @@
 									Status
 								</th>
 								<th>
-									Adres
+									Adres dostawy / odbioru
 								</th>								
 								<th>
-									 Opcje
+									Opcje
 								</th>
 							</tr>
 							</thead>
@@ -66,8 +66,8 @@
 									 <?php echo $order->status;?>
 								</td>			
 								<td>
-									 <?php echo $order->address->street;?> <?php echo $order->address->number;?> / <?php echo $order->address->flat;?> <?php echo $order->address->city;?>, <?php echo $order->address->postal;?>
-								</td>											
+									<?php echo $order->address->address();?>
+								</td>										
 								<td>
 								<div class="margin-bottom-5">
 

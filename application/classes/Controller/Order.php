@@ -134,6 +134,8 @@ class Controller_Order extends Controller_Welcome {
 		
 		$user = Auth::instance()->get_user();
 		$customer=$user->customer;
+		$query = $_REQUEST['query'];
+	
 		
 		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
 			$users = ORM::factory('User')->find_all();
@@ -164,10 +166,26 @@ class Controller_Order extends Controller_Welcome {
 		
 		$users_ids=array_unique($users_ids);
 		
-		$orders=ORM::factory('Order')->where('user_id', 'IN', $users_ids)->find_all();
+		$orders = ORM::factory('Order')->where('id', 'LIKE',"%".$query."%")->or_where('shipping_number', 'LIKE', "%".$query."%");
 		
-		//var_dump($orders);
+		$orders_count = ORM::factory('Order')->where('id', 'LIKE',"%".$query."%")->or_where('shipping_number', 'LIKE', "%".$query."%");
+
+		$orders=$orders->and_where('user_id', 'IN', $users_ids);
+		$orders_count=$orders_count->and_where('user_id', 'IN', $users_ids);
+	
 		
+		$per_page=10;
+		
+		$orders_count =  $orders_count->count_all();
+		
+		
+		$pagination = Pagination::factory(['items_per_page'=> $per_page, 'total_items'=>$orders_count]);
+		
+		$orders = $orders->limit($per_page)->offset($pagination->offset)->find_all();
+		
+		
+		$this->content->bind('pagination', $pagination);
+		$this->content->bind('query', $query);
 		$this->content->bind('orders', $orders);
 	
 	}

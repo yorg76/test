@@ -90,6 +90,7 @@ class Kohana_Pagination {
 			$request = Request::current();
 		}
 		
+		
 		$this->_request = $request;
 
 		// Assign default Route
@@ -222,8 +223,8 @@ class Kohana_Pagination {
 		{
 			case 'query_string':
 			
-				return URL::site($this->_route->uri($this->_route_params).
-					$this->query(array($this->config['current_page']['key'] => $page)));
+				return URL::site($this->_route->uri($this->_route_params).Request::detect_uri().
+					$this->query(array($this->config['current_page']['key'] => $page,'query'=>$_REQUEST['query'])));
 
 			case 'route':
 			
