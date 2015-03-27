@@ -648,7 +648,13 @@ class Controller_Order extends Controller_Welcome {
 			
 			$document_template->get_mpdf()->SetDisplayMode('fullpage');
 			$document_template->get_mpdf()->WriteHTML($document_css,1);
-			$document_template->download($document_filename);
+			
+			$pdf_file = $document_template->write_to_disk(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+			$pdf = EasyRSA::signFile(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+			
+			ob_clean();
+			$pdf->Output($document_filename);
+			die;
 		}
 	}
 	
@@ -681,7 +687,14 @@ class Controller_Order extends Controller_Welcome {
 				
 			$document_template->get_mpdf()->SetDisplayMode('fullpage');
 			$document_template->get_mpdf()->WriteHTML($document_css,1);
-			$document_template->download($document_filename);
+			
+			$pdf_file = $document_template->write_to_disk(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+			$pdf = EasyRSA::signFile(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+				
+			ob_clean();
+			$pdf->Output($document_filename);
+			
+			die;
 		}
 	}
 }

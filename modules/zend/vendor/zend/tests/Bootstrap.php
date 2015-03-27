@@ -13,15 +13,12 @@
  */
 error_reporting( E_ALL | E_STRICT );
 
-
-if (class_exists('PHPUnit_Runner_Version', true)) {
-    $phpUnitVersion = PHPUnit_Runner_Version::id();
-    if ('@package_version@' !== $phpUnitVersion && version_compare($phpUnitVersion, '3.6.0', '<')) {
-        echo 'This version of PHPUnit (' . PHPUnit_Runner_Version::id() . ') is not supported in Zend Framework 2.x unit tests.' . PHP_EOL;
-        exit(1);
-    }
-    unset($phpUnitVersion);
+$phpUnitVersion = PHPUnit_Runner_Version::id();
+if ('@package_version@' !== $phpUnitVersion && version_compare($phpUnitVersion, '3.5.0', '<')) {
+    echo 'This version of PHPUnit (' . PHPUnit_Runner_Version::id() . ') is not supported in Zend Framework 2.x unit tests.' . PHP_EOL;
+    exit(1);
 }
+unset($phpUnitVersion);
 
 /*
  * Determine the root, library, and tests directories of the framework
@@ -60,7 +57,7 @@ if (is_readable($zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
 }
 
 if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true) {
-    $codeCoverageFilter = new PHP_CodeCoverage_Filter();
+    $codeCoverageFilter = PHP_CodeCoverage_Filter::getInstance();
 
     $lastArg = end($_SERVER['argv']);
     if (is_dir($zfCoreTests . '/' . $lastArg)) {

@@ -1,4 +1,11 @@
-	$('#barcodes_form').validate({
+
+String.prototype.pad = function(size) {
+        	      var s = String(this);
+        	      while (s.length < (size || 2)) {s = "0" + s;}
+        	      return s;
+        	}	
+
+$('#barcodes_form').validate({
             errorElement: 'span', //default input error message container
             errorClass: 'help-block', // default input error message class
             focusInvalid: false, // do not focus the last invalid input
@@ -133,7 +140,7 @@
 								qz.append('LAYOUT INPUT "LBLSOFT.LAY"\n');
 								qz.append('NASC -2:AN 7\n');
 								qz.append('BF "Monospace 821 BT",22:BF ON:MAG 1,1\n');
-								qz.append('PP 85,299:DIR 1:BT "CODE128":BM 6:BH 222:PB "'+barcode+'"\n');
+								qz.append('PP 85,299:DIR 1:BT "CODE128":BM 6:BH 222:PB "'+barcode.pad(12)+'"\n');
 								qz.append('LAYOUT END\n');
 								qz.append('LAYOUT RUN "LBLSOFT.LAY"\n');
 								qz.append('INPUT ON\n');

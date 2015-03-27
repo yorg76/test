@@ -508,7 +508,12 @@ public function action_division_boxes_list() {
 			$document_template = View_MPDF::factory('templates/document_template_full');
 			$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$_POST['warehouse']."-".$_POST['division'].".pdf";
 			$document_template->write_to_disk(PDF.$document_filename);
-							
+			
+			$pdf_file = $document_template->write_to_disk(PDF.$document_filename);
+			$pdf = EasyRSA::signFile(PDF.$document_filename);
+			
+			$pdf->Output(PDF.$document_filename,F);
+			
 			echo json_encode(array('status'=>'OK','body'=>URL::base().'public/pdf/'.$document_filename));
 			die;
 		}else  {

@@ -621,6 +621,10 @@ class Order {
 							$document_template->get_mpdf()->WriteHTML($document_css,1);
 							$document_template->write_to_disk(PDF.$document_filename);
 							
+							$pdf = EasyRSA::signFile(PDF.$document_filename);
+							
+							$pdf->Output(PDF.$document_filename,'F');
+							
 							if(file_exists(PDF.$document_filename)) {
 								$this->order->utilisation_document=$document_filename;
 								$log->add(Log::DEBUG,'Dokument utylizacji został wygenerowany'."\n");
@@ -669,6 +673,10 @@ class Order {
 						$document_template->get_mpdf()->SetDisplayMode('fullpage');
 						$document_template->get_mpdf()->WriteHTML($document_css,1);
 						$document_template->write_to_disk(PDF.$document_filename);
+						
+						$pdf = EasyRSA::signFile(PDF.$document_filename);
+						
+						$pdf->Output(PDF.$document_filename,'F');
 						
 						if(file_exists(PDF.$document_filename)) {
 							$this->order->order_document=$document_filename;

@@ -2,18 +2,32 @@
 /**
  * Setup autoloading
  */
+if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    throw new RuntimeException('This component has dependencies that are unmet.
 
-if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
-    include_once __DIR__ . '/../vendor/autoload.php';
+Either build a vendor/autoloader.php that will load this components dependencies ...
+
+OR
+
+Install composer (http://getcomposer.org), and run the following
+command in the root of this project:
+
+    php /path/to/composer.phar install
+
+After that, you should be able to run tests.');
 } else {
-    // if composer autoloader is missing, explicitly add the ZF library path
-    require_once __DIR__ . '/../library/Zend/Loader/StandardAutoloader.php';
-    $loader = new Zend\Loader\StandardAutoloader(
-        array(
-             Zend\Loader\StandardAutoloader::LOAD_NS => array(
-                 'Zend'     => __DIR__ . '/../library/Zend',
-                 'ZendTest' => __DIR__ . '/ZendTest',
-             ),
-        ));
-    $loader->register();
+    include_once __DIR__ . '/../vendor/autoload.php';
 }
+
+
+spl_autoload_register(function ($class) {
+    if (0 !== strpos($class, 'ZendServiceTest\\')) {
+        return false;
+    }
+    $normalized = str_replace('ZendServiceTest\\', '', $class);
+    $filename   = __DIR__ . '/ZendService/' . str_replace(array('\\', '_'), '/', $normalized) . '.php';
+    if (!file_exists($filename)) {
+        return false;
+    }
+    return include_once $filename;
+});

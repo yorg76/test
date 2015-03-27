@@ -12,6 +12,34 @@ define("EASYRSA_REQ_OU","");
 define("ECMD",EASY_RSA_PATH."easyrsa ");
 
 class EasyRSA {
+	
+	public static function signFile($file) {
+		
+		$info = array(
+				'Name' => 'b2b@archiwumdepozytowe.pl',
+				'Location' => 'B2B',
+				'Reason' => 'Document Exchange',
+				'ContactInfo' => 'http://www.archiwumdepozytowe.pl',
+		);
+		
+		$certificate = "file://".APPPATH.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'b2b.pem';
+		$certificate_key = "file://".APPPATH.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'b2b.key';
+		$certificate_pass = "0Archiwum1";
+		
+		//$pdf = new TCPDF_IMPORT();
+		//$pdf->importPDF($file);
+		
+		$pdf = new FPDI(); //FPDI extends TCPDF
+		$pdf->AddPage();
+		
+		$pages = $pdf->setSourceFile($file);
+		$page = $pdf->ImportPage( 1 );
+		$pdf->useTemplate( $page, 0, 0 );
+		
+		$pdf->setSignature($certificate, $certificate_key, $certificate_pass, '', 2, $info);
+			
+		return $pdf;
+	}
 
     public static function saveLog($out) {
         $log=Kohana_Log::instance();

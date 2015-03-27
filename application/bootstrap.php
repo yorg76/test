@@ -175,6 +175,9 @@ define('BANK','mBank, 09876545678987654356789');
 
 Cookie::$salt = 'Parrarell Thinking';
 
+require_once Kohana::find_file('vendor/tcpdf', 'tcpdf');
+require_once Kohana::find_file('vendor/fpdi', 'fpdi');
+
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.

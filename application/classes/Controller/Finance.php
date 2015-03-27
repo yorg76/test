@@ -116,8 +116,18 @@ class Controller_Finance extends Controller_Welcome {
 				$this->template->bind_global('invoice', $invoice);
 				$this->template->bind_global('box_quantity', $boxes_in_wh);
 				$this->template->bind_global('customer', $customer);
-
-				$this->template->download($document_filename);
+				
+				$pdf_file = $this->template->write_to_disk(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+				$pdf = EasyRSA::signFile(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+				
+				ob_clean();
+				
+				header("Content-type:application/pdf");
+				
+				$pdf->Output($document_filename);
+				die;
+				//$this->template->download($document_filename);
+				
 				
 				//Message::success(ucfirst(__('Faktura została utworzona')),'/finance/invoice_add');
 				
