@@ -133,6 +133,7 @@ Kohana::modules(array(
 	   'multilang'	=> MODPATH.'multilang',
 	   'barcode'	=> MODPATH.'barcode',
 	   'zend'	=> MODPATH.'zend',
+	   'minion' => MODPATH.'minion',
 	));
 
 $languages = array();

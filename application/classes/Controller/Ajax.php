@@ -504,18 +504,32 @@ public function action_division_boxes_list() {
 		//TODO Szablon dokumentu utylizacji / wypełnianie treścią
 		
 		if($this->request->method()===HTTP_Request::POST) {
-				
-			$document_template = View_MPDF::factory('templates/document_template_full');
-			$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$_POST['warehouse']."-".$_POST['division'].".pdf";
+
+			$order=Order::instance($_POST['order_id']);
+			
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+			
+			$document_template = View_MPDF::factory('templates/utilisation_document_template');
+			$document_template->bind('order',$order);
+			$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$_POST['order_id'].".pdf";
+			
+			$document_template->get_mpdf()->SetDisplayMode('fullpage');
+			$document_template->get_mpdf()->WriteHTML($document_css,1);
+			
 			$document_template->write_to_disk(PDF.$document_filename);
 			
-			$pdf_file = $document_template->write_to_disk(PDF.$document_filename);
 			$pdf = EasyRSA::signFile(PDF.$document_filename);
-			
+				
 			$pdf->Output(PDF.$document_filename,F);
-			
-			echo json_encode(array('status'=>'OK','body'=>URL::base().'public/pdf/'.$document_filename));
-			die;
+				
+			echo json_encode(array('status'=>'OK','url'=>URL::base().'public/pdf/'.$document_filename));
+		die;
 		}else  {
 			echo json_encode(array('status'=>'OK','body'=>'<br><br>Dokument<br><br>'));
 			die;
@@ -526,13 +540,16 @@ public function action_division_boxes_list() {
 	
 	public function action_get_utilisation_document() {
 		
-		//TODO Szablon dokumentu utylizacji / wypełnianie treścią
 		
 		if($this->request->method()===HTTP_Request::POST) {
 			
-			$order=Order::instance();
+			$order=Order::instance($_POST['order_id']);
 			
-			$document_template = View::factory('templates/document_template_full');
+			$document_template = View::factory('templates/utilisation_document_template');
+			
+			$document_template->bind('order',$order);
+			
+			
 			$document = $document_template->render();
 			
 			echo json_encode(array('status'=>'OK','body'=>base64_encode($document)));

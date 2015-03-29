@@ -32,8 +32,8 @@ return array(
                     'password'=>'a16FmL6Rub',
                     'port'=>587,
                     'encryption'=>FALSE,
-                    'certificate'=>'/home/www_archiwum/public_html/application/RSA/pki/issued/server_and_ca.crt',
-                    'private_key'=>'/home/www_archiwum/public_html/application/RSA/pki/private/server.key',
+                    'certificate'=>APPPATH.'/RSA/pki/issued/server_and_ca.crt',
+                    'private_key'=>APPPATH.'/RSA/pki/private/server.key',
         ],
 
 );

@@ -42,11 +42,14 @@ class Controller_Order extends Controller_Welcome {
 			$this->add_css ( ASSETS_ADMIN_PAGES_CSS.'search.css');
 		}
 		
-		if(strtolower ( $this->request->action()) == 'add' || $this->request->action() == 'edit_order') {
+		if(strtolower ( $this->request->action()) == 'add' || $this->request->action() == 'edit_order' || $this->request->action() == 'view_order') {
 			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal-bs3patch.css');
 			$this->add_css ( ASSETS_GLOBAL_PLUGINS.'bootstrap-modal/css/bootstrap-modal.css');
 		}
 		
+		if(strtolower ( $this->request->action()) == 'view_order') $this->add_css ( ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+		
+			
 		if(strtolower ( $this->request->action()) == 'info') $this->add_css ( ASSETS_ADMIN_PAGES_CSS.'profile.css');
 		
 		$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'jquery-validation/js/jquery.validate.js');
@@ -85,6 +88,11 @@ class Controller_Order extends Controller_Welcome {
 		if(strtolower ( $this->request->action()) == 'send') {
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'order_send.js');
 		}
+		
+		if(strtolower ( $this->request->action()) == 'view_order') {
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'base64.js');
+		}
+		
 		
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'table-orders.js');
 		$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'custom.js');

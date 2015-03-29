@@ -9,6 +9,10 @@
 	<div class="col-md-9">
 		<form action="/order/edit_order/<?php echo $order->id; ?>" class="form-horizontal" id="edit_order_form"
 			method="POST">
+			
+			<input type="hidden" class="form-control" name="order_id" value="<?php echo $order->id;?>">
+			<input type="hidden" class="form-control" name="customer_id" value="<?php echo $customer->id;?>">
+		
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -427,21 +431,21 @@
 						
 						<div class="margiv-top-10">
 							<a href="#" class="btn green" id="show_utilisation_document"
-								data-toggle="modal" data-target="#long"> Pokaż dokument
+								data-toggle="modal" data-target="#doc"> Pokaż dokument
 								utylizacji</a> <a href="#" class="btn default"
 								id="print_utilisation_document"> Drukuj do PDF</a>
 						</div>
 
-						<div id="long" class="modal fade modal-scroll" tabindex="-1"
+						<div id="doc" class="modal fade modal-scroll" tabindex="-1"
 							data-replace="true" aria-hidden="true"
-							style="display: none; margin-top: -475px;">
+							style="display: none; background-color:white; width:800px; padding: 1em; left:10px;">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true"></button>
 								<h4 class="modal-title">Dokument utylizacji</h4>
 							</div>
 							<div class="modal-body">
-								<img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg">
+								
 							</div>
 							<div class="modal-footer">
 								<button type="button" data-dismiss="modal"
