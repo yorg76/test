@@ -210,7 +210,7 @@ setlocale(LC_ALL, 'pl_PL');
 			<td class="text_center half_width">
 				<i>.............................</i><br />
 				Osoba uprawniona do <br />
-				wystawienia faktury VAT:<br />
+				wystawienia faktury VAT<br />
 			</td>
 
 			<td   class="text_center small_text half_width">
@@ -264,7 +264,7 @@ setlocale(LC_ALL, 'pl_PL');
 				
 				<div class="row">
 					<div class="col-xs-8" style="width:40%;">
-							<strong class="big_text">Faktura VAT</strong> <strong class="medium_text"><?php echo $invoice->number?></strong>
+							<strong class="big_text">Faktura VAT <?php echo $invoice->number; ?></strong>
 					</div>
 							
 					<div class="col-xs-4" style="width:50%; text-align:right;">
@@ -441,7 +441,7 @@ setlocale(LC_ALL, 'pl_PL');
 							<br />
 							<i>.............................</i><br />
 								Osoba uprawniona do <br />
-								wystawienia faktury VAT:<br />
+								wystawienia faktury VAT<br />
 						</p>
 					</div>
 					<div class="col-xs-6" style="width:45%; text-align:center;">		

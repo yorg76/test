@@ -30,6 +30,14 @@ class Invoice {
 	
 		if($id !== NULL) {
 			$this->invoice=ORM::factory('Invoice',$id);
+			$this->number = $this->invoice->number;
+			$this->customer= $this->invoice->customer_id;
+			$this->invoice_date= $this->invoice->invoice_date;
+			$this->sale_date= $this->invoice->sale_date;
+			$this->amount= $this->invoice->amount;
+			$this->payment_date= $this->invoice->payment_date;
+			$this->pricetable_id= $this->invoice->pricetable_id;
+				
 		}else {
 			$this->invoice=ORM::factory('Invoice');
 			$this->customer=ORM::factory('Customer');

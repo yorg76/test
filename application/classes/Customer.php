@@ -134,6 +134,8 @@ class Customer  {
 		}elseif($invoice->invoice->save()) {
 			$invoice->id = $invoice->invoice->id;
 			
+			$invoice->invoice->number = "ARCH/".date('Y-m-d')."/".$invoice->invoice->id;
+			
 			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
 			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
 			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
@@ -161,9 +163,7 @@ class Customer  {
 			copy(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename, PDF.DIRECTORY_SEPARATOR.$document_filename);
 			
 			$invoice->invoice->invoice_file =  str_replace(DOCROOT,"",PDF.DIRECTORY_SEPARATOR.$document_filename);
-						
-			$invoice->invoice->number = "ARCH/".date('Y-m-d')."/".$invoice->invoice->id;
-			
+
 			$invoice->invoice->update();
 			return $invoice;
 		}else {
