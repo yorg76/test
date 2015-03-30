@@ -85,7 +85,26 @@
 								<?php endforeach;?>
 							</select>
 						</div>
-					</div>		
+					</div>
+					<div class="form-group">
+						<label class="control-label">Uprawnienia
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="checkbox-list">
+							<label class="checkbox-inline">
+							
+							<?php if ($user->user_rights->get_notification == 1) $checked_not = " checked=true "; 
+							else $checked_not = "  ";?>
+							
+							<input type="checkbox" id="get_notification" name="get_notification" value="1" <?php echo $checked_not; ?> > Otrzymuje notyfikację systemową. </label>
+							<label class="checkbox-inline">
+							
+							<?php if ($user->user_rights->get_monthly_email == 1) $checked_monthly = " checked=true ";
+							else $checked_monthly = "  "; ?>
+									
+							<input type="checkbox" id="get_monthly_email" name="get_monthly_email" value="1" <?php echo $checked_monthly?>> Otrzymuje informację o płatnościach. </label>
+						</div>
+					</div>			
 					<div class="form-group">
 						<label class="control-label">Hasło
 							<span class="required" aria-required="true"> * </span>

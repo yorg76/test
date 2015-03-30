@@ -135,6 +135,15 @@ class Controller_Customer extends Controller_Welcome {
  		    		}
  		    	}
  		    	
+ 		    	$user->user_rights->get_notification=$_POST['get_notification'];
+ 		    	$user->user_rights->get_monthly_email=$_POST['get_monthly_email'];
+ 		    	if($user->user_rights->loaded()) {
+ 		    		$user->user_rights->update();
+ 		    	}else {
+ 		    		$user->user_rights->user_id=$user->id;
+ 		    		$user->user_rights->save();
+ 		    	}
+ 		    	
             	$validate = new Validation($_POST);
             	$validate->rule('firstname', 'not_empty')
                 	     ->rule('lastname', 'not_empty')
@@ -156,7 +165,9 @@ class Controller_Customer extends Controller_Welcome {
     		
     		$customer=Auth::instance()->get_user()->customer;
     		$divisions = $customer->divisions->find_all();
+    		$roles = ORM::factory('Role')->where('name','!=','admin')->find_all();
     		
+    		$this->content->bind('roles', $roles);
     		$this->content->bind('customer', $customer);
     		$this->content->bind('divisions', $divisions);
     		

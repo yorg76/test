@@ -19,6 +19,9 @@ class User {
 	public $status;
 	public $customer;
 	public $division;
+	public $get_notification;
+	public $get_monthly_email;
+	
 		
 	public static function instance($id=NULL) {
 		if($id!=NULL) {
@@ -39,6 +42,8 @@ class User {
 			$this->username = $this->user->username;
 			$this->email = $this->user->email;
 			$this->status = $this->user->status;
+			$this->get_notification = $this->user->user_rights->get_notification;
+			$this->get_monthly_email = $this->user->user_rights->get_monthly_email;
 									
 		}else {
 			$this->user = ORM::factory('User');
@@ -205,14 +210,18 @@ class User {
 		$user->username=$params['username'];
 		$user->password=$params['password'];
 		$user->customer_id=$params['customer_id'];
-
 		
 		if(is_array($params)) {
 			
 			try {
 			
 				if($user->save()) {
-
+					
+					$user->user_rights->user_id=$user->id;
+					$user->user_rights->get_notification=$params['get_notification'];
+					$user->user_rights->get_monthly_email=$params['get_monthly_email'];
+					$user->user_rights->save();
+					
 					foreach ($params['divisions'] as $division) {
 						if(!$user->has('divisions',$division)) {
 							$user->add('divisions',$division);

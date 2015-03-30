@@ -304,6 +304,8 @@ class Controller_Admin extends Controller_Welcome {
 		
 		$customers = ORM::factory("Customer")->find_all();
 		$divisions = ORM::factory('Division')->find_all();
+		$roles = ORM::factory('Role')->find_all();
+		$this->content->bind('roles', $roles);
 		$this->content->bind('divisions', $divisions);
 		$this->content->bind('customers', $customers);			
 		
@@ -363,6 +365,15 @@ class Controller_Admin extends Controller_Welcome {
 					if(!in_array($division->id, $_POST['divisions'])) {
 						$user->remove('divisions',$division);
 					}
+				}
+
+				$user->user_rights->get_notification=$_POST['get_notification'];
+				$user->user_rights->get_monthly_email=$_POST['get_monthly_email'];
+				if($user->user_rights->loaded()) {
+					$user->user_rights->update();
+				}else {
+					$user->user_rights->user_id=$user->id;
+					$user->user_rights->save();
 				}
 				
 				$validate = new Validation($_POST);

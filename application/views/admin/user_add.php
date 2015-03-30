@@ -85,7 +85,37 @@
 								<?php endforeach;?>
 							</select>
 						</div>
-					</div>								
+					</div>			
+					<div class="form-group">
+						<label class="control-label">Rola
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="input-icon right">
+							<select class="form-control" multiple name="roles[]">
+								<?php foreach ($roles as $role):?>
+								<?php 
+										/*if ($user->has('roles',$role)) $checked=" selected=\"true\"";
+										else $checked=""; */
+										
+										echo "<option value=\"".$role->id."\"".$checked." >".$role->name." (".$role->description.")</option>";
+
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Uprawnienia
+							<span class="required" aria-required="true"> * </span>
+						</label>
+						<div class="checkbox-list">
+							<label class="checkbox-inline">
+							<input type="checkbox" id="get_notification" name="get_notification" value="1"> Otrzymuje notyfikację systemową. </label>
+							<label class="checkbox-inline">
+							<input type="checkbox" id="get_monthly_email" name="get_monthly_email" value="1"> Otrzymuje informację o płatnościach. </label>
+						</div>
+					</div>
+										
 					<div class="form-group">
 						<label class="control-label">Hasło
 							<span class="required" aria-required="true"> * </span>

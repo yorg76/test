@@ -129,27 +129,31 @@ class Task_ProcessMonthlyInvoices extends Minion_Task {
 				
 				$pdf->Output(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename,'F');
 				
-				$paramse['subject']="Nowa Faktura VAT w systemie Archiwum depozytowe";
-				$paramse['email_title'] = "Nowa Faktura VAT w systemie Archiwum depozytowe";
-				$paramse['email_info'] = "W załączniku znajdziesz dokument PDF z fakturą VAT.";
-				$paramse['email_content'] = "<p> Kwota netto: ".Pricetable::money($invoice->amount)."</p>";
-				$paramse['email_content'] .= "<p> Kwota brutto: ".Pricetable::money($invoice->amount*VAT)."</p>";
-				$paramse['email_content'] .= "<p> Termin płatności: ".$invoice->payment_date."</p>";
-				$paramse['attachments'] = array(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+				$who_get_notified = $customer->customer->users->where('id','IN',DB::expr('(SELECT user_id FROM user_rights WHERE get_monthly_email=1)'))->find_all();
+
+				foreach ($who_get_notified as $email_user) {
+					$paramse['subject']="Nowa Faktura VAT w systemie Archiwum depozytowe";
+					$paramse['email_title'] = "Nowa Faktura VAT w systemie Archiwum depozytowe";
+					$paramse['email_info'] = "W załączniku znajdziesz dokument PDF z fakturą VAT.";
+					$paramse['email_content'] = "<p> Kwota netto: ".Pricetable::money($invoice->amount)."</p>";
+					$paramse['email_content'] .= "<p> Kwota brutto: ".Pricetable::money($invoice->amount*VAT)."</p>";
+					$paramse['email_content'] .= "<p> Termin płatności: ".$invoice->payment_date."</p>";
+					$paramse['attachments'] = array(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
 								
-				$paramse['email'] = $user->email;
-				$paramse['firstname'] = $user->firstname;
-				$paramse['lastname']= $user->lastname;
+					$paramse['email'] = $email_user->email;
+					$paramse['firstname'] = $email_user->firstname;
+					$paramse['lastname']= $email_user->lastname;
 					
-				$this->sendEmail($paramse);
+					$this->sendEmail($paramse);
+				}			
 				
-				$log->add(Log::INFO, 'Invoice generated successfully.');
+				$log->add(Log::INFO, 'Faktura wygenerowana.');
 				
 			}else {
-				$log->add(Log::ERROR, 'Invoice not generated. Customer not found.');
+				$log->add(Log::ERROR, 'Faktura nie wygenerowana, klient nie znaleziony.');
 			}
 		}else {
-			$log->add(Log::ERROR, 'Invoice not generated. No id given.');
+			$log->add(Log::ERROR, 'Faktura nie wygenerowana, klient nie znaleziony.');
 		}
 	}	
 }

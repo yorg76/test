@@ -65,6 +65,17 @@ class Controller_User extends Controller_Welcome {
 		
 	}
 	
+	public function action_test() {
+		
+		$customer = Customer::instance('0');
+			
+		$who_get_notified = $customer->customer->users->where('id','IN',DB::expr('(SELECT user_id FROM user_rights WHERE get_monthly_email=1)'));
+		
+		var_dump($who_get_notified->find_all());
+	}
+	
+	
+	
 	public function action_import1() {
 		
 		die;
