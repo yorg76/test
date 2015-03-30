@@ -50,7 +50,8 @@ class Customer  {
 				$this->address = ORM::factory('Address');
 				$this->address->address_type='firmowy';
 			}
-						$this->street = $this->address->street; 
+			
+			$this->street = $this->address->street; 
 			$this->number = $this->address->number;
 			$this->flat = $this->address->flat;
 			$this->country=$this->address->country;
@@ -93,6 +94,10 @@ class Customer  {
 		
 		$invoice->invoice->customer_id=$this->id;
 		
+		if($this->customer->pricetables->where('active','=',1)->find()->id == NULL) {
+			return false;
+		}
+			
 		$customer_divisions= $this->customer->divisions->find_all();
 		$divisions_ids = array();
 		$sum = 0;
