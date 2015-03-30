@@ -150,7 +150,7 @@ class Customer  {
 			$document_filename=time()."-".$this->customer->id."-".$invoice->invoice->id.".pdf";
 				
 			$template->bind_global('html', $html);
-			$template->bind_global('invoice', $invoice);
+			$template->bind_global('invoice', $invoice->invoice);
 			$template->bind_global('box_quantity', $boxes_in_wh);
 			$template->bind_global('customer', $this);
 				
