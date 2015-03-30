@@ -55,7 +55,7 @@ class Task_ProcessMonthlyInvoices extends Minion_Task {
 		$email->from($conf['options']['fromemail'],"System magazynowy");
 			
 		try {
-			if($email->send()) $log->add(Log::DEBUG,"Success: User email sent\n");
+			if($email->sign()->send()) $log->add(Log::DEBUG,"Success: User email sent\n");
 			else $log->add(Log::ERROR,"Error: User email not sent\n");
 		}catch (Exception $e) {
 			$log->add(Log::ERROR,"Error: User email not sent".$e->getMessage()."\n");
