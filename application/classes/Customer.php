@@ -127,7 +127,38 @@ class Customer  {
 			return $monthly_invoice;
 			
 		}elseif($invoice->invoice->save()) {
+			$invoice->id = $invoice->invoice->id;
+			
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
+			$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
+			$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+			$template = View_MPDF::factory('templates/monthly_invoice_template');
+			$template->get_mpdf()->SetDisplayMode('fullpage');
+			$template->get_mpdf()->WriteHTML($document_css,1);
+				
+			$html = FALSE;
+				
+			$document_filename=time()."-".$this->customer->id."-".$invoice->invoice->id.".pdf";
+				
+			$template->bind_global('html', $html);
+			$template->bind_global('invoice', $invoice);
+			$template->bind_global('box_quantity', $boxes_in_wh);
+			$template->bind_global('customer', $this);
+				
+			$pdf_file = $template->write_to_disk(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+			$pdf = EasyRSA::signFile(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+
+			
+			copy(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename, PDF.DIRECTORY_SEPARATOR.$document_filename);
+			
+			$invoice->invoice->invoice_file =  str_replace(DOCROOT,"",PDF.DIRECTORY_SEPARATOR.$document_filename);
+						
 			$invoice->invoice->number = "ARCH/".date('Y-m-d')."/".$invoice->invoice->id;
+			
 			$invoice->invoice->update();
 			return $invoice;
 		}else {

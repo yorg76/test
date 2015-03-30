@@ -27,9 +27,7 @@
 								<th>
 									 Data sprzedaży
 								</th>
-								<th>
-									 Dział
-								</th>
+
 								<th>
 									 Kwota netto
 								</th>
@@ -54,13 +52,10 @@
 									 <?php echo $invoice->sale_date; ?>
 								</td>			
 								<td>
-									 <?php echo $invoice->division->name; ?>
+									 <?php echo Pricetable::money($invoice->amount); ?>
 								</td>			
 								<td>
-									 <?php echo $invoice->amount; ?>
-								</td>			
-								<td>
-									 <?php echo $invoice->amount * VAT; ?>
+									 <?php echo Pricetable::money($invoice->amount * VAT); ?>
 								</td>
 								<td>
 									<a href="<?php echo $invoice->invoice_file; ?>" class="btn btn-xs red margin-bottom" ><i class="fa fa-file-pdf-o"></i> Pobierz plik</a> <br />

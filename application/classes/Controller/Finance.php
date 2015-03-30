@@ -170,7 +170,11 @@ class Controller_Finance extends Controller_Welcome {
 		
 	public function action_invoices() {
 		$customer = Auth_ORM::instance()->get_user()->customer;
-		$invoices = ORM::factory('Invoice')->where('customer_id', '=', $customer->id)->find_all();
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('manager')) {
+			$invoices = ORM::factory('Invoice')->find_all();
+		}else {
+			$invoices = ORM::factory('Invoice')->where('customer_id', '=', $customer->id)->find_all();
+		}
 		
 		$this->content->bind('invoices', $invoices);	 
 	}

@@ -104,31 +104,6 @@ class Task_ProcessMonthlyInvoices extends Minion_Task {
 				
 				$user = ORM::factory('User')->where('username','=','admin')->find();
 				
-				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
-				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
-				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
-				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
-				$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
-				$document_css .= file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
-				$document_css .= file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
-				$template = View_MPDF::factory('templates/monthly_invoice_template');
-				$template->get_mpdf()->SetDisplayMode('fullpage');
-				$template->get_mpdf()->WriteHTML($document_css,1);
-				
-				$html = FALSE;
-				
-				$document_filename=time()."-".$user->id."-".$customer->customer->id."-".$invoice->id.".pdf";
-				
-				$template->bind_global('html', $html);
-				$template->bind_global('invoice', $invoice);
-				$template->bind_global('box_quantity', $boxes_in_wh);
-				$template->bind_global('customer', $customer);
-				
-				$pdf_file = $template->write_to_disk(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
-				$pdf = EasyRSA::signFile(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
-				
-				$pdf->Output(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename,'F');
-				
 				$who_get_notified = $customer->customer->users->where('id','IN',DB::expr('(SELECT user_id FROM user_rights WHERE get_monthly_email=1)'))->find_all();
 
 				foreach ($who_get_notified as $email_user) {
@@ -138,7 +113,7 @@ class Task_ProcessMonthlyInvoices extends Minion_Task {
 					$paramse['email_content'] = "<p> Kwota netto: ".Pricetable::money($invoice->amount)."</p>";
 					$paramse['email_content'] .= "<p> Kwota brutto: ".Pricetable::money($invoice->amount*VAT)."</p>";
 					$paramse['email_content'] .= "<p> Termin płatności: ".$invoice->payment_date."</p>";
-					$paramse['attachments'] = array(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename);
+					$paramse['attachments'] = array(APPPATH.DIRECTORY_SEPARATOR.$invoice->invoice->invoice_file);
 								
 					$paramse['email'] = $email_user->email;
 					$paramse['firstname'] = $email_user->firstname;
