@@ -208,7 +208,7 @@
 <!-- END CONTAINER -->
 <div class="page-footer">
 	<div class="page-footer-inner">
-	 <?php echo date('Y')?> &copy; BSDterminal.
+	 <?php echo date('Y')?> &copy; Archiwum Depozytowe Sp z o.o.
 	</div>
 	<div class="page-footer-tools">
 		<span class="go-top">

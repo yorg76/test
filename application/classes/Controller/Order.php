@@ -20,6 +20,12 @@ class Controller_Order extends Controller_Welcome {
 				$this->add_init("ComponentsPickers.init();\t\n");
 		}
 		
+		if(strtolower ( $this->request->action()) == 'edit_order')  {
+		
+			$this->add_init("ComponentsPickers.init();\t\n");
+		}
+		
+		
 		if(strtolower ( $this->request->action()) == 'orders_new') $this->add_init("TableOrdersNew.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'orders_inprogress') $this->add_init("TableOrdersInprogress.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'orders_realized') $this->add_init("TableOrdersRealized.init();\t\n");
@@ -252,7 +258,7 @@ class Controller_Order extends Controller_Welcome {
 	public function action_edit_order() {
 		if($this->request->param('id') > 0) {
 			$user = Auth::instance()->get_user();
-			$order=Order::instance();
+			$order = Order::instance($this->request->param('id'));
 			$customer=$user->customer;
 			$divisions = $customer->divisions->find_all();
 			$divisions_ids= array();
@@ -274,6 +280,14 @@ class Controller_Order extends Controller_Welcome {
 		
 			$boxes = array();
 		
+			if(Auth_ORM::instance()->logged_in('admin') || Auth_ORM::instance()->logged_in('manager')) {
+				$boxes = $order->order->boxes->find_all();
+					
+			
+			}else {
+				$boxes = $order->order->boxes->find_all();
+			}
+			
 			$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 			$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 		

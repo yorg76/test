@@ -82,7 +82,7 @@ class Document extends ORM {
 		$this->bulkpackaging=ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
 		$this->document->bulkpackaging_id=$this->bulkpackaging->id;
 
-		if(isset($params['file']) && $this->document->scan->id < 0) {
+		if(isset($params['file']) && !$this->document->scan->loaded()) {
 			$file = ORM::factory('DocumentScan');
 			$file->file=$params['file'];
 			$file->type='scan';

@@ -69,16 +69,16 @@
 									 <?php echo $box->description ;?>
 								</td>			
 								<td>
-									 <?php echo $box->date_from ;?>
+									 <?php echo ($box->date_from == '' ? "BRAK" : $box->date_from );?>
 								</td>
 								<td>
-									 <?php echo $box->date_to ;?>
+									 <?php echo ($box->date_to == '0000-00-00' ? "BRAK" : $box->date_to );?>
 								</td>
 								<td>
-									 <?php echo $box->date_reception;?>
+									 <?php echo ($box->date_reception == '0000-00-00' ? "BRAK" : $box->date_reception );?>
 								</td>
 								<td>
-									 <img alt="barcode" src="/barcode/get/<?php echo $box->id; ?>" />
+									 <?php echo sprintf('%012d',$box->barcode);?>
 								</td>
 								<td>
 									<div class="margin-bottom-5">

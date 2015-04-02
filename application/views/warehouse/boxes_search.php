@@ -22,7 +22,7 @@
 							</label>
 							<div class="input-icon right">
 								<select class="form-control input-large" name="warehouse_id">
-									<option>-- Wybierz magazyn --</option>
+									<option value="">-- Wybierz magazyn --</option>
 											<?php foreach ($warehouses as $warehouse):?>
 											<?php
 												echo "<option value=\"" . $warehouse->id . "\">" . $warehouse->name . "</option>";
@@ -36,7 +36,7 @@
 							</label>
 							<div class="input-icon right">
 								<select class="form-control input-large" name="storage_category_id">
-									<option>-- Wybierz kategorię --</option>
+									<option value="">-- Wybierz kategorię --</option>
 											<?php foreach ($storagecategories as $storagecategory):?>
 											<?php
 												echo "<option value=\"" . $storagecategory->id . "\">" . $storagecategory->name . "</option>";

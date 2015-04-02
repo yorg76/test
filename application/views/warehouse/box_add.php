@@ -41,7 +41,7 @@
 						<label class="control-label">Data początku magazynowania
 							<span class="required" aria-required="true"> * </span>
 						</label>
-							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" >
 								<input type="text" class="form-control form-filter input-sm" readonly name="date_from" placeholder="Od">
 								<span class="input-group-btn">
 								<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -65,7 +65,7 @@
 						<label class="control-label">Data odbioru
 							<span class="required" aria-required="true"> * </span>
 						</label>
-							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
 								<input type="text" class="form-control form-filter input-sm" readonly name="date_reception" placeholder="Termin odbioru" size="16">
 								<span class="input-group-btn">
 								<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -108,16 +108,34 @@
 											<input type="checkbox" name="lock" id="lock" value="0"> Nie </label>
 						</div>
 					</div>
-		
 					<div class="form-group">
-						<label class="control-label">Kod plomby
-							<span class="required" aria-required="true"> * </span>
+						<label class="control-label">Kod kreskowy
+
 						</label>
 						<div class="input-icon">
 							<i class="fa fa-lock fa-fw"></i>
-							<input id="seal" class="form-control" type="text" name="seal" placeholder="">
+							<input id="barcode" class="form-control" type="text" name="barcode" placeholder="">
+						</div>
+					</div>
+		
+					<div class="form-group">
+						<label class="control-label">Kod plomby nr 1 
+
+						</label>
+						<div class="input-icon">
+							<i class="fa fa-lock fa-fw"></i>
+							<input id="seal" class="form-control" type="text" name="seal1" placeholder="">
 						</div>
 					</div>		
+					<div class="form-group">
+						<label class="control-label">Kod plomby nr 2 							
+						</label>
+						<div class="input-icon">
+							<i class="fa fa-lock fa-fw"></i>
+							<input id="seal" class="form-control" type="text" name="seal2" placeholder="">
+						</div>
+					</div>		
+					
 					<br/>
 					<br/>
 					<div class="margiv-top-10">

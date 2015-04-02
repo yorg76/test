@@ -45,8 +45,10 @@
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
-            this.ordersList = new System.Windows.Forms.ListBox();
-            this.orderDetailsList = new System.Windows.Forms.ListBox();
+            this.seal1 = new System.Windows.Forms.TextBox();
+            this.seal2 = new System.Windows.Forms.TextBox();
+            this.addBtn = new System.Windows.Forms.Button();
+            this.endBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -62,12 +64,13 @@
             // 
             this.code.BackColor = System.Drawing.SystemColors.Control;
             this.code.ForeColor = System.Drawing.SystemColors.Window;
-            this.code.Location = new System.Drawing.Point(34, 506);
+            this.code.Location = new System.Drawing.Point(27, 169);
             this.code.Name = "code";
             this.code.Size = new System.Drawing.Size(414, 41);
             this.code.TabIndex = 7;
             this.code.Text = "Kod pudła ...";
             this.code.Visible = false;
+            this.code.TextChanged += new System.EventHandler(this.code_TextChanged);
             this.code.GotFocus += new System.EventHandler(this.clearSearchBox);
             this.code.KeyDown += new System.Windows.Forms.KeyEventHandler(this.scanFinished);
             // 
@@ -100,31 +103,56 @@
             this.menuItem3.Text = "Przyjęcie na mag.";
             this.menuItem3.Click += new System.EventHandler(this.warehouseReception);
             // 
-            // ordersList
+            // seal1
             // 
-            this.ordersList.Location = new System.Drawing.Point(34, 178);
-            this.ordersList.Name = "ordersList";
-            this.ordersList.Size = new System.Drawing.Size(414, 263);
-            this.ordersList.TabIndex = 8;
-            this.ordersList.SelectedIndexChanged += new System.EventHandler(this.showDetails);
+            this.seal1.BackColor = System.Drawing.SystemColors.Control;
+            this.seal1.ForeColor = System.Drawing.SystemColors.Window;
+            this.seal1.Location = new System.Drawing.Point(27, 274);
+            this.seal1.Name = "seal1";
+            this.seal1.Size = new System.Drawing.Size(414, 41);
+            this.seal1.TabIndex = 13;
+            this.seal1.Text = "Kod plomby 1";
+            this.seal1.Visible = false;
+            this.seal1.TextChanged += new System.EventHandler(this.seal1_TextChanged);
             // 
-            // orderDetailsList
+            // seal2
             // 
-            this.orderDetailsList.Location = new System.Drawing.Point(34, 178);
-            this.orderDetailsList.Name = "orderDetailsList";
-            this.orderDetailsList.Size = new System.Drawing.Size(414, 263);
-            this.orderDetailsList.TabIndex = 10;
-            this.orderDetailsList.Visible = false;
-            this.orderDetailsList.SelectedIndexChanged += new System.EventHandler(this.scanCode);
+            this.seal2.BackColor = System.Drawing.SystemColors.Control;
+            this.seal2.ForeColor = System.Drawing.SystemColors.Window;
+            this.seal2.Location = new System.Drawing.Point(27, 327);
+            this.seal2.Name = "seal2";
+            this.seal2.Size = new System.Drawing.Size(414, 41);
+            this.seal2.TabIndex = 16;
+            this.seal2.Text = "Kod plomby 2";
+            this.seal2.Visible = false;
+            this.seal2.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // addBtn
+            // 
+            this.addBtn.Location = new System.Drawing.Point(150, 420);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(144, 40);
+            this.addBtn.TabIndex = 17;
+            this.addBtn.Text = "Dodaj";
+            // 
+            // endBtn
+            // 
+            this.endBtn.Location = new System.Drawing.Point(150, 483);
+            this.endBtn.Name = "endBtn";
+            this.endBtn.Size = new System.Drawing.Size(144, 40);
+            this.endBtn.TabIndex = 18;
+            this.endBtn.Text = "Zakończ";
             // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(480, 588);
-            this.Controls.Add(this.orderDetailsList);
+            this.Controls.Add(this.endBtn);
+            this.Controls.Add(this.addBtn);
+            this.Controls.Add(this.seal2);
+            this.Controls.Add(this.seal1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.ordersList);
             this.Controls.Add(this.code);
             this.Controls.Add(this.pictureBox1);
             this.KeyPreview = true;
@@ -147,9 +175,11 @@
         private System.Windows.Forms.MainMenu mainMenu1;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.ListBox ordersList;
-        private System.Windows.Forms.ListBox orderDetailsList;
         private System.Windows.Forms.MenuItem menuItem3;
+        private System.Windows.Forms.TextBox seal1;
+        private System.Windows.Forms.TextBox seal2;
+        private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.Button endBtn;
     }
 }
 

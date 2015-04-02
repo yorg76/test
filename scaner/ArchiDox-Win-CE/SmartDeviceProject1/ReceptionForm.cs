@@ -697,9 +697,27 @@ namespace ArchiDox
 
         private void warehouseReception(object sender, EventArgs e)
         {
-            Form rf = new ReceptionForm();
-            rf.Show();
-            this.Hide();
+
+        }
+
+        private void seal1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void code_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkLogin(object sender, EventArgs e)
+        {
+
         }
     }
     

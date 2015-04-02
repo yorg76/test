@@ -15,6 +15,8 @@ class Box{
 	public $date_reception;
 	public $lock;
 	public $seal;
+	public $seal1;
+	public $seal2;
 	public $storagecategory;
 	public $warehouse;
 	public $boxbarcode;
@@ -41,6 +43,8 @@ class Box{
 			$this->date_reception = $this->box->date_reception;
 			$this->lock = $this->box->lock;
 			$this->seal = $this->box->seal;
+			$this->seal1 = $this->box->seal1;
+			$this->seal2 = $this->box->seal2;
 			$this->warehouse_id = $this->box->warehouse->id;
 			//$this->boxbarcode_id = $this->box->boxbarcode->id;
 			$this->storage_category_id = $this->box->storagecategory->id;
@@ -61,8 +65,10 @@ class Box{
 	public function addBox($params) {
         $log=Kohana_Log::instance();
 
+        
         $this->box->values($params);
-            
+
+        
         if(is_array($params)) {
             try {
                 Database::instance()->begin();

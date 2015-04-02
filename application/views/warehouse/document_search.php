@@ -42,10 +42,6 @@
 									<label class="sr-only" for="exampleInputtext2">Blokady</label>
 									<input type="text" class="form-control" id="lock" placeholder="Blokady">
 								</div>
-								<div class="form-group">
-									<label class="sr-only" for="exampleInputtext2">Plomby</label>
-									<input type="text" class="form-control" id="seal" placeholder="Plomby">
-								</div>
 								<button type="submit" class="btn green">
 									Szukaj &nbsp; <i class="m-icon-swapright m-icon-white"></i>
 								</button>
@@ -110,9 +106,6 @@
 								</td>
 								<td>
 									 box->lock
-								</td>
-								<td>
-									 box->seal
 								</td>
 								
 								<td>

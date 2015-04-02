@@ -47,7 +47,7 @@
 								<input type="text" class="form-control form-filter input-sm" name="place_id">
 							</td>							
 							<td>
-								<div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
+								<div class="input-group date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
 									<input type="text" class="form-control form-filter input-sm" readonly name="date_from" placeholder="Od">
 									<span class="input-group-btn">
 									<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -55,7 +55,7 @@
 								</div>
 							</td>
 							<td>
-								<div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
+								<div class="input-group date date-picker" data-date-format="yyyy-mm-dd">
 									<input type="text" class="form-control form-filter input-sm" readonly name="date_to" placeholder="Do">
 									<span class="input-group-btn">
 									<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>

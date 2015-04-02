@@ -49,6 +49,12 @@
 								</td>
 							<td style="width:10%">
 								<div class="margin-bottom-5">
+									
+									<button class="btn btn-xs yellow division-edit margin-bottom"
+										onClick="javascript:window.location='/warehouse/box_view/<?php echo $box->id ;?>';">
+										<i class="fa fa-user"></i> Szczegóły
+									</button>
+									
 									<button class="btn btn-xs yellow division-edit margin-bottom"
 										onClick="javascript:window.location='/warehouse/box_edit/<?php echo $box->id ;?>';">
 										<i class="fa fa-user"></i> Edytuj
@@ -110,6 +116,10 @@
 							</td>
 							<td style="width:10%">
 								<div class="margin-bottom-5">
+									<button class="btn btn-xs green division-edit margin-bottom"
+										onClick="javascript:window.location='/warehouse/document_view/<?php echo $document->id ;?>';">
+										<i class="fa fa-list"></i> Szczegóły
+									</button>
 									<button class="btn btn-xs yellow division-edit margin-bottom"
 										onClick="javascript:window.location='/warehouse/document_edit/<?php echo $document->id ;?>';">
 										<i class="fa fa-user"></i> Edytuj
@@ -171,6 +181,10 @@
 							</td>
 							<td style="width:10%">
 								<div class="margin-bottom-5">
+									<button class="btn btn-xs yellow division-edit margin-bottom"
+										onClick="javascript:window.location='/warehouse/documentlist_view/<?php echo $documentlist->id ;?>';">
+										<i class="fa fa-list"></i> Szczegóły
+									</button>
 									<button class="btn btn-xs yellow division-edit margin-bottom"
 										onClick="javascript:window.location='/warehouse/documentlist_edit/<?php echo $documentlist->id ;?>';">
 										<i class="fa fa-user"></i> Edytuj
@@ -291,7 +305,7 @@
 								<div class="margin-bottom-5">
 								<input type="hidden" value="<?php echo $virtualbriefcase->id ?>" name="virtualbriefcase2_id" />
 									<button class="btn btn-xs yellow division-edit margin-bottom"
-										onClick="javascript:window.location='/warehouse/virtualbriefcase_edit/<?php echo $virtualbriefcase->id ;?>';">
+										onClick="javascript:window.location='/virtualbriefcase/virtualbriefcase_edit/<?php echo $virtualbriefcase->id ;?>';">
 										<i class="fa fa-user"></i> Edytuj
 									</button>
 									<button class="btn btn-xs red division-delete margin-bottom"

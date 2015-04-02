@@ -67,6 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Box.cs" />
+    <Compile Include="ReceptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReceptionForm.Designer.cs">
+      <DependentUpon>ReceptionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="JsonResponseAddOrderBox.cs" />
     <Compile Include="JsonResponseCompleteOrder.cs" />
     <Compile Include="JsonReponseOrderDetailsResult.cs" />
@@ -88,6 +94,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ReceptionForm.resx">
+      <DependentUpon>ReceptionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
       <SubType>Designer</SubType>

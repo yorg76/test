@@ -23,7 +23,6 @@
 							<th>Data końca magazynowania</th>
 							<th>Data odbioru</th>
 							<th>Blokady</th>
-							<th>Plomby</th>
 							<th>Opcje</th>
 						</tr>
 					</thead>
@@ -48,9 +47,7 @@
 							<td>
 								<?php echo $box->lock;?>
 							</td>
-							<td>
-								<?php echo $box->seal;?>
-							</td>
+
 							<td>
 								<div class="margin-bottom-5">
 									<button class="btn btn-xs green margin-bottom"

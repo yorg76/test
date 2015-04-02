@@ -54,7 +54,7 @@
 						<label class="control-label">Data początku magazynowania
 							<span class="required" aria-required="true"> * </span>
 						</label>
-							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
 								<input type="text" class="form-control form-filter input-sm" readonly name="date_from" value="<?php echo $box->date_from;?>">
 								<span class="input-group-btn">
 								<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -66,7 +66,7 @@
 						<label class="control-label">Data końca magazynowania
 							<span class="required" aria-required="true"> * </span>
 						</label>
-							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
+							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
 								<input type="text" class="form-control form-filter input-sm" readonly name="date_to" value="<?php echo $box->date_to;?>">
 								<span class="input-group-btn">
 								<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -78,7 +78,7 @@
 						<label class="control-label">Data odbioru
 							<span class="required" aria-required="true"> * </span>
 						</label>
-							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy" data-date-start-date="+0d">
+							<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
 								<input type="text" class="form-control form-filter input-sm" readonly name="date_reception" value="<?php echo $box->date_reception;?>">
 								<span class="input-group-btn">
 								<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -144,13 +144,31 @@
 											<input type="checkbox" id="lock" name="lock" value="0" <?php echo ($box->lock == 0 ? "checked='true'":"");?> > Nie </label>
 						</div>
 					</div>
-		
+					
 					<div class="form-group">
-						<label class="control-label">Kod plomby
+						<label class="control-label">Kod kreskowy
 						</label>
 						<div class="input-icon">
 							<i class="fa fa-lock fa-fw"></i>
-							<input id="seal" class="form-control" type="text" name="seal" value="<?php echo $box->seal;?>">
+							<input id="barcode" class="form-control" type="text" name="barcode" placeholder="">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label">Kod plomby 1
+						</label>
+						<div class="input-icon">
+							<i class="fa fa-lock fa-fw"></i>
+							<input id="seal" class="form-control" type="text" name="seal1" value="<?php echo $box->seal1;?>">
+						</div>
+						<span class="help-block"></span>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Kod plomby 2
+						</label>
+						<div class="input-icon">
+							<i class="fa fa-lock fa-fw"></i>
+							<input id="seal" class="form-control" type="text" name="seal2" value="<?php echo $box->seal2;?>">
 						</div>
 						<span class="help-block"></span>
 					</div>

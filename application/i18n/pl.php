@@ -2,6 +2,8 @@
  
 return array
 (
+	'boxes_search_result'=>'Wyniki wyszukiwania pudeł',
+	'document_view' => 'Szczegóły dokumentu',
 	'First' => 'Pierwsza',
 	'Last' => 'Ostatnia',
 	'Next' => 'Następna',

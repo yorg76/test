@@ -19,7 +19,28 @@
 					<div class="portlet-body form">
 						<h3 class="block"><?php echo $order->type ?></h3>	
 						
-														
+						<div class="form-group">
+							<label class="control-label col-md-3">Data odbioru / dostawy</label>
+							<div class="col-md-4">
+								<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd">
+									<input type="text" class="form-control form-filter input-sm" readonly name="pickup_date" value="<?php echo $order->order->pickup_date;?>">
+									<span class="input-group-btn">
+									<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+									</span>
+								</div>
+								<span class="help-block"></span>
+							</div>							
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-md-3">Przyczyna zmiany daty zamówienia
+							</label>
+							<div class="col-md-4">
+								<textarea class="form-control" name="reason"></textarea>
+								<span class="help-block"></span>
+							</div>
+						</div>
+													
 						<?php if($order->type == 'Zamówienie pustych pudeł i kodów kreskowych') :?>
 						
 							<div class="form-group">
@@ -620,6 +641,124 @@
 									class="help-block"></span>
 							</div>
 						</div>						
+						<?php elseif ($order->type == 'Wypożyczenie pudeł'):?>
+						<div class="form-group">
+							<label class="control-label col-md-3">Magazyn</label>
+							<div class="col-md-4">
+								<select class="form-control" name="warehouse" disabled="true" >
+										
+										<?php foreach($warehouses as $warehouse):?>
+											<?php $wselected = ($order->order->warehouse->id == $warehouse->id ? "selected" : "");?>
+											<option value="<?php echo $warehouse->id ?>"
+										<?php echo $wselected;?>><?php echo $warehouse->name?></option>
+										<?php endforeach;?>
+									</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">Dział</label>
+							<div class="col-md-4">
+								<select class="form-control" name="division" disabled="true" >
+										<?php foreach($divisions as $division):?>
+											<?php $dselected = ($order->order->division->id == $division->id ? "selected" : "");?>
+											<option value="<?php echo $division->id ?>"
+										<?php echo $dselected;?>><?php echo $division->name?></option>
+										<?php endforeach;?>
+									</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">Pudła</label>
+							<div class="col-md-6">
+								<select multiple class="form-control" name="boxes[]" disabled="true" >
+										<?php foreach($boxes as $box):?>
+											<?php $bselected = ($order->order->has('boxes',ORM::factory('Box',$box->id)) ? "selected" : "");?>
+											<option value="<?php echo $box->id ?>" <?php echo $bselected?> ><?php echo sprintf('%012d',$box->barcode);?> -
+										<span style="margin-left: 120px;"> <?php echo $box->place->barcode."-".$box->place->description."-".$box->warehouse->name; ?> </span>
+										</option>
+										<?php endforeach;?>
+									</select>
+							</div>
+						</div>
+						
+						<h3 class="block">Adres</h3>
+						
+						<div class="form-group">
+							<label class="control-label  col-md-3">Ulica <span
+								class="required" aria-required="true"> * </span>
+							</label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="ul. Pana Jana " disabled="true" 
+									class="form-control" name="street"
+									value="<?php echo $order->order->address->street ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Numer <span
+								class="required" aria-required="true"> * </span>
+							</label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="1" disabled="true" 
+									class="form-control" name="number"
+									value="<?php echo $order->order->address->number ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Lokal </label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="1" disabled="true" 
+									class="form-control" name="flat"
+									value="<?php echo $order->order->address->flat ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">Miasto <span
+								class="required" aria-required="true"> * </span>
+							</label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="Warszawa" disabled="true" 
+									class="form-control" name="city"
+									value="<?php echo $order->order->address->city ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Kod pocztowy <span
+								class="required" aria-required="true"> * </span>
+							</label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="00-001" disabled="true" 
+									class="form-control" name='postal'
+									value="<?php echo $order->order->address->postal ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Kraj </label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="" disabled="true" 
+									class="form-control" name="country"
+									value="<?php echo $order->order->address->country ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">Telefon </label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="+48666999000" disabled="true" 
+									class="form-control" name="telephone"
+									value="<?php echo $order->order->address->telephone ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>			
+									
 						<?php else:?>
 						<?php endif;?>
 					</div>

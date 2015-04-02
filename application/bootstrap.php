@@ -167,7 +167,7 @@ define('JS','/public/js/');
 define('CSS','/public/css/');
 define('IMG', '/public/images/');
 define('LIB', '/public/lib/');
-define('UPLOAD', APPPATH.'upload');
+define('UPLOAD', DOCROOT.'upload');
 define('PDF', DOCROOT.'/public/pdf/');
 
 define('VAT','1.23');

@@ -117,14 +117,21 @@
 											</div>
 								
 											<div class="form-group">
-												<label class="control-label">Status plomby
-													<span class="required" aria-required="true"> * </span>
+												<label class="control-label">Plomba 1
 												</label>
 												<div class="input-icon">
 													<i class="fa fa-lock fa-fw"></i>
-													<input id="seal" class="form-control" type="text" name="seal" placeholder="">
+													<input id="seal" class="form-control" type="text" name="seal1" placeholder="">
 												</div>
 											</div>		
+											<div class="form-group">
+												<label class="control-label">Plomba 2</label>
+												<div class="input-icon">
+													<i class="fa fa-lock fa-fw"></i>
+													<input id="seal" class="form-control" type="text" name="seal2" placeholder="">
+												</div>
+											</div>		
+											
 											<br/>
 											<br/>
 											<div class="margiv-top-10">

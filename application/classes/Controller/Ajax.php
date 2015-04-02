@@ -243,8 +243,7 @@ class Controller_Ajax extends Controller_Welcome {
 			'division_id',
 			'date_from',
 			'date_to',
-			'status',
-			'seal');
+			'status');
 		
 		if($_POST['action'] == 'filter' ) {
 			
@@ -261,8 +260,8 @@ class Controller_Ajax extends Controller_Welcome {
 			}
 			
 			if($_POST['place_id'] != NULL) {
-				$boxes = $boxes->and_where('place_id','=',$_POST['place_id']);
-				$boxes_count = $boxes_count->and_where('place_id','=',$_POST['place_id']);
+				$boxes = $boxes->and_where('place_id','IN',DB::expr("(SELECT id FROM places WHERE barcode='".str_replace("-","",$_POST['place_id']."')")));
+				$boxes_count = $boxes_count->and_where('place_id','IN',DB::expr("(SELECT id FROM places WHERE barcode='".str_replace("-","",$_POST['place_id']."')")));
 			}
 			if($_POST['warehouse_name'] != NULL) {
 				$boxes = $boxes->and_where('warehouse_id','=',ORM::factory('Warehouse')->where('name','LIKE','%'.$_POST['warehouse_name'].'%')->find()->id);
@@ -338,13 +337,13 @@ class Controller_Ajax extends Controller_Welcome {
 			$records["data"][] = array(
 						$box->id,
 						'<img alt="barcode" src="/barcode/get/'.$box->barcode.'"/>',
-						($box->place_id != '' ? '<img alt="barcode" src="/barcode/get/'.$box->place->barcode.'"/>':''),
+						//($box->place_id != '' ? '<img alt="barcode" src="/barcode/get/'.$box->place->barcode.'"/>':''),
+						($box->place_id != '' ? $box->place->description : ""),
 						$box->warehouse->name,
 						$box->division->customer->name,
 						$box->date_from,
 						$box->date_to,
 						$box->status,
-						$box->seal,
 						$actions
 			);
 		}
@@ -392,8 +391,7 @@ public function action_division_boxes_list() {
 				'division_id',
 				'date_from',
 				'date_to',
-				'status',
-				'seal');
+				'status');
 			
 				
 			
@@ -474,7 +472,6 @@ public function action_division_boxes_list() {
 							$box->date_from,
 							$box->date_to,
 							$box->status,
-							$box->seal,
 							$actions
 				);
 			}
@@ -627,13 +624,11 @@ public function action_division_boxes_list() {
 				$box = ORM::factory('Box')->where('id', '=', $_POST['id'])->find();
 				$result = array();
 				if($box->warehouse->customer == $user->customer) {
-					if($box->seal > 1) {
-						array_push($result, array("doc_id"=>-1,"doc_name"=>"Całe pudło ".$box->id." - plomba"));
-					}else {
-						foreach ($box->documents->find_all() as $doc) {
-							array_push($result, array("doc_id"=>$doc->id,"doc_name"=>$doc->name));
-						}
+					
+					foreach ($box->documents->find_all() as $doc) {
+						array_push($result, array("doc_id"=>$doc->id,"doc_name"=>$doc->name));
 					}
+				
 					echo json_encode(array('status'=>'OK','id'=>$box->id,'result'=>$result));
 					die;
 				}else {

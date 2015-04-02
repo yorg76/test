@@ -66,7 +66,40 @@ class Order {
 	}
 	
 	public function updateOrder($params) {
-		return true;
+		$log=Kohana_Log::instance();
+	
+	
+		if($this->order->loaded()) {
+					
+			if(date('Y-m-d',strtotime($this->order->pickup_date)) != date('Y-m-d',strtotime($params['pickup_date']))) {
+				$this->pickup_date=$params['pickup_date'];
+				$this->order->pickup_date=$params['pickup_date'];
+				
+				if($this->order->update()) {
+					$paramse = array();
+					
+					$paramse['subject']="W twoim zamówieniu zmieniono datę";
+					$paramse['email_title'] = "W zamówieniu numer ".$this->order->id." zmieniono datę.";
+					$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+					$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+					$paramse['email_content'] = "<p>Przyczyna zmiany: ".$params['reason']." </p>";
+					$paramse['email'] = $this->order->user->email;
+					$paramse['firstname'] = $this->order->user->firstname;
+					$paramse['lastname']= $this->order->user->lastname;
+				
+					$this->sendEmail($paramse);
+					
+					return true;
+					
+				}else {
+					return false;
+				}
+			}else {
+				return true;
+			}
+		}else {
+			return false;
+		}
 	}
 		
 	public function deliverOrder() {

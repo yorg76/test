@@ -110,7 +110,7 @@
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-	 <?php echo date('Y')?> &copy; BSDterminal.
+	 <?php echo date('Y')?> &copy; Archiwum Depozytowe Sp z o.o.
 </div>
 <!-- END COPYRIGHT -->
 

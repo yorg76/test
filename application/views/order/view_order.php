@@ -1,4 +1,4 @@
-<div class="row profile-account">
+<div class="row profile-ac	count">
 	<div class="col-md-3">
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active"><a data-toggle="tab" href="#tab_1-1"> <i
@@ -30,8 +30,17 @@
 								<input type="text" class="form-control" name="customer_name" value="<?php echo $customer->name;?>" disabled="true" >
 							</div>
 						</div>
+						
+							<div class="form-group">
+							<label class="control-label col-md-3">Termin dostawy / odbioru</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="customer_name" value="<?php echo $order->order->pickup_date;?>" disabled="true" >
+							</div>
+						</div>
 					</div>
-				
+					
+
+					
 					<div class="portlet-body form">
 								
 						
@@ -335,14 +344,12 @@
 
 						<div class="form-group">
 							<label class="control-label col-md-3">Pudła</label>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<select multiple class="form-control" name="boxes[]" disabled="true" >
 										<?php foreach($boxes as $box):?>
 											<?php $bselected = ($order->order->has('boxes',ORM::factory('Box',$box->id)) ? "selected" : "");?>
-											<option value="<?php echo $box->id ?>"
-										<?php echo $bselected?> style="height:65px; background-image:url('/barcode/get/<?php echo $box->barcode; ?>'); background-repeat: no-repeat;">
-										
-										<?php //echo $box->id ."-".$box->place->description."-".$box->warehouse->name?>
+											<option value="<?php echo $box->id ?>" <?php echo $bselected?> ><?php echo sprintf('%012d',$box->barcode);?> - 								
+										<span style="margin-left: 120px;"> <?php echo $box->place->barcode."-".$box->place->description."-".$box->warehouse->name; ?> </span>
 										
 										</option>
 										<?php endforeach;?>
@@ -483,14 +490,14 @@
 
 						<div class="form-group">
 							<label class="control-label col-md-3">Pudła</label>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<select multiple class="form-control" name="boxes[]" disabled="true" >
 										<?php foreach($boxes as $box):?>
 											<?php $bselected = ($order->order->has('boxes',ORM::factory('Box',$box->id)) ? "selected" : "");?>
-											<option value="<?php echo $box->id ?>"
-										<?php echo $bselected?>
-											style="height:65px; background-image:url('/barcode/get/<?php echo $box->barcode; ?>'); background-repeat: no-repeat;">
-										<?php echo $box->id ."-".$box->place->description."-".$box->warehouse->name?></option>
+											<option value="<?php echo $box->id ?>"<?php echo $bselected?>
+											 ><?php echo sprintf('%012d',$box->barcode);?> - 
+										<span style="margin-left: 120px;"> <?php echo $box->place->barcode."-".$box->place->description."-".$box->warehouse->name; ?> </span>
+										</option>
 										<?php endforeach;?>
 									</select>
 							</div>
@@ -602,14 +609,13 @@
 
 						<div class="form-group">
 							<label class="control-label col-md-3">Pudła</label>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<select multiple class="form-control" name="boxes[]" disabled="true" >
 										<?php foreach($boxes as $box):?>
 											<?php $bselected = ($order->order->has('boxes',ORM::factory('Box',$box->id)) ? "selected" : "");?>
-											<option value="<?php echo $box->id ?>"
-										<?php echo $bselected?>
-											style="height:65px; background-image:url('/barcode/get/<?php echo $box->barcode; ?>'); background-repeat: no-repeat;">
-										<?php echo $box->id ."-".$box->place->description."-".$box->warehouse->name?></option>
+											<option value="<?php echo $box->id ?>" <?php echo $bselected?> ><?php echo sprintf('%012d',$box->barcode);?> -
+										<span style="margin-left: 120px;"> <?php echo $box->place->barcode."-".$box->place->description."-".$box->warehouse->name; ?> </span>
+										</option>
 										<?php endforeach;?>
 									</select>
 							</div>

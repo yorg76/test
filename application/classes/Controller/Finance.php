@@ -88,7 +88,7 @@ class Controller_Finance extends Controller_Welcome {
 				
 				
 			if(count($divisions_ids) > 0) {
-				$boxes_in_wh=ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('status','=','Na magazynie')->and_where('utilisation_status', '=', 0)->count_all();
+				$boxes_in_wh=ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('status','=','Na magazynie')->and_where('status','=','Wypożyczone')->and_where('utilisation_status', '=', 0)->count_all();
 			
 			}else {
 				$boxes_in_wh=0;

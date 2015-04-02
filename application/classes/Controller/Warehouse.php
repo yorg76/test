@@ -1044,13 +1044,13 @@ class Controller_Warehouse extends Controller_Welcome {
 			if($this->request->method()===HTTP_Request::POST) {
 					
 				$params=$_POST;
-				if($POST['warehouse_id']) $warehouse_id = $params['warehouse_id'];
-				if($POST['date_from']) $date_from = $params['date_from'];
-				if($POST['date_to']) $date_to = $params['date_to'];
-				if($POST['date_reception']) $date_reception = $params['date_reception'];
-				if($POST['storage_category_id']) $storage_category_id = $params['storage_category_id'];
-				if($POST['description']) $description = $params['description'];
-				if($POST['barcode']) $barcode = $params['barcode'];
+				if($_POST['warehouse_id']) $warehouse_id = $params['warehouse_id'];
+				if($_POST['date_from']) $date_from = $params['date_from'];
+				if($_POST['date_to']) $date_to = $params['date_to'];
+				if($_POST['date_reception']) $date_reception = $params['date_reception'];
+				if($_POST['storage_category_id']) $storage_category_id = $params['storage_category_id'];
+				if($_POST['description']) $description = $params['description'];
+				if($_POST['barcode']) $barcode = $params['barcode'];
 				
 				foreach ($warehouses as $warehouse) {
 					array_push($warehouses_ids, $warehouse->id);
@@ -1059,13 +1059,17 @@ class Controller_Warehouse extends Controller_Welcome {
 				$boxes = ORM::factory('Box');
 				
 				
-				if($POST['warehouse_id']) $boxes = $boxes->and_where('box.warehouse_id', '=', $warehouse_id);
-				if($POST['storage_category_id']) $boxes = $boxes->and_where('box.storage_category_id', '=', $storage_category_id);
-				if($POST['date_from']) $boxes = $boxes->and_where('box.date_from', '=', $date_from);
-				if($POST['date_to']) $boxes = $boxes->and_where('box.date_to', '=', $date_to);
-				if($POST['date_reception']) $boxes = $boxes->and_where('box.date_reception', '=', $date_reception);
-				if($POST['description']) $boxes = $boxes->and_where('box.description', 'LIKE', "%".$description."%");
-				if($POST['barcode']) $boxes = $boxes->and_where('box.barcode', '=', $barcode);
+				if($_POST['warehouse_id']) $boxes = $boxes->and_where('box.warehouse_id', '=', $warehouse_id);
+				if($_POST['storage_category_id']) $boxes = $boxes->and_where('box.storage_category_id', '=', $storage_category_id);
+				if($_POST['date_from']) $boxes = $boxes->and_where('box.date_from', '=', $date_from);
+				if($_POST['date_to']) $boxes = $boxes->and_where('box.date_to', '=', $date_to);
+				if($_POST['date_reception']) $boxes = $boxes->and_where('box.date_reception', '=', $date_reception);
+				if($_POST['description']) $boxes = $boxes->and_where('box.description', 'LIKE', "%".$description."%");
+				if($_POST['barcode']) $boxes = $boxes->and_where('box.barcode', '=', $barcode);
+				
+//				var_dump($boxes->find_all());
+				//die;
+				
 				$boxes = $boxes->limit(100)->find_all();
 
 				$count = $boxes->count();

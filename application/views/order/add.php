@@ -147,12 +147,13 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="col-md-3 control-label">Czy pudła mają plomby ?<span class="required">	
-									* </span></label>
-									<div class="col-md-4">
-										<input type="checkbox" value="sealed_boxes">
+									<label class="control-label col-md-3">Czy pudła mają plomby ?
+									</label>
+									<div class="checkbox-list col-md-4">
+										<label class="checkbox-inline">
+										<input type="checkbox" id="sealed_boxes" name="sealed_boxes" value="1" onClick="javascript:$('input[name=sealed_boxes_n]').attr('checked',false);"> Tak </label>
 									</div>
-								</div>
+								</div>	
 								
 								<div class="form-group">
 									<label class="control-label col-md-3">Ilość pudeł<span class="required">	

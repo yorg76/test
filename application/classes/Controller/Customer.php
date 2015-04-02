@@ -331,6 +331,7 @@ class Controller_Customer extends Controller_Welcome {
 		$this->content->bind('boxes_count',$bc);
 		$this->content->bind('documents_count',$xc);
 		$this->content->bind('virtualbriefcases_count',$vc);
+
 		
 		
 	}
@@ -348,8 +349,27 @@ class Controller_Customer extends Controller_Welcome {
 		$this->content->bind('delivery_addresses', $delivery_addresses);
 		$this->content->bind('pickup_addresses', $pickup_addresses);
 		
+		if($this->request->method()===HTTP_Request::POST) {
 
-		
+			if($this->request->param('id') > 0) {
+					
+				$customer = Customer::instance($this->request->param('id'));
+				
+				$params=$_POST;
+				$params['customer_id'] = $customer->id;
+				
+				if($this->request->method()===HTTP_Request::POST) {
+			
+					$params = $this->request->post();
+			
+					if($customer->updateCompany($params)) {
+						Message::success(ucfirst(__('Firma została zaktualizowana')),'/customer/info');
+					}else {
+						Message::error(ucfirst(__('Nie udało się zaktualizować firmy')),'/customer/info');
+					}
+				}
+			}
+		}
 	}
 	
 	public function action_add_address() {

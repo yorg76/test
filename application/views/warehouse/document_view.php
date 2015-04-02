@@ -3,7 +3,7 @@
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">
 				<a data-toggle="tab" href="#tab_1-1">
-				<i class="fa fa-cog"></i>Edycja dokumentu</a>
+				<i class="fa fa-cog"></i>Szczegóły dokumentu</a>
 				<span class="after">
 				</span>
 			</li>
@@ -39,7 +39,7 @@
 					<div class="form-group">
 						<?php if ($document->document->scan->file != NULL):?>
 						<label for="control-label">Skan dokumentu</label>
-						<a class="btn default" href="/<?php echo UPLOAD.DIRECTORY_SEPARATOR.$document->document->scan->file?>">Pokaż plik</a>
+						<a class="btn default" href="/<?php echo str_replace(array(DOCROOT,"\\"),array("","/"),$document->document->scan->file);?>" target="_blank">Pokaż plik</a>
 						<?php endif;?>
 					</div>
 					<div class="form-group">
