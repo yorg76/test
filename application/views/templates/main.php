@@ -162,6 +162,18 @@
 					</li>
 					<?php endif;?>
 				<?php endforeach;?>
+				<li>
+					<br />
+				</li>
+				<li style="text-align: center; background-color:white;">
+					<img alt="Innowacyjna Gospodarka" src="/public/images/ig.jpg" style="height: 41px;">
+				</li>
+				<li style="text-align: center; background-color:white;">
+					<img alt="PARP" src="/public/images/parp.jpg" style="height: 41px;">
+				</li>
+				<li style="text-align: center; background-color:white;">
+					<img alt="Unia Europejska" src="/public/images/eu.jpg" style="height: 41px;">
+				</li>
 			</ul>
 			
 			 

@@ -105,8 +105,12 @@
 		</div>
 	</form>
 	<!-- END FORGOT PASSWORD FORM -->
-	
 </div>
+<br />
+<center>
+		<img src="/public/images/parp.png" >
+</center>
+
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
