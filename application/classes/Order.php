@@ -33,7 +33,7 @@ class Order {
 							'Dostarczone',
 							'W trakcie realizacji',
 							'W trakcie odbioru',
-							'W dostrczeniu na magazyn',
+							'W dostarczeniu na magazyn',
 							'Na stanie magazynu',
 							'Odebrane',
 							'Zrealizowane');
@@ -532,6 +532,29 @@ class Order {
 				$log->add(Log::DEBUG,"Success: Zamówienie zostało usunięte - numer:".$this->order->id."\n");
 		
 				return true;
+			}else return false;
+		}else return false;
+	}
+	
+	public function receptOrder($params) {
+		if($this->order->loaded()) {
+			
+			$this->status='Na stanie magazynu';
+			$this->order->status='Na stanie magazynu';
+			if($this->order->update()) {
+				
+				if(isset($params['boxes']) && is_array($params['boxes'])) {
+					
+					foreach ($params['boxes'] as $box) {
+						$bbox=ORM::factory('Box')->where('id', '=', $box)->find();
+						$bbox->lock='0';
+						if($bbox->update()) {
+							$this->order->add('boxes', $box);
+						}
+					}
+
+					return true;
+				}else return false;
 			}else return false;
 		}else return false;
 	}

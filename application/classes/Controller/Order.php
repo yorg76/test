@@ -495,11 +495,17 @@ class Controller_Order extends Controller_Welcome {
 	public function action_recept() {
 		if($this->request->param('id') > 0) {
 			$order = Order::instance($this->request->param('id'));
-		
+			
+			$this->content->bind('order',$order);
+			
 			if($order->status=="Oczekuje na wysłanie") {
 				if($this->request->method()===HTTP_Request::POST) {
 					
-					if($order->receptOrder()) {
+					$params = array();
+					$params = $_POST;
+					$params['order_id'] = $order->order->id;
+					
+					if($order->receptOrder($params)) {
 						Message::success(ucfirst(__('Zamówienie zostało przyjęte na magazyn')),'/order/orders_inprogress');
 					}else {
 						Message::error(ucfirst(__('Wystąpił problem podczas przyjęcia zamówienia')),'/order/orders_inprogress');
