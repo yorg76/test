@@ -41,6 +41,7 @@
 						<input name="plik" type="file" id="upload">
 						<span class="help-block">Załącz plik ze skanem dokumentu</span>
 					</div>
+									
 					<div class="form-group">
 						<label class="control-label">Wybór pudła
 							<span class="required" aria-required="true"> * </span>

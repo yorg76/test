@@ -7,7 +7,16 @@
 				<span class="after">
 				</span>
 			</li>
-
+			<?php if ($document->document->files->count_all() >  0):?>
+				<?php foreach($document->document->files->find_all() as $fl):?>
+				<li>
+					<a data-toggle="tab" href="#tab_2-<?php echo $fl->id;?>">
+					<i class="fa fa-cog"></i>Dokument - <?php echo $fl->id;?></a>
+					<span class="after">
+					</span>
+				</li>	
+				<?php endforeach;?>
+			<?php endif;?>
 		</ul>
 	</div>
 	<div class="col-md-9">
@@ -17,7 +26,15 @@
 				<span>Popraw błędy w formularzu</span>
 			</div>
 			<div class="tab-content">
-			
+				<?php if ($document->document->files->count_all() >  0):?>
+					<?php foreach($document->document->files->find_all() as $fl):?>
+						<div id="tab_2-<?php echo $fl->id;?>" class="tab-pane">
+							<?php if($fl->type = 'scan'):?>
+								<img src="/<?php echo str_replace(array(DOCROOT,"\\"),array("","/"),$fl->file);?>" />
+							<?php endif;?>
+						</div>
+					<?php endforeach;?>
+				<?php endif;?>
 				<div id="tab_1-1" class="tab-pane active">
 					<div class="form-group">
 						<label class="control-label">Nazwa
@@ -42,6 +59,7 @@
 						<a class="btn default" href="/<?php echo str_replace(array(DOCROOT,"\\"),array("","/"),$document->document->scan->file);?>" target="_blank">Pokaż plik</a>
 						<?php endif;?>
 					</div>
+					
 					<div class="form-group">
 						<label class="control-label">Pudło
 							<span class="required" aria-required="true"> * </span>
