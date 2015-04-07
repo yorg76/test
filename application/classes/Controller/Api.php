@@ -28,18 +28,24 @@ class Controller_Api extends Controller_Welcome {
 			
 			$pdf = EasyRSA::signFile(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$_POST['invoice_file']);
 			
-			copy(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename, PDF.DIRECTORY_SEPARATOR.$_POST['invoice_file']);
+			copy(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$_POST['invoice_file'], PDF.DIRECTORY_SEPARATOR.$_POST['invoice_file']);
 			
 			$log->add(Log::DEBUG,ucfirst(__('Faktura podpisana.')));
 			
 			$pdf->Output(PDF.$_POST['invoice_file'],'F');
 			
+			$request = Request::factory('http://example.com/post_api')->method(Request::POST)->post(array('foo' => 'bar', 'bar' => 'baz'));
+				
 			echo "OK";
+			die;
 		}
 	}
 	
 	public function action_uploadInvoice() {
 		$log=Kohana_Log::instance();
+		
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		$log->add(Log::DEBUG,"Success:".serialize($_FILES)."\n");
 		
 		if($this->request->method()===HTTP_Request::POST) {
 			if(isset($_FILES['invoice']['size']) && $_FILES['invoice']['size'] > 0) {
