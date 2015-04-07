@@ -19,6 +19,55 @@ class Controller_Api extends Controller_Welcome {
 		$this->auto_render=FALSE;
 	}
 	
+	public function action_signInvoice() {
+		$log=Kohana_Log::instance();
+		
+		if($this->request->method()===HTTP_Request::POST) {
+			
+			copy(PDF.DIRECTORY_SEPARATOR.$_POST['invoice_file'],APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$_POST['invoice_file']);
+			
+			$pdf = EasyRSA::signFile(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$_POST['invoice_file']);
+			
+			copy(APPPATH.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR.$document_filename, PDF.DIRECTORY_SEPARATOR.$_POST['invoice_file']);
+			
+			$log->add(Log::DEBUG,ucfirst(__('Faktura podpisana.')));
+			
+			$pdf->Output(PDF.$_POST['invoice_file'],'F');
+			
+			echo "OK";
+		}
+	}
+	
+	public function action_uploadInvoice() {
+		$log=Kohana_Log::instance();
+		
+		if($this->request->method()===HTTP_Request::POST) {
+			if(isset($_FILES['invoice']['size']) && $_FILES['invoice']['size'] > 0) {
+				$filename = isset($_FILES["invoice"]) ? $_FILES["invoice"] : '';
+			
+				$path_parts = pathinfo($_FILES["invoice"]["name"]);
+				$extension = $path_parts['extension'];
+			
+				if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
+					$log->add(Log::ERROR,ucfirst(__('Nie udało się zaktualizować faktury.')));
+					echo "NOK";
+					die;
+				}
+			
+				if ($file = Upload::save($filename, $_FILES["invoice"]["name"], PDF)) {
+					$log->add(Log::DEBUG,ucfirst(__('Faktura dodana.')));
+					echo "OK";
+					die;
+				}else {
+					$log->add(Log::ERROR,ucfirst(__('Nie udało się zaktualizować faktury.')));
+					echo "NOK";
+					die;
+				}
+			}
+		}
+		
+	}
+	
 	public function action_checkLogin() {
 		$log=Kohana_Log::instance();
 		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");

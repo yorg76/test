@@ -35,6 +35,9 @@
 									 Kwota brutto
 								</th>
 								<th>
+									Zapłacona 
+								</th>
+								<th>
 									 PDF
 								</th>
 							</tr>
@@ -56,6 +59,9 @@
 								</td>			
 								<td>
 									 <?php echo Pricetable::money($invoice->amount * VAT); ?>
+								</td>
+								<td>
+									<?php echo ($invoice->payed == 0 ? "Nie" : "Tak"); ?>
 								</td>
 								<td>
 									<a href="<?php echo $invoice->invoice_file; ?>" class="btn btn-xs red margin-bottom" ><i class="fa fa-file-pdf-o"></i> Pobierz plik</a> <br />
