@@ -1,4 +1,4 @@
-﻿<div class="row profile-account">	
+<div class="row profile-account">	
 	<div class="col-md-3">
 		<ul class="ver-inline-menu tabbable margin-bottom-10">
 			<li class="active">

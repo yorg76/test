@@ -1,4 +1,4 @@
-﻿<div class="row profile">
+<div class="row profile">
 				<div class="col-md-12">
 					<!--BEGIN TABS-->
 					<div class="tabbable tabbable-custom tabbable-full-width">

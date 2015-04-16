@@ -1,4 +1,4 @@
-﻿<h2>Dodaj Firmę</h2>
+<h2>Dodaj Firmę</h2>
 
 <?php echo form::open() ?>
 <dl>          

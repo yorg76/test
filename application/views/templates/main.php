@@ -1,4 +1,4 @@
-﻿<?php defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') or die('No direct script access.');
 /**
  * @author     Maciej Kowalczyk - Tepfer <maciekk@bsdterminal.pl>
  * @copyright  BSDterminal 2014
