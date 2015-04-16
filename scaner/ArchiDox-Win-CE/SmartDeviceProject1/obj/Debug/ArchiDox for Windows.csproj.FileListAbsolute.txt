@@ -12,9 +12,8 @@ C:\Users\mkowalczyk\Documents\Visual Studio 2008\Projects\SmartDeviceProject1\Sm
 C:\Users\mkowalczyk\Documents\Visual Studio 2008\Projects\SmartDeviceProject1\SmartDeviceProject1\obj\Debug\ArchiDox.SearchForm.resources
 E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\bin\Debug\ArchiDox for Windows.exe
 E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\bin\Debug\ArchiDox for Windows.pdb
-E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\bin\Debug\Newtonsoft.Json.Compact.pdb
-E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\bin\Debug\Newtonsoft.Json.Compact.xml
 E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\obj\Debug\ResolveAssemblyReference.cache
+E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\obj\Debug\ArchiDox.ReceptionForm.resources
 E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\obj\Debug\ArchiDox.SearchForm.resources
 E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\obj\Debug\ArchiDox.LoginForm.resources
 E:\www12\web\archiwum\scaner\ArchiDox-Win-CE\SmartDeviceProject1\obj\Debug\ArchiDox.Properties.Resources.resources

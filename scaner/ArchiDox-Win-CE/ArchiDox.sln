@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchiDox for Windows", "SmartDeviceProject1\ArchiDox for Windows.csproj", "{EF298CD4-4DB1-47CF-BCE9-63A2B89C1CC2}"
 EndProject
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "AchidoxSetup", "AchidoxSetup\AchidoxSetup.vddproj", "{45A04D88-EC38-4469-813F-EF2252711EB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{EF298CD4-4DB1-47CF-BCE9-63A2B89C1CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF298CD4-4DB1-47CF-BCE9-63A2B89C1CC2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EF298CD4-4DB1-47CF-BCE9-63A2B89C1CC2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{45A04D88-EC38-4469-813F-EF2252711EB2}.Debug|Any CPU.ActiveCfg = Debug
+		{45A04D88-EC38-4469-813F-EF2252711EB2}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -33,7 +33,7 @@ namespace ArchiDox
         private ListBox ordersListBox;
         private DecodeHandle hDcd;
         private int reqID;
-        private WndMessageWindow wndMsg;
+        private SearchWndMessageWindow wndMsg;
         private DecodeRequest reqType;
         private int order_id;
 
@@ -148,10 +148,12 @@ namespace ArchiDox
             Console.SetError(this.errStream);
             Console.Error.WriteLine("Send data started");
             Console.Error.WriteLine("Params: " + full_url);
+            
 
             try
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(full_url);
+
                 request.KeepAlive = false;
                 request.Method = method;
 
@@ -182,7 +184,6 @@ namespace ArchiDox
                 HttpWebResponse response;
 
                 response = (HttpWebResponse)request.GetResponse();
-
                 Stream dataStream = response.GetResponseStream();
 
                 StreamReader reader = new StreamReader(dataStream);
@@ -205,7 +206,7 @@ namespace ArchiDox
 
         public SearchForm()
         {
-            this.wndMsg = new WndMessageWindow(this);
+            this.wndMsg = new SearchWndMessageWindow(this);
             this.appStart = DateTime.Now;
             //this.app_path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             this.app_path = @"\Storage Card\ArchiDox\";
@@ -701,68 +702,5 @@ namespace ArchiDox
             rf.Show();
             this.Hide();
         }
-    }
-    
-    public class WndMessageWindow : MessageWindow
-    {
-        // Reference to the window we will subclass.
-        private SearchForm dlgParent;
-      
-        public WndMessageWindow(SearchForm frm)
-        {
-            this.dlgParent = frm;
-        }
-
-        /// <summary>
-        /// This overrides WndProc (the window's message pump). From
-        /// here we can see what messages are being sent. In our case
-        /// all we care about is WM_SCANNED and WM_TIMEOUT.
-        /// </summary>
-        /// <param name="msg">The Windows Message to process.</param>
-        protected override void WndProc(ref Message msg)
-        {
-
-            switch (msg.Msg)
-            {
-                case Constants.WM_SCANNED:
-                    // The Request ID is stored in the LPARAM parameter
-                    // of the message.
-                    Console.Error.WriteLine("WM_SCANNED");
-                    dlgParent.SetDcdText(msg.LParam.ToInt32());
-                    break;
-                case Constants.WM_TIMEOUT:
-                    Console.Error.WriteLine("WM_TIMEOUT");
-                    Console.Error.WriteLine("Timed out before string read!");
-                    Console.Error.Flush();
-
-                    break;
-
-                case Constants.WM_STARTSCAN:
-                    Console.Error.WriteLine("WM_START_SCAN");
-                    Console.Error.Flush();
-
-                    break;
-
-                case Constants.WM_STOPSCAN:
-                    Console.Error.WriteLine("WM_STOP_SCAN");
-                    Console.Error.Flush();
-
-                    break;
-
-                case Constants.WM_PRESSSCAN:
-                    Console.Error.WriteLine("WM_PRESSSCAN");
-                    Console.Error.Flush();
-
-                    break;
-
-                case Constants.WM_RELEASESCAN:
-                    Console.Error.WriteLine("WM_RELEASESCAN");
-                    Console.Error.Flush();
-                    break;
-            }
-
-            base.WndProc(ref msg);
-        }
-
     }
 }

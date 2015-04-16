@@ -13,14 +13,14 @@
     <PlatformFamilyName>PocketPC</PlatformFamilyName>
     <PlatformID>b2c48bd2-963d-4549-9169-1fa021dce484</PlatformID>
     <OSVersion>5.2</OSVersion>
-    <DeployDirSuffix>\Storage Card\ArchiDox</DeployDirSuffix>
+    <DeployDirSuffix>\ArchiDox</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <NativePlatformName>Windows Mobile 6 Professional SDK</NativePlatformName>
     <FormFactorID>
     </FormFactorID>
     <ApplicationIcon>mxomssdrv2.ico</ApplicationIcon>
     <StartupObject>ArchiDox.Program</StartupObject>
-    <DeployDirPrefix>\</DeployDirPrefix>
+    <DeployDirPrefix>%25CSIDL_PROGRAM_FILES%25</DeployDirPrefix>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -116,6 +116,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="WndMessageWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="mxomssdrv2.ico" />

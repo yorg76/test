@@ -51,10 +51,8 @@ namespace ArchiDox
             Console.Error.WriteLine("Send data started");
             Console.Error.WriteLine("Params: "+full_url);
 
-            CookieContainer cookieJar = new CookieContainer();
-
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(full_url);
-            request.CookieContainer = cookieJar;
+            
             request.KeepAlive = false;
             request.Method = method;
 
@@ -85,7 +83,7 @@ namespace ArchiDox
             HttpWebResponse response;
 
             response = (HttpWebResponse)request.GetResponse();
-            
+
             Stream dataStream = response.GetResponseStream();
 
             StreamReader reader = new StreamReader(dataStream);

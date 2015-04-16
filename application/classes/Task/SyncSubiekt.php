@@ -20,13 +20,13 @@ class Task_SyncSubiekt extends Minion_Task {
 		$gt->Produkt = 1;
 		$gt->Serwer = "SQL-SERWER\INSERTGT";
 		$gt->Baza = "ARCHIWUM";
-		$gt->Autentykacja = 0;
+		$gt->Autentykacja = 1;
 		$gt->Uzytkownik = "sa";
-		$gt->UzytkownikHaslo = "";
-		$gt->Operator = "Szef";
+		$gt->UzytkownikHaslo = "gt";
+		$gt->Operator = "Szabelska Halina";
 		$gt->OperatorHaslo = "gt";
-
-		$subiekt = $gt->Uruchom(0,4);
+		
+		$subiekt = $gt->Uruchom(2,4);
 		
 		foreach($customers as $customer) {
 			
@@ -37,7 +37,8 @@ class Task_SyncSubiekt extends Minion_Task {
 			if(!$monthly_invoice->loaded() && $customer->nip != "" && $subiekt->Kontrahenci->Istnieje($customer->nip)) {
 				
 				$kontrahent = $subiekt->Kontrahenci->Wczytaj($customer->nip);
-				echo "Customer ".$customer->name." found in Subiekt - processing invoice \n\n";
+				
+				echo "Customer ".$customer->name." found in Subiekt - processing monthly invoice \n\n";
 				
 				$product_name = "ARCHIDOX".($customer->id+10000);
 				
