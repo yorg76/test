@@ -103,8 +103,13 @@ namespace ArchiDox
 
         public ReceptionForm()
         {
-            
-        } 
+            InitializeComponent();
+        }
+
+        private void clearSearchBox(object sender, EventArgs e)
+        {
+            this.code.Text = "";
+        }
 
         private void exitApp(object sender, EventArgs e)
         {
@@ -128,5 +133,6 @@ namespace ArchiDox
                 return;
             }
         }
+
     }
 }

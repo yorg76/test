@@ -503,6 +503,20 @@
 							</div>
 						</div>
 						
+						<div class="form-group">
+							<label class="control-label col-md-3">Dokumenty</label>
+							<div class="col-md-6">
+								<select multiple class="form-control" name="contents[]" disabled="true" >
+										<?php foreach($documents as $doc):?>
+											<?php $bselected = ($order->order->has('documents',ORM::factory('Document',$doc->id)) ? "selected" : "");?>
+											<option value="<?php echo $doc->id ?>"<?php echo $bselected?>
+											 >Dokument <?php echo $doc->name;?>
+										</option>
+										<?php endforeach;?>
+									</select>
+							</div>
+						</div>
+						
 						<h3 class="block">Adres</h3>
 						
 						<div class="form-group">

@@ -234,7 +234,9 @@ class Controller_Order extends Controller_Welcome {
 			}else {
 				$boxes = $order->order->boxes->find_all();
 			}
-	
+			
+			$documents = $order->order->documents->find_all();
+			
 			$delivery_addresses = $customer->addresses->where('address_type','=','dostawy')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 			$pickup_addresses = $customer->addresses->where('address_type','=','odbioru')->or_where('address_type','=','firmowy')->and_where('customer_id','=',$customer->id)->find_all();
 	
@@ -248,6 +250,7 @@ class Controller_Order extends Controller_Welcome {
 			$this->content->bind('user', $user);
 			$this->content->bind('warehouses',$warehouses);
 			$this->content->bind('boxes',$boxes);
+			$this->content->bind('documents',$documents);
 			$this->content->bind('delivery_addresses',$delivery_addresses);
 			$this->content->bind('pickup_addresses',$pickup_addresses);
 			$this->content->bind('storagecategories',$storagecategories);

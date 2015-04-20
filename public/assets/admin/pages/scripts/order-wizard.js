@@ -324,9 +324,12 @@ var OrderWizard = function () {
                                 			$.each(data.result,function(idx, obj)  {
                                 				
                                 				if (!$("select[name='contents_3[]'] option[value='" + obj.doc_id + "']").length) {
+                                					
+                                					$("select[name='contents_3[]']").html("");
+                                					
                                 					$("select[name='contents_3[]']").append($('<option>', { 
                                 						value: obj.doc_id,
-                                						text : obj.doc_name,
+                                						text : "Dokument " + obj.doc_name,
                                 					}));
                                 				}
                                 			});
@@ -360,7 +363,7 @@ var OrderWizard = function () {
                                 				if (!$("select[name='contents_4[]'] option[value='" + obj.doc_id + "']").length) {
                                 					$("select[name='contents_4[]']").append($('<option>', { 
                                 						value: obj.doc_id,
-                                						text : obj.doc_name,
+                                						text : "Dokument " + obj.doc_name,
                                 					}));
                                 				}
                                 			});
