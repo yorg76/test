@@ -1,7 +1,7 @@
 <div class="invoice">
 				<div class="row invoice-logo">
 					<div class="invoice-logo-space">
-						<img src="<?php echo DOCROOT.ASSETS_ADMIN_LAYOUT_IMG ?>document_logo.jpg" class="img-responsive" alt="" >
+						<img src="<?php echo ASSETS_ADMIN_LAYOUT_IMG ?>document_logo.jpg" class="img-responsive" alt="" >
 					</div>
 
 					<div class="col-xs-8">
@@ -11,24 +11,21 @@
 				</div>
 				<hr>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-xs-4">
 						<h3>Klient:</h3>
 						<ul class="list-unstyled">
 							<li>
-								<strong>Nazwa: </strong> <?php echo $customer->name; ?>
+								<strong>Nazwa: </strong> <?php echo $order->order->user->customer->name; ?>
 							</li>
 							<li>
-								<strong>NIP: </strong><?php echo $customer->nip; ?>
+								<strong>NIP: </strong><?php echo $order->order->user->customer->nip; ?>
 							</li>
 							<li>
-								<strong>REGON: </strong><?php echo $customer->regon; ?>
+								<strong>REGON: </strong><?php echo $order->order->user->customer->regon; ?>
 							</li>
 							<li>
-								<strong>Adres: </strong><br /><?php echo $address->street ." ".$address->number. "/".$address->flat ; ?>
+								<strong>Adres: </strong><br /><?php echo $order->order->user->customer->addresses->where('address_type','=','firmowy')->find()->address(); ?>
 							</li>
-							<li>
-								 <?php echo $address->postal.", ".$address->city; ?>
-							</li>														
 						</ul>
 					</div>
 					<div class="col-xs-4" style="width:200px;">
@@ -45,9 +42,6 @@
 							</li>
 							<li>
 								 <strong>Ilość pudeł: </strong><?php echo $order->order->boxes->count_all();?>
-							</li>
-							<li>
-								 <strong>Data odbioru: </strong><?php echo $order->order->pickup_date;?>
 							</li>
 						</ul>
 					</div>
@@ -126,13 +120,13 @@
 					<div class="col-xs-6 invoice-block">
 						<ul class="list-unstyled amounts">
 							<li>
-								<strong>Suma zamówienia:</strong> $9265
+								<br />
 							</li>
 							<li>
-								<strong>VAT:</strong> -----
+								<br />
 							</li>
 							<li>
-								<strong>Suma brutto:</strong> $12489
+								<br />
 							</li>
 						</ul>
 					</div>
@@ -146,15 +140,16 @@
 					</i> 
 					</p>
 				</div>
-				<pagebreak />
-					<?php foreach ($order->order->boxes->find_all() as $ord):?>
-						<hr>
-							Pudło: <?php echo $ord->id; ?> - <?php echo "Dodać opis pudła"; ?>
-						<hr>
-						<div style="text-align:center;">
-							<img alt="barcode" src="/barcode/get/<?php echo $ord->id; ?>" />
-						</div>
-					<pagebreak />
-					<?php endforeach;?>
-				
-			</div>
+			<pagebreak />
+
+			<?php foreach ($order->order->boxes->find_all() as $ord):?>
+				<hr>
+					Pudło: <?php echo $ord->id; ?> - <?php echo "Dodać opis pudła"; ?>
+				<hr>
+				<div style="text-align:center;">
+					<img alt="barcode" src="/barcode/get/<?php echo $ord->id; ?>" />
+				</div>
+			<pagebreak />
+			<?php endforeach;?>
+			
+</div>

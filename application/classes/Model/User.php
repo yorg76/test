@@ -9,7 +9,7 @@ class Model_User extends Model_Auth_User {
 	
 	protected $_has_many = array(
 			'user_tokens'=> array('model' => 'User_Token'),
-			'roles'=> array('model' => 'role', 'through' => 'roles_users'),
+			'roles'=> array('model' => 'Role', 'through' => 'roles_users'),
 			'divisions'=> array('model' =>  'Division', 'through' => 'divisions_users'),
 			'orders'=> array('model' =>  'Order', 'foreign_key' => 'user_id'),
 			'notifications' => array('model'=>'Notification','foreign_key'=>'user_id')

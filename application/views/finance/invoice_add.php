@@ -104,7 +104,7 @@
 								</td>	
 								<td>
 									<div class="margin-bottom-5">
-										<a class="btn btn-xs green margin-bottom" href="/finance/invoice_add/<?php echo $customer->id;?>" target="_blank">
+										<a class="btn btn-xs green margin-bottom" href="/finance/invoice_accept/<?php echo $customer->id;?>">
 											<i class="glyphicon glyphicon-info-sign"></i> Akceptuj FVAT m-czną
 										</a>
 									</div>

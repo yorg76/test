@@ -66,6 +66,62 @@ class Controller_Finance extends Controller_Welcome {
 		
 	}
 	
+	public function action_invoice_accept() {
+	
+		$id =  $this->request->param('id');
+	
+		if($this->request->param('id') > 0) {
+			$customer = Customer::instance($id);
+			$invoice = $customer->customer->invoices->order_by('sale_date','DESC')->limit(1)->find();
+			
+		
+			if($customer->customer->loaded() && $invoice->loaded()) {
+				
+				$who_get_notified = $customer->customer->users->where('id','IN',DB::expr('(SELECT user_id FROM user_rights WHERE get_monthly_email=1)'))->find_all();
+				
+				$admins = ORM::factory('Role')->where('name','=','admin')->find()->users->find_all();
+				
+				foreach ($admins as $email_user) {
+					$paramse['subject']="Nowa Faktura VAT w systemie Archiwum depozytowe";
+					$paramse['email_title'] = "Nowa Faktura VAT w systemie Archiwum depozytowe";
+					$paramse['email_info'] = "W załączniku znajdziesz dokument PDF z fakturą VAT.";
+					$paramse['email_content'] = "<p> Kwota netto: ".Pricetable::money($invoice->amount)."</p>";
+					$paramse['email_content'] .= "<p> Kwota brutto: ".Pricetable::money($invoice->amount*VAT)."</p>";
+					$paramse['email_content'] .= "<p> Termin płatności: ".$invoice->payment_date."</p>";
+					$paramse['attachments'] = array(APPPATH.DIRECTORY_SEPARATOR.$invoice->invoice_file);
+				
+					$paramse['email'] = $email_user->email;
+					$paramse['firstname'] = $email_user->firstname;
+					$paramse['lastname']= $email_user->lastname;
+				
+					Order::instance()->sendEmail($paramse);
+				}
+				
+												
+				foreach ($who_get_notified as $email_user) {
+					$paramse['subject']="Nowa Faktura VAT w systemie Archiwum depozytowe";
+					$paramse['email_title'] = "Nowa Faktura VAT w systemie Archiwum depozytowe";
+					$paramse['email_info'] = "W załączniku znajdziesz dokument PDF z fakturą VAT.";
+					$paramse['email_content'] = "<p> Kwota netto: ".Pricetable::money($invoice->amount)."</p>";
+					$paramse['email_content'] .= "<p> Kwota brutto: ".Pricetable::money($invoice->amount*VAT)."</p>";
+					$paramse['email_content'] .= "<p> Termin płatności: ".$invoice->payment_date."</p>";
+					$paramse['attachments'] = array(APPPATH.DIRECTORY_SEPARATOR.$invoice->invoice_file);
+				
+					$paramse['email'] = $email_user->email;
+					$paramse['firstname'] = $email_user->firstname;
+					$paramse['lastname']= $email_user->lastname;
+						
+					Order::instance()->sendEmail($paramse);
+				}
+								
+				Message::success(ucfirst(__('Faktura została zaakceptowana i wysłana do klienta')),'/finance/invoice_add');
+	
+			}else {
+				Message::error(ucfirst(__('Faktura nie została zaakceptowana')),'/finance/invoice_add');
+			}
+		}
+	}
+		
 	public function action_invoice_add() {
 		
 		$customers = ORM::factory('Customer')->find_all();

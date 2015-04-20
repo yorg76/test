@@ -448,7 +448,7 @@ class Order {
 			if($this->order->update()) {
 				$paramse = array();
 					
-				$paramse['subject']="Twoje zamówienie zostało zaakceptowane";
+				$paramse['subject']="Twoje zamówienie zostało przyjęte do realizacji";
 				$paramse['email_title'] = "Zamówienie numer ".$this->order->id." zmieniło status.";
 				$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
 				$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
@@ -459,7 +459,50 @@ class Order {
 				$paramse['email'] = $this->order->user->email;
 				$paramse['firstname'] = $this->order->user->firstname;
 				$paramse['lastname']= $this->order->user->lastname;
-		
+				
+				if($this->order->type == "Zamówienie zniszczenie magazynowanych pudeł") {
+					$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$params['order_type']."-".$order->order->id.".pdf";
+					$user = Auth::instance()->get_user();
+					$customer=$user->customer;
+					$address=$user->customer->addresses->where('address_type','=','firmowy')->find();
+					$order = $this;
+				
+					$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
+					$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
+					$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+					$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
+					$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
+					$document_css .= @file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
+					$document_css .= @file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+				
+					$document_template = View_MPDF::factory('order/utilisation_document');
+						
+					$document_template->bind_global('customer', $customer);
+					$document_template->bind_global('address', $address);
+					$document_template->bind_global('user', $user);
+				
+					$document_template->bind_global('order',$order);
+				
+					$document_template->get_mpdf()->SetDisplayMode('fullpage');
+					$document_template->get_mpdf()->WriteHTML($document_css,1);
+					$document_template->write_to_disk(PDF.$document_filename);
+						
+					$pdf = EasyRSA::signFile(PDF.$document_filename);
+						
+					$pdf->Output(PDF.$document_filename,'F');
+						
+					if(file_exists(PDF.$document_filename)) {
+						$this->order->utilisation_document=$document_filename;
+						$log->add(Log::DEBUG,'Dokument utylizacji został wygenerowany'."\n");
+						$paramse['attachments'] = array(0=>PDF.$document_filename);
+						try {
+							$this->order->update();
+						}catch (Exception $e) {
+							$log->add(Log::ERROR,'Exception: Wystąpił błąd podczas dodwania dokumentu zamówienia'."\n");
+						}
+					}
+				}
+						
 				$this->sendEmail($paramse);
 		
 				$notification = ORM::factory('Notification');
