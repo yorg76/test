@@ -149,4 +149,8 @@
     <value>/api/searchCode</value>
     <comment>Url API do wyszukiwania kodów</comment>
   </data>
+  <data name="warehouseReceptURL" xml:space="preserve">
+    <value>/api/warehouseRecept</value>
+    <comment>Url API do przyjęcia na magazyn</comment>
+  </data>
 </root>

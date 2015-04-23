@@ -103,6 +103,14 @@ namespace ArchiDox
 
         public ReceptionForm()
         {
+            this.appStart = DateTime.Now;
+            //this.app_path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            this.app_path = @"\Storage Card\ArchiDox\";
+            this.fn = app_path + @"\error_log-" + appStart.ToString("yyyyMMdd") + ".log";
+            this.errStream = new StreamWriter(fn, true);
+            Console.SetError(this.errStream);
+            Console.Error.WriteLine("Reception form initilized");
+
             InitializeComponent();
         }
 
@@ -132,6 +140,16 @@ namespace ArchiDox
                 Console.Error.Flush();
                 return;
             }
+        }
+
+        private void backToSearch(object sender, EventArgs e)
+        {
+            Console.Error.Flush();
+            Console.Error.Close();
+            this.errStream.Close();
+            Form sf = new SearchForm();
+            sf.Show();
+            this.Hide();
         }
 
     }

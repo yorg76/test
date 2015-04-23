@@ -698,6 +698,9 @@ namespace ArchiDox
 
         private void warehouseReception(object sender, EventArgs e)
         {
+            Console.Error.Flush();
+            Console.Error.Close();
+            this.errStream.Close();
             Form rf = new ReceptionForm();
             rf.Show();
             this.Hide();

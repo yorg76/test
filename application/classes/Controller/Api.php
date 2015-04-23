@@ -19,6 +19,12 @@ class Controller_Api extends Controller_Welcome {
 		$this->auto_render=FALSE;
 	}
 	
+	public function action_warehouseRecept() {
+		$log=Kohana_Log::instance();
+		
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+	}
+	
 	public function action_signInvoice() {
 		$log=Kohana_Log::instance();
 		

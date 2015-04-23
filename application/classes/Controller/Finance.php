@@ -88,7 +88,7 @@ class Controller_Finance extends Controller_Welcome {
 					$paramse['email_content'] = "<p> Kwota netto: ".Pricetable::money($invoice->amount)."</p>";
 					$paramse['email_content'] .= "<p> Kwota brutto: ".Pricetable::money($invoice->amount*VAT)."</p>";
 					$paramse['email_content'] .= "<p> Termin płatności: ".$invoice->payment_date."</p>";
-					$paramse['attachments'] = array(APPPATH.DIRECTORY_SEPARATOR.$invoice->invoice_file);
+					$paramse['attachments'] = array(str_replace("\\","/",DOCROOT.$invoice->invoice_file));
 				
 					$paramse['email'] = $email_user->email;
 					$paramse['firstname'] = $email_user->firstname;
@@ -105,7 +105,7 @@ class Controller_Finance extends Controller_Welcome {
 					$paramse['email_content'] = "<p> Kwota netto: ".Pricetable::money($invoice->amount)."</p>";
 					$paramse['email_content'] .= "<p> Kwota brutto: ".Pricetable::money($invoice->amount*VAT)."</p>";
 					$paramse['email_content'] .= "<p> Termin płatności: ".$invoice->payment_date."</p>";
-					$paramse['attachments'] = array(APPPATH.DIRECTORY_SEPARATOR.$invoice->invoice_file);
+					$paramse['attachments'] = array(str_replace("\\","/",DOCROOT.$invoice->invoice_file));
 				
 					$paramse['email'] = $email_user->email;
 					$paramse['firstname'] = $email_user->firstname;

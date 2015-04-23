@@ -131,5 +131,14 @@ namespace ArchiDox.Properties {
                 return ResourceManager.GetString("searchURL", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/warehouseRecept.
+        /// </summary>
+        public static string warehouseReceptURL {
+            get {
+                return ResourceManager.GetString("warehouseReceptURL", resourceCulture);
+            }
+        }
     }
 }
