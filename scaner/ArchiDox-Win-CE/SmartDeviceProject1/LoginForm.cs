@@ -31,9 +31,8 @@ namespace ArchiDox
         public LoginForm()
         {
             this.appStart = DateTime.Now;
-            //this.app_path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            this.app_path = @"\Storage Card\ArchiDox\";
-            this.fn = app_path + @"\error_log-" + appStart.ToString("yyyyMMdd") + ".log";
+            this.app_path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            this.fn = app_path + @"\logs\error_log-" + appStart.ToString("yyyyMMdd") + ".log";
             this.errStream = new StreamWriter(fn,true);
 
            

@@ -695,6 +695,15 @@
             "Property" = "8:%InstallDir%"
                 "Folders"
                 {
+                    "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_5035012AF6AB4A6480873CB7BB0CDA7B"
+                    {
+                    "Name" = "8:logs"
+                    "Condition" = "8:"
+                    "Property" = "8:_9155BAA6E51F4C5DADA0BF620AC3B8DF"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }

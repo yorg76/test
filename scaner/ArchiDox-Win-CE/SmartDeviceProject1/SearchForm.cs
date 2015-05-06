@@ -208,9 +208,8 @@ namespace ArchiDox
         {
             this.wndMsg = new SearchWndMessageWindow(this);
             this.appStart = DateTime.Now;
-            //this.app_path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            this.app_path = @"\Storage Card\ArchiDox\";
-            this.fn = app_path + @"\orders_log-" + appStart.ToString("yyyyMMdd") + ".log";
+            this.app_path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            this.fn = app_path + @"\logs\orders_log-" + appStart.ToString("yyyyMMdd") + ".log";
             this.errStream = new StreamWriter(fn,true);
             string url = ArchiDox.Properties.Resources.ordersURL;
             string postData = "orders=all";
