@@ -41,8 +41,40 @@
     min-height: 300px !important;
     padding: 0px 20px 20px !important;
     margin: 0 !important;
+    font-size:10px !important;
+  }
+  
+  .page-content input{
+  	font-size:10px !important;
+  	height: 14px;
+  }
+  
+  .page-content textarea{
+  	font-size:10px !important;
+  	height: 100%;
+  }
+  
+  .page-content h3{
+  	font-size:12px !important;
+  }
+  
+  .page-content .page-breadcrumb {
+  	display:none;
+  }
+
+  .page-content .page-breadcrumb {
+  	display:none;
+  }   
+  
+  .page-content .ver-inline-menu {
+  	display:none;
+  } 
+  
+  .page-content .form-actions {
+  	display:none;
   }
 }
+
 /***
 Page Header
 ***/

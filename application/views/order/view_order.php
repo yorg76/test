@@ -710,7 +710,92 @@
 									class="help-block"></span>
 							</div>
 						</div>			
-									
+						<?php elseif ($order->type == 'Zamówienie ogólne'):?>
+						
+						<div class="form-group">
+							<label class="control-label  col-md-3">Opis zamówienia 
+							</label>
+							<div class="col-md-4">
+								<textarea disabled="true" class="form-control" name="order_description" ><?php echo $order->order->description ?></textarea> 
+								<span class="help-block"></span>
+							</div>
+						</div>
+						
+						<h3 class="block">Adres</h3>
+						
+						<div class="form-group">
+							<label class="control-label  col-md-3">Ulica <span
+								class="required" aria-required="true"> * </span>
+							</label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="ul. Pana Jana " disabled="true" 
+									class="form-control" name="street"
+									value="<?php echo $order->order->address->street ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Numer <span
+								class="required" aria-required="true"> * </span>
+							</label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="1" disabled="true" 
+									class="form-control" name="number"
+									value="<?php echo $order->order->address->number ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Lokal </label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="1" disabled="true" 
+									class="form-control" name="flat"
+									value="<?php echo $order->order->address->flat ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">Miasto <span
+								class="required" aria-required="true"> * </span>
+							</label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="Warszawa" disabled="true" 
+									class="form-control" name="city"
+									value="<?php echo $order->order->address->city ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Kod pocztowy <span
+								class="required" aria-required="true"> * </span>
+							</label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="00-001" disabled="true" 
+									class="form-control" name='postal'
+									value="<?php echo $order->order->address->postal ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Kraj </label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="" disabled="true" 
+									class="form-control" name="country"
+									value="<?php echo $order->order->address->country ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">Telefon </label>
+							<div class="col-md-4">
+								<input disabled="true" type="text" placeholder="+48666999000" disabled="true" 
+									class="form-control" name="telephone"
+									value="<?php echo $order->order->address->telephone ?>" /> <span
+									class="help-block"></span>
+							</div>
+						</div>										
 						<?php else:?>
 						<?php endif;?>
 					</div>

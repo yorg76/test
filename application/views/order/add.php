@@ -88,353 +88,31 @@
 						<div class="tab-pane" id="tab2">
 						
 							<div class="order_type_0" style="display: none;" >
-								<h3 class="block">Zamówienie pustych pudeł i kodów kreskowych</h3>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Dział<span class="required">	
-									* </span></label>
-									<div class="col-md-4">
-										<select class="form-control" name="division_0">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($divisions as $division):?>
-												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Ilość pudeł<span class="required">	
-									* </span>
-									</label>
-									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_quantity_0"/>
-										<span class="help-block">
-										Podaj ile będziesz potrzebować pudeł</span>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Data odbioru
-										<span class="required" aria-required="true"> * </span>
-									</label>
-										<div class="col-md-4">
-											<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
-												<input type="text" class="form-control form-filter input-sm" readonly name="date_reception_0" placeholder="Termin dostarczenia pudeł" size="16">
-												<span class="input-group-btn">
-												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-												</span>
-											</div>
-											<span class="help-block"></span>
-										</div>
-								</div>								
+								<?php echo View::factory('order/add_order_type_0')->bind('boxes',$boxes)->bind('divisions',$divisions)->bind('storagecategories',$storagecategories)->render();?>							
 							</div>
 							
 							<div class="order_type_1" style="display: none;" >
-								<h3 class="block">Zamówienie odbioru i magazynowania pudeł</h3>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Dział<span class="required">	
-									* </span></label>
-									<div class="col-md-4">
-										<select class="form-control" name="division_1">
-												<option value="" > -- Wybierz -- </option>
-											<?php foreach($divisions as $division):?>
-												<option value="<?php echo $division->id ?>" ><?php echo $division->name?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Czy pudła mają plomby ?
-									</label>
-									<div class="checkbox-list col-md-4">
-										<label class="checkbox-inline">
-										<input type="checkbox" id="sealed_boxes" name="sealed_boxes" value="1" onClick="javascript:$('input[name=sealed_boxes_n]').attr('checked',false);"> Tak </label>
-									</div>
-								</div>	
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Ilość pudeł<span class="required">	
-									* </span>
-									</label>
-									<div class="col-md-4">
-										<input type="text" class="form-control" name="box_quantity_1"/>
-										<span class="help-block">
-										Podaj ile będzie pudeł do odebrania </span>
-									</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Data odbioru pudeł
-										<span class="required" aria-required="true"> * </span>
-									</label>
-										<div class="col-md-4">
-											<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
-												<input type="text" class="form-control form-filter input-sm" readonly name="date_reception_1" placeholder="Termin odbioru" size="16">
-												<span class="input-group-btn">
-												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-												</span>
-											</div>
-											<span class="help-block"></span>
-										</div>
-								</div>
-								
-								<div class="margiv-top-10" id="description-container">
-								</div>
-								
-								
-								<h4 class="form-section">Opis pudła (opcjonalnie)</h4>
-								
-								<div class="box_description_template">	
-								
-									<div class="form-group">
-										<label class="control-label col-md-3">Numer paczki
-										</label>
-										<div class="col-md-4">
-											<input type="text" class="form-control" name="box_id_template"/>
-											<span class="help-block">
-											Musisz podać numer pudła</span>
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label col-md-3">Kategoria magazynowania</label>
-										<div class="col-md-4">
-											<select class="form-control" name="box_storagecategory_template" id="box_storagecategory_template">
-													<option value="" > -- Wybierz -- </option>
-												<?php foreach($storagecategories as $storagecategory):?>
-													<option value="<?php echo $storagecategory->id ?>" ><?php echo $storagecategory->name?></option>
-												<?php endforeach;?>
-											</select>
-											<span class="help-block">
-											Wybierz kategorię magazynowania</span>
-										</div>
-									</div>							
-										
-									<div class="form-group">
-										<label class="control-label col-md-3">Opis zawartości pudła<span class="required">	
-										* </span>
-										</label>
-										<div class="col-md-4">
-											<input type="text" class="form-control" name="box_description_template"/>
-											<span class="help-block">
-											Musisz opisać pudło</span>
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="control-label col-md-3">Okres przez jaki pudło ma być magazynowane<span class="required">	
-										* </span>
-										</label>
-										<div class="col-md-4">
-											<input type="text" class="form-control" name="box_date_template"/>
-											<span class="help-block">
-											Musisz podać jaki okres pudło ma być składowane</span>
-										</div>
-									</div>
-								
-								</div>
-								
-								<div class="margiv-top-10">
-									<a href="#" class="btn green" id="add_box_description">
-									Dodaj </a>
-									<a href="#" class="btn default" id="add_box_cancel">
-									Anuluj </a>
-								</div>	
+								<?php echo View::factory('order/add_order_type_1')->bind('divisions',$divisions)->bind('storagecategories',$storagecategories)->render();?>
 							</div>
 							
 							<div class="order_type_2" style="display: none;" >
-								<h3 class="block">Zamówienie zniszczenie magazynowanych pudeł</h3>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Numer pudła (kod kreskowy)</label>
-									<div class="col-md-4">
-										<div class="input-group">
-									
-											<input id="box_code" class="form-control" type="text" name="box_code" placeholder="Kod pudła"/>
-											<span class="input-group-btn">
-												<button id="add_box_to_order" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Dodaj</button>
-											</span>
-										
-											<span class="help-block"></span>
-										</div>
-									</div>
-								</div>
-																							
-								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
-									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_2[]" id="boxes_list">
-											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box->id;?>"><?php echo sprintf('%012d',$box->barcode);?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
-								
-								<div class="form-group">
-										<label for="boxes_file" class="control-label col-md-3">Pobierz CSV z pudłami</label>
-										<div class="col-md-4">
-											<span class="input-group-btn">
-												<a id="get_boxes_file" class="btn btn-success" href="/ajax/get_boxes_file" target="_new"><i class="fa fa-arrow-left fa-fw"/></i> Pobierz plik</a>
-											</span>
-										</div>
-								</div>
-								<div class="form-group">
-										<label for="boxes_file" class="control-label col-md-3">Dodaj CSV z pudłami</label>
-										<div class="col-md-4">
-											<input type="file" id="boxes_file">
-											<p class="help-block">
-												 Plik dodany tutaj powinien zawierać w pierwszej kolumnie, numery kodów kreskowycg pudeł przeznaczonych do zniszczenia.
-											</p>
-										</div>
-								</div>
-								
-								
+								<?php echo View::factory('order/add_order_type_2')->bind('boxes',$boxes)->bind('divisions',$divisions)->bind('storagecategories',$storagecategories)->render();?>																
 							</div>
 							
 							<div class="order_type_3" style="display: none;" >
-								<h3 class="block">Zamówienie skanowania, kopii dokumentów</h3>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Numer pudła (kod kreskowy)</label>
-									<div class="col-md-4">
-										<div class="input-group">
-									
-											<input id="box_code_4" class="form-control" type="text" name="box_code_3" placeholder="Kod pudła"/>
-											<span class="input-group-btn">
-												<button id="add_box_to_order_3" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Dodaj</button>
-											</span>
-										
-											<span class="help-block"></span>
-										</div>
-									</div>
-								</div>
-																							
-								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
-									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_3[]" id="boxes_list">
-											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box->id;?>"><?php echo sprintf('%012d',$box->barcode);?></option>
-											<?php endforeach;?>										
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="control-label col-md-3">Zawartość</label>
-									<div class="col-md-4">
-										<select multiple class="form-control" name="contents_3[]">
-										</select>
-									</div>
-								</div>
-								
+								<?php echo View::factory('order/add_order_type_3')->bind('boxes',$boxes)->bind('divisions',$divisions)->bind('storagecategories',$storagecategories)->render();?>
 							</div>
 							
 							<div class="order_type_4" style="display: none;" >
-								<h3 class="block">Zamówienie kopii notarialnej dokumentów</h3>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Numer pudła (kod kreskowy)</label>
-									<div class="col-md-4">
-										<div class="input-group">
-									
-											<input id="box_code_4" class="form-control" type="text" name="box_code_4" placeholder="Kod pudła"/>
-											<span class="input-group-btn">
-												<button id="add_box_to_order_4" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Dodaj</button>
-											</span>
-										
-											<span class="help-block"></span>
-										</div>
-									</div>
-								</div>
-																							
-								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
-									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_4[]" id="boxes_list">
-											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box->id;?>"><?php echo sprintf('%012d',$box->barcode);?></option>
-											<?php endforeach;?>
-										
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="control-label col-md-3">Zawartość</label>
-									<div class="col-md-4">
-										<select multiple class="form-control" name="contents_4[]">
-										</select>
-									</div>
-								</div>
-								
-								
+								<?php echo View::factory('order/add_order_type_4')->bind('boxes',$boxes)->bind('divisions',$divisions)->bind('storagecategories',$storagecategories)->render();?>							
 							</div>
+							
 							<div class="order_type_5" style="display: none;" >
-								<h3 class="block">Wypożyczenie pudeł</h3>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Numer pudła (kod kreskowy)</label>
-									<div class="col-md-4">
-										<div class="input-group">
-									
-											<input id="box_code_5" class="form-control" type="text" name="box_code_5" placeholder="Kod pudła"/>
-											<span class="input-group-btn">
-												<button id="add_box_to_order_5" class="btn btn-success" type="button"><i class="fa fa-arrow-left fa-fw"/></i> Dodaj</button>
-											</span>
-										
-											<span class="help-block"></span>
-										</div>
-									</div>
-								</div>
-																							
-								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
-									<div class="col-md-4">
-										<select multiple class="form-control" name="boxes_5[]" id="boxes_list">
-											<?php foreach($boxes as $box):?>
-											<option value="<?php echo $box->id;?>"><?php echo sprintf('%012d',$box->barcode);?></option>
-											<?php endforeach;?>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-										<label for="boxes_file" class="control-label col-md-3">Pobierz CSV z pudłami</label>
-										<div class="col-md-4">
-											<span class="input-group-btn">
-												<a id="get_boxes_file" class="btn btn-success" href="/ajax/get_boxes_file" target="_new"><i class="fa fa-arrow-left fa-fw"/></i> Pobierz plik</a>
-											</span>
-										</div>
-								</div>
-								<div class="form-group">
-										<label for="boxes_file" class="control-label col-md-3">Dodaj CSV z pudłami</label>
-										<div class="col-md-4">
-											<input type="file" id="boxes_file">
-											<p class="help-block">
-												 Plik dodany tutaj powinien zawierać w pierwszej kolumnie, numery kodów kreskowycg pudeł przeznaczonych do wypożyczenia.
-											</p>
-										</div>
-								</div>
-								
-								<div class="form-group">
-									<label class="control-label col-md-3">Data dostawy pudeł
-										<span class="required" aria-required="true"> * </span>
-									</label>
-										<div class="col-md-4">
-											<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
-												<input type="text" class="form-control form-filter input-sm" readonly name="date_reception_5" placeholder="Termin dostawy" size="16">
-												<span class="input-group-btn">
-												<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-												</span>
-											</div>
-											<span class="help-block"></span>
-										</div>
-								</div>
-								
+								<?php echo View::factory('order/add_order_type_5')->bind('boxes',$boxes)->bind('divisions',$divisions)->bind('storagecategories',$storagecategories)->render();?>
+							</div>
+														
+							<div class="order_type_6" style="display: none;" >
+								<?php echo View::factory('order/add_order_type_6')->bind('boxes',$boxes)->bind('divisions',$divisions)->bind('storagecategories',$storagecategories)->render();?>
 							</div>							
 						</div>
 
@@ -632,21 +310,20 @@
 							<div class="order_type_0" style="display: none;" >
 															
 								<div class="form-group">
-									<label class="control-label col-md-3">Dział<span class="required">	
-									* </span></label>
+									<label class="control-label col-md-3">Dział:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="division_0"></p>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-3">Ilość pudeł</label>
+									<label class="control-label col-md-3">Ilość pudeł:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="box_quantity_0" > </p>
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Data odbioru</label>
+									<label class="control-label col-md-3">Data odbioru:</label>
 										<div class="col-md-4">											
 											<p class="form-control-static" data-display="date_reception_0" > </p>
 										</div>
@@ -657,8 +334,7 @@
 								<h3 class="block">Zamówienie odbioru i magazynowania pudeł</h3>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Dział<span class="required">	
-									* </span></label>
+									<label class="control-label col-md-3">Dział:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="division_1">
 										</p>
@@ -666,8 +342,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Ilość pudeł<span class="required">	
-									* </span>
+									<label class="control-label col-md-3">Ilość pudeł:
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="box_quantity_1">
@@ -676,8 +351,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Data odbioru
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Data odbioru:
 									</label>
 										<div class="col-md-4">
 										<p class="form-control-static" data-display="date_reception_1">
@@ -692,7 +366,7 @@
 							<div class="order_type_2" style="display: none;" >
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
+									<label class="control-label col-md-3">Pudła:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="boxes_2[]">
 										</p>
@@ -703,7 +377,7 @@
 							<div class="order_type_3" style="display: none;" >
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
+									<label class="control-label col-md-3">Pudła:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="boxes_3[]">
 										</p>
@@ -711,7 +385,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Dokumenty</label>
+									<label class="control-label col-md-3">Dokumenty:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="contents_3[]">
 										</p>
@@ -723,7 +397,7 @@
 							<div class="order_type_4" style="display: none;" >
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
+									<label class="control-label col-md-3">Pudła:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="boxes_4[]">
 										</p>
@@ -731,7 +405,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Dokumenty</label>
+									<label class="control-label col-md-3">Dokumenty:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="contents_4[]">
 										</p>
@@ -744,7 +418,7 @@
 								<input type="hidden" name="box_quantity_5" value="0" />
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Pudła</label>
+									<label class="control-label col-md-3">Pudła:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="boxes_5[]">
 										</p>
@@ -752,11 +426,33 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Data dostawy
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Data dostawy:
 									</label>
 										<div class="col-md-4">
 										<p class="form-control-static" data-display="date_reception_5">
+										</p>
+										</div>
+								</div>
+								
+							</div>
+							
+							<div class="order_type_6" style="display: none;" >
+								
+								
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Opis zamówienia:</label>
+									<div class="col-md-4">
+										<p class="form-control-static" data-display="order_description">
+										</p>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-md-3">Data realizacji:
+									</label>
+										<div class="col-md-4">
+										<p class="form-control-static" data-display="date_reception_6">
 										</p>
 										</div>
 								</div>
@@ -780,14 +476,14 @@
 							<div id="pickup_address" style="display:none">						
 								
 								<div class="form-group">
-									<label class="control-label col-md-3">Adres odbioru</label>
+									<label class="control-label col-md-3">Adres odbioru:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="pickup_address">
 										</p>
 									</div>
 								</div>				
 								<div class="form-group">
-									<label class="control-label  col-md-3">Ulica
+									<label class="control-label  col-md-3">Ulica:
 										<span class="required" aria-required="true"> * </span>
 									</label>
 									<div class="col-md-4">
@@ -796,7 +492,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-3">Numer <span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Numer: 
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="number">
@@ -804,7 +500,7 @@
 									</div>
 								</div>					
 								<div class="form-group">
-									<label class="control-label col-md-3">Lokal							
+									<label class="control-label col-md-3">Lokal:							
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="flat">
@@ -813,8 +509,7 @@
 								</div>					
 																		
 								<div class="form-group">
-									<label class="control-label col-md-3">Miasto
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Miasto:
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="city">
@@ -822,8 +517,8 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-3">Kod pocztowy
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Kod pocztowy:
+
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="postal">
@@ -832,7 +527,7 @@
 								</div>															
 
 								<div class="form-group">
-									<label class="control-label col-md-3">Telefon							
+									<label class="control-label col-md-3">Telefon:							
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="telephone">
@@ -843,15 +538,14 @@
 							
 							<div id="delivery_address" style="display:none">
 								<div class="form-group">
-									<label class="control-label col-md-3">Adres odbioru</label>
+									<label class="control-label col-md-3">Adres odbioru:</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="delivery_address">
 										</p>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-3">Ulica
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Ulica:
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="street">
@@ -859,8 +553,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-3">Numer
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Numer:
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="number">
@@ -868,7 +561,7 @@
 									</div>
 								</div>					
 								<div class="form-group">
-									<label class="control-label col-md-3">Lokal							
+									<label class="control-label col-md-3">Lokal:							
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="flat">
@@ -877,8 +570,7 @@
 								</div>					
 																		
 								<div class="form-group">
-									<label class="control-label col-md-3">Miasto
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Miasto:
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="city">
@@ -886,8 +578,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-3">Kod pocztowy
-										<span class="required" aria-required="true"> * </span>
+									<label class="control-label col-md-3">Kod pocztowy:
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="postal">
@@ -896,7 +587,7 @@
 								</div>															
 
 								<div class="form-group">
-									<label class="control-label col-md-3">Telefon							
+									<label class="control-label col-md-3">Telefon:							
 									</label>
 									<div class="col-md-4">
 										<p class="form-control-static" data-display="telephone">
@@ -908,7 +599,7 @@
 							<h4 class="form-section">Cena</h4>
 							
 							<div class="form-group">
-								<label class="control-label col-md-3">Cena netto							
+								<label class="control-label col-md-3">Cena netto:							
 								</label>
 								<div class="col-md-4">
 									<p class="form-control-static" id="final_price_netto">
@@ -916,7 +607,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3">Cena brutto							
+								<label class="control-label col-md-3">Cena brutto:							
 								</label>
 								<div class="col-md-4">
 									<p class="form-control-static" id="final_price_brutto">

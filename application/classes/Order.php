@@ -17,14 +17,16 @@ class Order {
 						'Zamówienie zniszczenie magazynowanych pudeł',
 						'Zamówienie skanowania, kopii dokumentów',
 						'Zamówienie kopii notarialnej dokumentów',
-						'Wypożyczenie pudeł');
+						'Wypożyczenie pudeł',
+						'Zamówienie ogólne');
 	
 	public $types_short = array('Zamówienie pustych pudeł i kodów kreskowych'=>'ZPPiKK',
 							'Zamówienie odbioru i magazynowania pudeł'=>'ZOiMP',
 							'Zamówienie zniszczenie magazynowanych pudeł'=>'ZZMP',
 							'Zamówienie skanowania, kopii dokumentów'=>'ZSKD',
 							'Zamówienie kopii notarialnej dokumentów'=>'ZKND',
-							'Wypożyczenie pudeł'=>'WP');
+							'Wypożyczenie pudeł'=>'WP',
+							'Zamówienie ogólne'=>'ZO');
 	
 	public $statuses = array('Nowe',
 							'Przyjęte do realizacji',
@@ -618,7 +620,7 @@ class Order {
 				$this->order->address_id=$params['pickup_address'];
 			}elseif(isset($params['delivery_address']) && $params['delivery_address'] != '-- Wybierz --' && $params['delivery_address'] != NULL) {
 				$this->order->address_id=$params['delivery_address'];
-			}elseif($params['order_type'] == 0 || $params['order_type'] == 1 || $params['order_type'] == 5 ){
+			}elseif($params['order_type'] == 0 || $params['order_type'] == 1 || $params['order_type'] == 5 || $params['order_type'] == 6){
 				$address=ORM::factory('Address');
 				$address->city=$params['city'];
 				$address->street=$params['street'];
@@ -640,6 +642,7 @@ class Order {
 			$this->order->warehouse_id=$params['warehouse'];
 			$this->order->division_id=$params['division'];
 			$this->order->sealed_boxes=$params['sealed_boxes'];
+			$this->order->description=$params['order_description'];
 			
 			if($params['order_type']==0) {
 				$this->order->quantity=$params['box_quantity_0'];
@@ -663,6 +666,10 @@ class Order {
 				$this->order->pickup_date=$params['date_reception_5'];
 			}
 			
+			if($params['date_reception_6'] != "" && $params['order_type']==6) {
+				$this->order->pickup_date=$params['date_reception_6'];
+			}
+			
 			try {
 					
 				if($this->order->save()) {
@@ -671,7 +678,7 @@ class Order {
 					$paramse = array();
 					$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$params['order_type']."-".$order->order->id.".pdf";
 					
-					if($params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4 || $params['order_type'] == 5) {
+					if($params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4 || $params['order_type'] == 5 || $params['order_type'] == 6) {
 						if(isset($params['boxes']) && is_array($params['boxes']) && ($params['order_type'] == 0 || $params['order_type'] == 2 || $params['order_type'] == 3 || $params['order_type'] == 4 || $params['order_type'] == 5)) {
 							foreach ($params['boxes'] as $box) {
 								$bbox=ORM::factory('Box')->where('id', '=', $box)->find();
@@ -741,7 +748,7 @@ class Order {
 							$order_detail->box_number = $params['box_id'][$i];
 							$order_detail->box_storagecategory = $params['box_storagecategory'][$i]["storagecategory"];
 							$order_detail->box_description = $params['box_description'][$i]["description"];
-							$order_detail->box_date =  date('Y-m-d', strtotime('+'.$params['box_date'][$i]["date"].' years')); 
+							$order_detail->box_date =  date('Y-m-d', strtotime(date('d').'-'.date('m').'-'.$params['box_end_date'][$i]["box_end_date"])); 
 							$order_detail->order_id = $this->order->id;
 							if($order_detail->save()) {
 								$log->add(Log::DEBUG,"Success: Dodano pudła do zamówienia:".serialize($i)."\n");
@@ -830,6 +837,7 @@ class Order {
 					$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
 					$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
 					$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+					if($params['order_type'] == 6) $paramse['email_content'] .="<p>Opis zamówienia: ".$this->order->description."</p>"; 
 					$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
 					$paramse['email'] = $user->email;
 					$paramse['firstname'] = $user->firstname;

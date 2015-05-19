@@ -147,6 +147,7 @@ var OrderWizard = function () {
                     	
                     	if(order_type == 1) {
                     		
+                    		
                     		$("#tab3 #delivery_address").hide();
                     		$("#tab3 #doc").hide();
                     		$("#tab3 #skip").hide();
@@ -430,6 +431,24 @@ var OrderWizard = function () {
                     			}
                     		});
                     	}
+                    	
+                    	if(order_type == 6) {
+                    		$("#tab3 #delivery_address").hide();
+                    		$("#tab3 #doc").hide();
+                    		$("#tab3 #skip").hide();
+                    		$("#tab3 #pickup_address").show();
+                    		
+                    		$("#tab4 #delivery_address").hide();
+                    		$("#tab4 #doc").hide();
+                    		$("#tab4 #skip").hide();
+                    		$("#tab4 #pickup_address").show();
+                    		
+                    		$(".nav-pills a").each(function(){
+                    			if($(this).attr('href') == '#tab3') {
+                    				$('span.desc',$(this)).html('<i class="fa fa-check"></i> Adres zamówienia</span>');
+                    			}
+                    		});
+                    	}
                     }
                 },
 
@@ -466,6 +485,9 @@ var OrderWizard = function () {
             	}else if(order_type == 5 ) { 
             		$('#tab4 #final_price_netto', form).html(final_price +" PLN");
                 	$('#tab4 #final_price_brutto', form).html(final_price*1.23 +" PLN");
+            	}else if(order_type == 6 ) { 
+            		$('#tab4 #final_price_netto', form).html("Uzgodniona poza systemem");
+                	$('#tab4 #final_price_brutto', form).html("Uzgodniona poza systemem");
             	}
 
             	
@@ -545,7 +567,8 @@ var OrderWizard = function () {
                 		quantity = $('input[name=box_quantity_1]').val();
                 		var boxes_reception = $('input[name=boxes_reception]').val();
                 		var boxes_storage = $('input[name=boxes_storage]').val();
-                		price = ((boxes_reception * quantity) + (boxes_storage * quantity))+ ' PLN / miesiąc';                 		
+                		price = ((boxes_reception * quantity) + (boxes_storage * quantity))+ ' PLN / miesiąc';
+                		
                 	}else if(order_type == 2 ) {
                 		var boxes_disposal = $('input[name=position_disposal]').val();
                 		price = boxes_disposal * quantity + ' PLN'; 
@@ -560,6 +583,8 @@ var OrderWizard = function () {
                 		var boxes_sending = $('input[name=boxes_sending]').val();
                 		$('input[name=box_quantity_5]').val(quantity);
                 		price = boxes_sending * quantity + ' PLN'; 
+                	}else if(order_type == 6 ) {
+                		price = "Uzgodniona poza systemem"; 
                 	}
                 	
                 	$('.step-title', $('#form_wizard_1')).text('Krok ' + (index + 1) + ' z ' + total + ' - Cena: ' + price );
@@ -621,6 +646,30 @@ var OrderWizard = function () {
                     handleTitle(tab, navigation, index);
                     
                     var order_type=$("select[name=order_type]").val();
+                    if(order_type==0) {
+                    	
+                    	$('select[name=division_0]').rules('add','required');
+                    	$('input[name=box_quantity_0]').rules('add','required');
+                    	$('input[name=date_reception_0]').rules('add','required');
+                    }else if(order_type==1) {
+                    	
+                    	$('select[name=division_1]').rules('add','required');
+                    	$('input[name=box_quantity_1]').rules('add','required');
+                    	$('input[name=date_reception_1]').rules('add','required');
+                    	
+                    	$('input[name=boxes_description]').change(function(e){
+                    		console.log("OK");
+                    		$("#box_description_form").toggle();
+                    	});
+                    	
+                    }else if(order_type==5) {
+                    	
+                    	$('input[name=date_reception_5]').rules('add','required');
+                    }else if(order_type==6) {
+                    	$('textarea[name=order_description]').rules('add','required');
+                    	$('input[name=date_reception_6]').rules('add','required');
+                    }
+                    
                     
                     if(index == '2' && order_type=='2') {
                     	var warehouse = $('select[name=warehouse] option:selected').val();
@@ -700,15 +749,44 @@ var OrderWizard = function () {
             	return false;
             });
             
-            $('#add_box_description').click(function(){
+            
+            
+            $('#add_box_description').click(function(e){
             	
-            	var box=$('.box_description_template').clone();
+            	e.preventDefault();
+            	
+                var box=$('.box_description_template').clone();
             	var number = $('input[name=box_id_template]', box).val();
-            	var descripton = $('input[name=box_description_template]', box).val();
+            	var description = $('input[name=box_description_template]', box).val();
             	var storagecategory = $('select[name=box_storagecategory_template] option:selected').val();
             	var date = $('input[name=box_date_template]', box).val();
+        		
+            	var error_det = 0;
+        		
+            	if(description=="") {
+            		
+            		$('input[name=box_description_template]').closest('.form-group').removeClass('has-success').addClass('has-error');
+            		error_det++;
+            	}
+            	else $('input[name=box_description_template]').closest('.form-group').removeClass('has-error');
+
+            	if(storagecategory=="") {
+            		$('select[name=box_storagecategory_template]').closest('.form-group').removeClass('has-success').addClass('has-error');
+            		
+            		error_det++;
+            	}
+            	else $('select[name=box_storagecategory_template]').closest('.form-group').removeClass('has-error');
+
+            	if(date=="") {
+            		$('input[name=box_date_template]').closest('.form-group').removeClass('has-success').addClass('has-error');
+            		
+            		error_det++;
+            	}
+            	else $('input[name=box_date_template]').closest('.form-group').removeClass('has-error');
+            		
+            	if(error_det !=0 ) return false;
             	
-            
+            	
             	$('input[name=box_id_template]', box).attr('name','box_id['+number+']');
             	
             	$('select[name=box_storagecategory_template]', box).attr('name','box_storagecategory['+number+'][storagecategory]');
@@ -716,6 +794,12 @@ var OrderWizard = function () {
             	$('input[name=box_description_template]', box).attr('name','box_description['+number+'][description]');
             	
             	$('input[name=box_date_template]', box).attr('name','box_date['+number+'][date]');
+            	
+            	var end_date = parseInt(date) + parseInt(storagecategory);
+            	
+            	var box_date = "<div class=\"form-group\"><label class=\"control-label col-md-3\">Data końca magazynowania</label><div class=\"col-md-4\"><input value=\""+end_date+"\" type=\"text\" class=\"form-control\" name=\"box_end_date["+number+"][box_end_date]\"/></div></div>";
+            	
+            	box.append(box_date);
             	
             	$('#description-container').append('<h4 class="form-section">Opis pudła numer '+number+'</h4>');
             	$('#description-container').append(box.html());
@@ -725,15 +809,10 @@ var OrderWizard = function () {
              	$('input[name=box_id\\['+number+'\\]]', $('#description-container')).attr('value',number);
              	$('select[name=box_storagecategory\\['+number+'\\]\\[storagecategory\\]]',  $('#description-container')).attr('value',storagecategory);
              	$('select[name=box_storagecategory\\['+number+'\\]\\[storagecategory\\]]',  $('#description-container')).val(storagecategory);
-             	$('input[name=box_description\\['+number+'\\]\\[description\\]]',  $('#description-container')).attr('value',descripton);
+             	$('input[name=box_description\\['+number+'\\]\\[description\\]]',  $('#description-container')).attr('value',description);
              	$('input[name=box_date\\['+number+'\\]\\[date\\]]', $('#description-container')).attr('value',date);
-             	
-             	$('.form-control', $('#description-container')).each(function() {
-            		$(this).attr('readonly',true);
-            	});
-             	
-            	return false;
-            	
+                     	
+                return false;
             });
         }
 
