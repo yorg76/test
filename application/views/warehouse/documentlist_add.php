@@ -11,7 +11,7 @@
 		</ul>
 	</div>
 	<div class="col-md-9">
-		<form role="form" action="/warehouse/documentlist_add" method="POST" id="add_documentlist_form">
+		<form role="form" enctype="multipart/form-data" action="/warehouse/documentlist_add" method="POST" id="add_documentlist_form">
 			<div class="alert alert-danger display-hide">
 				<button class="close" data-close="alert"></button>
 				<span>Popraw błędy w formularzu</span>
@@ -55,6 +55,13 @@
 						<textarea class="form-control" name="description" placeholder="Opis listy dokumentów"></textarea>
 						<span class="help-block"></span>
 					</div>
+					
+					<div class="form-group">
+						<label for="control-label">Załącznik</label>
+						<input name="attachment" type="file" id="attachment">
+						<span class="help-block">Załącz plik do dokumentu</span>
+					</div>
+					
 					<br/>
 					<input type="hidden" value="<?php echo $box->id ?>" name="box_id" />
 					<div class="margiv-top-10">

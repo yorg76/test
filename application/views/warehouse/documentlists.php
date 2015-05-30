@@ -66,6 +66,13 @@
 										id="<?php echo $documentlist->id ;?>">
 										<i class="fa fa-recycle"></i> Usuń
 									</button>
+									<?php if($documentlist->attachment->loaded()):?>
+									<a	href="/<?php echo str_replace(array(DOCROOT,"\\"),array("","/"),$documentlist->attachment->file);?>"
+										class="btn btn-xs blue file-download margin-bottom"
+										id="<?php echo $documentlist->attachment->id ;?>">
+										<i class="fa fa-file"></i> Załącznik
+									</a>
+									<?php endif;?>
 								</div>
 							</td>
 						</tr>

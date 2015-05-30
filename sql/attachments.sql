@@ -43,3 +43,5 @@ ALTER TABLE  `bulkpackagings` ADD FOREIGN KEY (  `attachment_id` ) REFERENCES  `
 `id`
 ) ON DELETE CASCADE ON UPDATE CASCADE ;
 
+
+RENAME TABLE  `archidox`.`attachment` TO  `archidox`.`attachments` ;

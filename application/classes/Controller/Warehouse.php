@@ -651,10 +651,27 @@ class Controller_Warehouse extends Controller_Welcome {
 		}
 		
 		if($this->request->method()===HTTP_Request::POST) {
-		
+			
 			$params = $_POST;
-				
 			$documentlist = DocumentList::instance();
+				
+			if(isset($_FILES['attachment']['size']) && $_FILES['attachment']['size'] > 0) {
+				$filename = isset($_FILES["attachment"]) ? $_FILES["attachment"] : '';
+			
+				$path_parts = pathinfo($_FILES["attachment"]["name"]);
+				$extension = $path_parts['extension'];
+			
+				if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
+					Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documentlists');
+				}
+			
+				if ($file = Upload::save($filename, "attachment-".$customer->id."-".$user->id."-".time().".".$extension, UPLOAD)) {
+					$params['file'] = $file;
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documentlists');
+				}
+			}
+			
 			
 			if($documentlist->addDocumentList($params)) {
 				Message::success(ucfirst(__('Lista dokumentów została dodana do pudła.')),'/warehouse/documentlists');
@@ -697,7 +714,25 @@ class Controller_Warehouse extends Controller_Welcome {
 			if($this->request->method()===HTTP_Request::POST) {
 					
 				$params = $_POST;
+				
+				if(isset($_FILES['attachment']['size']) && $_FILES['attachment']['size'] > 0) {
+					$filename = isset($_FILES["attachment"]) ? $_FILES["attachment"] : '';
+						
+					$path_parts = pathinfo($_FILES["attachment"]["name"]);
+					$extension = $path_parts['extension'];
+						
+					if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
+						Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documentlists');
+					}
+						
+					if ($file = Upload::save($filename, "attachment-".$customer->id."-".$user->id."-".time().".".$extension, UPLOAD)) {
+						$params['file'] = $file;
+					}else {
+						Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documentlists');
+					}
+				}
 					
+										
 				if($documentlist->editDocumentList($params)) {
 						
 					Message::success(ucfirst(__('Lista dokumentów została zaktualizowana.')),'/warehouse/documentlists');
@@ -1066,9 +1101,6 @@ class Controller_Warehouse extends Controller_Welcome {
 				if($_POST['date_reception']) $boxes = $boxes->and_where('box.date_reception', '=', $date_reception);
 				if($_POST['description']) $boxes = $boxes->and_where('box.description', 'LIKE', "%".$description."%");
 				if($_POST['barcode']) $boxes = $boxes->and_where('box.barcode', '=', $barcode);
-				
-//				var_dump($boxes->find_all());
-				//die;
 				
 				$boxes = $boxes->limit(100)->find_all();
 

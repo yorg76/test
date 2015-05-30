@@ -44,7 +44,26 @@ class DocumentList {
 		$this->documentlist->values($params);
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->documentlist->box_id=$this->box->id;
-			
+		
+		if(isset($params['file']) && !$this->documentlist->attachment->loaded()) {
+			$file = ORM::factory('Attachment');
+			$file->file=$params['file'];
+			$file->name=$params['file'];
+			$file->description=$params['file'];
+			$file->type=mime_content_type($params['file']);
+			$file->user_id=Auth::instance()->get_user()->id;
+			$file->save();
+			$this->documentlist->attachment_id=$file->id;
+		}elseif(isset($params['file']) && $params['file'] != NULL) {
+			$file = $this->documentlist->attachment;
+			$file->file=$params['file'];
+			$file->name=$params['file'];
+			$file->description=$params['file'];
+			$file->type=mime_content_type($params['file']);
+			$file->update();
+			$this->documentlist->attachment_id=$file->id;
+		}
+					
 		if(is_array($params)) {
 		
 			try {
@@ -72,6 +91,25 @@ class DocumentList {
 		$this->bulkpackaging=ORM::factory('BulkPackaging',$params['bulkpackaging_id']);
 		$this->documentlist->bulkpackaging_id=$this->bulkpackaging->id;
 		
+		if(isset($params['file']) && !$this->documentlist->attachment->loaded()) {
+			$file = ORM::factory('Attachment');
+			$file->file=$params['file'];
+			$file->name=$params['file'];
+			$file->description=$params['file'];
+			$file->type=mime_content_type($params['file']);
+			$file->user_id=Auth::instance()->get_user()->id;
+			$file->save();
+			$this->documentlist->attachment_id=$file->id;
+		}elseif(isset($params['file']) && $params['file'] != NULL) {
+			$file = $this->documentlist->attachment;
+			$file->file=$params['file'];
+			$file->name=$params['file'];
+			$file->description=$params['file'];
+			$file->type=mime_content_type($params['file']);
+			$file->update();
+			$this->documentlist->attachment_id=$file->id;
+		}
+				
 		if(is_array($params)) {
 		
 			try {

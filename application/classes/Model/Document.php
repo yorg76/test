@@ -14,7 +14,9 @@ class Model_Document extends ORM {
 	);
 	
 	protected $_has_one = array(
-			'scan' => array('model'=>'DocumentScan')
+			'scan' => array('model'=>'DocumentScan'),
+			'attachment'=> array('model' => 'Attachment', 'foreign_key' => 'attachment_id')
+			
 	);
 	
 			

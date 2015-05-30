@@ -8,7 +8,8 @@
 class Model_VirtualBriefcase extends ORM {
 
 	protected $_belongs_to = array(
-			'division'=> array('model' => 'Division')
+			'division'=> array('model' => 'Division'),
+			'attachment'=> array('model' => 'Attachment', 'foreign_key' => 'attachment_id')
 	);
 	
 	protected $_has_many = array(
@@ -18,6 +19,7 @@ class Model_VirtualBriefcase extends ORM {
 			'boxes'=> array('model' => 'Box', 'through' => 'virtualbriefcases_boxes'),
 			'documents'=> array('model' => 'Document', 'through' => 'virtualbriefcases_documents')
 	);
+	
 }
 
 

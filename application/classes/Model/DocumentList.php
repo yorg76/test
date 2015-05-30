@@ -15,8 +15,10 @@ class Model_DocumentList extends ORM {
 	
 	protected $_belongs_to = array(
 			'bulkpackaging'=> array('model' => 'BulkPackaging', 'foreign_key' => 'bulkpackaging_id'),
-			'box'=> array('model' => 'Box', 'foreign_key' => 'box_id')
+			'box'=> array('model' => 'Box', 'foreign_key' => 'box_id'),
+			'attachment'=> array('model' => 'Attachment')
 	);
+
 }
 
 

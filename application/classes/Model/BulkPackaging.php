@@ -15,7 +15,8 @@ class Model_BulkPackaging extends ORM {
 	);
 	
 	protected $_belongs_to = array(
-			'box'=> array('model' => 'Box', 'foreign_key' => 'box_id')
+			'box'=> array('model' => 'Box', 'foreign_key' => 'box_id'),
+			'attachment'=> array('model' => 'Attachment', 'foreign_key' => 'attachment_id')
 	);
 }
 
