@@ -206,6 +206,65 @@
 							<?php echo (Request::current()->param('id')!=NULL ? '<i class="fa fa-angle-right"></i>'.Request::current()->param('id'):''); ?>
 							
 						</li>
+						<?php if(isset($_SESSION['chosen_box']) || isset($_SESSION['chosen_bulkpacking']) || isset($_SESSION['chosen_virtualbriefcase'])):?>
+						<?php 
+							$count = 0;
+							if(isset($_SESSION['chosen_box'])) $count++; 
+							if(isset($_SESSION['chosen_bulkpacking'])) $count++;
+							if(isset($_SESSION['chosen_virtualbriefcase'])) $count++;
+						?>
+						<li class="btn-group">
+							<button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+							<span>Edytowane elementy</span> <span class="badge badge-success"> <?php echo $count; ?> </span> 
+							<i class="fa fa-angle-down"></i>
+							</button>
+							<ul class="dropdown-menu" role="menu" style="width:100%;">
+							<?php 
+								if(isset($_SESSION['chosen_box'])):
+								?>
+									<li>
+										<a href="/warehouse/box_view/<?php echo $_SESSION['chosen_box'];?>">Pudło: <?php  echo $_SESSION['chosen_box']; ?> </a> 
+									</li>
+								<?php
+								endif;
+								
+								if(isset($_SESSION['chosen_bulkpacking'])):
+								?>
+									<li>
+										<a href="/warehouse/bulkpackaging_view/<?php echo $_SESSION['chosen_bulkpacking'];?>">Teczka: <?php  echo $_SESSION['chosen_bulkpacking']; ?> </a>
+									</li>
+								<?php
+								endif;
+								 
+								if(isset($_SESSION['chosen_virtualbriefcase'])):
+								?>
+									<li>
+										<a href="/warehouse/virtualbriefcase_view/<?php echo $_SESSION['chosen_virtualbriefcase'];?>">Wirtualna teczka: <?php  echo $_SESSION['chosen_virtualbriefcase']; ?> </a>
+									</li>
+								<?php 
+								endif;
+								?>
+								<li class="divider"> </li>
+								
+								<li>
+									<a href="/user/elements_choose">Wybierz elementy</a>
+								</li>
+								
+							</ul>
+						</li>
+						<?php else:?>
+						<li class="btn-group">
+							<button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+							<span>Edytowane elementy</span> <span class="badge badge-success"> 0 </span>
+							<i class="fa fa-angle-down"></i>
+							</button>
+							<ul class="dropdown-menu" role="menu" style="width:100%;">
+								<li>
+									<a href="/user/elements_choose">Wybierz edytowany element</a>
+								</li>
+							</ul>
+						</li>
+						<?php endif;?>
 						
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->

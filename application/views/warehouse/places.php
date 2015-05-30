@@ -24,13 +24,41 @@
 					id="places_list">
 					<thead>
 						<tr>
-							<th>Numer</th>
-							<th>Kod kreskowy</th>
+							<th>Numer</th>					
 							<th>Opis</th>
 							<th>Status</th>
 							<th>Zajętość</th>
 							<th>Pojemność</th>
 							<th>Opcje</th>
+						</tr>
+						<tr role="row" class="filter">
+							<td>
+								<input type="text" class="form-control form-filter input-sm" name="id">
+							</td>
+							
+							<td>
+								<input type="text" class="form-control form-filter input-sm" name="description">
+							</td>
+							
+							<td>
+								<select name="status" class="form-control form-filter input-sm">
+									<option value="">Wybierz...</option>
+									<option value="Puste">Puste</option>
+									<option value="Używane">Używane</option>
+									<option value="Pełne">Pełne</option>
+									<option value="Usunięte">Usunięte</option>
+								</select>
+							</td>
+							<td>
+							</td>
+							<td>
+							</td>
+							<td>
+								<div class="margin-bottom-5">
+									<button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Szukaj</button>
+								</div>
+									<button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Wyczyść</button>
+							</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -41,10 +69,8 @@
 								<td>
 									 <?php echo $place->id;?>
 								</td>
+
 								<td>
-									 <?php echo $place->barcode;?>
-								</td>
-							<td>
 									 <?php echo $place->description;?>
 								</td>
 								<td>
@@ -73,7 +99,7 @@
 								</div>
 							</td>
 						</tr>
-							<?php endforeach;?>
+							<?php endforeach; ?>
 							</tbody>
 				</table>
 			</div>

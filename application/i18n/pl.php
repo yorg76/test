@@ -2,6 +2,7 @@
  
 return array
 (
+	'elements_choose'=>'Wybór elementu edytowanego',
 	'boxes_search_result'=>'Wyniki wyszukiwania pudeł',
 	'document_view' => 'Szczegóły dokumentu',
 	'First' => 'Pierwsza',

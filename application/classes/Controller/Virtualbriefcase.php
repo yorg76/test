@@ -110,12 +110,19 @@ public $controller_title = 'Wirtualne teczki';
 		$divisions_ids= array();
 		$virtualbriefcases = array();
 		
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 			
-		} 
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->find_all();
+			
+		}else {
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
 				
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+		}
 
 		$user = Auth::instance()->get_user();
 		$this->content->bind('customer', $customer);
@@ -190,13 +197,21 @@ public $controller_title = 'Wirtualne teczki';
 		$divisions = $customer->divisions->find_all();
 		$divisions_ids= array();
 		$virtualbriefcases_ids = array();
-	
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
+		
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 				
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->find_all();
+				
+		}else {
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+				
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+		
 		}
-	
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+		
 	
 		foreach ($virtualbriefcases as $virtualbriefcase) {
 			array_push($virtualbriefcases_ids, $virtualbriefcase->id);
@@ -221,12 +236,20 @@ public $controller_title = 'Wirtualne teczki';
 		$divisions_ids= array();
 		$virtualbriefcases_ids = array();
 		
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 			
-		} 
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->find_all();
+			
+		}else {
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+				
+		}
 		
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
 		
 		foreach ($virtualbriefcases as $virtualbriefcase) {
 			array_push($virtualbriefcases_ids, $virtualbriefcase->id);
@@ -249,12 +272,20 @@ public $controller_title = 'Wirtualne teczki';
 		$divisions_ids= array();
 		$virtualbriefcases_ids = array();
 		
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 			
-		} 
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->find_all();
+			
+		}else {
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+				
+		}
 		
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
 		
 		foreach ($virtualbriefcases as $virtualbriefcase) {
 			array_push($virtualbriefcases_ids, $virtualbriefcase->id);
@@ -275,12 +306,20 @@ public $controller_title = 'Wirtualne teczki';
 		$divisions_ids= array();
 		$virtualbriefcases_ids = array();
 		
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 			
-		} 
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->find_all();
+			
+		}else {
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+				
+		}
 		
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
 		
 		foreach ($virtualbriefcases as $virtualbriefcase) {
 			array_push($virtualbriefcases_ids, $virtualbriefcase->id);
@@ -301,12 +340,20 @@ public $controller_title = 'Wirtualne teczki';
 		$divisions_ids= array();
 		$virtualbriefcases_ids = array();
 	
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
+			
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->find_all();
+			
+		}else {
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
 				
 		}
-	
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+		
 	
 		foreach ($virtualbriefcases as $virtualbriefcase) {
 			array_push($virtualbriefcases_ids, $virtualbriefcase->id);
@@ -613,13 +660,20 @@ public $controller_title = 'Wirtualne teczki';
 		$virtualbriefcases_ids = array();
 		$virtualbriefcases = array();
 		
-		foreach ($divisions as $division) {
-			array_push($divisions_ids, $division->id);
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 			
-		} 
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->find_all();
+			
+		}else {
+			foreach ($divisions as $division) {
+				array_push($divisions_ids, $division->id);
+					
+			}
+			
+			$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
 				
-		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
-		
+		}
+				
 		
 		
 		foreach ($warehouses as $warehouse) {

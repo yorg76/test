@@ -12,6 +12,111 @@ class Controller_Ajax extends Controller_Welcome {
 		$this->auto_render=FALSE;
 	}
 	
+	public function action_check_bulkpacking() {
+		$log=Kohana_Log::instance();
+	
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		if($this->request->method()===HTTP_Request::POST) {
+			$user=Auth::instance()->get_user();
+			if($user->id > 0) {
+				$bulckpackaging = ORM::factory('BulkPackaging')->where('id', '=', (int) $_POST['id'])->find();
+				if($bulckpackaging->loaded()) {
+					echo json_encode(array('status'=>'OK','id'=>$bulckpackaging->id));
+					die;
+				}else {
+					echo json_encode(array('status'=>'NOTOK'));
+					die;
+				}
+			}else {
+				echo json_encode(array('status'=>'NOTOK'));
+				die;
+			}
+		}
+	}
+	
+	public function action_check_virtualbriefcase() {
+		$log=Kohana_Log::instance();
+	
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		if($this->request->method()===HTTP_Request::POST) {
+			$user=Auth::instance()->get_user();
+			if($user->id > 0) {
+				$virtualbriefcase = ORM::factory('VirtualBriefcase')->where('id', '=', (int) $_POST['id'])->find();
+				if($virtualbriefcase->loaded()) {
+					echo json_encode(array('status'=>'OK','id'=>$virtualbriefcase->id));
+					die;
+				}else {
+					echo json_encode(array('status'=>'NOTOK'));
+					die;
+				}
+			}else {
+				echo json_encode(array('status'=>'NOTOK'));
+				die;
+			}
+		}
+	}
+	
+	public function action_choose_box() {
+		$log=Kohana_Log::instance();
+	
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		if($this->request->method()===HTTP_Request::POST) {
+			Session::instance()->set('chosen_box', $_POST['id']);
+			echo json_encode(array('status'=>'OK'));
+		}
+	}
+	
+	public function action_clear_chosen_box() {
+		$log=Kohana_Log::instance();
+	
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		if($this->request->method()===HTTP_Request::POST) {
+			Session::instance()->delete('chosen_box');
+			echo json_encode(array('status'=>'OK'));
+		}
+	}
+	
+	public function action_choose_bulkpacking() {
+		$log=Kohana_Log::instance();
+	
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		if($this->request->method()===HTTP_Request::POST) {
+			Session::instance()->set('chosen_bulkpacking', $_POST['id']);
+			echo json_encode(array('status'=>'OK'));
+		}
+	}
+	
+	public function action_clear_chosen_bulkpacking() {
+		$log=Kohana_Log::instance();
+	
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		if($this->request->method()===HTTP_Request::POST) {
+			Session::instance()->delete('chosen_bulkpacking');
+			echo json_encode(array('status'=>'OK'));
+		}
+	}
+	
+	public function action_choose_virtualbriefcase() {
+		$log=Kohana_Log::instance();
+	
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		if($this->request->method()===HTTP_Request::POST) {
+			Session::instance()->set('chosen_virtualbriefcase', $_POST['id']);
+			echo json_encode(array('status'=>'OK'));
+		}
+	}
+	
+	public function action_clear_chosen_virtualbriefcase() {
+		$log=Kohana_Log::instance();
+	
+		$log->add(Log::DEBUG,"Success:".serialize($_POST)."\n");
+		if($this->request->method()===HTTP_Request::POST) {
+			Session::instance()->delete('chosen_virtualbriefcase');
+			echo json_encode(array('status'=>'OK'));
+		}
+	}
+		
+	
 	public function action_get_boxes_file() {
 
 		$user = Auth::instance()->get_user();
@@ -133,20 +238,47 @@ class Controller_Ajax extends Controller_Welcome {
 	
 		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
 			$places = ORM::factory('Place');
-			$places_count = ORM::factory('Place')->count_all();
+			$places_count = ORM::factory('Place');
 		}
 
+		
+
+
+		if($_POST['action'] == 'filter' ) {
+				
+			$places = $places->where('id','>','0');
+				
+			if($_POST['id'] != NULL) {
+				$places = $places->and_where('id','=',$_POST['id']);
+				$places_count = $places_count->and_where('id','=',$_POST['id']);
+			}
+				
+			if($_POST['barcode'] != NULL) {
+				$places = $places->and_where('barcode','=',$_POST['barcode']);
+				$places_count = $places_count->and_where('barcode','=',$_POST['barcode']);
+			}
+				
+			if($_POST['description'] != NULL) {
+				$places = $places->and_where('description','LIKE',"%".$_POST['description']."%");
+				$places_count = $places_count->and_where('description','LIKE',"%".$_POST['description']."%");
+			}
+			
+				
+			if($_POST['status'] != NULL) {
+				$places = $places->and_where('status','=',$_POST['status']);
+				$places_count = $places_count->and_where('status','=',$_POST['status']);
+			}
+		}		
 		
 		if($_POST['order'][0]['column'] != NULL) {
 			$places = $places->order_by($columns[$_POST['order'][0]['column']], $_POST['order'][0]['dir']);
 		
 		}
-		
-		
 		/*
 		 * Paging
 		*/
-	
+		$places_count = $places_count->count_all();
+		
 		$iTotalRecords = $places_count;
 		$iDisplayLength = intval($_REQUEST['length']);
 		$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
@@ -173,8 +305,8 @@ class Controller_Ajax extends Controller_Welcome {
 					"</div>";
 				
 			$records["data"][] = array(
-					$place->id,
-					"<img alt=\"barcode\" src=\"/barcode/get/".$place->barcode."\"/>",
+					sprintf('%012d',$place->id),
+					//"<img alt=\"barcode\" src=\"/barcode/get/".$place->barcode."\"/>",
 					$place->description,
 					$place->status,
 					$place->boxes->count_all(),
@@ -335,10 +467,10 @@ class Controller_Ajax extends Controller_Welcome {
 				"</div>";
 			
 			$records["data"][] = array(
-						$box->id,
-						'<img alt="barcode" src="/barcode/get/'.$box->barcode.'"/>',
+						//$box->id,
+						sprintf('%012d',$box->barcode),
 						//($box->place_id != '' ? '<img alt="barcode" src="/barcode/get/'.$box->place->barcode.'"/>':''),
-						($box->place_id != '' ? $box->place->description : ""),
+						($box->place_id != '' ? $box->place->description : sprintf('%012d',0) ),
 						$box->warehouse->name,
 						$box->division->customer->name,
 						$box->date_from,

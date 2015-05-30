@@ -57,8 +57,9 @@ class Controller_Welcome extends Controller_Template {
 	}
 	
 	public function before() {
-				
+		
 		parent::before ();
+		
 		$this->load_template ();
 	
         if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') $this->add_css ("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all");
@@ -118,6 +119,8 @@ class Controller_Welcome extends Controller_Template {
 		$this->template->footer = $this->footer ();
 		$this->template->init = $this->init();
 		parent::after ();
+
+		//TODO Dodać obsługę ACL-i 
 	}
 	
 	public function init() {

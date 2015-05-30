@@ -17,7 +17,7 @@ class Controller_User extends Controller_Welcome {
 
 		if(strtolower ( $this->request->action()) == 'calendar') $this->add_init(" Calendar.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'dashboard') $this->add_init(" Calendar.init();\t\n");
-		
+		if(strtolower ( $this->request->action()) == 'elements_choose') $this->add_init(" Elements_choose.init();\t\n");
 	}
 	
 	
@@ -41,6 +41,10 @@ class Controller_User extends Controller_Welcome {
 			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/fullcalendar.min.js');
 			$this->add_fjs ( ASSETS_GLOBAL_PLUGINS.'fullcalendar/lang-all.js');
 			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'calendar.js');
+		}
+		
+		if(strtolower ( $this->request->action()) == 'elements_choose') {
+			$this->add_fjs ( ASSETS_ADMIN_PAGES_SCRIPTS.'elements_choose.js');
 		}
 		
 		$this->class='page-header-fixed page-quick-sidebar-over-content';
@@ -766,7 +770,7 @@ die;
 		{
 			// Attempt to login user
 			$remember = array_key_exists('remember', $this->request->post()) ? (bool) $this->request->post('remember') : FALSE;
-			$user = Auth::instance()->login($this->request->post('username'), $this->request->post('password'), $remember);
+			$this->_user = $user = Auth::instance()->login($this->request->post('username'), $this->request->post('password'), $remember);
 			
 			// If successful, redirect user
 			if ($user) 
@@ -791,7 +795,7 @@ die;
 
 
 
-public function action_profile(){
+	public function action_profile(){
 	
 		$user = Auth::instance()->get_user();
 		$roles = ORM::factory('Role')->where('name','!=','admin')->find_all();
@@ -849,5 +853,46 @@ public function action_profile(){
 
 		}
 	
+	}
+	
+	public function action_elements_choose() {
+		$user = $this->_user;
+
+		$customer=$user->customer;
+		$divisions = $customer->divisions->find_all();
+		$divisions_ids= array();
+		$virtualbriefcases = array();
+
+		$warehouses = $customer->warehouses->find_all();
+		$warehouses_ids = array();
+		$boxes_ids = array();
+			
+		foreach ($divisions as $division) {
+			array_push($divisions_ids, $division->id);
+				
+		}
+		
+		$virtualbriefcases = ORM::factory('VirtualBriefcase')->where('division_id','IN',$divisions_ids)->find_all();
+		
+		foreach ($warehouses as $warehouse) {
+			array_push($warehouses_ids, $warehouse->id);
+		}
+		
+		if(Auth::instance()->logged_in('admin')) {
+			$boxes = ORM::factory('Box')->where('lock', '=', 0)->and_where('status','=','Na magazynie')->find_all();
+		}else {
+			$boxes = ORM::factory('Box')->where('division_id','IN',$divisions_ids)->and_where('lock', '=', 0)->and_where('status','=','Na magazynie')->find_all();
+		}
+		
+		foreach ($boxes as $box) {
+			array_push($boxes_ids, $box->id);
+		}
+		$bulkpackagings = ORM::factory('BulkPackaging')->where('box_id','IN', $boxes_ids)->find_all();
+		
+		$this->content->bind('bulkpackagings', $bulkpackagings);
+		$this->content->bind('virtualbriefcases', $virtualbriefcases);
+		$this->content->bind('user', $user);
+		$this->content->bind('warehouses',$warehouses);
+		$this->content->bind('boxes',$boxes);
 	}
 }

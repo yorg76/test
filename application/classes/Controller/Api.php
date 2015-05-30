@@ -19,6 +19,8 @@ class Controller_Api extends Controller_Welcome {
 		$this->auto_render=FALSE;
 	}
 	
+
+	
 	public function action_warehouseRecept() {
 		$log=Kohana_Log::instance();
 		

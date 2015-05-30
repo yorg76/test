@@ -24,7 +24,7 @@
 					id="boxes_list">
 					<thead>
 						<tr>
-							<th>Numer</th>
+
 							<th>Kod pudła</th>
 							<th>Regał</th>
 							<th>Magazyn</th>
@@ -37,9 +37,7 @@
 						</tr>
 						
 						<tr role="row" class="filter">
-							<td>
-								<input type="text" class="form-control form-filter input-sm" name="id">
-							</td>
+
 							<td>
 								<input type="text" class="form-control form-filter input-sm" name="barcode">
 							</td>
@@ -71,7 +69,7 @@
 							</td>
 							<td>
 								<select name="status" class="form-control form-filter input-sm">
-									<option value="">Select...</option>
+									<option value="">Wybierz...</option>
 									<option value="Puste">Puste</option>
 									<option value="Na magazynie">Na magazynie</option>
 									<option value="W trakcie transportu">W trakcie transportu</option>
