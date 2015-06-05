@@ -16,6 +16,7 @@ class Controller_Customer extends Controller_Welcome {
 		$this->template->message = Message::factory();
 		
 		if(strtolower ( $this->request->action()) == 'users') $this->add_init("TableUsers.init();\t\n");
+		if(strtolower ( $this->request->action()) == 'divisions') $this->add_init("TableDivisions.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'user_add') $this->add_init("PasswordGenerator.init();\t\nUser_add.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'user_edit') $this->add_init("PasswordGenerator.init();\t\nUser_edit.init();\t\n");
 		if(strtolower ( $this->request->action()) == 'division_add') $this->add_init("PasswordGenerator.init();\t\nAdd_division.init();\t\n");

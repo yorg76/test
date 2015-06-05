@@ -21,7 +21,7 @@
 									</button>
 								</div>
 							</div>						
-							<table class="table table-striped table-hover table-bordered" id="customer_users_list">
+							<table class="table table-striped table-hover table-bordered" id="customer_divisions_list">
 							<thead>
 							<tr>
 								<th>
@@ -42,6 +42,30 @@
 									 Opcje
 								</th>
 							</tr>
+							<tr role="row" class="filter">
+								<td>
+									<input type="text" class="form-control form-filter input-sm" name="name">
+								</td>
+								
+								<td>
+									<input type="text" class="form-control form-filter input-sm" name="description">
+								</td>
+								
+								<td>
+
+								</td>
+								<?php if(Auth_ORM::instance()->logged_in('admin')):?>
+								<td>
+									<input type="text" class="form-control form-filter input-sm" name="customer">
+								</td>
+								<?php endif;?>
+								<td>
+									<div class="margin-bottom-5">
+										<button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Szukaj</button>
+									</div>
+										<button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Wyczyść</button>
+								</td>
+							</tr>							
 							</thead>
 							<tbody>
 							<?php foreach ($divisions as $division):?>

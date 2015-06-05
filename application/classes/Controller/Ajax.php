@@ -225,6 +225,102 @@ class Controller_Ajax extends Controller_Welcome {
 		die;
 	}
 	
+	public function action_divisions_list() {
+	
+		$divisions = NULL;
+		$divisions_count = 0;
+	
+		$columns = array(
+				'name',
+				'description',
+				'id',
+				'customer_id',);
+	
+		if(Auth::instance()->logged_in('admin') || Auth::instance()->logged_in('operator')) {
+			$divisions = ORM::factory('Division');
+			$divisions_count = ORM::factory('Division');
+		}else {
+			$customer=Auth::instance()->get_user()->customer;
+			$divisions = $customer->divisions;
+			$divisions_count = $customer->divisions;
+		}
+	
+		if($_POST['action'] == 'filter' ) {
+	
+			$divisions = $divisions->where('Division.id','>','0');
+			
+			if($_POST['customer'] != NULL) {
+				$divisions = $divisions->join('customers')->on('customers.id','=','Division.customer_id')->where('customers.name','LIKE',"%".$_POST['customer']."%")->or_where('customers.nip','LIKE',"%".$_POST['customer']."%")->or_where('customers.regon','LIKE',"%".$_POST['customer']."%")->or_where('customers.code','LIKE',"%".$_POST['customer']."%");
+				$divisions_count = $divisions_count->join('customers')->on('customers.id','=','Division.customer_id')->where('customers.name','LIKE', "%".$_POST['customer']."%")->or_where('customers.nip','LIKE',"%".$_POST['customer']."%")->or_where('customers.regon','LIKE',"%".$_POST['customer']."%")->or_where('customers.code','LIKE',"%".$_POST['customer']."%");
+			}
+				
+			if($_POST['name'] != NULL) {
+				$divisions = $divisions->and_where('name','LIKE','%'.$_POST['name'].'%');
+				$divisions_count = $divisions_count->and_where('name','LIKE','%'.$_POST['name'].'%');
+			}
+	
+			if($_POST['description'] != NULL) {
+				$divisions = $divisions->and_where('description','LIKE',"%".$_POST['description']."%");
+				$divisions_count = $divisions_count->and_where('description','LIKE',"%".$_POST['description']."%");
+			}
+			
+		}
+	
+		if($_POST['order'][0]['column'] != NULL) {
+			$divisions = $divisions->order_by($columns[$_POST['order'][0]['column']], $_POST['order'][0]['dir']);
+	
+		}
+		/*
+		 * Paging
+		*/
+		$divisions_count = $divisions_count->count_all();
+	
+		$iTotalRecords = $divisions_count;
+		$iDisplayLength = intval($_REQUEST['length']);
+		$iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+		$iDisplayStart = intval($_REQUEST['start']);
+		$sEcho = intval($_REQUEST['draw']);
+	
+		$records = array();
+		$records["data"] = array();
+	
+		$end = $iDisplayStart + $iDisplayLength;
+		$end = $end > $iTotalRecords ? $iTotalRecords : $end;
+	
+		$divisions = $divisions->limit($iDisplayLength)->offset($iDisplayStart)->find_all();
+	
+		foreach ($divisions as $division) {
+			$id = $division->id;
+	
+			$actions =" <div class=\"margin-bottom-5\">
+											<button class=\"btn btn-xs green margin-bottom\" onClick=\"javascript:window.location='/customer/division_view/".$division->id."';\"><i class=\"glyphicon glyphicon-info-sign\"></i> Przegląd</button>
+											<button class=\"btn btn-xs yellow division-edit margin-bottom\" onClick=\"javascript:window.location='/customer/division_edit/".$division->id."';\"><i class=\"fa fa-user\"></i> Edytuj</button>
+									</div>";
+			
+	
+			$records["data"][] = array(
+					$division->name,
+					$division->description,
+					$division->boxes->count_all(),
+					(Auth_ORM::instance()->logged_in('admin') ? $division->customer->name ."<br />NIP: ". $division->customer->nip: NULL),
+					$actions
+			);
+		}
+	
+		if (isset($_REQUEST["customActionType"]) && $_REQUEST["customActionType"] == "group_action") {
+			$records["customActionStatus"] = "OK"; // pass custom message(useful for getting status of group actions)
+			$records["customActionMessage"] = "Group action successfully has been completed. Well done!"; // pass custom message(useful for getting status of group actions)
+		}
+	
+		$records["draw"] = $sEcho;
+		$records["recordsTotal"] = $iTotalRecords;
+		$records["recordsFiltered"] = $iTotalRecords;
+	
+		echo json_encode($records);
+		die;
+	
+	}
+	
 	public function action_places_list() {
 	
 		$places = NULL;
