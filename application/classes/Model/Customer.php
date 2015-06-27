@@ -17,7 +17,9 @@ class Model_Customer extends ORM {
 			'pricetables'=> array('model' => 'Pricetable',	'foreign_key' => 'customer_id')
 	);
 	
-
+	protected $_belongs_to = array(
+			'parent'=> array('model' => 'Customer',	'foreign_key' => 'parent_customer')
+	);
 }
 
 

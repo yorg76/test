@@ -226,7 +226,7 @@ var TableCustomerUsers = function () {
             "language": {
                 "lengthMenu": " _MENU_ wierszy",
                 "infoEmpty": "<span class=\"label label-info\">Brak użytkowników.  </span> ",
-                "emptyTable": "<span class=\"label label-info\">Brak użytkowników.  </span><p> <center> <button class=\"btn btn-sm yellow customer-edit margin-bottom\" onclick=\"javascript:window.location='/admin/customer_add_user/"+TableCustomerUsers.id+"';\"><i class=\"fa fa-user\"></i> Dodaj</button></center></p>"
+                "emptyTable": "<span class=\"label label-info\">Brak użytkowników.  </span><p> <center> <button class=\"btn btn-sm yellow customer-edit margin-bottom\" onclick=\"javascript:window.location='/admin/user_add/"+TableCustomerUsers.id+"';\"><i class=\"fa fa-user\"></i> Dodaj</button></center></p>"
             },
             "columnDefs": [{ // set default column settings
                 'orderable': true,

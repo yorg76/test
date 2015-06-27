@@ -65,9 +65,10 @@ class Box{
 	public function addBox($params) {
         $log=Kohana_Log::instance();
 
+        $customer_division = ORM::factory('Customer',$params['customer_id'])->divisions->limit(1)->find();
         
         $this->box->values($params);
-
+        $this->box->division_id=$customer_division->id;
         
         if(is_array($params)) {
             try {

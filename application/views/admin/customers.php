@@ -28,15 +28,18 @@
 							</div>
 							<table class="table table-striped table-hover table-bordered" id="customers_list">
 							<thead>
-							<tr>
+							<tr>							
 								<th>
 									 Nazwa
 								</th>
 								<th>
+									 Firma nadrzędna
+								</th>								
+								<th>
 									 NIP
 								</th>
 								<th>
-									 REGON
+									REGON
 								</th>
 								<th>
 									KOD
@@ -54,6 +57,9 @@
 							<tr>
 								<td>
 									 <?php echo $customer->name;?>
+								</td>
+								<td>
+									 <?php echo $customer->parent->name;?>
 								</td>
 								<td>
 									 <?php echo $customer->nip;?>

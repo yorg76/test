@@ -50,12 +50,28 @@ class Document extends ORM {
 		$this->box=ORM::factory('Box',$params['box_id']);
 		$this->document->box_id=$this->box->id;
 		
-					
+
+		
 		if(is_array($params)) {
 		
 			try {
 					
 				if($this->document->save()) {
+					
+					if(isset($params['file']) && !$this->document->scan->loaded()) {
+						$file = ORM::factory('DocumentScan');
+						$file->file=$params['file'];
+						$file->type='scan';
+						$file->document_id=$this->document->id;
+						$file->save();
+					}elseif(isset($params['file']) && $params['file'] != NULL) {
+						$file = $this->document->scan;
+						$file->file=$params['file'];
+						$file->type='scan';
+						$file->document_id=$this->document->id;
+						$file->update();
+					}
+					
 					$log->add(Log::DEBUG,"Success: Dodano dokument z parametrami:".serialize($params)."\n");
 		
 				}else {

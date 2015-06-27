@@ -31,7 +31,32 @@
 			<div class="tab-content">
 			
 				<div id="tab_1-1" class="tab-pane active">
-					
+					<div class="form-group">
+						<label class="control-label">Klient nadrzędny
+						</label>
+						<div class="input-icon right">
+							<?php foreach ($parent_customers as $parent_customer):?>
+							
+								<input type="hidden" name="parent_nip_<?php echo $parent_customer->id?>" value="<?php echo $parent_customer->nip?>" />
+								
+							<?php endforeach;?>
+							
+							<select class="form-control" name="parent_customer">
+								<option value="" >-- Wybierz --</option>
+								<?php foreach ($parent_customers as $parent_customer):?>
+								<?php 
+										if ($parent_customer->id == $customer->customer->parent_customer) { 
+											$checked=" selected=\"true\"";
+											$nip_disabled = TRUE;
+										}
+										else $checked="";
+										
+										echo "<option value=\"".$parent_customer->id."\"".$checked." >".$parent_customer->name."</option>";
+								?>
+								<?php endforeach;?>
+							</select>
+						</div>
+					</div>					
 					<div class="form-group">
 						<label class="control-label">Nazwa
 							<span class="required" aria-required="true"> * </span>
@@ -47,7 +72,11 @@
 						<label class="control-label">NIP
 							<span class="required" aria-required="true"> * </span>
 						</label>
-						<input type="text" placeholder="123456" class="form-control" name="nip"  value="<?php echo $customer->nip?>"/>
+						<?php if($nip_disabled == TRUE):?>
+							<input type="text" placeholder="123456" class="form-control" name="nip"  value="<?php echo $customer->customer->parent->nip?>" readonly />
+						<?php else:?>
+							<input type="text" placeholder="123456" class="form-control" name="nip"  value="<?php echo $customer->nip?>"/>
+						<?php endif;?>
 						<span class="help-block"></span>
 					</div>
 					<div class="form-group">

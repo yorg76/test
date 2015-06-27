@@ -193,6 +193,135 @@ class Order {
 			
 	}
 	
+	
+	public function sendOrderByEmail($params) {
+		$log=Kohana_Log::instance();
+
+		if($this->order->loaded()) {
+			$this->status='Zrealizowane';
+			$this->order->status='Zrealizowane';
+				
+			if($this->order->update()) {
+				$paramse = array();
+				$document_filename=time()."-".Auth_ORM::instance()->get_user()->id."-".$params['order_type']."-".$order->order->id.".pdf";
+				
+				$user = Auth::instance()->get_user();
+				$customer=$user->customer;
+				$address=$user->customer->addresses->where('address_type','=','firmowy')->find();
+				$order = $this;
+				
+				$documents = $this->order->documents->find_all();
+				
+				$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap/css/bootstrap.min.css");
+				$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS."bootstrap-switch/css/bootstrap-switch.min.css");
+				$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."components.css");
+				$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_PLUGINS.'datatables/plugins/bootstrap/dataTables.bootstrap.css');
+				$document_css .= @file_get_contents(DOCROOT.ASSETS_GLOBAL_CSS."plugins.css");
+				$document_css .= @file_get_contents(DOCROOT.ASSETS_ADMIN_LAYOUT_CSS."layout.css");
+				$document_css .= @file_get_contents(DOCROOT.ASSETS_ADMIN_PAGES_CSS.'order_document.css');
+					
+				$document_template = View_MPDF::factory('order/order_scans');
+				
+				$document_template->bind_global('documents', $documents);
+				$document_template->bind_global('customer', $customer);
+				$document_template->bind_global('address', $address);
+				$document_template->bind_global('user', $user);
+					
+				$document_template->bind_global('order',$order);
+					
+				$document_template->get_mpdf()->SetDisplayMode('fullpage');
+				$document_template->get_mpdf()->WriteHTML($document_css,1);
+				$document_template->write_to_disk(PDF.$document_filename);
+				
+				$pdf = EasyRSA::signFile(PDF.$document_filename);
+				
+				$pdf->Output(PDF.$document_filename,'F');
+				
+				if(file_exists(PDF.$document_filename)) {
+					$this->order->utilisation_document=$document_filename;
+					$log->add(Log::DEBUG,'Dokument utylizacji został wygenerowany'."\n");
+					$paramse['attachments'] = array(0=>PDF.$document_filename);
+					try {
+						$this->order->update();
+					}catch (Exception $e) {
+						$log->add(Log::ERROR,'Exception: Wystąpił błąd podczas dodwania dokumentu zamówienia'."\n");
+					}
+				}	
+								
+				$paramse['subject']="Twoje zamówienie zmieniło status";
+				$paramse['email_title'] = "Zamówienie numer ".$this->order->id." zmieniło status.";
+				$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+				$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+				$paramse['email_content'] = "<p>Status zamówienia: ".$this->order->status." </p>";
+				$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
+				$paramse['email_content'] .="<p>Firma kurierska: ".$this->order->shipmentcompany->name."</p>";
+				$paramse['email_content'] .="<p>Numer paczki: ".$this->order->shipping_number."</p>";
+				$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+				$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
+				$paramse['email'] = $this->order->user->email;
+				$paramse['firstname'] = $this->order->user->firstname;
+				$paramse['lastname']= $this->order->user->lastname;
+	
+				$this->sendEmail($paramse);
+	
+				$notification = ORM::factory('Notification');
+					
+				$notification->status=0;
+				$notification->message="Zamówienie ".$this->order->id." zmieniło status<br /><br />";
+				$notification->user_id=$this->order->user->id;
+	
+				try {
+					$notification->save();
+				}catch (Exception $e) {
+					$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+				}
+	
+				$paramse = array();
+					
+				$user = Auth_ORM::instance()->get_user();
+					
+				$delivery_managers=$user->customer->users->join('roles_users')->on('roles_users.user_id','=','user.id')->join('roles')->on('roles_users.role_id','=','roles.id')->where('roles.name','=','operator')->find_all();
+	
+				foreach($delivery_managers as $dm) {
+	
+					$paramse['subject']="Zamówienie zmieniło status";
+					$paramse['email_title'] = "Zamówienie numer ".$this->order->id." zmieniło status.";
+					$paramse['email_info'] = "Poniżej znajdują się informacje odnośnie zmówienia";
+					$paramse['email_content'] = "<p>Numer zamówienia: ".$this->order->id." </p>";
+					$paramse['email_content'] = "<p>Status zamówienia: ".$this->order->status." </p>";
+					$paramse['email_content'] .="<p>Firma kurierska: ".$this->order->shipmentcompany->name."</p>";
+					$paramse['email_content'] .="<p>Numer paczki: ".$this->order->shipping_number."</p>";
+					$paramse['email_content'] .="<p>Rodzaj zamówienia: ".$this->order->type."</p>";
+					$paramse['email_content'] .="<p>Użytkownik: ".$this->order->user->username."</p>";
+					$paramse['email_content'] .="<p>Data utworzenia: ".date('d-m-Y')."</p>";
+					$paramse['email_content'] .="<p>Adres: ".$this->order->address->street." ".$this->order->address->number."/".$this->order->address->flat.", ".$this->order->address->postal.", ".$this->order->address->city."</p><br />";
+					$paramse['email'] = $dm->email;
+					$paramse['firstname'] = $dm->firstname;
+					$paramse['lastname']= $dm->lastname;
+	
+					$this->sendEmail($paramse);
+	
+					$notification = ORM::factory('Notification');
+	
+					$notification->status=0;
+					$notification->message="Nowe zamówienie zostało wysłane<br /><br />";
+					$notification->user_id=$dm->id;
+	
+					try {
+						$notification->save();
+					}catch (Exception $e) {
+						$log->add(Log::ERROR,'Nie udało się dodać powiadomienia systemowego'."\n");
+					}
+				}
+	
+				$log->add(Log::DEBUG,"Success: Zamówienie zostało zaakceptowane parametrami:".$this->order->id."\n");
+	
+				return true;
+			}else return false;
+		}else return false;
+			
+	}
+	
 	public function sendOrder($params) {
 		$log=Kohana_Log::instance();
 	

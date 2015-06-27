@@ -37,6 +37,31 @@
 									<div class="tab-content">
 										<div id="tab_1-1" class="tab-pane active">
 											<div class="form-group">
+												<label class="control-label">Klient
+												</label>
+												<div class="input-icon right">
+												
+													<select class="form-control" name="customer_id">
+														<option value="" >-- Wybierz --</option>
+														<?php foreach ($customers as $customer):?>
+														<?php 
+																echo "<option value=\"".$customer->id."\"".$checked." >".$customer->name."</option>";
+														?>
+														<?php endforeach;?>
+													</select>
+												</div>
+											</div>
+																
+											<div class="form-group">
+												<label class="control-label">Kod kreskowy
+												</label>
+												<div class="input-icon">
+													<i class="fa fa-lock fa-fw"></i>
+													<input id="lock" class="form-control" type="text" name="barcode" placeholder="">
+												</div>
+											</div>
+																										
+											<div class="form-group">
 												<label class="control-label">Kategoria przechowywania
 													<span class="required" aria-required="true"> * </span>
 												</label>
@@ -51,13 +76,32 @@
 														<?php endforeach;?>
 													</select>
 													
+														<?php foreach ($storagecategories as $storagecategory):?>
+														
+															<input type="hidden" value="<?php echo $storagecategory->period; ?>" name="storage_period_<?php echo $storagecategory->id?>"/>
+														
+														<?php endforeach;?>
+													
 												</div>
 											</div>
+											<div class="form-group">
+												<label class="control-label">Rok najstarszego dokumentu w pudle
+													<span class="required" aria-required="true"> * </span>
+												</label>
+													<div class="input-group input-medium date date-picker margin-bottom-5" id="document_year" data-date-format="yyyy" data-date-start-view="decade" data-date-min-view-mode="years" data-date-start-date="">
+														<input type="text" class="form-control form-filter input-sm" readonly name="document_year" placeholder="Rok">
+														<span class="input-group-btn">
+														<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
+														</span>
+													</div>
+												<span class="help-block"></span>
+											</div>
+											
 											<div class="form-group">
 												<label class="control-label">Data początku magazynowania
 													<span class="required" aria-required="true"> * </span>
 												</label>
-													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="">
 														<input type="text" class="form-control form-filter input-sm" readonly name="date_from" placeholder="Od">
 														<span class="input-group-btn">
 														<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -69,7 +113,7 @@
 												<label class="control-label">Data końca magazynowania
 													<span class="required" aria-required="true"> * </span>
 												</label>
-													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+													<div id="end_date" class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="">
 														<input type="text" class="form-control form-filter input-sm" readonly name="date_to" placeholder="Do" size="16">
 														<span class="input-group-btn">
 														<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -81,7 +125,7 @@
 												<label class="control-label">Data odbioru
 													<span class="required" aria-required="true"> * </span>
 												</label>
-													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+													<div class="input-group input-medium date date-picker margin-bottom-5" data-date-format="yyyy-mm-dd" data-date-start-date="">
 														<input type="text" class="form-control form-filter input-sm" readonly name="date_reception" placeholder="Termin odbioru" size="16">
 														<span class="input-group-btn">
 														<button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
@@ -112,7 +156,10 @@
 												</label>
 												<div class="input-icon">
 													<i class="fa fa-lock fa-fw"></i>
-													<input id="lock" class="form-control" type="text" name="lock" placeholder="">
+													<select id="lock" class="form-control" type="text" name="lock" placeholder="">
+														<option value="0"> Brak blokady </option>
+														<option value="1"> Zablokowane </option> 
+													</select>
 												</div>
 											</div>
 								

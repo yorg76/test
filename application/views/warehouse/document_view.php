@@ -30,7 +30,7 @@
 					<?php foreach($document->document->files->find_all() as $fl):?>
 						<div id="tab_2-<?php echo $fl->id;?>" class="tab-pane">
 							<?php if($fl->type = 'scan'):?>
-								<img src="/<?php echo str_replace(array(DOCROOT,"\\"),array("","/"),$fl->file);?>" />
+								<img src="/<?php echo str_replace(array(DOCROOT,"\\"),array("","/"),$fl->file);?>" style="width:800px;"/>
 							<?php endif;?>
 						</div>
 					<?php endforeach;?>

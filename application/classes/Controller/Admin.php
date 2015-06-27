@@ -158,7 +158,7 @@ class Controller_Admin extends Controller_Welcome {
 	
 	public function action_customers() {
 		
-		$customers = ORM::factory("Customer")->find_all();
+		$customers = ORM::factory("Customer")->order_by('id')->find_all();
 		
 		$this->content->bind('customers', $customers);
 		
@@ -203,6 +203,9 @@ class Controller_Admin extends Controller_Welcome {
 	}
 	
 	public function action_customer_edit() {
+		
+		$parent_customers=ORM::factory('Customer')->find_all();
+		$this->content->bind('parent_customers', $parent_customers);
 		
 		if($this->request->param('id') > 0) {
 			

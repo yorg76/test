@@ -478,6 +478,23 @@ class Controller_Warehouse extends Controller_Welcome {
 			
 			$document = Document::instance();
 			
+			if(isset($_FILES['plik']['size']) && $_FILES['plik']['size'] > 0) {
+				$filename = isset($_FILES["plik"]) ? $_FILES["plik"] : '';
+			
+				$path_parts = pathinfo($_FILES["plik"]["name"]);
+				$extension = $path_parts['extension'];
+			
+				if ( ! Upload::valid($filename) OR ! Upload::not_empty($filename) OR ! Upload::type($filename, array('pdf', 'tif', 'tiff', 'png','jpg','jpeg'))) {
+					Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documents');
+				}
+			
+				if ($file = Upload::save($filename, "scan-".$customer->id."-".$document->id."-".time().".".$extension, UPLOAD)) {
+					$params['file'] = $file;
+				}else {
+					Message::error(ucfirst(__('Nie udało się zaktualizować dokumentu.')),'/warehouse/documents');
+				}
+			}
+			
 			if($document->addDocument($params)) {
 				Message::success(ucfirst(__('Dokument został dodany do pudła.')),'/warehouse/documents');
 			}else {
@@ -864,6 +881,9 @@ class Controller_Warehouse extends Controller_Welcome {
 		$this->content->bind('storagecategories', $storagecategories);
 		
 		$this->content->bind('warehouses', $warehouses);
+		
+		$customers = ORM::factory('Customer')->find_all();
+		$this->content->bind('customers', $customers);
 		
 		if($this->request->method()===HTTP_Request::POST) {
 			$params = $_POST;

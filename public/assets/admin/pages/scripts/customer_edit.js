@@ -2,6 +2,18 @@
 Custom module for you to write your own javascript functions
 **/
 var Customer_edit  = function () {
+
+	$('select[name=parent_customer]').change(function(){
+
+		if($(this).val() == "") {
+			$('input[name=nip]').attr('readonly',false);			
+		}else {
+			
+			var parent_nip = $('input[name=parent_nip_'+$(this).val()+']').val();
+				
+			$('input[name=nip]').val(parent_nip);
+		}
+	});
 	
 	jQuery.validator.addMethod("nip", function(value, element) {
 		var verificator_nip = new Array(6,5,7,2,3,4,5,6,7); var nip = value.replace(/[\ \-]/gi, ''); 

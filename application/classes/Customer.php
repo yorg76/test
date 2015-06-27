@@ -194,6 +194,7 @@ class Customer  {
 		$this->customer->nip = $params['nip'];
 		$this->customer->regon = $params['regon'];
 		$this->customer->comments = $params['comments'];
+		$this->customer->parent_customer = $params['parent_customer'];
 		
 		try {
 			Database::instance()->begin();
@@ -258,6 +259,11 @@ class Customer  {
 		$this->customer->nip = $params['nip'];
 		$this->customer->regon = $params['regon'];
 		$this->customer->comments = $params['comments'];
+
+		if($params['parent_customer'] == "" || $params['parent_customer'] == NULL)
+			$this->customer->parent_customer = NULL;
+		else  
+			$this->customer->parent_customer = $params['parent_customer'];
 		
 		try {
 			if($this->customer->update() && $this->address->update()) {

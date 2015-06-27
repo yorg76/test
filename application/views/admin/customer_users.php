@@ -16,7 +16,7 @@
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="btn-group">
-									<button class="btn green" onClick="javascript:window.location='/admin/customer_add_user/<?php echo $customer->id;?>'">
+									<button class="btn green" onClick="javascript:window.location='/admin/user_add/<?php echo $customer->id;?>'">
 									Dodaj <i class="fa fa-plus"></i>
 									</button>
 								</div>

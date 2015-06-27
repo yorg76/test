@@ -540,18 +540,29 @@ class Controller_Order extends Controller_Welcome {
 		if($this->request->param('id') > 0) {
 			$order = Order::instance($this->request->param('id'));
 			$shipmentcompanies = Auth_ORM::instance()->get_user()->customer->shipmentcompanies->find_all();
-			
+				
 			$this->content->bind('order', $order);
 			$this->content->bind('shipmentcompanies', $shipmentcompanies);
 			
-			if($this->request->method()===HTTP_Request::POST) {
+			if($order->type == "Zamówienie skanowania, kopii dokumentów") {
+				
 				$params = $_POST;
-				if($order->sendOrder($params)) {
+				if($order->sendOrderByEmail($params)) {
 					Message::success(ucfirst(__('Zamówienie zostało przygotowane do wysłania')),'/order/orders_inprogress');
 				}else {
 					Message::error(ucfirst(__('Wystąpił problem podczas wysyłania zamówienia')),'/order/orders_inprogress');
 				}
-					
+			
+			}else {
+
+				if($this->request->method()===HTTP_Request::POST) {
+					$params = $_POST;
+					if($order->sendOrder($params)) {
+						Message::success(ucfirst(__('Zamówienie zostało przygotowane do wysłania')),'/order/orders_inprogress');
+					}else {
+						Message::error(ucfirst(__('Wystąpił problem podczas wysyłania zamówienia')),'/order/orders_inprogress');
+					}
+				}
 			}
 		}
 	}

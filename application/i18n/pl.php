@@ -94,5 +94,6 @@ return array
 	'user_edit' => 'Edycja danych użytkownia',
 	'division_edit' => 'Edycja działu',
 	'view_order' => 'Szczegóły zamówienia',
+	'customer_edit' => 'Edycja klienta',
 
 );
